@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteBase /admin_func/
+
+RewriteRule index\.jsp$ - [L]
+RewriteRule index\.html - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /admin_func/index\.jsp [L]
+RewriteRule . /admin_func/index\.html - [L]
