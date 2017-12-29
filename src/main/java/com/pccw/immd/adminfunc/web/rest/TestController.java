@@ -1,6 +1,6 @@
-package com.pccw.immd.adminfunc.controller;
+package com.pccw.immd.adminfunc.web.rest;
 
-import com.pccw.immd.adminfunc.controller.intr.TestAPI;
+import com.pccw.immd.adminfunc.web.rest.intr.TestAPI;
 import com.pccw.immd.adminfunc.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

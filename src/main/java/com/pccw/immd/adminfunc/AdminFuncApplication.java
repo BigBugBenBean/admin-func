@@ -10,9 +10,6 @@ import org.springframework.context.annotation.ImportResource;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication(exclude = MessageSourceAutoConfiguration.class)
-//@EnableAutoConfiguration
-@EnableSwagger2
-//@ComponentScan({"com.pccw.immd.adminfunc"})
 @ImportResource({"classpath:application-context.xml"})
 public class AdminFuncApplication extends SpringBootServletInitializer {
 
@@ -20,7 +17,6 @@ public class AdminFuncApplication extends SpringBootServletInitializer {
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(AdminFuncApplication.class);
     }
-
 
     public static void main(String[] args) {
         SpringApplication.run(AdminFuncApplication.class, args);

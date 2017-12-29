@@ -1,4 +1,4 @@
-package com.pccw.immd.adminfunc.controller.intr;
+package com.pccw.immd.adminfunc.web.rest.intr;
 
 import com.pccw.immd.adminfunc.dto.UserDTO;
 import io.swagger.annotations.*;

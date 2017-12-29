@@ -11,7 +11,10 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.pccw.immd.smartics2.adminfunc.web.controller"/>
+    <!-- For RESful controller -->
+    <context:component-scan base-package="com.pccw.immd.adminfunc.web.rest"/>
+
+    <!-- ?? Double check the config, is it keep -->
     <!--<bean name="jackson2ObjectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">-->
         <!--<property name="indentOutput" value="true"/>-->
     <!--</bean>-->

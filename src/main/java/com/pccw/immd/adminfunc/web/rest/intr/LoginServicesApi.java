@@ -3,12 +3,13 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package com.pccw.immd.adminfunc.controller.intr;
+package com.pccw.immd.adminfunc.web.rest.intr;
 
 
 
 import com.pccw.immd.adminfunc.dto.UserDTO;
 import com.pccw.immd.adminfunc.dto.ValidationerrorDTO;
+import com.pccw.immd.adminfunc.web.rest.LoginServicesApiController;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,6 @@ import javax.validation.Valid;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-01T03:56:21.323Z")
 
 @Api(value = "adminfunc", description = "the adminfunc API")
-@RequestMapping(value = "/adminfunc")
 public interface LoginServicesApi {
 
     @ApiOperation(value = "Test example for validation", notes = "Test example for validationf", response = String.class, tags={ "adminfunc","protected", })
@@ -32,6 +32,6 @@ public interface LoginServicesApi {
         produces = { "application/json" },
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<String> login(@ApiParam(value = "", required = true) @RequestBody  @Valid  UserDTO userDTO);
+    LoginServicesApiController.UpmsUser login(@ApiParam(value = "", required = true) @RequestBody  @Valid  UserDTO userDTO);
 
 }

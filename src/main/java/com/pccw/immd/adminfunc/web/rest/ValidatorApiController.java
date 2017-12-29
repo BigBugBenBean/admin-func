@@ -1,7 +1,7 @@
-package com.pccw.immd.adminfunc.controller;
+package com.pccw.immd.adminfunc.web.rest;
 
+import com.pccw.immd.adminfunc.web.rest.intr.ValidatorApi;
 import com.pccw.immd.commons.dto.*;
-import com.pccw.immd.adminfunc.controller.intr.ValidatorApi;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
