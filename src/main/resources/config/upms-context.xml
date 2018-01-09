@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+       xmlns:sec="http://cxf.apache.org/configuration/security"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://cxf.apache.org/transports/http/configuration
+        http://cxf.apache.org/schemas/configuration/http-conf.xsd
+        http://cxf.apache.org/configuration/security
+        http://cxf.apache.org/schemas/configuration/security.xsd
+        ">
+
+    <!-- For RESful controller -->
+    <context:component-scan base-package="com.pccw.immd.adminfunc.service.impl"/>
+    <context:component-scan base-package="com.pccw.immd.adminfunc.ws.interceptor"/>
+    <http-conf:conduit name="*.http-conduit">
+        <!--<http-conf:client ProxyServer="${proxy.server}" ProxyServerPort="${proxy.port}" />-->
+        <http-conf:tlsClientParameters>
+            <!--<sec:keyManagers keyPassword="cspass">-->
+                <!--<sec:keyStore file="src/main/config/client-keystore.jks" password="pass" type="JKS"/>-->
+            <!--</sec:keyManagers>-->
+            <!--<sec:trustManagers>-->
+                <!--<sec:keyStore file="src/main/config/client-keystore.jks" password="pass" type="JKS"/>-->
+            <!--</sec:trustManagers>-->
+
+            <!--<sec:keyManagers keyPassword="password">-->
+                <!--<sec:keyStore resource="ca/upms_dev.jks" password="password" type="JKS"/>-->
+            <!--</sec:keyManagers>-->
+            <!--<sec:trustManagers>-->
+                <!--<sec:keyStore resource="ca/upms_dev.jks" password="password" type="JKS"/>-->
+            <!--</sec:trustManagers>-->
+
+            <!--<sec:keyManagers keyPassword="password">-->
+                <!--<sec:keyStore file="E:/SMARTICS-2/GIT/eservices_admin_func/src/main/resources/ca/upms_dev_root.jks" password="password" type="JKS"/>-->
+            <!--</sec:keyManagers>-->
+            <!--<sec:trustManagers>-->
+                <!--<sec:keyStore file="E:/SMARTICS-2/GIT/eservices_admin_func/src/main/resources/ca/upms_dev_root.jks" password="password" type="JKS"/>-->
+            <!--</sec:trustManagers>-->
+
+        </http-conf:tlsClientParameters>
+    </http-conf:conduit>
+</beans>  

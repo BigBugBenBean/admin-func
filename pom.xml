@@ -27,6 +27,8 @@
         <profile>dev</profile>
         <springfox-version>2.7.0</springfox-version>
 
+        <!-- CXF -->
+        <cxf.version>3.1.14</cxf.version>
 
         <!-- Frontend -->
         <frontend.plugin.version>1.6</frontend.plugin.version>
@@ -80,6 +82,22 @@
             <artifactId>jquery</artifactId>
             <version>2.0.3-1</version>
         </dependency>
+
+
+        <!-- CXF BEGIN -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <!-- CXF END -->
 
         <!-- BEGIN - For compile, which are provided by running env. machine -->
         <!-- TODO: xml.jar is not published on Maven repository. -->
@@ -192,6 +210,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArguments>
+                        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+                    </jvmArguments>
+                </configuration>
 			</plugin>
 
 

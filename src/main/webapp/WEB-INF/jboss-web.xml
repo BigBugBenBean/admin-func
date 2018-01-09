@@ -1,0 +1,4 @@
+<jboss-web>
+    <context-root>/adminfunc</context-root>
+    <!--<virtual-host>eapps-example.com</virtual-host>-->
+</jboss-web>

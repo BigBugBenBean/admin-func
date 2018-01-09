@@ -16,77 +16,43 @@ import javax.validation.Valid;
 
 public class UserDTO {
     @Valid
-    @JsonProperty("nameDTO")
-    private NameDTO nameDTO = null;
+    @JsonProperty("loginId")
+    private String loginId = null;
     @Valid
-    @JsonProperty("sexDTO")
-    private SexDTO sexDTO = null;
-    @Valid
-    @JsonProperty("sexDTO1")
-    private SexDTO sexDTO1 = null;
-
-    public UserDTO nameDTO(NameDTO nameDTO) {
-        this.nameDTO = nameDTO;
-        return this;
-    }
+    @JsonProperty("password")
+    private String password = null;
 
     /**
-     * Get nameDTO
-     * @return nameDTO
+     * Get loginId
+     * @return loginId
      **/
     @ApiModelProperty(value = "")
 
     @Valid
 
-    public NameDTO getNameDTO() {
-        return nameDTO;
+    public String getLoginId() {
+        return loginId;
     }
 
-    public void setNameDTO(NameDTO nameDTO) {
-        this.nameDTO = nameDTO;
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
-
-    public UserDTO sexDTO(SexDTO sexDTO) {
-        this.sexDTO = sexDTO;
-        return this;
-    }
-
-    /**
-     * Get sexDTO
-     * @return sexDTO
+    /*
+     * Get password
+     * @return password
      **/
     @ApiModelProperty(value = "")
 
     @Valid
 
-    public SexDTO getSexDTO() {
-        return sexDTO;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSexDTO(SexDTO sexDTO) {
-        this.sexDTO = sexDTO;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public UserDTO sexDTO1(SexDTO sexDTO1) {
-        this.sexDTO1 = sexDTO1;
-        return this;
-    }
-
-    /**
-     * Get sexDTO1
-     * @return sexDTO1
-     **/
-    @ApiModelProperty(value = "")
-
-    @Valid
-
-    public SexDTO getSexDTO1() {
-        return sexDTO1;
-    }
-
-    public void setSexDTO1(SexDTO sexDTO1) {
-        this.sexDTO1 = sexDTO1;
-    }
 
 
     @Override
@@ -98,24 +64,21 @@ public class UserDTO {
             return false;
         }
         UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(this.nameDTO, userDTO.nameDTO) &&
-            Objects.equals(this.sexDTO, userDTO.sexDTO) &&
-            Objects.equals(this.sexDTO1, userDTO.sexDTO1);
+        return Objects.equals(this.loginId, userDTO.loginId) &&
+            Objects.equals(this.password, userDTO.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nameDTO, sexDTO, sexDTO1);
+        return Objects.hash(loginId, password);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class UserDTO {\n");
-
-        sb.append("    nameDTO: ").append(toIndentedString(nameDTO)).append("\n");
-        sb.append("    sexDTO: ").append(toIndentedString(sexDTO)).append("\n");
-        sb.append("    sexDTO1: ").append(toIndentedString(sexDTO1)).append("\n");
+        sb.append("    loginId: ").append(toIndentedString(loginId)).append("\n");
+        sb.append("    password: ").append(toIndentedString(password)).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -7,6 +7,7 @@ package com.pccw.immd.adminfunc.web.rest.intr;
 
 
 
+import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.dto.UserDTO;
 import com.pccw.immd.adminfunc.dto.ValidationerrorDTO;
 import com.pccw.immd.adminfunc.web.rest.LoginServicesApiController;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ws.upms.immd.v1.ITIAppException;
+import ws.upms.immd.v1.ITISysException;
 
 import javax.validation.Valid;
 
@@ -32,6 +35,6 @@ public interface LoginServicesApi {
         produces = { "application/json" },
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    LoginServicesApiController.UpmsUser login(@ApiParam(value = "", required = true) @RequestBody  @Valid  UserDTO userDTO);
+    UpmsUser login(@ApiParam(value = "", required = true) @RequestBody  @Valid  UserDTO userDTO)  throws ITIAppException, ITISysException;
 
 }
