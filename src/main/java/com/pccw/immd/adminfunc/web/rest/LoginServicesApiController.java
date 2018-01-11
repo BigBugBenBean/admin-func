@@ -31,17 +31,17 @@ public class LoginServicesApiController implements LoginServicesApi {
     private UpmsService upmsService;
 
     public UpmsUser login(@ApiParam(value = "" ,required=true )  @RequestBody  @Valid UserDTO userDTO) throws ITIAppException, ITISysException {
-        String userId = "A5";
-        String password = "{sha256}+svXlT+p7mThxXc46ulsXzLEFbNwER3is8+mtZsjrQA=";
-        userId = "SCUSER08";
-        password =        "{sha256}XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=";
+//        String userId = "A5";
+//        String password = "{sha256}+svXlT+p7mThxXc46ulsXzLEFbNwER3is8+mtZsjrQA=";
+//        userId = "SCUSER08";
+//        password =        "{sha256}XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=";
         String termialId = "";
 
         // do some magic!
         LOG.info("Calling login ... ");
         UpmsUser user =
 //                upmsService.login(userId, password, termialId);
-                upmsService.login(userDTO.getLoginId(), password, termialId);
+                upmsService.login(userDTO.getLoginId(), userDTO.getPassword(), termialId);
 //        user.setName("Test Ricky");
 //        user.setAge(18);
 

@@ -23,10 +23,10 @@ import javax.validation.Valid;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2017-11-01T03:56:21.323Z")
 
-@Api(value = "adminfunc", description = "the adminfunc API")
+@Api(value = "adminfunc", description = "The adminfunc API")
 public interface LoginServicesApi {
 
-    @ApiOperation(value = "Test example for validation", notes = "Test example for validationf", response = String.class, tags={ "adminfunc","protected", })
+    @ApiOperation(value = "UMPS Integration for user authentication", notes = "No need to provide the terminial ID.", response = String.class, tags={ "adminfunc","protected", })
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Return success message", response = String.class),
         @ApiResponse(code = 400, message = "Return validation error", response = ValidationerrorDTO.class) })

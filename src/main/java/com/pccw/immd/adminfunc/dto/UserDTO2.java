@@ -2,7 +2,7 @@ package com.pccw.immd.adminfunc.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pccw.immd.commons.dto.*;
-import lombok.Data;
+//import lombok.Data;
 
 import javax.validation.Valid;
 
@@ -10,7 +10,7 @@ import javax.validation.Valid;
 /**
  * Created by vagrant on 5/3/17.
  */
-@Data
+//@Data
 public class UserDTO2 {
 
     @Valid

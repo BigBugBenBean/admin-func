@@ -1,0 +1,6 @@
+Copy cacerts from %JAVA_HOME%/jre/lib/security/cacerts to working directory
+keytool -import -trustcacerts -alias upms_dev_root -file "upms_dev_root.cer" -keystore cacerts
+
+keytool -delete -trustcacerts -alias upms_dev_root -keystore cacerts
+
+keytool -list -v -keystore cacerts > cacerts_deleted.txt

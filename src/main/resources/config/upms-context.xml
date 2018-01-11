@@ -31,11 +31,11 @@
                 <!--<sec:keyStore file="src/main/config/client-keystore.jks" password="pass" type="JKS"/>-->
             <!--</sec:trustManagers>-->
 
-            <!--<sec:keyManagers keyPassword="password">-->
-                <!--<sec:keyStore resource="ca/upms_dev.jks" password="password" type="JKS"/>-->
+            <!--<sec:keyManagers keyPassword="changeit">-->
+                <!--<sec:keyStore resource="/ca/cacerts" password="changeit" type="JKS"/>-->
             <!--</sec:keyManagers>-->
             <!--<sec:trustManagers>-->
-                <!--<sec:keyStore resource="ca/upms_dev.jks" password="password" type="JKS"/>-->
+                <!--<sec:keyStore resource="/ca/cacerts" password="changeit" type="JKS"/>-->
             <!--</sec:trustManagers>-->
 
             <!--<sec:keyManagers keyPassword="password">-->
