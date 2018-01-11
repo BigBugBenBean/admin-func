@@ -27,57 +27,77 @@ function updateData() {
 
     $('#navTitle').html('');
     $('#enquiryTitle').html('Demo - User Login');
-    $('#displayValue1').html('Username: ' + result.iss3UserSignOnDTO.userEngName);
-    $('#displayValue2').html('User ID: ' + userID);
-    $('#displayValue3').html('Role: ' + result.iss3UserSignOnDTO.roleCDs[0]);
+    if (result && result.iss3UserSignOnDTO && result.iss3UserSignOnDTO.userEngName){
+        $('#displayValue1').html('Username: ' + result.iss3UserSignOnDTO.userEngName);
+        $('#displayValue2').html('User ID: ' + userID);
+        $('#displayValue3').html('Role: ' + result.iss3UserSignOnDTO.roleCDs[0]);
+    }else{
+        $('#displayValue1').html('Error Message: Login Failure ');
+    }
 }
 
 function loadData() {
     var link = '';
 
     // link = 'https://jsonplaceholder.typicode.com/posts';
-    link = 'https://10.26.213.85:28080/adminfunc/login/';
+    link = window.location.protocol + '//' + window.location.host +'/adminfunc/login/';
 
-    $.post(link,
-    {},
-    function(data, status){
-        // console.log('success');
-        result = {
-            "userAuthenticateResponse": null,
-            "iss3UserSignOnDTO": {
-                "accessibleLocs": [
-                    "*"
-                ],
-                "controllerSysIDs": [
-                    "CS",
-                    "SM"
-                ],
-                "externalUser": false,
-                "forceLogoutTerm": null,
-                "immdToken": "fe4a920a518142f8bac8e2b811719a83",
-                "locID": "",
-                "needToDoLocationSignOn": false,
-                "passwordExpiryDateTime": 1546565687000,
-                "posts": [
-                    "IO(ROP)KO"
-                ],
-                "roleCDs": [
-                    "IO(ROP)KO"
-                ],
-                "sysIDs": [
-                    "CD",
-                    "UP",
-                    "CS",
-                    "SM",
-                    "SB",
-                    "SQ"
-                ],
-                "userEngName": "CHAN, TAI HING"
-            }
-        };
-        // console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-        updateData();
-    });
+
+    if ( !localStorage.getItem("userID") || ! localStorage.getItem("userPwd" ) )
+        return;
+    var inputData = {
+                    "loginId": localStorage.getItem("userID"),
+                    "password": localStorage.getItem("userPwd")
+                  };
+    var success = function(data, status){
+      // console.log('success');
+            result = data.responseJSON; /*{
+                "userAuthenticateResponse": null,
+                "iss3UserSignOnDTO": {
+                    "accessibleLocs": [
+                        "*"
+                    ],
+                    "controllerSysIDs": [
+                        "CS",
+                        "SM"
+                    ],
+                    "externalUser": false,
+                    "forceLogoutTerm": null,
+                    "immdToken": "fe4a920a518142f8bac8e2b811719a83",
+                    "locID": "",
+                    "needToDoLocationSignOn": false,
+                    "passwordExpiryDateTime": 1546565687000,
+                    "posts": [
+                        "IO(ROP)KO"
+                    ],
+                    "roleCDs": [
+                        "IO(ROP)KO"
+                    ],
+                    "sysIDs": [
+                        "CD",
+                        "UP",
+                        "CS",
+                        "SM",
+                        "SB",
+                        "SQ"
+                    ],
+                    "userEngName": "CHAN, TAI HING"
+                }
+            };
+            */
+            // console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+            updateData();
+          };
+//    $.post(link, inputData, success,"jsonp");
+
+
+    $.ajax(link,
+     {
+      method: "POST",
+      data: JSON.stringify(inputData),
+      complete: success,
+      headers: {"Content-Type": "application/json"}
+      });
 }
 
 function goToLogin() {
