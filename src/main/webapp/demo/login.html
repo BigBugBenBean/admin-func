@@ -1,0 +1,178 @@
+
+<!-- saved from url=(0050)./login.do -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Immigration Department of the Hong Kong Special Administrative Region</title>
+	<link href="./static/EServicesStyle.css" rel="stylesheet" type="text/css">
+	<script language="JavaScript1.2" src="./static/clock.js" type="text/javascript"></script>
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/script.js"></script>
+<script>
+var submitCount = 0;
+function submitForm() {
+	if (submitCount > 0) return;
+	
+	var pass = document.forms[0].elements['userpassword'].value;
+	var name = document.forms[0].elements['username'].value;	
+	
+	if (pass == '' || name == '') {
+		alert ('Please enter both User ID and Password to login.');
+		return;
+	}
+	document.forms[0].submit();
+	submitCount++;
+}
+function checkEnter( event ) {
+  var whichCode = (window.Event) ? event.which : event.keyCode;
+//User click Enter
+  if ((event.keyCode==13)){
+submitForm();
+  }
+}
+</script></head>
+
+<body bgcolor="#ffffff" leftmargin="5" topmargin="5">
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" id="Table1">
+			<tbody><tr>
+				<td width="20" rowspan="2"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+				<td width="330" class="fontGreenBig" align="left" rowspan="2">e-Services 2
+				</td>
+				<td align="right" valign="bottom" class="UserCode">	&nbsp; Date: <b>
+						<script language="JavaScript1.2" type="text/javascript">
+	var a_months = new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+	var a_days = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+	today= new Date()
+         	document.write(a_days[today.getDay()])
+         	document.write(", ")             
+         	document.write(today.getDate())
+         	document.write(" ")
+         	document.write(a_months[today.getMonth()])
+         	document.write(" ")             
+         	document.write(" ")             
+         	document.write(today.getFullYear())
+						</script>
+					</b><img height="10" src="./static/spacer.gif" width="20"></td>
+				<td width="20"><img height="20" alt="" src="./static/spacer.gif" width="10" border="0"></td>
+			</tr>
+		</tbody></table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tbody><tr>
+	<td width="10"><img height="10" alt="" src="./static/spacer.gif" width="10" border="0"></td>
+	<td bgcolor="#C7DBB8">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tbody><tr> 
+			<td width="15"><img height="25" src="./static/menu_bar_left.png" width="15"></td>
+			<td width="100%" background="./static/menu_bar_bg.png"> 
+		      		<table width="100%" border="0" cellspacing="0" cellpadding="0" height="25">
+              <tbody><tr> 
+
+              </tr>
+            </tbody></table>
+
+		    	</td>
+		    	<td width="15"><img height="25" src="./static/menu_bar_right.png" width="15"></td>
+		</tr>
+		</tbody></table>
+		
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tbody><tr> 
+			<td width="15"><img height="42" alt="" src="./static/top_banner_left.png" width="15" border="0"></td>
+		    	<td valign="top" background="./static/top_banner_bg.png"><img height="7" src="./static/spacer.gif" width="8"><br>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		        	<tbody><tr> 
+		        		
+                <td width="80%" class="PageTitle">Login</td>
+                <td width="20%" align="right" class="PageTitle">ASC0001</td>
+		        	</tr>
+		      		</tbody></table>
+		    	</td>
+		    	<td width="15"><img height="42" alt="" src="./static/top_banner_right.png" width="15" border="0"></td>
+		</tr>
+		</tbody></table>
+
+
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tbody><tr>
+			<td width="20"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+			<td><!-- begin contents -->	
+<form name="LoginForm" method="post" action=""><div><input type="hidden" name="org.apache.struts.taglib.html.TOKEN" value="d5344d1c0cf9d9e22bc45175e8ee1851"></div>	<!--
+			<INPUT TYPE=HIDDEN NAME="SMENC" VALUE="ISO-8859-1">
+			<INPUT type=HIDDEN name="SMLOCALE" value="US-EN">
+-->
+		<br>&nbsp;&nbsp;
+              		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			             	<tbody><tr> 
+              		     </tr>
+              		     	<tr>
+			           <td width="100">&nbsp;</td>
+                		   <td width="175" nowrap="" class="FieldName" valign="top">
+								<strong>WARNING : </strong></td>
+              		     	<td height="25" class="FieldName" colspan="3" style="TEXT-ALIGN: justify">
+							    All information contained in or related to the&nbsp;e-Services (the System) is strictly classified.  Unauthorized access to the System is prohibited.  Any disclosure of the information to unauthorized person or breach of security on information being held in computer connected with the System is liable to prosecution under Computer Crimes Ordinance and Official Secrets Ordinance.   
+					</td>
+                		   <td width="80">&nbsp;</td>
+              		     	</tr>
+	 		             	<tr> 
+							<td height="45"></td>
+              		     	</tr>
+ 		             	<tr> 
+			           <td width="100">&nbsp;</td>
+                		   <td width="175" nowrap="" class="FieldName">
+								<strong>User ID:</strong></td>
+                		   <td width="150" class="FieldName">
+<!-- 						   <input name="USER" style="WIDTH: 200px" class="Changablecontent" 
+							maxlength="8" onkeyup="upperText(this)" enabled="false">&nbsp;</td>-->
+ 						   <input id="userID" name="username" style="WIDTH: 200px" class="Changablecontent" maxlength="8" enabled="false">&nbsp;</td>
+                		   <td width="400">&nbsp;</td>
+              		     	</tr>
+              		     	<tr>
+              		     	   <td height="25">&nbsp;</td>
+              		     	</tr>
+ 		             	<tr> 
+			           <td width="100">&nbsp;</td>
+                		   <td width="175" nowrap="" class="FieldName"><strong>Password:</strong></td>
+                		   <td width="150" class="FieldName"><input id="userPwd" name="userpassword" style="WIDTH: 200px" class="Changablecontent" type="password" maxlength="20" enabled="false" onkeyup="checkEnter(event)" ;="">&nbsp;</td>
+                		   <td width="400">&nbsp;</td>
+              		     	</tr>
+              		     	<tr>
+              		     	   <td height="45"></td>
+              		     	</tr>
+              		     	<tr>
+              		     	   <td width="100">&nbsp;</td>
+              		     	   <td width="175"><input type="hidden" name="actiontype" value="checklogin"></td>
+              		     	   <td width="150"><input type="button" name="login" id="login" class="ButtonStyle" style="WIDTH: 150px" value="Confirm" onclick="goToLanding();"></td>
+              		     	   <td width="400"><input type="reset" name="clear" id="clear" value="Clear" class="ButtonStyle" style="WIDTH: 150px"></td>
+              		     	</tr>
+              		     	<tr>
+              		     	   <td height="25"></td>
+              		     	</tr>
+				</tbody></table>
+</form>
+<!-- end contents -->	
+			
+			</td>
+			<td width="20"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+		</tr>
+		</tbody></table>
+
+		
+		
+</td>
+	<td width="10"><img height="10" alt="" src="./static/spacer.gif" width="10" border="0"></td>
+</tr>
+<tr valign="top">
+	<td width="15"><img height="38" src="./static/spacer.gif" width="15"></td>
+	<td><table border="0" cellspacing="0" cellpadding="0">
+        
+        <tbody><tr>
+		<td width="15" bgcolor="#C7DBB8"><img height="38" src="./static/bottom_left.png" width="15"></td>
+		<td width="100%" bgcolor="#C7DBB8"><img height="23" src="./static/spacer.gif" width="15"></td>
+		<td width="15" bgcolor="#C7DBB8"><img height="38" src="./static/bottom_right.png" width="15"></td></tr></tbody></table>
+	</td>	
+	<td width="15"><img height="38" src="./static/spacer.gif" width="15"></td>
+</tr>
+</tbody></table>
+
+</body></html>

@@ -1,0 +1,129 @@
+/*
+	E-Services Style
+*/
+/*font styles #B2CFE4;*/
+
+.TopLabel { color: White; font-family: Arial; font-size: 14px; text-decoration: none;}
+.ArialBlack14 { color: Black; font-family: Arial; font-size: 14px; text-decoration: none;}
+.FieldName { color: Black; font-family: Arial; font-size: 14px;}
+.ChineseFieldName {color: Black; font-family: Arial; font-size: 16px;}
+.PageTitle { color: White; font-family: Arial; font-size: 20px; text-decoration: none;}
+.UserCode {
+	color: #1B6742;
+	font-family: Verdana, Arial;
+	font-size: 11px;
+	text-decoration: none;
+}
+.Changablecontent { color: Black; font-family: "Arial"; font-size: 14px; text-decoration: none; ; border-color: #152C54 black black #152C54; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 1px}
+.ChangableChineseContent { color: Black; font-family: "Arial"; font-size: 16px; text-decoration: none; ; border-color: #152C54 black black #152C54; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 1px}
+.FixedContent { color: Black; font-family: "Arial"; font-size: 14px; text-decoration: none; background: #D2EFFF; border-color: #152C54 black black #152C54; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 1px}
+.FixedChineseContent { color: Black; font-family: "Arial"; font-size: 16px; text-decoration: none; background: #D2EFFF; border-color: #152C54 black black #152C54; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 1px}
+.SmallButtonStyle {border-bottom: 1px solid #152C54;
+	border-top: 1px solid #FFE1B3;
+	border-left: 1px solid #FFE1B3;font-size: 14px;font-family: "Arial"; color: White; background: #39624C; font-weight: bold}
+.LargeButtonStyle  {border-bottom: 1px solid #152C54;
+	border-top: 1px solid #FFE1B3;
+	border-left: 1px solid #FFE1B3;
+	border-right: 1px solid #152C54;font-size: 15px;font-family: "Arial"; color: White;background: #39624C;font-weight: bold}
+
+
+/* ----------------------- TABLE STYLES ------------------- */
+
+.TableHeader {
+	background: #79A775;
+	color: White;
+	font-family: Arial;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.TableBody {
+	background: #B1CC9E;
+	color: Black;
+		font-family: Arial;
+		font-size: 14px;
+		text-decoration: none;
+	}
+
+	.TableFooter {
+		background: #79A775;
+	}
+
+	.PageFrame {
+		background: #C7DBB8;
+	}
+
+.RowSeparator {
+	background: #79A775;
+}
+
+.RedLink {
+	color: #BF5564;
+	font-family: Arial;
+	font-size: 14px;
+	text-decoration: underline;
+}
+
+/*link styles*/
+A.PageTitle:link { color: white; }
+A.PageTitle:visited { color: white; }
+A.PageTitle:hover { color: #79e278; }
+A.FieldName:hover {
+	color: #1B6742;
+}
+A.TopLabel:hover { color: #79e278; }
+
+/*form styles*/
+
+.ButtonStyle {
+	border-bottom: 1px solid #152C54;
+	border-top: 1px solid #FFE1B3;
+	border-left: 1px solid #FFE1B3;
+	border-right: 1px solid #152C54;
+	font-size: 14px;
+	font-family: Arial;
+	font-weight: bold;
+	color: #FFFFFF;
+	background: #39624C;
+}
+
+.PageButton {
+	font-size: 12px;
+	font-family: Arial;
+	font-weight: bold;
+	color: #ffffff;
+	background: #39624C;
+}
+
+.SubTableField { color: Black; font-family: Arial; font-size: 14px; text-decoration: none; }
+
+
+/* ----------------------- FONT STYLES ------------------- */
+
+.fontGreenBig {
+	color: #1B6742;
+	font-family: Verdana, Arial;
+	font-size: 18px;
+	text-decoration: none;
+	font-weight: 900;
+}
+
+.fontGreenBig1{
+	color:#467EB2;
+	font-family: Verdana, Arial;
+	font-size: 20px;
+	text-decoration: none;
+	font-weight:950;
+}
+
+.fontGraySmall {
+	color: Gray;
+	font-family: Arial;
+	font-size: 10px;
+}
+.surgerInlineblock{
+	display:inline-block;width:30px;text-align:center;
+}
+.splitInlineblock{
+	display:inline-block;width:8px;text-align:center;
+}

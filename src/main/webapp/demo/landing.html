@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ZH" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0073)./enquirymenu.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>e-Services 2 Admin Function</title>
+
+<meta http-equiv="expires" content="WED, 04 July 2001 01:01:01 GMT">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="pragma" content="no-store">
+	
+<link href="./static/EServicesStyle.css" rel="stylesheet" type="text/css">
+<script language="JavaScript1.2" src="./static/smartics.js" type="text/javascript"></script>
+<script language="JavaScript1.2" src="./static/clock.js" type="text/javascript"></script>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/script.js"></script>
+<style> 
+.hide { visibility:hidden; }
+.show { visibility:visible;}
+</style>
+	</head>
+	<body bgcolor="#ffffff" leftmargin="5" topmargin="5">
+		<br>
+
+				
+
+<script>
+var submitLogoutCount = 0;
+function logout() {
+	if (submitLogoutCount > 0) return;
+	window.location = '../admin/login.do?actiontype=logout';
+	submitLogoutCount++;
+}
+</script>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tbody><tr>
+				<td width="20" rowspan="2"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+				<td width="400" class="fontGreenBig" align="left" rowspan="2">e-Services 2
+				</td>
+				<td width="20"><img height="20" alt="" src="./static/spacer.gif" width="10" border="0"></td>
+			</tr>
+			<tr>
+				<td align="right" valign="bottom" class="UserCode" nowrap="">| User ID: <b id="displayUserID"><!--CHAN0001-->S</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Date: <b>
+						<script language="JavaScript1.2" type="text/javascript">
+	var a_months = new Array("January","February","March","April","May","June","July","August","September","October","November","December")
+	var a_days = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+	today= new Date()
+         	document.write(a_days[today.getDay()])
+         	document.write(", ")             
+         	document.write(today.getDate())
+         	document.write(" ")
+         	document.write(a_months[today.getMonth()])
+         	document.write(" ")             
+         	document.write(" ")             
+         	document.write(today.getFullYear())
+						</script>
+					<img height="10" src="spacer.gif" width="20" ></td>
+			</tr>
+		</tbody></table>
+		<table width="98%" border="0" cellspacing="0" cellpadding="0">
+			<tbody><tr>
+				<td width="15"><img height="10" alt="" src="./static/spacer.gif" width="10" border="0"></td>
+				<td bgcolor="#C7DBB8" width="3259">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+							<td width="15"><img height="25" src="./static/menu_bar_left.png" width="15"></td>
+							<td width="100%" background="./static/menu_bar_bg.png">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0" height="25">
+									<tbody><tr>
+										<td height="25" valign="bottom"><img height="10" src="./static/spacer.gif" width="8"></td>
+
+		
+										<!-- <td height="25"><img height="25" src="./static/menu_separator_left_green.png" width="30"></td>
+										<td background="./static/menu_bar_bg_green.png" height="25">
+											<a class="TopLabel" href="./enquirymenu.html"><b>Enquiry</b></a></td>
+										<td height="25"><img height="25" src="./static/menu_separator_right_green.png" width="30"></td> -->
+                                        <td height="25"><img height="25" src="./static/menu_separator.png" width="30"></td>
+                                        <td height="25">
+                                            <a class="TopLabel" ><b>Enquiry</b></a>
+                                        </td>
+                                        <td height="25"><img height="25" src="./static/menu_separator.png" width="30"></td>
+
+
+
+                                        <td height="25">
+											<a class="TopLabel" ><b>Maintenance</b></a>
+										</td>	
+										<td height="25"><img height="25" src="./static/menu_separator.png" width="30"></td>										
+										<td height="25">
+											<a class="TopLabel" ><b>Management</b></a>
+										</td>
+		
+								
+										<td height="25"><img height="25" src="./static/menu_separator.png" width="30"></td>
+																	
+										<td height="25" nowrap>
+											<a class="TopLabel" ><b>SMARTICS-2</b></a>
+										</td>
+		
+								
+										<td height="25"><img height="25" src="./static/menu_separator.png" width="30"></td>
+										<td height="25" width="100%" valign="bottom">
+											<img height="10" src="./static/spacer.gif" width="15"></td>
+										<td height="25" valign="bottom"><img height="10" src="./static/spacer.gif" width="15"></td>
+										<td height="25"><img height="25" src="./static/menu_separator.png" width="30"></td>
+										<td height="25" >
+											<a class="TopLabel" onclick="goToLogin();" ><b>Exit</b></a>
+										</td> 
+										
+										<td height="25" valign="bottom"><img height="10" src="./static/spacer.gif" width="8"></td>
+									</tr>
+								</tbody></table>
+							</td>
+							<td width="15"><img height="25" src="./static/menu_bar_right.png" width="15"></td>
+						</tr>
+					</tbody></table>
+
+				
+
+<!--- ----------------------------------------- content ---------------------------------------- ---->
+
+
+
+
+
+
+
+
+
+
+
+
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+							<td width="15">
+								<img height="42" alt="" src="./static/top_banner_left.png" width="15" border="0"></td>
+							<td valign="top" background="./static/top_banner_bg.png">
+								<img height="7" src="./static/spacer.gif" width="8"><br>
+								<div id="SSOPAGE_TITLE" width="100%">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tbody><tr>
+											<td id="navTitle" class="PageTitle" width="500">
+												Enquiry Desk
+											</td>
+											<td class="PageTitle" align="right">&nbsp; </td>
+										</tr>
+									</tbody></table>
+								</div>
+							</td>
+							<td width="15" background="./static/top_banner_right.png" width="15" border="0"></td>
+						</tr>
+					</tbody></table>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+							<td width="21"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+							<td width="3218">
+								<table border="0" cellpadding="0" cellspacing="0" width="100%">
+									<tbody>
+										<tr>
+											<td width="10"><img height="10" alt="" src="./static/spacer.gif" width="10" border="0"></td>
+											<td class="DefaultColorTD">
+												<table border="0" cellpadding="0" cellspacing="0" width="100%">
+													<tbody>
+														<tr>
+															<td width="20" height="400"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+															<td height="4"  valign="top"><img height="100" alt="" src="./static/spacer.gif" width="20" border="0">
+																<table align="center" bgcolor="#B1CC9E" border="0" cellpadding="0" cellspacing="0" width="80%">
+																	<tbody>
+																		<tr>
+																			<td width="50%">
+																				<table border="0" cellpadding="0" cellspacing="0">
+																					<tbody>
+																						<tr>
+																							<td align="left" background="./static/menupage_head_left.png" width="10" border="0" height="30" ></td>
+																							<td background="./static/menupage_head_bg.png">
+																								<font id="enquiryTitle" class="TopLabel">Enquiry Desk</font></td>
+																							<td align="right" background="./static/menupage_head_right.png" width="24" border="0" height="30" ></td>
+																						</tr>
+																					</tbody></table>
+																			</td>
+																			<td align="right" width="50%"><img height="30" src="./static/menupage_panel_top_right.png" width="24" border="0" height="30" ></td>
+																		</tr>
+																		<tr>
+																			<td colspan="2">&nbsp;</td>
+																		</tr>
+																		
+																		
+																		<tr>
+																			<td height="35" width="50%" colspan="2">
+																				<table cellpadding="0" cellspacing="0" width="100%">
+																					<tbody>
+																						<tr>
+                                                                                            <td width="33"><img src="./static/spacer.gif" width="20">
+                                                                                                <!-- <img src="./static/bullet1.png" width="13"> -->
+                                                                                            </td>
+																							<td>
+                                                                                                <span id="displayValue1"></span>
+                                                                                                <!-- <a class="FieldName" href="./EnquiryPaymentCode.html">
+																							Application Fee Enquiry </a> -->
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+		
+																		
+																		<tr>
+																			<td height="35" width="50%" colspan="2">
+																				<table cellpadding="0" cellspacing="0" width="100%">
+																					<tbody>
+																						<tr>
+                                                                                            <td width="33"><img src="./static/spacer.gif" width="20">
+                                                                                                <!-- <img src="./static/bullet1.png" width="13"> -->
+                                                                                            </td>
+																							<td>
+                                                                                                <span id="displayValue2"></span>
+                                                                                                <!-- <a class="FieldName" href="./EnquiryApplicationStatus01.html">
+																							Online Submission Enquiry </a> -->
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<!--
+																		<tr>
+																			<td height="35" width="50%" colspan="2">
+																				<table cellpadding="0" cellspacing="0" width="100%">
+																					<tbody>
+																						<tr>
+																							<td width="33"><img src="./static/spacer.gif" width="20"><img src="./static/bullet1.png" width="13"></td>
+																							<td><a class="FieldName" href="./PaymentEnquiry01.do">
+																							Payment Enquiry </a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		-->
+																		<!--
+																		<tr>
+																			<td height="35" width="50%" colspan="2">
+																				<table cellpadding="0" cellspacing="0" width="100%">
+																					<tbody>
+																						<tr>
+																							<td width="33"><img src="./static/spacer.gif" width="20"><img src="./static/bullet1.png" width="13"></td>
+																							<td><a class="FieldName" href="./EnquiryRoaOverdue01.do">
+																							ROA No Show Case </a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		-->
+																		<!--
+																		<tr>
+																			<td height="35" width="50%" colspan="2">
+																				<table cellpadding="0" cellspacing="0" width="100%">
+																					<tbody>
+																						<tr>
+																							<td width="33"><img src="./static/spacer.gif" width="20"><img src="./static/bullet1.png" width="13"></td>
+																							<td><a class="FieldName" href="./SupplementaryDocumentSubmission01.do">
+																							Supplementary Document Submission </a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		-->
+																		<tr>
+																			<td height="35" width="50%" colspan="2">
+																				<table cellpadding="0" cellspacing="0" width="100%">
+																					<tbody>
+																						<tr>
+                                                                                            <td width="33"><img src="./static/spacer.gif" width="20">
+                                                                                                <!-- <img src="./static/bullet1.png" width="13"> -->
+                                                                                            </td>
+																							<td>
+                                                                                                <span id="displayValue3"></span>
+                                                                                                <!-- <a class="FieldName" href="./EnquirySystemHoliday.html">
+																							System Holiday View </a> -->
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		<!--
+																		<tr>
+																			<td height="35" width="50%" colspan="2">
+																				<table cellpadding="0" cellspacing="0" width="100%">
+																					<tbody>
+																						<tr>
+																							<td width="33"><img src="./static/spacer.gif" width="20"><img src="./static/bullet1.png" width="13"></td>
+																							<td><a class="FieldName" href="./EnquiryVirtualAppointmentBooking00.do">
+																							Virtual Appointment Enquiry </a>
+																							</td>
+																						</tr>
+																					</tbody>
+																				</table>
+																			</td>
+																		</tr>
+																		-->
+																		
+																<tr>
+																			<td align="left" width="50%"><img height="30" src="./static/menupage_panel_bottom_left.png" width="24" border="0"></td>
+																			<td align="right" width="50%"><img height="30" src="./static/menupage_panel_bottom_right.png" width="24" border="0"></td>
+																		</tr>
+																	</tbody></table>
+															</td>
+															<td width="20"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+														</tr>
+													</tbody></table>
+											</td>
+							
+							<td width="20"><img height="10" alt="" src="./static/spacer.gif" width="20" border="0"></td>
+						</tr>
+					</tbody></table>
+				</td>
+				<td width="10"><img height="10" alt="" src="./static/spacer.gif" width="10" border="0"></td>
+			</tr>
+			<tr valign="top">
+				<td colspan="99"><table border="0" cellspacing="0" cellpadding="0">
+						<tbody><tr>
+							<td width="15" bgcolor="#C7DBB8"><img height="20" src="./static/bottom_left.png" width="15"></td>
+							<td width="100%" bgcolor="#C7DBB8" colspan="4"><img height="20" src="./static/spacer.gif" width="15"></td>
+							<td width="15" bgcolor="#C7DBB8"><img height="20" src="./static/bottom_right.png" width="15"></td>
+						</tr>
+					</tbody></table>
+				</td>
+			</tr>
+		</tbody></table>
+		</td></tr></tbody></table>
+		<br>
+
+
+
+
+
+
+
+
+</body></html>
