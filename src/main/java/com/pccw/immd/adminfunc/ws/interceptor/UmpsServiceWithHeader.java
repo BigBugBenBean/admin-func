@@ -19,6 +19,7 @@ import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,15 @@ import ws.upms.immd.v1.*;
 @Service("umpsServiceWithHeader")
 public class UmpsServiceWithHeader {
 
+
+
     private final static Logger LOOGER = LoggerFactory.getLogger(UmpsServiceWithHeader.class);
 
     private static final String NAMESPACE_URI = "http://immd.itifwk.ws/v1";
 
-    private String upmsEndpoint = "https://upvdc1lvwb01h02.iss3dev.immd.hksarg:8443/war.upms.ws/services/buzz/ldapImmdUserServiceExtWS";
+//    private String upmsEndpoint = "https://upvdc1lvwb01h02.iss3dev.immd.hksarg:8443/war.upms.ws/services/buzz/ldapImmdUserServiceExtWS";
+    @Value("${web.umps.endpoint}")
+    private String upmsEndpoint;
 
     @Autowired
     private ApplicationContext context;
