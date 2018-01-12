@@ -8,6 +8,13 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/script.js"></script>
 <script>
+
+	$( document ).ready(function() {
+		//   console.log('login_ready');
+		  
+		  localStorage.clear();
+    });
+
 var submitCount = 0;
 function submitForm() {
 	if (submitCount > 0) return;

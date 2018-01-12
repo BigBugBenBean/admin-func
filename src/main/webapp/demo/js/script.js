@@ -10,11 +10,13 @@ var role ='';
 $( document ).ready(function() {
     // console.log( "ready!" );
 
+    
+
     userID = localStorage.getItem("userID");
     userPwd = localStorage.getItem("userPwd");
     // userID = localStorage.getItem("userID");
 
-    loadData();
+    // loadData();
 
     // updateData();
 
@@ -95,7 +97,25 @@ function loadData() {
      {
       method: "POST",
       data: JSON.stringify(inputData),
-      complete: success,
+      error: (e) => {
+        console.log(e);
+
+        let errMsg = 'Login Failed';
+        
+        let errMsg1 = e.responseJSON['fieldErrors'][0]['messageId'];
+        let errMsg2 = e['message'];
+
+        if (errMsg1 != null && errMsg1 != 'undefined' && errMsg1 != '') {
+            errMsg = errMsg1;
+        } else if (errMsg2 != null && errMsg2 != 'undefined' && errMsg2 != '') {
+            let tmpStr = errMsg2.split(':')[2];
+
+            errMsg = tmpStr;
+        }
+
+        $('#displayValue1').html('Error Message: ' + errMsg);
+      },
+      success: success,
       headers: {"Content-Type": "application/json"}
       });
 }
