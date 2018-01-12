@@ -10,6 +10,7 @@
 
     <context:property-placeholder location="
             classpath:properties/application.properties,
+            classpath:properties/upms.properties,
             classpath:properties/rest.properties,
             classpath:properties/web.properties,
             classpath:properties/database.properties"
