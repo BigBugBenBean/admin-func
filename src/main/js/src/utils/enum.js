@@ -1,0 +1,15 @@
+export const ENV = {
+    DEV: 'DEV',
+    SIT: 'SIT',
+    UAT: 'UAT',
+    PROD: 'PROD'
+}
+
+
+
+export const ACTION_TYPE = {
+    USER_LOGIN_REQUEST: 'USER_LOGIN_REQUEST',
+    USER_LOGIN_SUCCESS: 'USER_LOGIN_SUCCESS',
+    USER_LOGIN_FAIL: 'USER_LOGIN_FAIL',
+}
+

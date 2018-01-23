@@ -1,21 +1,14 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Link, Switch, Route } from 'react-router-dom';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {withRouter} from "react-router-dom";
 
-import LandingContainer from '../Landing/landing-container';
+// import './login-comp.scss';
+import '../../../styles/style.css';
 
-// import { doLogin } from '../../actions/login-action';
-
-// import './login.css';
-import '../../styles/style.css';
-
-class LoginContainer extends Component {
-
-
-    render() {
-        return (
-            <div >
+export const Login = ({ dispatchLogin }) => (
+         <div>
+           {/* <h2 className="test">login</h2> */}
+          {/* <div>Login Page</div> */}
             <div className="flex-container">
               <div className="flex-item-1 header-item-left">
                 <span>e-Services 2</span>
@@ -46,12 +39,14 @@ class LoginContainer extends Component {
                   </span>
                 </div>
               </div>
+              <form >
               <div className="flex-container">
                 <div className="flex-item-1 field-name content-user-id-left">
                   <b>User ID :</b>
                 </div>
                 <div className="flex-item-2 field-name content-user-id-right">
-                  <input name="username" />
+                  <input
+                 name="username" />
                 </div>
               </div>
               <div className="flex-container">
@@ -59,36 +54,30 @@ class LoginContainer extends Component {
                   <b>Password :</b>
                 </div>
                 <div className="flex-item-2 field-name content-password-right">
-                  <input name="password" type="password" />
+                  <input
+        name="password" type="password"  />
                 </div>
               </div>
               <div className="flex-container">
                 <div className="flex-item-1"></div>
                 <div className="flex-item-2">
-                  <Link to={'/landing'}>
-                    <input type="button" className="ButtonStyle login-confirm" value="Confirm"  />
-                  </Link>
+                <button type="button" className="ButtonStyle login-confirm" onClick={dispatchLogin} >Login</button>
 
                   <input type="button" className="ButtonStyle login-clear" value="Clear" />
+
+                  {/* <button type="button"  className="btn btn-secondary btn-block"
+                      onClick={dispatchLogin}>Go Counter
+                  </button> */}
                 </div>
               </div>
+
+              </form>
             </div>
-            <div></div>
           </div>
-        );
-    }
+)
+Login.propTypes = {
+//  user: PropTypes.any.isRequired
 }
 
-function mapStateToProps(state) {
-    return {
-
-    };
-}
-
-function matchDispatchToProps(dispatch){
-    return bindActionCreators({
-      // loginClicked: doLogin
-    }, dispatch);
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(LoginContainer);
+//export default Login
+export default withRouter(Login)
