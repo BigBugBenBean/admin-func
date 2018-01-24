@@ -307,6 +307,7 @@
 
 
 <!--
+-->
         <repository>
             <id>central</id>
             <name>the nexus repository of pccw framework team</name>
@@ -322,7 +323,15 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>-->
+        </repository>
+        <repository>
+            <id>Maven 2</id>
+            <name>Maven 2 Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
 
 
     </repositories>
