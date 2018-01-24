@@ -162,7 +162,7 @@ export const dispatchLogin = (e) => {
                 type: ACTION_TYPE.USER_LOGIN_SUCCESS,
                 payload: result
             });   
-            // history.push('landing');
+            history.push('landing');
             
         })
         .catch(error => {

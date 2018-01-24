@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {withRouter} from "react-router-dom";
 
 // import './login-comp.scss';
-import '../../../styles/style.css';
+// import '../../../styles/style.css';
 
 export const Login = ({ dispatchLogin }) => (
          <div>

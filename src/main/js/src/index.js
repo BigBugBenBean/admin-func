@@ -10,3 +10,10 @@ import App from './containers/App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 // registerServiceWorker();
+
+// const title = 'My Minimal React Webpack Babel Setup 123';
+
+// ReactDOM.render(
+//   <div>{title}</div>,
+//   document.getElementById('root')
+// );

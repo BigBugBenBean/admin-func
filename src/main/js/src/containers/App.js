@@ -32,28 +32,15 @@ import createRoutes from './createRoutes';
 const store = configureStore();
 
 class App extends Component {
-
-
   render() {
+    
     return (
-      // <div>
-        // {/* <ul>
-          // <li><Route exact path="/" component={'Title'} /></li>
-          // <li><Route path="/list" component={'List'} /></li>
-        // </ul> */}
-        // {/* <Header /> */}
-        // <Routers />
-
-        // {/* <LoginView /> */}
-      // </div>
-
       <Provider store={ store }>
         <ConnectedRouter history={ history }>
           { createRoutes(store) }
               {/* <div>123</div> */}
         </ConnectedRouter>
       </Provider>
-
     );
   }
 }
