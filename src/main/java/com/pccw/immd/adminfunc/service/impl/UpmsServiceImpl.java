@@ -3,9 +3,10 @@ package com.pccw.immd.adminfunc.service.impl;
 import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import com.pccw.immd.adminfunc.ws.interceptor.UmpsServiceWithHeader;
+import com.pccw.immd.adminfunc.ws.upms.cxf.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ws.upms.immd.v1.*;
 
 
 @Service("upmsService")

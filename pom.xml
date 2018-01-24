@@ -27,6 +27,11 @@
         <profile>dev</profile>
         <springfox-version>2.7.0</springfox-version>
 
+        <hikaricp.version>2.7.6</hikaricp.version>
+        <local.config>${project.basedir}/local_config</local.config>
+        <local.java.lib>${local.config}/lib</local.java.lib>
+
+        <hibernate.version>5.0.12.Final</hibernate.version>
         <!-- CXF -->
         <cxf.version>3.1.14</cxf.version>
 
@@ -64,7 +69,7 @@
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>2.5.1</version>
+            <version>${hikaricp.version}</version>
         </dependency>
 
         <!--<dependency>-->
@@ -142,6 +147,42 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+<!--
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+<!--
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+-->
         <!-- Provided -->
         <!--<dependency>-->
             <!--<groupId>org.apache.tomcat.embed</groupId>-->
@@ -196,6 +237,13 @@
 			<artifactId>json-smart</artifactId>
 			<version>2.2.1</version>
 		</dependency>
+        <dependency>
+            <groupId>local</groupId>
+            <artifactId>oracle.ojdbc</artifactId>
+            <version>6</version>
+            <scope>system</scope>
+            <systemPath>${local.java.lib}/ojdbc6.jar</systemPath>
+        </dependency>
 	</dependencies>
 
 	<build>
