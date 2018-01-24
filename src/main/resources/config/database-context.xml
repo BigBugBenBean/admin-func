@@ -1,8 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/data/jpa
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
 
-</beans>  
+    <jpa:repositories
+        base-package="com.pccw.immd.adminfunc.repository"
+        entity-manager-factory-ref="entityManagerFactory.adminfunc"
+    />
+
+    <!-- Configures the database connection.
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+    </bean>
+    -->
+
+    <!-- Creates the datasource bean.
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg index="0" ref="hikariConfig"/>
+    </bean>
+    -->
+
+    <bean id="datasource.adminfunc" class="oracle.jdbc.pool.OracleDataSource"
+          p:user="${eservice2.web.datasource.username}"
+          p:password="${eservice2.web.datasource.password}"
+          p:driverType="${eservice2.web.datasource.className}"
+          p:URL="${eservice2.web.datasource.url}"
+    />
+
+    <!-- Create default configuration for Hibernate -->
+    <bean id="hibernateJpaVendorAdapter.adminfunc"
+          class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+    <util:map id="jpaProperties.adminfunc">
+        <!--
+            Configures the used database dialect. This allows Hibernate to create SQL
+            that is optimized for the used database.
+        -->
+        <entry key="hibernate.dialect" value="${hibernate.dialect}"/>
+        <!--
+            Specifies the action that is invoked to the database when the Hibernate
+            SessionFactory is created or closed.
+        -->
+        <entry key="hibernate.hbm2ddl.auto" value="${hibernate.hbm2ddl.auto}"/>
+        <!--
+            Configures the naming strategy that is used when Hibernate creates
+            new database objects and schema elements
+        -->
+        <entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}"/>
+        <!--
+            If the value of this property is true, Hibernate writes all SQL
+            statements to the console.
+        -->
+        <entry key="hibernate.show_sql" value="${hibernate.show_sql}"/>
+        <!--
+            If the value of this property is true, Hibernate will use prettyprint
+            when it writes SQL to the console.
+        -->
+        <entry key="hibernate.format_sql" value="${hibernate.format_sql}"/>
+    </util:map>
+    <!-- Creates the bean that creates the JPA entity manager factory. -->
+    <bean id="entityManagerFactory.adminfunc" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:dataSource-ref="datasource.adminfunc"
+          p:jpaVendorAdapter-ref="hibernateJpaVendorAdapter.adminfunc"
+          p:packagesToScan="com.pccw.immd.adminfunc.domain"
+          p:jpaPropertyMap-ref="jpaProperties.adminfunc">
+    </bean>
+
+    <!--
+    <bean id="auditingProvider" class="net.petrikainulainen.springdata.jpa.common.UsernameAuditorAware"/>
+
+    <bean id="dateTimeProvider" class="net.petrikainulainen.springdata.jpa.common.AuditingDateTimeProvider">
+        <constructor-arg index="0" ref="dateTimeService"/>
+    </bean>
+
+    <jpa:auditing auditor-aware-ref="auditingProvider" set-dates="true"/>
+    <jpa:repositories base-package="net.petrikainulainen.springdata.jpa.todo"/>
+
+
+   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+      <property name="entityManagerFactory" ref="myEmf" />
+   </bean>
+
+   <tx:annotation-driven />
+
+   <bean id="persistenceExceptionTranslationPostProcessor"
+      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+    -->
+</beans>

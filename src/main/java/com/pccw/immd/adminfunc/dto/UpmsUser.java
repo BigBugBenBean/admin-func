@@ -1,7 +1,7 @@
 package com.pccw.immd.adminfunc.dto;
 
-import ws.upms.immd.v1.Iss3UserSignOnDTO;
-import ws.upms.immd.v1.UserAuthenticateResponse;
+import com.pccw.immd.adminfunc.ws.upms.cxf.Iss3UserSignOnDTO;
+import com.pccw.immd.adminfunc.ws.upms.cxf.UserAuthenticateResponse;
 
 public class UpmsUser {
 

@@ -1,8 +1,8 @@
 package com.pccw.immd.adminfunc.service;
 
 import com.pccw.immd.adminfunc.dto.UpmsUser;
-import ws.upms.immd.v1.ITIAppException;
-import ws.upms.immd.v1.ITISysException;
+import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
+import com.pccw.immd.adminfunc.ws.upms.cxf.ITISysException;
 
 import javax.xml.bind.JAXBException;
 
