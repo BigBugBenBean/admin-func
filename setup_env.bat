@@ -1,4 +1,4 @@
-set PATH=$PATH;~\apache-maven-3.5.2\bin\
+set PATH=%PATH%;~\apache-maven-3.5.2\bin\
 set JAVA_HOME="C:\Program Files\Java\jdk1.8.0_151"
 
 alias mvn_in='mvn clean install'

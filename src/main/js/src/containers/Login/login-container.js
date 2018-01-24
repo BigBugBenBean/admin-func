@@ -5,13 +5,44 @@ import { Link, Switch, Route } from 'react-router-dom';
 
 import LandingContainer from '../Landing/landing-container';
 
-// import { doLogin } from '../../actions/login-action';
+ import { doLogin } from '../../actions/login-action';
 
 // import './login.css';
 import '../../styles/style.css';
 
 class LoginContainer extends Component {
 
+    constructor(props) {
+        super(props);
+        this.handleLogin = this.handleLogin.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.handleLogin();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.user) {
+            // logged in, let's show redirect if any, or show home
+            try {
+                const { from } = this.props.location.state || {
+                    from: { pathname: "/" }
+                };
+                nextProps.history.replace(from);
+            } catch (err) {
+                nextProps.history.replace("/");
+            }
+        }
+    }
+
+    handleLogin(event) {
+        event.preventDefault();
+        const username = this.refs.username;
+        const password = this.refs.password;
+//        this.props.dispatch(doLogin(username.value, password.value));
+//        username.value = "";
+//        password.value = "";
+    }
 
     render() {
         return (
@@ -51,7 +82,8 @@ class LoginContainer extends Component {
                   <b>User ID :</b>
                 </div>
                 <div className="flex-item-2 field-name content-user-id-right">
-                  <input name="username" />
+                  <input
+                ref="username" name="username" />
                 </div>
               </div>
               <div className="flex-container">
@@ -59,12 +91,14 @@ class LoginContainer extends Component {
                   <b>Password :</b>
                 </div>
                 <div className="flex-item-2 field-name content-password-right">
-                  <input name="password" type="password" />
+                  <input
+        ref="password" name="password" type="password" />
                 </div>
               </div>
               <div className="flex-container">
                 <div className="flex-item-1"></div>
                 <div className="flex-item-2">
+                <button onClick={this.handleLogin} >Login</button>
                   <Link to={'/landing'}>
                     <input type="button" className="ButtonStyle login-confirm" value="Confirm"  />
                   </Link>
@@ -80,14 +114,17 @@ class LoginContainer extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
+    const { auth } = state;
+    if (auth) {
+        return { user: auth.user, loginError: auth.loginError };
+    }
 
-    };
+    return { user: null };
 }
 
 function matchDispatchToProps(dispatch){
     return bindActionCreators({
-      // loginClicked: doLogin
+        handleLogin: doLogin
     }, dispatch);
 }
 
