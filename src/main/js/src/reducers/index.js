@@ -11,7 +11,8 @@
 import { combineReducers } from 'redux';
 
 // import history from '../utils/history';
-import createReducer from '../routes/Login/reducer/login-reducer';
+import LoginReducer from '../routes/Login/reducer/login-reducer';
+import LandingReducer from '../routes/Landing/reducer/landing-reducer';
 
 // import { reducers as apiReducers } from 'redux-api-call'
 
@@ -32,8 +33,11 @@ const initialState = {};
 //
 //  return handler ? handler(state, action) : state
 //}
-const loginReducer = createReducer(initialState, ACTION_HANDLERS);
-const _loginReducer = combineReducers({
+const loginReducer = LoginReducer(initialState, ACTION_HANDLERS);
+const landingReducer = LandingReducer(initialState, ACTION_HANDLERS);
+
+const rootReducer = combineReducers({
     loginReducer,
+    landingReducer,
 })
-export default loginReducer
+export default rootReducer

@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
 import { connect } from 'react-redux'
-import { handleLogin, dispatchLogin } from '../action/login-action'
+import { dispatchLogin } from '../action/login-action'
 // import { handleLogin, dispatchLogin } from '../modules/reducers'
 
 /*  This is a container component. Notice it does not contain any JSX,
@@ -33,7 +33,8 @@ const mapDispatchToProps = {
 //}
 
 const mapStateToProps = (state, ownProps) => ({
-  login : state.login
+  // userID : '54321',
+  // login: state.login,
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

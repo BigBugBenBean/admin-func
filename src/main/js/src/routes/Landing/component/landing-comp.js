@@ -1,12 +1,43 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {withRouter} from "react-router-dom";
+import { onLogoutClicked } from '../action/landing-action';
 
 // import '../../../styles/style.css';
 
-export const Landing = ({  }) => (
+var test = '321';
+var names = ['Jake', 'Jon', 'Thruster'];
+
+var tabs = [
+    {
+        id: 0,
+        name: 'e-Services-2',
+        isSelected: true
+    },
+    {
+        id: 1,
+        name: 'SMARTICS-2',
+        isSelected: false,
+    },
+    {
+        id: 2,
+        name: 'RM',
+        isSelected: false,
+    }
+];
+
+export const Landing = ({ onLogoutClicked }) => (
         <div>
-            <h3>landing</h3>
+            {/* <h3>landing</h3> */}
+
+            {/* <ul>
+                {names.map(function(name, index){
+                    return <li key={ index }>{name}</li>;
+                  })}
+                <li>{ 123 }</li>
+            </ul> */}
+
+
             <div className="flex-container">
                 <div className="flex-item-1 header-item-left">
                 <span>e-Services 2</span>
@@ -20,9 +51,20 @@ export const Landing = ({  }) => (
             <div className="content-container">
                 <div className="flex-container" style={{ width:'100%', height: '25px', backgroundColor: '#BF5564' }}>
                 <div className="" style={{ width: '20px' }}><span>&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
-                <div className="TopLabel header-tab header-tab-active"><b >e-Services-2</b></div>
+                
+                {tabs.map((tab, index) => {
+                    let isSelectedStr = '';
+                    if (tab.isSelected) {
+                        isSelectedStr = ' header-tab-active';
+                    }
+                    return <div className={ "TopLabel header-tab " + isSelectedStr } key={tab.id}><b >{tab.name}</b></div>
+                })}
+
+                {/* <div className="TopLabel header-tab header-tab-active"><b >e-Services-2</b></div>
                 <div className="TopLabel header-tab "><b >SMARTICS-2</b></div>
-                <div className="TopLabel header-tab "><b >RM</b></div>
+                <div className="TopLabel header-tab "><b >RM</b></div> */}
+
+
                 <div style={{  flex: 'auto' }}></div>
                 {/* <div style={{  width: '100%' }}></div> */}
                 {/* <div className="flex-item-1 nav-title-exit">
@@ -30,7 +72,7 @@ export const Landing = ({  }) => (
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </div> */}
 
-                <div className="TopLabel nav-title-exit"><b >Exit</b></div>
+                <div className="TopLabel nav-title-exit" ><b onClick={onLogoutClicked} >Exit</b></div>
 
                 </div>
             </div>

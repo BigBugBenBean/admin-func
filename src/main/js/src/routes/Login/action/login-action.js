@@ -163,7 +163,11 @@ export const dispatchLogin = (e) => {
 
             dispatch({
                 type: ACTION_TYPE.USER_LOGIN_SUCCESS,
-                payload: result
+                payload: {
+                    // userID: '678',
+                    // password: '123123'
+                    login: '111222333'
+                }
             });
             history.push(util.contextPath + '/');
             

@@ -30,10 +30,12 @@ const createRoutes = (store, history) => {
         <Route exact path={ contextpath + '/' } render={() => {
           util.log('isLogined: ' + util.isLogined);
 
-          if (util.isLogined) {
-            return <Landing />;
-          } else {
+          if (!util.isLogined) {
             return <Login />;
+          } else {
+            return (
+              <Landing />
+            );
           }
 
           return <Login />;

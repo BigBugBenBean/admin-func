@@ -1,11 +1,13 @@
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux'
-import {  } from '../action/landing-action'
+
+
+import { onLogoutClicked } from '../action/landing-action'
 
 import Landing from '../component/landing-comp'
 
 const mapDispatchToProps = {
-
+    onLogoutClicked,
 }
 //function mapDispatchToProps(dispatch) {
 //    return {
@@ -19,8 +21,9 @@ const mapDispatchToProps = {
 //  };
 //}
 
+
 const mapStateToProps = (state, ownProps) => ({
-  
+    // userID: state.userID
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Landing)

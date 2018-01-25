@@ -2,21 +2,33 @@ import { ACTION_TYPE } from '../../../utils/enum';
 
 import * as util from '../../../utils/util';
 
-const createReducer = (initialState, handlers) => {
-    util.log('createReducer');
+const LoginReducer = (initialState, handlers) => {
     return (state = initialState, action) => {
-      util.log('createReducer2');
-      util.log(action.type);
-      util.log(action.payload);
+      // util.log('createReducer2');
+      // util.log(action.type);
+      // util.log(action.payload);
     
 
       switch(action.type) {
         case ACTION_TYPE.USER_LOGIN: {
-          util.log('USER_LOGIN_123');
+          // util.log('----------USER_LOGIN----------');
           // state = {...state, userID: action.payload};
+          state = {...state, userID: 'userid123456'};
+          // util.log('----------End of USER_LOGIN----------');
+          break;
+        }
+        case ACTION_TYPE.USER_LOGIN_SUCCESS: {
+          // util.log('----------USER_LOGIN_SUCCESS----------');
+          // state = {...state, userID: action.payload};
+          state = {...state, userID: 'userid123456'};
+          // util.log('----------End of USER_LOGIN_SUCCESS----------');
           break;
         }
         default: {
+          // util.log('----------Default state----------');
+          // util.log(state);
+          // util.log(action);
+          // util.log('----------End of Default state----------');
           return state;
         }
       }
@@ -28,9 +40,9 @@ const createReducer = (initialState, handlers) => {
       //   return state;
       // }
 
-
+      return state;
     };
   };
   
-  export default createReducer;
+  export default LoginReducer;
   
