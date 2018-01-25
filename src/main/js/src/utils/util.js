@@ -16,6 +16,9 @@ import axios from 'axios';
 
 // let logger = require('js-logging').console();
 
+export var isLogined = false;
+export var contextPath = '/adminfunc';
+
 export var config = require('../config/env.js');
 
 export const HTTP_METHOD = {

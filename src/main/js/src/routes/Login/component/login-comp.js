@@ -2,13 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {withRouter} from "react-router-dom";
 
-// import './login-comp.scss';
-// import '../../../styles/style.css';
+import '../../../styles/base.scss';
 
 export const Login = ({ dispatchLogin }) => (
          <div>
-           {/* <h2 className="test">login</h2> */}
-          {/* <div>Login Page</div> */}
             <div className="flex-container">
               <div className="flex-item-1 header-item-left">
                 <span>e-Services 2</span>

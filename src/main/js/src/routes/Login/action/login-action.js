@@ -158,11 +158,14 @@ export const dispatchLogin = (e) => {
             console.log('response');
             console.log(result);
 
+            util.isLogined = true;
+            util.log('isLogined: ' + util.isLogined);
+
             dispatch({
                 type: ACTION_TYPE.USER_LOGIN_SUCCESS,
                 payload: result
-            });   
-            history.push('landing');
+            });
+            history.push(util.contextPath + '/');
             
         })
         .catch(error => {
