@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { onLogoutClicked } from '../action/landing-action'
 
+import { REDUCER_PAGE } from '../../../utils/enum';
+
 import Landing from '../component/landing-comp'
 
 const mapDispatchToProps = {
@@ -23,7 +25,14 @@ const mapDispatchToProps = {
 
 
 const mapStateToProps = (state, ownProps) => ({
-    // userID: state.userID
+    user: state[REDUCER_PAGE.LANDING_PAGE].landingReducer.user,
+    // user: {user: {id: '789', password: '5678'}}
 })
+
+// const mapStateToProps = () => {
+//     return state => ({
+//         user: state.user
+//     });
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Landing)

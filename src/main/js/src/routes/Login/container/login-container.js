@@ -17,24 +17,11 @@ import Login from '../component/login-comp'
 
 const mapDispatchToProps = {
   user: {},
-  // handleLogin,
   dispatchLogin
 }
-//function mapDispatchToProps(dispatch) {
-//    return {
-//        routeActions: bindActionCreators(routeActions, dispatch),
-//    }
-//}
-//function mapDispatchToProps(dispatch) {
-//  return {
-//    changeRoute: (url) => dispatch(push(url)),
-//    dispatch,
-//  };
-//}
 
 const mapStateToProps = (state, ownProps) => ({
-  // userID : '54321',
-  // login: state.login,
+  
 })
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:

@@ -1,8 +1,9 @@
 import { ACTION_TYPE } from '../../../utils/enum';
 
-import * as util from '../../../utils/util';
+import * as util from '../../../utils/';
 
 const LoginReducer = (initialState, handlers) => {
+    console.log('step_LoginReducer');
     return (state = initialState, action) => {
       // util.log('createReducer2');
       // util.log(action.type);
@@ -13,17 +14,18 @@ const LoginReducer = (initialState, handlers) => {
         case ACTION_TYPE.USER_LOGIN: {
           // util.log('----------USER_LOGIN----------');
           // state = {...state, userID: action.payload};
-          state = {...state, userID: 'userid123456'};
+          // state = {...state, userID: 'userid123456'};
           // util.log('----------End of USER_LOGIN----------');
           break;
         }
-        case ACTION_TYPE.USER_LOGIN_SUCCESS: {
-          // util.log('----------USER_LOGIN_SUCCESS----------');
-          // state = {...state, userID: action.payload};
-          state = {...state, userID: 'userid123456'};
-          // util.log('----------End of USER_LOGIN_SUCCESS----------');
-          break;
-        }
+        // case ACTION_TYPE.USER_LOGIN_SUCCESS: {
+        //   util.log('----------USER_LOGIN_SUCCESS----------');
+        //   util.log(action.payload);
+        //   // state = {...state, userID: action.payload};
+        //   state = {...state, user: action.payload};
+        //   util.log('----------End of USER_LOGIN_SUCCESS----------');
+        //   break;
+        // }
         default: {
           // util.log('----------Default state----------');
           // util.log(state);

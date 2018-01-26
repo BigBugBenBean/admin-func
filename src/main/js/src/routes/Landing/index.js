@@ -2,7 +2,9 @@ import React from 'react';
 
 import { injectReducer } from '../../store/makeRootReducer';
 
-import * as util from '../../utils/util';
+import { REDUCER_PAGE } from '../../utils/enum';
+
+import * as util from '../../utils/';
 
 const landingRoute = store => {
   const getComponent = () => {
@@ -13,7 +15,7 @@ const landingRoute = store => {
     return import('../../reducers');
   };
 
-  injectReducer(store, { key: util.LANDING_MAIN_PAGE, getReducer });
+  injectReducer(store, { key: REDUCER_PAGE.LANDING_PAGE, getReducer });
 
   return getComponent;
 };

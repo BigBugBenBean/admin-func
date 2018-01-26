@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import asyncComponent from './asyncComponent';
 import CoreLayout from '../layouts/CoreLayout/core-layout';
 
-import * as util from '../utils/util';
+import * as util from '../utils/';
 
 // import Home from '../routes/Home';
 // import todoRoute from '../routes/Todo';

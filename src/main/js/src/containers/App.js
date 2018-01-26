@@ -9,7 +9,7 @@ import history from './../utils/history';
 import configureStore from './../store/configureStore';
 import createRoutes from './createRoutes';
 
-// import * as util from '../utils/util';
+// import * as util from '../utils/';
 
 // import allReducers from './reducers'
 
