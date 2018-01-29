@@ -5,6 +5,8 @@ import { onLogoutClicked } from '../action/landing-action';
 
 import * as util from '../../../utils/';
 
+import ApplicationFeeEnquiry from '../../eServices2/Enquiry/ApplicationFeeEnquiry';
+
 // import '../../../styles/style.css';
 
 var test = '321';
@@ -79,6 +81,12 @@ const Landing = ({ user, onLogoutClicked }) => (
 
                 </div>
             </div>
+
+            <div>
+                456456
+                {/*<ApplicationFeeEnquiry />*/}
+            </div>
+
         </div>
 )
 

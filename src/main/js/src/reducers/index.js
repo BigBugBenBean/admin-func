@@ -13,6 +13,8 @@ import { combineReducers } from 'redux';
 // import history from '../utils/history';
 import LoginReducer from '../routes/Login/reducer/login-reducer';
 import LandingReducer from '../routes/Landing/reducer/landing-reducer';
+import ApplicationFeeEnquiryReducer from '../routes/eServices2/Enquiry/ApplicationFeeEnquiry/reducer/application-fee-enquiry-reducer';
+import eServicesMenuReducer from '../routes/eServices2/eServicesMenu/reducer/e-services-menu-reducer';
 
 // import { reducers as apiReducers } from 'redux-api-call'
 
@@ -35,9 +37,13 @@ const initialState = {};
 //}
 const loginReducer = LoginReducer(initialState, ACTION_HANDLERS);
 const landingReducer = LandingReducer(initialState, ACTION_HANDLERS);
+const _eServicesMenuReducer = eServicesMenuReducer(initialState, ACTION_HANDLERS);
+const _applicationFeeEnquiryReducer = ApplicationFeeEnquiryReducer(initialState, ACTION_HANDLERS);
 
 const rootReducer = combineReducers({
     loginReducer,
     landingReducer,
+    _eServicesMenuReducer,
+    _applicationFeeEnquiryReducer,
 })
 export default rootReducer

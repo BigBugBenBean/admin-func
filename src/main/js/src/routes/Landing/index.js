@@ -4,14 +4,19 @@ import { injectReducer } from '../../store/makeRootReducer';
 
 import { REDUCER_PAGE } from '../../utils/enum';
 
-import * as util from '../../utils/';
+import Container from './container/landing-container';
+import Reducers from '../../reducers';
+
+
 
 const landingRoute = store => {
   const getComponent = () => {
+    // return Container;
     return import('./container/landing-container');
   };
 
   const getReducer = () => {
+    // return Reducers;
     return import('../../reducers');
   };
 

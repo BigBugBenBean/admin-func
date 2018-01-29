@@ -94,32 +94,48 @@ export const dispatchLogin = (e) => {
         // return () => {
         // }
 
-        util.callAPI(URL, util.HTTP_METHOD.GET)
-        .then(result => {
-            console.log('response');
-            console.log(result);
-
-            util.isLogined = true;
-            util.log('isLogined: ' + util.isLogined);
-
-            dispatch({
-                type: AUTH_ACTION.LOGIN_SUCCESS,
-                payload: {
-                    user: {
-                        id: '678',
-                        password: '654'
-                    }
-                    // userID: '678',
-                    // password: '123123',
-                    // login: '111222333'
+        // temp
+        util.isLogined = true;
+        dispatch({
+            type: AUTH_ACTION.LOGIN_SUCCESS,
+            payload: {
+                user: {
+                    id: '678',
+                    password: '654'
                 }
-            });
-            history.push(util.contextPath + '/');
-            
-        })
-        .catch(error => {
-            console.log('error: ' + JSON.stringify(error));
+                // userID: '678',
+                // password: '123123',
+                // login: '111222333'
+            }
         });
+        history.push(util.contextPath + '/eservicesmenu');
+
+        // util.callAPI(URL, util.HTTP_METHOD.GET)
+        // .then(result => {
+        //     console.log('response');
+        //     console.log(result);
+
+        //     util.isLogined = true;
+        //     util.log('isLogined: ' + util.isLogined);
+
+        //     dispatch({
+        //         type: AUTH_ACTION.LOGIN_SUCCESS,
+        //         payload: {
+        //             user: {
+        //                 id: '678',
+        //                 password: '654'
+        //             }
+        //             // userID: '678',
+        //             // password: '123123',
+        //             // login: '111222333'
+        //         }
+        //     });
+        //     history.push(util.contextPath + '/applicationfeeenquiry');
+            
+        // })
+        // .catch(error => {
+        //     console.log('error: ' + JSON.stringify(error));
+        // });
 
         // return util.callAPI2('https://jsonplaceholder.typicode.com/posts', util.HTTP_METHOD.GET);
     }
