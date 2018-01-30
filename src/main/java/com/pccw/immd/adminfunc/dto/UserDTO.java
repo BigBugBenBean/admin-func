@@ -22,6 +22,31 @@ public class UserDTO {
     @JsonProperty("password")
     private String password = null;
 
+
+    @Valid
+    private String errorTitle = "";
+    @Valid
+    private String errorMessage = "";
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public String getErrorTitle() {
+        return errorTitle;
+    }
+
+    public void setErrorTitle(String errorTitle) {
+        this.errorTitle = errorTitle;
+    }
+
+
+
+
     /**
      * Get loginId
      * @return loginId
@@ -79,6 +104,8 @@ public class UserDTO {
         sb.append("class UserDTO {\n");
         sb.append("    loginId: ").append(toIndentedString(loginId)).append("\n");
         sb.append("    password: ").append(toIndentedString(password)).append("\n");
+        sb.append("    errorTitle: ").append(toIndentedString(errorTitle)).append("\n");
+        sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
         sb.append("}");
         return sb.toString();
     }
