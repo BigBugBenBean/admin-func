@@ -7,12 +7,10 @@
 
 .flex-item-1 {
     flex: 1;
-    /* border: 1px solid blue; */
 }
 
 .flex-item-2 {
     flex: 2;
-    /* // border: 1px solid red; */
 }
 
 .field-name {
@@ -40,10 +38,32 @@
     text-decoration: none;
 }
 
+.FieldName {
+    color: Black;
+    font-family: Arial;
+    font-size: 14px;
+}
+
 .grid-header {
     width: 100%;
-    height: 25px;
-    background: #aa4747;
+    height: 30px;
+    background: #BF5564;
+}
+
+.shadow-top {
+    box-shadow: 0 -5px 5px -5px black;
+}
+
+.shadow-right {
+    box-shadow: 5px 0 5px -5px black;
+}
+
+.shadow-bottom {
+    box-shadow: 0 5px 5px -5px black;
+}
+
+.shadow-left {
+    box-shadow: -5px 0 5px -5px black;
 }
 
 .header-tab {
@@ -52,17 +72,28 @@
     padding: 0px 15px;
     display: inline-block;
 
+    text-align: center;
+    width: 80px;
+
+    line-height: 30px;
+
+    box-shadow: 5px 0 5px -5px black;
+
+
 
     /* border: 1px solid lime; */
 }
 
 .header-tab-active {
-    background-color: #73a370;
+    background-color: #81a478;
     color: white;
-    font-family: Verdana, Arial;
+    /* font-family: Verdana, Arial; */
     text-decoration: none;
+    font-weight: bold;
 
     border-radius: 0px 10px 0px 0px;
+
+    box-shadow: 5px 0 5px -5px yellow;
 
     /* border: 1px solid yellow; */
 }
@@ -123,4 +154,159 @@
 
 .content-container {
     padding: 1em;
+}
+
+
+.menu-container {
+    /* border: 1px solid red; */
+    width: 100%;
+    flex: 8;
+    padding-top: 2em;
+}
+
+.func-parent {
+    /* border: 1px solid red; */
+}
+
+.func-child {
+    height: 30px;
+    text-decoration: none;
+}
+
+
+
+/***
+main menu
+*/
+.main-menu {
+    background: #BF5564;
+    /* padding: 10px; */
+}
+
+.main-menu input {
+    display: none;
+}
+
+.main-menu #exit-tab:checked + label,
+.main-menu label {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 5px 25px;
+    color: white;
+    background-color: #BF5564;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    border-radius: 0px 10px 0px 0px;
+    margin-right: -3px;
+}
+.main-menu label:before {
+    content:'';
+    display:block;
+    width:100%;
+    background-color:#fff;
+    position:absolute;
+    bottom:-11px;
+    left:0;
+    z-index:10;
+}
+.main-menu label:hover {
+    color: #93de83;
+    cursor: pointer;
+}
+.main-menu input:checked + label {
+    position: relative;
+    color: white;
+    background-color: #81a478;
+}
+.main-menu input:checked + label:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+#main-content-1, #main-content-2, #main-content-3 {
+    display: none;
+    /* padding: 15px; */
+    height: 150px;
+    background-color: #C7DBB8;
+}
+#main-tab-1:checked ~ #main-content-1,
+#main-tab-2:checked ~ #main-content-2,
+#main-tab-3:checked ~ #main-content-3 {
+    display: block;
+}
+
+
+#exit-tab {
+
+}
+
+
+/***
+sub menu
+*/
+.sub-menu {
+    background: #b6cba2;
+    /* padding: 10px; */
+    flex: 7;
+}
+
+.sub-menu input {
+    display: none;
+}
+.sub-menu label {
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 5px 25px;
+    color: white;
+    background-color: #82a579;
+    margin-bottom: -1px;
+    margin-left: -1px;
+    border-radius: 0px 0px 10px 0px;
+    margin-right: -3px;
+}
+.sub-menu label:before {
+    content:'';
+    display:block;
+    width:100%;
+    background-color:#fff;
+    position:absolute;
+    bottom:-11px;
+    left:0;
+    z-index:10;
+}
+.sub-menu label:hover {
+    color: #93de83;
+    cursor: pointer;
+}
+.sub-menu input:checked + label {
+    position: relative;
+    color: white;
+    background-color: #6a8369;
+}
+.sub-menu input:checked + label:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+#sub-content-1-1, #sub-content-1-2, #sub-content-1-3,
+#sub-content-2-1, #sub-content-2-2, #sub-content-2-3,
+#sub-content-3-1, #sub-content-3-2, #sub-content-3-3
+{
+    display: none;
+    padding: 15px;
+    height: 150px;
+}
+#sub-tab-1-1:checked ~ #sub-content-1-1,
+#sub-tab-1-2:checked ~ #sub-content-1-2,
+#sub-tab-1-3:checked ~ #sub-content-1-3,
+#sub-tab-2-1:checked ~ #sub-content-2-1,
+#sub-tab-2-2:checked ~ #sub-content-2-2,
+#sub-tab-2-3:checked ~ #sub-content-2-3,
+#sub-tab-3-1:checked ~ #sub-content-3-1,
+#sub-tab-3-2:checked ~ #sub-content-3-2,
+#sub-tab-3-3:checked ~ #sub-content-3-3
+{
+    display: block;
 }

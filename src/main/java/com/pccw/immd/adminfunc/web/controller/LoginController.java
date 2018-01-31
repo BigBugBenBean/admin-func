@@ -32,11 +32,11 @@ import io.swagger.annotations.ApiParam;
 @Controller
 public class LoginController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
     public String loginPage() {
-        return "login";
+        return "/Auth/login";
     }
 
 //    @RequestMapping( value = "/{module}/module.html", method = RequestMethod.POST)
@@ -50,27 +50,37 @@ public class LoginController {
 //        return "";
 //    }
 
+    @RequestMapping(value = "/login-fail.html", method = RequestMethod.GET)
+    public String loginFailPage() {
+        return "/Auth/login-fail";
+    }
+
     @Autowired
     @Qualifier ("upmsService")
     private UpmsService upmsService;
 
 
     @PostMapping("/result.html")
-    public String submit(@ModelAttribute UserDTO userDTO) {
+    public String submit(@ModelAttribute UserDTO userDTO)   {
         LOG.info("Calling login ....... ");
+        LOG.info("loginID: " + userDTO.getLoginId() + " , password: " + userDTO.getPassword() );
 
         String termialId = "";
 
         try {
-            UpmsUser user = upmsService.login(userDTO.getLoginId(), userDTO.getPassword(), termialId);
+            if (false) {
+                UpmsUser user = upmsService.login(userDTO.getLoginId(), userDTO.getPassword(), termialId);
+            }
+
+
         } catch (ITIAppException|ITISysException e) {
 
             userDTO.setErrorTitle("Login Rejected");
             userDTO.setErrorMessage(e.getMessage());
 
-            return "login-fail";
+            return "/Auth/login-fail";
         }
-        return "login-fail";
+        return "/Auth/login-fail";
 //        return "result";
     }
 

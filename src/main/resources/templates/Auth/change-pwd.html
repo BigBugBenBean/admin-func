@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+
+    <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
+    <script src="/adminfunc/js/lib/lodash.min.js"></script>
+
+    <link rel="stylesheet" href="/adminfunc/css/style.css" />
+    <link rel="stylesheet" href="/adminfunc/css/change-pwd.css" />
+
+</head>
+
+<body>
+    <div>
+        <div class="flex-container">
+            <div class="flex-item-1 header-item-left">
+                <span>e-Services 2</span>
+            </div>
+            <div></div>
+            <div class="flex-item-1 header-item-right">
+                <span>Date:
+                    <b>Wednesday, 3 January 2018</b>
+                </span>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-header">&nbsp;</div>
+            <div class="flex-container grid-nav-container">
+                <div class="flex-item-1 nav-title-left">
+                    <span style=" width: '100%'">Change Password</span>
+                </div>
+                <div></div>
+                <div class="flex-item-1 nav-title-right">
+                    <span style=" width: '100%' ">CPA0001</span>
+                </div>
+            </div>
+            <div class="content-container FieldName title">
+                <span>Create your new password in the fields below.</span>
+            </div>
+            <form action="changePassword.html" method="post">
+                <div class="flex-container">
+                    <div style="flex: 6;">
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 input-tilte FieldName">
+                                <b>Old Password</b>
+                            </div>
+                            <div class="box-3 FieldName">
+                                <input type="password" />
+                            </div>
+                        </div>
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 input-tilte FieldName">
+                                <b>New Password</b>
+                            </div>
+                            <div class="box-3 FieldName">
+                                <input type="password" />
+                            </div>
+                        </div>
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 input-tilte FieldName">
+                                <b>Confirm New Password</b>
+                            </div>
+                            <div class="box-3 FieldName">
+                                <input type="password" />
+                            </div>
+                        </div>
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 "></div>
+                            <div class="box-3">
+                                <div class="flex-container">
+                                    <input type="submit" class="ButtonStyle change-pwd-confirm" value="Confirm" />
+
+                                    <input type="button" class="ButtonStyle change-pwd-clear" value="Clear" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="flex: 3; border: 3px ridge; vertical-align: top;">
+                        <table>
+                            <tr>
+                                <td style="">
+                                    <p style="font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+                                        <b>Hints:</b>
+                                        <br /> The new password should
+                                    </p>
+                                    <ul style="font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+                                        <li>contain at least 6 characters</li>
+                                        <li>contain both numeral and alphabet</li>
+                                        <li>not be the same as your last password</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="flex: 1;"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
