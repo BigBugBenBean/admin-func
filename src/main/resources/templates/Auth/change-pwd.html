@@ -26,12 +26,22 @@
         // alert(str);
         // alert(err);
 
-        if (errorCode != -1) {
+        if (errorCode == 1001) {
             alert(errorMessage);
         }
 
 
         /*]]>*/
+    </script>
+
+    <script type="text/javascript"  >
+
+        function onClear() {
+            $('#oldPassword').val('');
+            $('#newPassword').val('');
+            $('#confirmNewPassword').val('');
+        }
+
     </script>
 
 </head>
@@ -72,7 +82,7 @@
                                 <b>Old Password</b>
                             </div>
                             <div class="box-3 FieldName">
-                                <input type="password" name="oldPassword" />
+                                <input id="oldPassword" type="password" name="oldPassword" />
                             </div>
                         </div>
                         <div class="flex-container box-container">
@@ -81,7 +91,7 @@
                                 <b>New Password</b>
                             </div>
                             <div class="box-3 FieldName">
-                                <input type="password" name="newPassword" />
+                                <input id="newPassword" type="password" name="newPassword" />
                             </div>
                         </div>
                         <div class="flex-container box-container">
@@ -90,7 +100,7 @@
                                 <b>Confirm New Password</b>
                             </div>
                             <div class="box-3 FieldName">
-                                <input type="password" name="confirmNewPassword" />
+                                <input id="confirmNewPassword" type="password" name="confirmNewPassword" />
                             </div>
                         </div>
                         <div class="flex-container box-container">
@@ -100,7 +110,7 @@
                                 <div class="flex-container">
                                     <input type="submit" class="ButtonStyle change-pwd-confirm" value="Confirm" />
 
-                                    <input type="button" class="ButtonStyle change-pwd-clear" value="Clear" />
+                                    <input type="button" class="ButtonStyle change-pwd-clear" value="Clear" onclick="onClear()" />
                                 </div>
 
                             </div>

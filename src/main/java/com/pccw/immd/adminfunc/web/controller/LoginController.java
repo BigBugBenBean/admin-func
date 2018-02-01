@@ -33,6 +33,14 @@ import io.swagger.annotations.ApiParam;
 @Controller
 public class LoginController {
 
+    public enum LOGIN_STATUS {
+        LOGIN_SUCCESS,
+        FIRST_LOGIN,
+        INVALID_LOGIN_ID,
+        INVALID_PASSWORD,
+        EXPIRED
+    }
+
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping(value = "/login.html", method = RequestMethod.GET)
@@ -76,39 +84,105 @@ public class LoginController {
         LOG.info("loginID: " + loginId + " , password: " + password );
 
         String termialId = "";
-        String str = "123";
 
-        if (loginId.equals("123")) {
-            userDTO.setErrorTitle("Login Rejected");
+        String demoPrefix = "demo";
 
-            String errMsg= "Your account has been locked after 180 days of inactivity. Please contact your supervisor to activate the account if necessary.";
+        if (loginId.contains(demoPrefix)) {
+
+            String errTitle = "";
+            String errMsg = "";
+
+
+            LOGIN_STATUS status = validateAccount(loginId, password);
+            switch (status) {
+                case LOGIN_SUCCESS: {
+                    return "menu";
+                }
+                case FIRST_LOGIN: {
+                    return "/Auth/change-pwd";
+                }
+                case EXPIRED: {
+                    errTitle = "Login Rejected";
+                    errMsg= "Your account has been locked after 180 days of inactivity. Please contact your supervisor to activate the account if necessary.";
+                    break;
+                }
+                case INVALID_LOGIN_ID:
+                case INVALID_PASSWORD:
+                    errTitle = "Login Rejected";
+                    errMsg = "Invalid user ID or incorrect password";
+                    break;
+                default: {
+                    break;
+                }
+            }
+
+            userDTO.setErrorTitle(errTitle);
             userDTO.setErrorMessage(errMsg);
 
             return "/Auth/login-fail";
-        }
+        } else {
+            try {
+                LOG.info("testing.......");
 
-        try {
-            LOG.info("testing.......");
-            if (false) {
-                UpmsUser user = upmsService.login(userDTO.getLoginId(), userDTO.getPassword(), termialId);
-            }
-            if (loginId.equals("SCUSER08") && password.equals("password")) {
+                UpmsUser user = upmsService.login(loginId, password, termialId);
+
                 return "menu";
+
+            } catch (ITIAppException|ITISysException e) {
+
+                userDTO.setErrorTitle("Login Rejected");
+                userDTO.setErrorMessage(e.getMessage());
+
+                return "/Auth/login-fail";
             }
-
-
-        } catch (ITIAppException|ITISysException e) {
-
-            userDTO.setErrorTitle("Login Rejected");
-            userDTO.setErrorMessage(e.getMessage());
-
-            return "/Auth/login-fail";
         }
+
+
 //        return "/Auth/login-fail";
 //        return "result";
-        return "/Auth/login";
+//        return "/Auth/login";
 //        return "menu";
     }
+
+
+    private LOGIN_STATUS validateAccount(String loginId, String password) {
+        LOG.info("validateAccount");
+
+        String okPwd = "password";
+
+//        if (loginId.equals("demo001")) {
+//
+//        } else if (loginId.equals("demo002")) {
+//
+//        }
+
+        switch (loginId) {
+            case "demo001": {
+                if (!password.equals(okPwd)) {
+                    return LOGIN_STATUS.INVALID_PASSWORD;
+                }
+                return LOGIN_STATUS.LOGIN_SUCCESS;
+            }
+            case "demo002": {
+                if (!password.equals(okPwd)) {
+                    return LOGIN_STATUS.INVALID_PASSWORD;
+                }
+                return LOGIN_STATUS.FIRST_LOGIN;
+            }
+            case "demo003": {
+                if (!password.equals(okPwd)) {
+                    return LOGIN_STATUS.INVALID_PASSWORD;
+                }
+                return LOGIN_STATUS.EXPIRED;
+            }
+            default: {
+                return LOGIN_STATUS.INVALID_LOGIN_ID;
+            }
+        }
+
+//        return LOGIN_STATUS.INVALID_LOGIN_ID;
+    }
+
 
 //    @RequestMapping( value = "/result.html", method = RequestMethod.POST)
 //    @ModelAttribute

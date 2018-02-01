@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.validation.Valid;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.pccw.immd.adminfunc.service.AppointmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +34,18 @@ import io.swagger.annotations.ApiParam;
 
 @Controller
 public class ChangePasswordController {
+
+    public enum CHANGE_PWD_STATUS {
+        CHANGE_PWD_SUCCESS,
+        OLD_PWD_EMPTY,
+        NEW_PWD_EMPTY,
+        CONFIRM_NEW_PWD_EMPTY,
+        AT_LEAST_6_CHARACTERS,
+        PWD_SHOULD_CONTAIN_NUM_AND_ALPHABET,
+        NEW_PWD_NOT_SAME_AS_CONFIRM_NEW_PWD,
+        NEW_PWD_SAME_AS_OLD_PWD,
+        OLD_PWD_INCORRECT
+    }
 
     private static final Logger LOG = LoggerFactory.getLogger(ChangePasswordController.class);
 
@@ -65,51 +80,78 @@ public class ChangePasswordController {
 
          LOG.info("oldPassword: " + oldPassword + " , newPassword: " + newPassword + " , confirmNewPassword: " + confirmNewPassword );
 
+         CHANGE_PWD_STATUS status = validateChangePassword(oldPassword, newPassword, confirmNewPassword);
+
+         Integer errCode = passwordDTO.getErrorCode();
+         String errTitle = "";
          String errMsg = "";
-         if (oldPassword.equals("")) {
-             errMsg = "Please input Old Password.";
 
-             passwordDTO.setErrorCode(100);
-             passwordDTO.setErrorMessage(errMsg);
+
+
+         switch (status) {
+             case CHANGE_PWD_SUCCESS: {
+                break;
+             }
+             case OLD_PWD_EMPTY: {
+                 errCode = 1001;
+                 errMsg = "Please input Old Password.";
+                 break;
+             }
+             case NEW_PWD_EMPTY: {
+                 errCode = 1001;
+                 errMsg = "Please input New Password.";
+                 break;
+             }
+             case CONFIRM_NEW_PWD_EMPTY: {
+                 errCode = 1001;
+                 errMsg = "Please input Confirm New Password.";
+                 break;
+             }
+             case AT_LEAST_6_CHARACTERS: {
+                 errCode = 1001;
+                 errMsg = "The new password should contain at least 6 characters";
+                 break;
+             }
+             case PWD_SHOULD_CONTAIN_NUM_AND_ALPHABET: {
+                 errCode = 1001;
+                 errMsg = "The new password should contain both numeral and alphabet.";
+                 break;
+             }
+             case NEW_PWD_NOT_SAME_AS_CONFIRM_NEW_PWD: {
+                 errCode = 1001;
+                 errMsg = "Thew new passwords are not the same.";
+                 break;
+             }
+             case NEW_PWD_SAME_AS_OLD_PWD: {
+                 errCode = 1001;
+                 errMsg = "The new password should not be same as your last password.";
+                 break;
+             }
+             case OLD_PWD_INCORRECT: {
+                 errCode = 1002;
+                 errMsg = "Your password cannot be updated due to the following reason: \n\n";
+                 break;
+             }
+             default: {
+                 break;
+             }
+         }
+
+         LOG.info("errCode: " + errCode);
+
+         passwordDTO.setErrorCode(errCode);
+         passwordDTO.setErrorMessage(errMsg);
+
+         if (errCode == -1) {
+             // success
+             return "menu";
+         } else if (errCode == 1001) {
 
              return "/Auth/change-pwd";
+         } else if (errCode == 1002) {
+
+             return "/Auth/change-pwd-fail";
          }
-         if (newPassword.equals("")) {
-             errMsg = "Please input New Password.";
-
-             passwordDTO.setErrorCode(101);
-             passwordDTO.setErrorMessage(errMsg);
-
-             return "/Auth/change-pwd";
-         }
-         if (confirmNewPassword.equals("")) {
-             errMsg = "Please input Confirm New Password.";
-
-             passwordDTO.setErrorCode(102);
-             passwordDTO.setErrorMessage(errMsg);
-
-             return "/Auth/change-pwd";
-         }
-
-         if (newPassword.length() < 6) {
-             errMsg = "The new password should contain at least 6 characters.";
-
-             passwordDTO.setErrorCode(103);
-             passwordDTO.setErrorMessage(errMsg);
-
-             return "/Auth/change-pwd";
-         }
-
-         if (!newPassword.equals(confirmNewPassword)) {
-             errMsg = "The new password are not the same.";
-
-             passwordDTO.setErrorCode(104);
-             passwordDTO.setErrorMessage(errMsg);
-
-             return "/Auth/change-pwd";
-         }
-
-
 
 //         String termialId = "";
 
@@ -129,5 +171,69 @@ public class ChangePasswordController {
      }
 
 
+     private CHANGE_PWD_STATUS validateChangePassword(String oldPwd, String newPwd, String confirmNewPwd) {
+
+        // old password empty
+        if (oldPwd.equals("")) {
+            return CHANGE_PWD_STATUS.OLD_PWD_EMPTY;
+        }
+
+        // new password empty
+        if (newPwd.equals("")) {
+            return CHANGE_PWD_STATUS.NEW_PWD_EMPTY;
+        }
+
+        // confirm new password empty
+        if (confirmNewPwd.equals("")) {
+            return CHANGE_PWD_STATUS.CONFIRM_NEW_PWD_EMPTY;
+        }
+
+        // new password not same as confirm new password
+        if (!newPwd.equals(confirmNewPwd)) {
+            return CHANGE_PWD_STATUS.NEW_PWD_NOT_SAME_AS_CONFIRM_NEW_PWD;
+        }
+
+        // at least 6 characters
+        if (newPwd.length() < 6) {
+            return CHANGE_PWD_STATUS.AT_LEAST_6_CHARACTERS;
+        }
+
+        // new password same as old password
+        if (oldPwd.equals(newPwd)) {
+            return CHANGE_PWD_STATUS.NEW_PWD_SAME_AS_OLD_PWD;
+        }
+
+        // should contain numeric and alphabet
+//        String keyword = newPwd;
+//        String regex = "^[a-zA-Z0-9]*$";
+//        Pattern pattern = Pattern.compile(regex);
+//        Matcher matcher = pattern.matcher(keyword);
+//        if (!matcher.find()) {
+//            return CHANGE_PWD_STATUS.PWD_SHOULD_CONTAIN_NUM_AND_ALPHABET;
+//        }
+//        if (!isAlphaAndNumeric(newPwd)) {
+//            return CHANGE_PWD_STATUS.PWD_SHOULD_CONTAIN_NUM_AND_ALPHABET;
+//        }
+
+//         return CHANGE_PWD_STATUS.NEW_PWD_SAME_AS_OLD_PWD;
+//        return CHANGE_PWD_STATUS.OLD_PWD_INCORRECT;
+        return CHANGE_PWD_STATUS.CHANGE_PWD_SUCCESS;
+     }
+
+//     private boolean isAlphaAndNumeric(String keyword) {
+//         String regex = "";
+////         Pattern pattern = Pattern.compile(regex);
+////         Matcher matcher = pattern.matcher(keyword);
+//
+//
+////         return matcher.find();
+////        String pattern = "^[\\pL\\pN]+$";
+//
+//         boolean isMatch = keyword.matches(regex);
+//
+//         LOG.info("keyword: " + keyword + " , isMatch: " + isMatch);
+//
+//        return isMatch;
+//     }
 
 }

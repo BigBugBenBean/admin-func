@@ -31,6 +31,15 @@
         /*]]>*/
     </script>
 
+    <script type="text/javascript"  >
+
+        function onClear() {
+            $('#loginId').val('');
+            $('#password').val('');
+        }
+
+    </script>
+
 </head>
 <body>
 <div>
@@ -81,7 +90,8 @@
                     <b>User ID :</b>
                 </div>
                 <div class="flex-item-2 field-name content-user-id-right">
-                    <input name="loginId" value="SCUSER08" />
+                    <input id="loginId" name="loginId" value="SCUSER08" />
+                    <!--SCUSER08-->
                 </div>
             </div>
             <div class="flex-container">
@@ -89,7 +99,7 @@
                     <b>Password :</b>
                 </div>
                 <div class="flex-item-2 field-name content-password-right">
-                    <input name="password" type="password" value="password" />
+                    <input id="password" name="password" type="password" value="password" />
                 </div>
             </div>
             <div class="flex-container">
@@ -97,7 +107,7 @@
                 <div class="flex-item-2">
                     <input type="submit" class="ButtonStyle login-confirm" value="Confirm"  />
 
-                    <input type="button" class="ButtonStyle login-clear" value="Clear" />
+                    <input type="button" class="ButtonStyle login-clear" value="Clear" onclick="onClear()" />
 
 
 
