@@ -7,17 +7,39 @@
     <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
     <script src="/adminfunc/js/lib/lodash.min.js"></script>
 
-    <!--<script src="/adminfunc/js/login.js"></script>-->
+    <script src="/adminfunc/js/login.js"></script>
 
     <!--<link rel="stylesheet" href="${style.css}" />-->
     <link rel="stylesheet" href="/adminfunc/css/style.css" />
     <link rel="stylesheet" href="/adminfunc/css/login.css" />
 
+    <script type="text/javascript" th:inline="javascript" th:if="${userDTO}" >
+        /*<![CDATA[*/
 
+
+        var username = "[[${userDTO.loginId}]]";
+        var password = "[[${userDTO.password}]]";
+        var errorTitle = "[[${userDTO.errorTitle}]]";
+        var errorMessage = "[[${userDTO.errorMessage}]]";
+
+        var str = 'username: ' + username + ' , pwd: ' + password;
+        var err = 'errorTitle: ' + errorTitle + ' , errorMessage: ' + errorMessage;
+        // alert(str);
+        // alert(err);
+
+
+        /*]]>*/
+    </script>
 
 </head>
 <body>
 <div>
+
+    <!--<div th:if="${userDTO}">-->
+        <!--<h3 th:text="${userDTO.loginId}" ></h3><br />-->
+        <!--<h3 th:text="${userDTO.password}"></h3><br />-->
+    <!--</div>-->
+
     <div class="flex-container">
         <div class="flex-item-1 header-item-left">
             <span>e-Services 2</span>
@@ -25,7 +47,7 @@
         <div></div>
         <div class="flex-item-1 header-item-right">
                 <span>Date:
-                    <b>Wednesday, 3 January 2018</b>
+                    <b>Thusday, 1 February 2018</b>
                 </span>
         </div>
     </div>
@@ -53,7 +75,7 @@
                     </span>
             </div>
         </div>
-        <form id="" method="post" action="result.html">
+        <form id="" method="post" action="menu" >
             <div class="flex-container">
                 <div class="flex-item-1 field-name content-user-id-left">
                     <b>User ID :</b>
@@ -73,7 +95,7 @@
             <div class="flex-container">
                 <div class="flex-item-1"></div>
                 <div class="flex-item-2">
-                    <input type="submit" class="ButtonStyle login-confirm" value="Confirm" />
+                    <input type="submit" class="ButtonStyle login-confirm" value="Confirm"  />
 
                     <input type="button" class="ButtonStyle login-clear" value="Clear" />
 

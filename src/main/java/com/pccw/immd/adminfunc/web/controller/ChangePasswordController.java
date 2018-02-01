@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.dto.UserDTO;
-import com.pccw.immd.adminfunc.dto.UserDTO3;
+import com.pccw.immd.adminfunc.dto.PasswordDTO;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import com.pccw.immd.adminfunc.web.rest.AuthApi;
 import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
@@ -55,9 +55,61 @@ public class ChangePasswordController {
 //     private UpmsService upmsService;
 
 
-//     @PostMapping("/result.html")
-//     public String submit(@ModelAttribute UserDTO userDTO) {
-//         LOG.info("Calling login ....... ");
+     @PostMapping("/changePassword")
+     public String submit(@ModelAttribute PasswordDTO passwordDTO) {
+         LOG.info("Calling changePassword ....... ");
+
+         String oldPassword = passwordDTO.getOldPassword();
+         String newPassword = passwordDTO.getNewPassword();
+         String confirmNewPassword = passwordDTO.getConfirmNewPassword();
+
+         LOG.info("oldPassword: " + oldPassword + " , newPassword: " + newPassword + " , confirmNewPassword: " + confirmNewPassword );
+
+         String errMsg = "";
+         if (oldPassword.equals("")) {
+             errMsg = "Please input Old Password.";
+
+             passwordDTO.setErrorCode(100);
+             passwordDTO.setErrorMessage(errMsg);
+
+             return "/Auth/change-pwd";
+         }
+         if (newPassword.equals("")) {
+             errMsg = "Please input New Password.";
+
+             passwordDTO.setErrorCode(101);
+             passwordDTO.setErrorMessage(errMsg);
+
+             return "/Auth/change-pwd";
+         }
+         if (confirmNewPassword.equals("")) {
+             errMsg = "Please input Confirm New Password.";
+
+             passwordDTO.setErrorCode(102);
+             passwordDTO.setErrorMessage(errMsg);
+
+             return "/Auth/change-pwd";
+         }
+
+         if (newPassword.length() < 6) {
+             errMsg = "The new password should contain at least 6 characters.";
+
+             passwordDTO.setErrorCode(103);
+             passwordDTO.setErrorMessage(errMsg);
+
+             return "/Auth/change-pwd";
+         }
+
+         if (!newPassword.equals(confirmNewPassword)) {
+             errMsg = "The new password are not the same.";
+
+             passwordDTO.setErrorCode(104);
+             passwordDTO.setErrorMessage(errMsg);
+
+             return "/Auth/change-pwd";
+         }
+
+
 
 //         String termialId = "";
 
@@ -72,6 +124,10 @@ public class ChangePasswordController {
 //         }
 //         return "login-fail";
 // //        return "result";
-//     }
+
+         return "/Auth/change-pwd";
+     }
+
+
 
 }

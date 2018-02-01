@@ -11,6 +11,29 @@
     <link rel="stylesheet" href="/adminfunc/css/style.css" />
     <link rel="stylesheet" href="/adminfunc/css/change-pwd.css" />
 
+    <script type="text/javascript" th:inline="javascript" th:if="${passwordDTO}" >
+        /*<![CDATA[*/
+
+
+        var oldPassword = "[[${passwordDTO.oldPassword}]]";
+        var newPassword = "[[${passwordDTO.newPassword}]]";
+        var confirmNewPassword = "[[${passwordDTO.confirmNewPassword}]]";
+        var errorCode = "[[${passwordDTO.errorCode}]]";
+        var errorMessage = "[[${passwordDTO.errorMessage}]]";
+
+        var str = 'oldPassword: ' + oldPassword + ' , newPassword: ' + newPassword + ' , confirmNewPassword: ' + confirmNewPassword;
+        var err = 'errorCode: ' + errorCode + ' , errorMessage: ' + errorMessage;
+        // alert(str);
+        // alert(err);
+
+        if (errorCode != -1) {
+            alert(errorMessage);
+        }
+
+
+        /*]]>*/
+    </script>
+
 </head>
 
 <body>
@@ -22,7 +45,7 @@
             <div></div>
             <div class="flex-item-1 header-item-right">
                 <span>Date:
-                    <b>Wednesday, 3 January 2018</b>
+                    <b>Thusday, 1 February 2018</b>
                 </span>
             </div>
         </div>
@@ -49,7 +72,7 @@
                                 <b>Old Password</b>
                             </div>
                             <div class="box-3 FieldName">
-                                <input type="password" />
+                                <input type="password" name="oldPassword" />
                             </div>
                         </div>
                         <div class="flex-container box-container">
@@ -58,7 +81,7 @@
                                 <b>New Password</b>
                             </div>
                             <div class="box-3 FieldName">
-                                <input type="password" />
+                                <input type="password" name="newPassword" />
                             </div>
                         </div>
                         <div class="flex-container box-container">
@@ -67,7 +90,7 @@
                                 <b>Confirm New Password</b>
                             </div>
                             <div class="box-3 FieldName">
-                                <input type="password" />
+                                <input type="password" name="confirmNewPassword" />
                             </div>
                         </div>
                         <div class="flex-container box-container">

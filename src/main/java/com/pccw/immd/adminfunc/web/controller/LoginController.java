@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -50,6 +51,12 @@ public class LoginController {
 //        return "";
 //    }
 
+    @GetMapping("/login")
+    public String backToLogin() {
+        LOG.info("Calling backToLogin ....... ");
+        return "/Auth/login";
+    }
+
     @RequestMapping(value = "/login-fail.html", method = RequestMethod.GET)
     public String loginFailPage() {
         return "/Auth/login-fail";
@@ -60,16 +67,33 @@ public class LoginController {
     private UpmsService upmsService;
 
 
-    @PostMapping("/result.html")
+    @PostMapping("/menu")
     public String submit(@ModelAttribute UserDTO userDTO)   {
         LOG.info("Calling login ....... ");
-        LOG.info("loginID: " + userDTO.getLoginId() + " , password: " + userDTO.getPassword() );
+
+        String loginId = userDTO.getLoginId();
+        String password = userDTO.getPassword();
+        LOG.info("loginID: " + loginId + " , password: " + password );
 
         String termialId = "";
+        String str = "123";
+
+        if (loginId.equals("123")) {
+            userDTO.setErrorTitle("Login Rejected");
+
+            String errMsg= "Your account has been locked after 180 days of inactivity. Please contact your supervisor to activate the account if necessary.";
+            userDTO.setErrorMessage(errMsg);
+
+            return "/Auth/login-fail";
+        }
 
         try {
+            LOG.info("testing.......");
             if (false) {
                 UpmsUser user = upmsService.login(userDTO.getLoginId(), userDTO.getPassword(), termialId);
+            }
+            if (loginId.equals("SCUSER08") && password.equals("password")) {
+                return "menu";
             }
 
 
@@ -80,8 +104,10 @@ public class LoginController {
 
             return "/Auth/login-fail";
         }
-        return "/Auth/login-fail";
+//        return "/Auth/login-fail";
 //        return "result";
+        return "/Auth/login";
+//        return "menu";
     }
 
 //    @RequestMapping( value = "/result.html", method = RequestMethod.POST)
