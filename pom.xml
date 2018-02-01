@@ -203,11 +203,11 @@
             <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -316,9 +316,6 @@
     <profiles>
         <profile>
             <id>undertow</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <undertwo-jsp.version>1.0.0.Beta27</undertwo-jsp.version>
             </properties>
@@ -345,6 +342,36 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>jetty</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>9.4.8.v20171121</version>
+                        <configuration>
+                            <webApp>
+                                <contextPath>/adminfunc</contextPath>
+                            </webApp>
+                            <scanTargetPatterns>
+                                <scanTargetPattern>
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                        <include>**/*.html</include>
+                                        <include>**/*.properties</include>
+                                        <include>**/*.xml</include>
+                                    </includes>
+                                </scanTargetPattern>
+                            </scanTargetPatterns>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 <!--
      <pluginRepositories>
@@ -354,9 +381,9 @@
             <url>http://10.89.105.44/nexus/repository/maven-public</url>
         </pluginRepository>
     </pluginRepositories>
+
+
 -->
-
-
     <repositories>
 
 
@@ -377,7 +404,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
--->
+        
         <repository>
             <id>Maven 2</id>
             <name>Maven 2 Repository</name>
@@ -386,7 +413,13 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>mvnrepository</id>
+            <name>mvnrepository Repository</name>
+            <url>http://central.maven.org/maven2</url>
+        </repository>
 
+-->
 
     </repositories>
 </project>

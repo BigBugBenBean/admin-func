@@ -65,9 +65,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("authenticationFailureHandler")
     private AuthenticationFailureHandler authenticationFailureHandler;
 
-    @Autowired
-    @Qualifier("securityContextFilter")
-    private SecurityContextPersistenceFilter securityContextFilter;
+//    @Autowired
+//    @Qualifier("securityContextFilter")
+//    private SecurityContextPersistenceFilter securityContextFilter;
 
     @Autowired
     @Qualifier("upmsAuthenticationProvider")

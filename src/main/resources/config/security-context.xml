@@ -5,11 +5,11 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="securityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository" />
+    <!--<bean id="securityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository" />-->
 
-    <bean id="securityContextFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter" >
-        <constructor-arg ref="securityContextRepository"/>
-    </bean>
+    <!--<bean id="securityContextFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter" >-->
+        <!--<constructor-arg ref="securityContextRepository"/>-->
+    <!--</bean>-->
 
     <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
         <property name="exceptionMappings">
