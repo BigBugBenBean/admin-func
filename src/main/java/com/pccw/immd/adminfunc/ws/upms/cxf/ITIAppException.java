@@ -13,7 +13,7 @@ import javax.xml.ws.WebFault;
 @WebFault(name = "ITIAppException", targetNamespace = "http://immd.itifwk.util/v1")
 public class ITIAppException extends Exception {
     
-    private com.pccw.immd.adminfunc.ws.itifwk.cxf.ITIAppException itiAppException;
+    private ITIAppException itiAppException;
 
     public ITIAppException() {
         super();
@@ -27,17 +27,17 @@ public class ITIAppException extends Exception {
         super(message, cause);
     }
 
-    public ITIAppException(String message, com.pccw.immd.adminfunc.ws.itifwk.cxf.ITIAppException itiAppException) {
+    public ITIAppException(String message, ITIAppException itiAppException) {
         super(message);
         this.itiAppException = itiAppException;
     }
 
-    public ITIAppException(String message, com.pccw.immd.adminfunc.ws.itifwk.cxf.ITIAppException itiAppException, Throwable cause) {
+    public ITIAppException(String message, ITIAppException itiAppException, Throwable cause) {
         super(message, cause);
         this.itiAppException = itiAppException;
     }
 
-    public com.pccw.immd.adminfunc.ws.itifwk.cxf.ITIAppException getFaultInfo() {
+    public ITIAppException getFaultInfo() {
         return this.itiAppException;
     }
 }

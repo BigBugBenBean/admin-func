@@ -3,13 +3,20 @@ package com.pccw.immd.adminfunc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration;
+import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.*;
 
 @SpringBootApplication(exclude = MessageSourceAutoConfiguration.class)
-@ImportResource({"classpath:application-context.xml"})
+@EnableAutoConfiguration(exclude={
+        DataSourceAutoConfiguration.class
+})
+@ImportResource ("classpath:/config/application-context.xml")
 public class AdminFuncApplication extends SpringBootServletInitializer {
 
     @Override

@@ -26,6 +26,7 @@
         <version.jboss.spec.javaee7>1.0.0.Final</version.jboss.spec.javaee7>
         <profile>dev</profile>
         <springfox-version>2.7.0</springfox-version>
+        <spring.security.version>4.2.3.RELEASE</spring.security.version>
 
         <hikaricp.version>2.7.6</hikaricp.version>
         <local.config>${project.basedir}/local_config</local.config>
@@ -46,11 +47,6 @@
         <!-- J2EE 7 lib END -->
     </properties>
 	<dependencies>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -145,6 +141,16 @@
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
         </dependency>
 
         <dependency>
@@ -355,7 +361,6 @@
 
 
 <!--
--->
         <repository>
             <id>central</id>
             <name>the nexus repository of pccw framework team</name>
@@ -372,6 +377,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+-->
         <repository>
             <id>Maven 2</id>
             <name>Maven 2 Repository</name>

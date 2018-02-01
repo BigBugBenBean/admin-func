@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.dto.UserDTO;
@@ -18,8 +18,10 @@ import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
 import com.pccw.immd.adminfunc.ws.upms.cxf.ITISysException;
 
 import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@RestController
+@Controller
 public class AuthApiController implements AuthApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(AuthApiController.class);
@@ -27,6 +29,11 @@ public class AuthApiController implements AuthApi {
     @Autowired
     @Qualifier ("upmsService")
     private UpmsService upmsService;
+
+//    @RequestMapping(value = "/login.html", method = RequestMethod.GET)
+    public String loginPage() {
+        return "index";
+    }
 
     public UpmsUser login(@ApiParam(value = "" ,required=true )  @RequestBody  @Valid UserDTO userDTO) throws ITIAppException, ITISysException {
 //        String userId = "A5";

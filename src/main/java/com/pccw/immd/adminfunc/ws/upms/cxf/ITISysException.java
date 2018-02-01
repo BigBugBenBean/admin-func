@@ -13,7 +13,7 @@ import javax.xml.ws.WebFault;
 @WebFault(name = "ITISysException", targetNamespace = "http://immd.itifwk.util/v1")
 public class ITISysException extends Exception {
     
-    private com.pccw.immd.adminfunc.ws.itifwk.cxf.ITISysException itiSysException;
+    private ITISysException itiSysException;
 
     public ITISysException() {
         super();
@@ -27,17 +27,17 @@ public class ITISysException extends Exception {
         super(message, cause);
     }
 
-    public ITISysException(String message, com.pccw.immd.adminfunc.ws.itifwk.cxf.ITISysException itiSysException) {
+    public ITISysException(String message, ITISysException itiSysException) {
         super(message);
         this.itiSysException = itiSysException;
     }
 
-    public ITISysException(String message, com.pccw.immd.adminfunc.ws.itifwk.cxf.ITISysException itiSysException, Throwable cause) {
+    public ITISysException(String message, ITISysException itiSysException, Throwable cause) {
         super(message, cause);
         this.itiSysException = itiSysException;
     }
 
-    public com.pccw.immd.adminfunc.ws.itifwk.cxf.ITISysException getFaultInfo() {
+    public ITISysException getFaultInfo() {
         return this.itiSysException;
     }
 }

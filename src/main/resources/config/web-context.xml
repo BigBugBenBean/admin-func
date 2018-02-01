@@ -23,4 +23,10 @@
     <!-- Swagger Conifg -->
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+
+    <!--<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">-->
+        <!--<property name="templateEngine" ref="templateEngine" />-->
+        <!--<property name="order" value="1" />-->
+        <!--<property name="viewNames" value="*.html,*.xhtml" />-->
+    <!--</bean>-->
 </beans>  
