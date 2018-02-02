@@ -1,0 +1,33 @@
+.title {
+    font-weight: bold;
+    text-align: center;
+    height: 2em;
+    line-height: 2em;
+}
+
+.input-tilte {
+    padding-right: 1em;
+}
+
+.box-container {
+    height: 30px;
+    line-height: 30px;
+    padding-right: 1em;
+}
+
+.box-1 {
+    flex: 1;
+}
+
+.box-2 {
+    flex: 3;
+}
+
+.box-3 {
+    flex: 3;
+}
+
+.change-pwd-confirm, .change-pwd-clear {
+    flex: 1;
+    margin: 5px;
+}

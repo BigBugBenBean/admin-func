@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+
+    <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
+    <script src="/adminfunc/js/lib/lodash.min.js"></script>
+    <script src="/adminfunc/js/lib/moment.min.js"></script>
+
+    <script src="/adminfunc/js/common.js"></script>
+
+    <link rel="stylesheet" href="/adminfunc/css/style.css" />
+    <link rel="stylesheet" href="/adminfunc/css/change-pwd.css" />
+
+    <script type="text/javascript" th:inline="javascript" th:if="${passwordDTO}" >
+        /*<![CDATA[*/
+
+
+        var oldPassword = "[[${passwordDTO.oldPassword}]]";
+        var newPassword = "[[${passwordDTO.newPassword}]]";
+        var confirmNewPassword = "[[${passwordDTO.confirmNewPassword}]]";
+        var errorCode = "[[${passwordDTO.errorCode}]]";
+        var errorMessage = "[[${passwordDTO.errorMessage}]]";
+
+        var str = 'oldPassword: ' + oldPassword + ' , newPassword: ' + newPassword + ' , confirmNewPassword: ' + confirmNewPassword;
+        var err = 'errorCode: ' + errorCode + ' , errorMessage: ' + errorMessage;
+        // alert(str);
+        // alert(err);
+
+        if (errorCode == 1001) {
+            setTimeout(function () {
+                alert(errorMessage);
+            }, 100)
+        }
+
+
+        /*]]>*/
+    </script>
+
+    <script type="text/javascript"  >
+
+        jQuery(document).ready(function () {
+            $('#todayDate').html(today);
+        });
+
+        function onClear() {
+            $('#oldPassword').val('');
+            $('#newPassword').val('');
+            $('#confirmNewPassword').val('');
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div>
+        <div class="flex-container">
+            <div class="flex-item-1 header-item-left">
+                <span>e-Services-2</span>
+            </div>
+            <div></div>
+            <div class="flex-item-1 header-item-right">
+                <span>Date:
+                    <b id="todayDate"></b>
+                </span>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-header">&nbsp;</div>
+            <div class="flex-container grid-nav-container">
+                <div class="flex-item-1 nav-title-left">
+                    <span style=" width: '100%'">Change Password</span>
+                </div>
+                <div></div>
+                <div class="flex-item-1 nav-title-right">
+                    <span style=" width: '100%' ">CPA0001</span>
+                </div>
+            </div>
+            <div class="content-container FieldName title">
+                <span>Create your new password in the fields below.</span>
+            </div>
+            <form action="changePassword.html" method="post">
+                <div class="flex-container">
+                    <div style="flex: 6;">
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 input-tilte FieldName">
+                                <b>Old Password</b>
+                            </div>
+                            <div class="box-3 FieldName">
+                                <input id="oldPassword" type="password" name="oldPassword" />
+                            </div>
+                        </div>
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 input-tilte FieldName">
+                                <b>New Password</b>
+                            </div>
+                            <div class="box-3 FieldName">
+                                <input id="newPassword" type="password" name="newPassword" />
+                            </div>
+                        </div>
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 input-tilte FieldName">
+                                <b>Confirm New Password</b>
+                            </div>
+                            <div class="box-3 FieldName">
+                                <input id="confirmNewPassword" type="password" name="confirmNewPassword" />
+                            </div>
+                        </div>
+                        <div class="flex-container box-container">
+                            <div class="box-1"></div>
+                            <div class="box-2 "></div>
+                            <div class="box-3">
+                                <div class="flex-container">
+                                    <input type="submit" class="ButtonStyle change-pwd-confirm" value="Confirm" />
+
+                                    <input type="button" class="ButtonStyle change-pwd-clear" value="Clear" onclick="onClear()" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div style="flex: 3; border: 3px ridge; vertical-align: top;">
+                        <table>
+                            <tr>
+                                <td style="">
+                                    <p style="font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+                                        <b>Hints:</b>
+                                        <br /> The new password should
+                                    </p>
+                                    <ul style="font-size: 12px; margin-top: 0px; margin-bottom: 0px;">
+                                        <li>contain at least 6 characters</li>
+                                        <li>contain both numeral and alphabet</li>
+                                        <li>not be the same as your last password</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="flex: 1;"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

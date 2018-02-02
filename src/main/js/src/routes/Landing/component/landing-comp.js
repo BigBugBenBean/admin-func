@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {withRouter} from "react-router-dom";
 import { onLogoutClicked } from '../action/landing-action';
+
+import * as util from '../../../utils/';
+
+import ApplicationFeeEnquiry from '../../eServices2/Enquiry/ApplicationFeeEnquiry';
 
 // import '../../../styles/style.css';
 
@@ -26,16 +30,17 @@ var tabs = [
     }
 ];
 
-export const Landing = ({ onLogoutClicked }) => (
+const Landing = ({ user, onLogoutClicked }) => (
         <div>
             {/* <h3>landing</h3> */}
 
-            {/* <ul>
+            <ul>
                 {names.map(function(name, index){
                     return <li key={ index }>{name}</li>;
                   })}
-                <li>{ 123 }</li>
-            </ul> */}
+                <li>{ user.user.id } | {user.user.password}</li>
+                {/* <li>{ user } | {user}</li> */}
+            </ul>
 
 
             <div className="flex-container">
@@ -57,7 +62,7 @@ export const Landing = ({ onLogoutClicked }) => (
                     if (tab.isSelected) {
                         isSelectedStr = ' header-tab-active';
                     }
-                    return <div className={ "TopLabel header-tab " + isSelectedStr } key={tab.id}><b >{tab.name}</b></div>
+                    return <div className={ `TopLabel header-tab ${isSelectedStr}` } key={tab.id}><b >{tab.name}</b></div>
                 })}
 
                 {/* <div className="TopLabel header-tab header-tab-active"><b >e-Services-2</b></div>
@@ -76,11 +81,21 @@ export const Landing = ({ onLogoutClicked }) => (
 
                 </div>
             </div>
+
+            <div>
+                456456
+                {/*<ApplicationFeeEnquiry />*/}
+            </div>
+
         </div>
 )
+
+
+
 Landing.propTypes = {
-//  user: PropTypes.any.isRequired
+    // user: PropTypes.any.isRequired
+    
 }
 
-//export default Login
+// export default Landing
 export default withRouter(Landing)

@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom'
 import history from '../../../utils/history';
 // import * as loginAction from '../action/login-action.js';
 
-// import * as util from '../../../utils/util';
-// require('../../../utils/util');
+// import * as util from '../../../utils/';
+// require('../../../utils/');
 
 import axios from 'axios';
 
@@ -18,8 +18,8 @@ import axios from 'axios';
 // export const USER_AUTH = 'USER_AUTH'
 // export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 
-import { ACTION_TYPE } from '../../../utils/enum';
-import * as util from '../../../utils/util';
+import { AUTH_ACTION } from '../../../utils/enum';
+import * as util from '../../../utils/';
 
 
 // import 'whatwg-fetch';
@@ -53,66 +53,7 @@ import * as util from '../../../utils/util';
 //  }
 // }
 
-export const loginError = (error) => {
-    return {
-        type: ACTION_TYPE.USER_LOGIN_FAIL,
-        error
-    }
-}
 
-export const loginSuccess = (response) => {
-    return dispatch => {
-        dispatch({
-            type: ACTION_TYPE.USER_LOGIN_SUCCESS,
-            response
-        });
-        history.push('landing');
-    }
-}
-
-export const loginRequest = (username, password) => {
-    console.log('loginRequest');
-    console.log('username: ' + username + ' , password: ' + password);
-
-
-    var link = 'https://jsonplaceholder.typicode.com/posts';
-
-
-    
-    
-
-    // axios.get(link)
-    // .then((response) => {
-    //     console.log('loginRequest_response');
-    //     console.log(response);
-    //     return {type: 'good', payload: 'well'};
-    // })
-    // .catch((error) => {
-    //     console.log(error);
-    // });
-    
-
-
-    // return {type: 'good', payload: 'well'};
-
-    // return dispatch => fetch(link), {
-    //     method: 'get',
-    //     // headers: {
-    //     //     'Accept': 'application/json',
-    //     //     'Content-Type': 'application/json'
-    //     // },
-    //     // body: JSON.stringify({
-
-    //     // })
-    // }
-    // .then(response => {
-    //     console.log('request_success');
-    //     console.log(response);
-    // })
-    // .catch(error => {
-    //     console.log('request_fail');
-    // })
-}
 
 export const dispatchLogin = (e) => {
     console.log("dispatchLogin");
@@ -125,7 +66,7 @@ export const dispatchLogin = (e) => {
 
     // let a = util.getBaseURL();
 
-    // return loginRequest('user123', 'pwd123');
+
 
     // return util.callAPI();
 
@@ -153,28 +94,48 @@ export const dispatchLogin = (e) => {
         // return () => {
         // }
 
-        util.callAPI(URL, util.HTTP_METHOD.GET)
-        .then(result => {
-            console.log('response');
-            console.log(result);
-
-            util.isLogined = true;
-            util.log('isLogined: ' + util.isLogined);
-
-            dispatch({
-                type: ACTION_TYPE.USER_LOGIN_SUCCESS,
-                payload: {
-                    // userID: '678',
-                    // password: '123123'
-                    login: '111222333'
+        // temp
+        util.isLogined = true;
+        dispatch({
+            type: AUTH_ACTION.LOGIN_SUCCESS,
+            payload: {
+                user: {
+                    id: '678',
+                    password: '654'
                 }
-            });
-            history.push(util.contextPath + '/');
-            
-        })
-        .catch(error => {
-            console.log('error: ' + JSON.stringify(error));
+                // userID: '678',
+                // password: '123123',
+                // login: '111222333'
+            }
         });
+        history.push(util.contextPath + '/eservicesmenu');
+
+        // util.callAPI(URL, util.HTTP_METHOD.GET)
+        // .then(result => {
+        //     console.log('response');
+        //     console.log(result);
+
+        //     util.isLogined = true;
+        //     util.log('isLogined: ' + util.isLogined);
+
+        //     dispatch({
+        //         type: AUTH_ACTION.LOGIN_SUCCESS,
+        //         payload: {
+        //             user: {
+        //                 id: '678',
+        //                 password: '654'
+        //             }
+        //             // userID: '678',
+        //             // password: '123123',
+        //             // login: '111222333'
+        //         }
+        //     });
+        //     history.push(util.contextPath + '/applicationfeeenquiry');
+            
+        // })
+        // .catch(error => {
+        //     console.log('error: ' + JSON.stringify(error));
+        // });
 
         // return util.callAPI2('https://jsonplaceholder.typicode.com/posts', util.HTTP_METHOD.GET);
     }

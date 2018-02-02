@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Title</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/style.css"></link>
+    <link rel="stylesheet" href="/adminfunc/css/login-fail.css"></link>
+
+    <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
+    <script src="/adminfunc/js/lib/lodash.min.js"></script>
+    <script src="/adminfunc/js/lib/moment.min.js"></script>
+
+    <script src="/adminfunc/js/common.js"></script>
+
+    <script type="text/javascript"  >
+
+        jQuery(document).ready(function () {
+            $('#todayDate').html(today);
+        });
+
+    </script>
+
+</head>
+
+<body>
+<div th:if="${passwordDTO}">
+
+    <!--<h3 th:if="${userDTO}">-->
+    <!--loginId: <span th:text="${userDTO.loginId}"></span><br/>-->
+    <!--password: <span th:text="${userDTO.password}"></span><br/>-->
+    <!--tilte: <span th:text="${userDTO.errorTitle}"></span><br/>-->
+    <!--error: <span th:text="${userDTO.errorMessage}"></span><br/>-->
+    <!--</h3>-->
+
+
+    <!--<h3 th:text="${userDTO}"></h3>-->
+
+    <div class="flex-container">
+        <div class="flex-item-1 header-item-left">
+            <span>e-Services-2</span>
+        </div>
+        <div></div>
+        <div class="flex-item-1 header-item-right">
+                <span>Date:
+                    <b id="todayDate"></b>
+                </span>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div class="grid-header">&nbsp;</div>
+        <div class="flex-container grid-nav-container">
+            <div class="flex-item-1 nav-title-left">
+                <span style=" width: '100%'" th:text="${passwordDTO.errorTitle}"></span>
+            </div>
+            <div></div>
+            <div class="flex-item-1 nav-title-right">
+                <span style=" width: '100%' ">ASC0001</span>
+            </div>
+        </div>
+        <div class="content-container flex-container">
+            <div class="login-fail-container">
+                    <span id="loginFailTitle" class="login-fail-title">
+                        <b>Warning</b>
+                    </span>
+
+                <p id="loginFailContent" class="login-fail-content">
+                    <b th:text="${passwordDTO.errorMessage}"></b>
+                </p>
+                <form action="login.html" method="GET">
+                    <input type="submit" value="Confirm" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

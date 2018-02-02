@@ -5,14 +5,14 @@ import { push } from 'react-router-redux';
 
 import history from '../../../utils/history';
 
-import { ACTION_TYPE } from '../../../utils/enum';
-import * as util from '../../../utils/util';
+import { REDUCER_PAGE } from '../../../utils/enum';
+import * as util from '../../../utils/';
 
 
 export const onLogoutClicked = () => {
     return (dispatch, getSelection) => {
         dispatch({
-            type: ACTION_TYPE.LANDING_MAIN_PAGE,
+            type: REDUCER_PAGE.USER_LOGIN_PAGE,
             payload: {}
         });
 

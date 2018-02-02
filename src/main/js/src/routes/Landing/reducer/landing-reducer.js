@@ -1,15 +1,17 @@
-import { ACTION_TYPE } from '../../../utils/enum';
+import { AUTH_ACTION } from '../../../utils/enum';
 
-import * as util from '../../../utils/util';
+import * as util from '../../../utils/';
 
 const LandingReducer = (initialState, handlers) => {
+    console.log('step_LandingReducer');
     return (state = initialState, action) => {
 
       switch(action.type) {
-        case ACTION_TYPE.LANDING_MAIN_PAGE: {
-          // state = {...state, userID: action.payload};
-          
-
+        case AUTH_ACTION.LOGIN_SUCCESS: {
+          state = {...state, user: action.payload};
+        //   util.log('----------LOGIN_REQUEST----------');
+        //   util.log(action);
+        //   util.log('----------End of LOGIN_REQUEST----------');
           break;
         }
         default: {

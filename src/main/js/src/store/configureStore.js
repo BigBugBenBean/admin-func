@@ -15,11 +15,21 @@ const immutable = immutableStateInvariant();
 
 const middleware =
   process.env.NODE_ENV !== 'production'
-    ? [immutable, router, thunk, logger]
-    : [router, thunk];
+    ? [
+      immutable, 
+      router, 
+      thunk, 
+      logger,
+    ]
+    : [
+      router, 
+      thunk
+    ];
 
-const composeEnhancers =
-  process.env.NODE_ENV === 'development' ? composeWithDevTools : compose;
+    const withReduxDevTools = typeof window !== 'undefined' && window.devToolsExtension;
+
+    const composeEnhancers = withReduxDevTools ? composeWithDevTools : compose;
+// const composeEnhancers = process.env.NODE_ENV === 'development' ? composeWithDevTools : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(...middleware));
 

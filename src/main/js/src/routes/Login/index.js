@@ -2,7 +2,7 @@ import React from 'react';
 
 import { injectReducer } from '../../store/makeRootReducer';
 
-import * as util from '../../utils/util';
+import * as util from '../../utils/';
 
 const loginRoute = store => {
   const getComponent = () => {
@@ -13,7 +13,7 @@ const loginRoute = store => {
     return import('../../reducers');
   };
 
-  injectReducer(store, { key: util.USER_LOGIN_MAIN_PAGE, getReducer });
+  injectReducer(store, { key: 'USER_LOGIN_MAIN_PAGE', getReducer });
 
   return getComponent;
 };

@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "UM_SEARCH_AUDIT_TRAIL")
+//@Entity
+//@Table(name = "UM_SEARCH_AUDIT_TRAIL")
 public class SearchAuditTrail {
 
 

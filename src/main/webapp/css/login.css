@@ -1,0 +1,26 @@
+.content-warning-left, .content-user-id-left, .content-password-left {
+    padding-top: 1em;
+    text-align: center;
+}
+
+.content-warning-left {
+    height: 100px;
+}
+
+.content-warning-right {
+    TEXT-ALIGN: justify;
+    padding: 1em;
+}
+
+.content-user-id-left, .content-password-left {
+    height: 35px;
+}
+
+.content-user-id-right, .content-password-right {
+    line-height: 49px;
+}
+
+.login-confirm, .login-clear {
+    margin: 1em;
+    width: 150px;
+}
