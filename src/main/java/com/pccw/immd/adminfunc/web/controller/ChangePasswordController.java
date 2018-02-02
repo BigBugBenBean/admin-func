@@ -144,7 +144,7 @@ public class ChangePasswordController {
 
          if (errCode == -1) {
              // success
-             return "menu";
+             return "/Auth/login";
          } else if (errCode == 1001) {
 
              return "/Auth/change-pwd";
@@ -214,26 +214,32 @@ public class ChangePasswordController {
 //        if (!isAlphaAndNumeric(newPwd)) {
 //            return CHANGE_PWD_STATUS.PWD_SHOULD_CONTAIN_NUM_AND_ALPHABET;
 //        }
+         boolean isAlpha = isAlphabet(newPwd);
+         boolean isNum = isNumeric(newPwd);
+
+         if (!(isAlpha && isNum)) {
+             return CHANGE_PWD_STATUS.PWD_SHOULD_CONTAIN_NUM_AND_ALPHABET;
+         }
 
 //         return CHANGE_PWD_STATUS.NEW_PWD_SAME_AS_OLD_PWD;
 //        return CHANGE_PWD_STATUS.OLD_PWD_INCORRECT;
         return CHANGE_PWD_STATUS.CHANGE_PWD_SUCCESS;
      }
 
-//     private boolean isAlphaAndNumeric(String keyword) {
-//         String regex = "";
-////         Pattern pattern = Pattern.compile(regex);
-////         Matcher matcher = pattern.matcher(keyword);
-//
-//
-////         return matcher.find();
-////        String pattern = "^[\\pL\\pN]+$";
-//
-//         boolean isMatch = keyword.matches(regex);
-//
-//         LOG.info("keyword: " + keyword + " , isMatch: " + isMatch);
-//
-//        return isMatch;
-//     }
+     private boolean isAlphabet(String keyword) {
+        String regex = ".*[A-Za-z].*";
+
+        boolean isMatch = keyword.matches(regex);
+        LOG.info("isAlpha keyword: " + keyword + " , isMatch: " + isMatch);
+        return isMatch;
+     }
+
+    private boolean isNumeric(String keyword) {
+        String regex = ".*[0-9].*";
+
+        boolean isMatch = keyword.matches(regex);
+        LOG.info("isNumeric keyword: " + keyword + " , isMatch: " + isMatch);
+        return isMatch;
+    }
 
 }
