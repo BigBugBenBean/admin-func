@@ -1,7 +1,12 @@
 package com.pccw.immd.adminfunc.domain;
 
-import javax.persistence.*;
+
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Dell on 29/1/2018.
@@ -11,7 +16,7 @@ import java.util.Date;
 public class SystemHoliday {
 
     @Id
-//    @Column(name = "HOLIDAY_DATE")
+    @Column(name = "HOLIDAY_DATE")
     private Date holidayDate;
 
     public Date getHolidayDate() {
