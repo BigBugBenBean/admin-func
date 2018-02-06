@@ -23,5 +23,6 @@
     <import resource="classpath:config/upms-context.xml"/>
     <import resource="classpath:config/rest-context.xml"/>
     <import resource="classpath:config/web-context.xml"/>
+<!--    <import resource="classpath:config/security-context.bak.xml"/> -->
     <import resource="classpath:config/database-context.xml"/>
 </beans>

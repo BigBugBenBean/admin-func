@@ -26,6 +26,7 @@
         <version.jboss.spec.javaee7>1.0.0.Final</version.jboss.spec.javaee7>
         <profile>dev</profile>
         <springfox-version>2.7.0</springfox-version>
+        <spring.security.version>4.2.3.RELEASE</spring.security.version>
 
         <hikaricp.version>2.7.6</hikaricp.version>
         <local.config>${project.basedir}/local_config</local.config>
@@ -46,11 +47,6 @@
         <!-- J2EE 7 lib END -->
     </properties>
 	<dependencies>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -148,6 +144,16 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
         </dependency>
@@ -197,11 +203,11 @@
             <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-devtools</artifactId>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -259,9 +265,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <jvmArguments>
-                        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
-                    </jvmArguments>
+                    <!--<jvmArguments>-->
+                        <!-- -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005-->
+                    <!--</jvmArguments>-->
                 </configuration>
 			</plugin>
 
@@ -310,9 +316,6 @@
     <profiles>
         <profile>
             <id>undertow</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <undertwo-jsp.version>1.0.0.Beta27</undertwo-jsp.version>
             </properties>
@@ -339,6 +342,36 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>jetty</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-maven-plugin</artifactId>
+                        <version>9.4.8.v20171121</version>
+                        <configuration>
+                            <webApp>
+                                <contextPath>/adminfunc</contextPath>
+                            </webApp>
+                            <scanTargetPatterns>
+                                <scanTargetPattern>
+                                    <directory>src/main/resources</directory>
+                                    <includes>
+                                        <include>**/*.html</include>
+                                        <include>**/*.properties</include>
+                                        <include>**/*.xml</include>
+                                    </includes>
+                                </scanTargetPattern>
+                            </scanTargetPatterns>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 <!--
      <pluginRepositories>
@@ -348,14 +381,13 @@
             <url>http://10.89.105.44/nexus/repository/maven-public</url>
         </pluginRepository>
     </pluginRepositories>
+
+
 -->
-
-
     <repositories>
 
 
 <!--
--->
         <repository>
             <id>central</id>
             <name>the nexus repository of pccw framework team</name>
@@ -372,6 +404,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        
         <repository>
             <id>Maven 2</id>
             <name>Maven 2 Repository</name>
@@ -380,7 +413,13 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>mvnrepository</id>
+            <name>mvnrepository Repository</name>
+            <url>http://central.maven.org/maven2</url>
+        </repository>
 
+-->
 
     </repositories>
 </project>

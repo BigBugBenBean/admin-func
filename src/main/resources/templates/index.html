@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8" ></meta>
     <title>Administrative Functions</title>
-    <link rel="manifest" href="/adminfunc/manifest.json" />
-    <link rel="shortcut icon" href="/adminfunc/favicon.ico" />
 </head>
 <body>
 <h3>hello2</h3>
 <div id="root"></div>
-<script type="text/javascript" src="/adminfunc/vendor.js"></script><script type="text/javascript" src="/adminfunc/bundle.js"></script></body>
+
+<div sec:authentication="name">User Name </div>
+
+<div th:text ="${#authentication.principal.displayName}"></div>
+<a href="index.html" th:href="@{/AUTH/logout.html}">Logout NOW</a>
+</body>
 </html>

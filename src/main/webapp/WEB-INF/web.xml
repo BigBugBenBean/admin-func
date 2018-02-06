@@ -8,8 +8,4 @@
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-    <!--
-    https://springframework.guru/spring-boot-restful-api-documentation-with-swagger-2/
-
-    -->
 </web-app>

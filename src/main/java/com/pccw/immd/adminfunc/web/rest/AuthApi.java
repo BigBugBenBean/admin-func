@@ -35,13 +35,14 @@ public interface AuthApi {
     		tags={ "adminfunc"}
     )
     @ApiResponses(value = {
-        @ApiResponse(code = 201, message = "Return success message", response = String.class),
-        @ApiResponse(code = 400, message = "Return validation error", response = ValidationerrorDTO.class),
-    	@ApiResponse(code = 401, message = "Return auth error", response = ValidationerrorDTO.class) })
+//        @ApiResponse(code = 201, message = "Return success message", response = String.class),
+//        @ApiResponse(code = 400, message = "Return validation error", response = ValidationerrorDTO.class),
+//    	@ApiResponse(code = 401, message = "Return auth error", response = ValidationerrorDTO.class)
+    })
 
     @RequestMapping(value = "/login/",
-        produces = { "application/json" },
-        consumes = { "application/json" },
+//        produces = { "application/json" },
+//        consumes = { "application/json" },
         method = RequestMethod.POST)
     UpmsUser login(@ApiParam(value = "", required = true) @RequestBody  @Valid  UserDTO userDTO)  throws ITIAppException, ITISysException;
 

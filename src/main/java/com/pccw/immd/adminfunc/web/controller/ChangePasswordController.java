@@ -144,13 +144,13 @@ public class ChangePasswordController {
 
          if (errCode == -1) {
              // success
-             return "/Auth/login";
+             return "redirect:/AUTH/login_form.html";
          } else if (errCode == 1001) {
 
-             return "/Auth/change-pwd";
+             return "/auth/change-pwd";
          } else if (errCode == 1002) {
 
-             return "/Auth/change-pwd-fail";
+             return "/auth/change-pwd-fail";
          }
 
 //         String termialId = "";

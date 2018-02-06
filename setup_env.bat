@@ -7,4 +7,7 @@ alias mvn_server='mvn wildfly:run'
 "C:\Program Files\Git\bin\bash.exe"
 
 
+set MAVEN_OPTS=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n
+
+set MAVEN_OPTS=-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n
 

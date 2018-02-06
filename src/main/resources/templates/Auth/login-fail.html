@@ -68,9 +68,9 @@
                     <p id="loginFailContent" class="login-fail-content">
                         <b th:text="${userDTO.errorMessage}"></b>
                     </p>
-                    <form action="login.html" method="GET">
+                    <a th:href="@{/AUTH/login_form.html}">
                         <input type="submit" value="Confirm" />
-                    </form>
+                    </a >
                 </div>
             </div>
         </div>
