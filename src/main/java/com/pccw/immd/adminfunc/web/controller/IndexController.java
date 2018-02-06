@@ -77,6 +77,7 @@ public class IndexController {
 
 
             LOGIN_STATUS status = validateAccount(loginId);
+            LOG.info("validateAccount status: " + status);
             switch (status) {
                 case LOGIN_SUCCESS: {
                     return "menu";
@@ -114,7 +115,7 @@ public class IndexController {
 
 
     private LOGIN_STATUS validateAccount(String loginId) {
-        LOG.info("validateAccount");
+
 
         String okPwd = "password";
 
