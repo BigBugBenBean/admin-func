@@ -173,7 +173,14 @@
     text-decoration: none;
 }
 
+.func-bullet {
+    /* text-decoration: none; */
+    color: black;
+}
 
+.func-bullet:hover {
+    color: #1B6742;
+}
 
 /***
 main menu

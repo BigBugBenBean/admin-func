@@ -12,7 +12,7 @@
     <script src="/adminfunc/js/common.js"></script>
 
     <link rel="stylesheet" href="/adminfunc/css/style.css"></link>
-    <link rel="stylesheet" href="/adminfunc/css/menu.css"></link>
+    <link rel="stylesheet" href="/admmvn cleaninfunc/css/menu.css"></link>
 
     <script type="text/javascript"  >
 
@@ -23,128 +23,11 @@
         jQuery(document).ready(function () {
             $('#todayDate').html(today);
 
-            $('#eServices2SubCat').html(eServices2SelectedSubCat);
-            $('#smartics2SubCat').html(smartics2SelectedSubCat);
-            $('#rmSubCat').html(rmSelectedSubCat);
+            updateNavTitle();
         });
 
-        function onEServices2SubCatSelected(subCat) {
-            switch (subCat) {
-                case SUB_CAT_MENU.ENQUIRY: {
-                    eServices2SelectedSubCat = SUB_CAT_MENU.ENQUIRY;
-                    break;
-                }
-                case SUB_CAT_MENU.MAINTENANCE: {
-                    eServices2SelectedSubCat = SUB_CAT_MENU.MAINTENANCE;
-                    break;
-                }
-                case SUB_CAT_MENU.MANAGEMENT: {
-                    eServices2SelectedSubCat = SUB_CAT_MENU.MANAGEMENT;
-                    break;
-                }
-            }
-            $('#eServices2SubCat').html(eServices2SelectedSubCat);
-        }
 
-        function onSmartics2SubCatSelected(subCat) {
-            switch (subCat) {
-                case SUB_CAT_MENU.ENQUIRY: {
-                    smartics2SelectedSubCat = SUB_CAT_MENU.ENQUIRY;
-                    break;
-                }
-                case SUB_CAT_MENU.MAINTENANCE: {
-                    smartics2SelectedSubCat = SUB_CAT_MENU.MAINTENANCE;
-                    break;
-                }
-                case SUB_CAT_MENU.MANAGEMENT: {
-                    smartics2SelectedSubCat = SUB_CAT_MENU.MANAGEMENT;
-                    break;
-                }
-            }
-            $('#smartics2SubCat').html(smartics2SelectedSubCat);
-        }
 
-        function onRmSubCatSelected(subCat) {
-            switch (subCat) {
-                case SUB_CAT_MENU.ENQUIRY: {
-                    rmSelectedSubCat = SUB_CAT_MENU.ENQUIRY;
-                    break;
-                }
-                case SUB_CAT_MENU.MAINTENANCE: {
-                    rmSelectedSubCat = SUB_CAT_MENU.MAINTENANCE;
-                    break;
-                }
-                case SUB_CAT_MENU.MANAGEMENT: {
-                    rmSelectedSubCat = SUB_CAT_MENU.MANAGEMENT;
-                    break;
-                }
-            }
-            $('#rmSubCat').html(rmSelectedSubCat);
-        }
-
-        // function onSubCatSelected(cat, subCat) {
-        //     console.log('onSubCatSelected');
-        //     console.log(cat);
-        //     console.log(subCat);
-        //
-        //
-        //     switch (cat) {
-        //         case CAT_MENU.E_SERVICES_2: {
-        //             switch (subCat) {
-        //                 case SUB_CAT_MENU.ENQUIRY: {
-        //                     eServices2SelectedSubCat = SUB_CAT_MENU.ENQUIRY;
-        //                     break;
-        //                 }
-        //                 case SUB_CAT_MENU.MAINTENANCE: {
-        //                     eServices2SelectedSubCat = SUB_CAT_MENU.MAINTENANCE;
-        //                     break;
-        //                 }
-        //                 case SUB_CAT_MENU.MANAGEMENT: {
-        //                     eServices2SelectedSubCat = SUB_CAT_MENU.MANAGEMENT;
-        //                     break;
-        //                 }
-        //             }
-        //             $('#eServices2SubCat').html(eServices2SelectedSubCat);
-        //             break;
-        //         }
-        //         case CAT_MENU.SMARTICS_2: {
-        //             switch (subCat) {
-        //                 case SUB_CAT_MENU.ENQUIRY: {
-        //                     smartics2SelectedSubCat = SUB_CAT_MENU.ENQUIRY;
-        //                     break;
-        //                 }
-        //                 case SUB_CAT_MENU.MAINTENANCE: {
-        //                     smartics2SelectedSubCat = SUB_CAT_MENU.MAINTENANCE;
-        //                     break;
-        //                 }
-        //                 case SUB_CAT_MENU.MANAGEMENT: {
-        //                     smartics2SelectedSubCat = SUB_CAT_MENU.MANAGEMENT;
-        //                     break;
-        //                 }
-        //             }
-        //             $('#smartics2SubCat').html(smartics2SelectedSubCat);
-        //             break;
-        //         }
-        //         case CAT_MENU.RM: {
-        //             switch (subCat) {
-        //                 case SUB_CAT_MENU.ENQUIRY: {
-        //                     rmSelectedSubCat = SUB_CAT_MENU.ENQUIRY;
-        //                     break;
-        //                 }
-        //                 case SUB_CAT_MENU.MAINTENANCE: {
-        //                     rmSelectedSubCat = SUB_CAT_MENU.MAINTENANCE;
-        //                     break;
-        //                 }
-        //                 case SUB_CAT_MENU.MANAGEMENT: {
-        //                     rmSelectedSubCat = SUB_CAT_MENU.MANAGEMENT;
-        //                     break;
-        //                 }
-        //             }
-        //             $('#rmSubCat').html(rmSelectedSubCat);
-        //             break;
-        //         }
-        //     }
-        // }
 
 
     </script>
@@ -201,39 +84,39 @@
                                 <div id="sub-content-1-1">
                                     <ul class="func-parent">
                                         <li class="func-child">
-                                            <a>Application Fee Enquiry</a>
+                                            <a th:href="@{/applicationFeeEnquiry.html}" class="func-bullet">Application Fee Enquiry</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>System Holiday View</a>
+                                            <a class="func-bullet">System Holiday View</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div id="sub-content-1-2">
                                     <ul class="func-parent">
                                         <li class="func-child">
-                                            <a>Important Announcement</a>
+                                            <a class="func-bullet">Important Announcement</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>Surge Control</a>
+                                            <a class="func-bullet">Surge Control</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>Access Control</a>
+                                            <a class="func-bullet">Access Control</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>Audit Log</a>
+                                            <a class="func-bullet">Audit Log</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div id="sub-content-1-3">
                                     <ul class="func-parent">
                                         <li class="func-child">
-                                            <a>Create Function Group</a>
+                                            <a class="func-bullet">Create Function Group</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>Update Function Group</a>
+                                            <a class="func-bullet">Update Function Group</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>Delete Function Group</a>
+                                            <a class="func-bullet">Delete Function Group</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -261,20 +144,20 @@
                                 <div id="sub-content-2-1">
                                     <ul class="func-parent">
                                         <li class="func-child">
-                                            <a>Appointment Booking Enquiry</a>
+                                            <a class="func-bullet">Appointment Booking Enquiry</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>Online Submission Enquiry</a>
+                                            <a class="func-bullet">Online Submission Enquiry</a>
                                         </li>
                                         <li class="func-child">
-                                            <a>Enquiry Code</a>
+                                            <a class="func-bullet">Enquiry Code</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div id="sub-content-2-2">
                                     <ul class="func-parent">
                                         <li class="func-child">
-                                            <a>Delete Appointment</a>
+                                            <a class="func-bullet">Delete Appointment</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -312,7 +195,7 @@
                                 <div id="sub-content-3-1">
                                     <ul class="func-parent">
                                         <li class="func-child">
-                                            <a>Online Submission Enquiry</a>
+                                            <a class="func-bullet">Online Submission Enquiry</a>
                                         </li>
                                     </ul>
                                 </div>
