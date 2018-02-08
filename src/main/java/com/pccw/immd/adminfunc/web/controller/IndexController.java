@@ -47,7 +47,7 @@ public class IndexController {
         return "/auth/login_form";
     }
 
-    @RequestMapping(value = "/login-fail.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/login-fail.do", method = RequestMethod.GET)
     public String loginFailPage() {
         return "/Auth/login-fail";
     }

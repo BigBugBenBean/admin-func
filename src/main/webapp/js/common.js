@@ -5,6 +5,12 @@ const today = moment().format(dateFormat);
 
 // console.log(today);
 
+const PAGE_MENU = {
+    LOGIN: '/AUTH/login_form.html',
+    LANDING: 'landing',
+    APPLICATION_FEE_ENQUIRY: 'applicationFeeEnquiry.html'
+};
+
 const CAT_MENU = {
     E_SERVICES_2: 0,
     SMARTICS_2: 1,
@@ -89,6 +95,34 @@ function onMainCatSelected(cat) {
     // $.post({
     //     url: '/menu',
     // });
+}
+
+function navigatePage(page) {
+    console.log('navigatePage: ' + page);
+
+    let formData = {
+        firstname: 'alex',
+        lastname:  'wong'
+    };
+
+    let url = '/adminfunc/navMenu';
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: url,
+        data: JSON.stringify(formData),
+        dataType: 'json',
+        success: function(result) {
+            alert('done: ' + JSON.stringify(result));
+            console.log(result);
+        },
+        error: function(e) {
+            alert("Error!");
+            console.log("ERROR: ", e);
+        }
+    })
+
 }
 
 function updateNavTitle() {

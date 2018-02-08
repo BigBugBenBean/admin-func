@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"></meta>
-    <title>Login</title>
+    <title>Immigration Department of the Hong Kong Special Administrative Region</title>
 
     <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
     <script src="/adminfunc/js/lib/lodash.min.js"></script>
@@ -91,13 +91,13 @@
                     </span>
             </div>
         </div>
-        <form id="" method="post" th:action="@{/AUTH/login.html}">
+        <form id="" method="post" th:action="@{/AUTH/login.do}">
             <div class="flex-container">
                 <div class="flex-item-1 field-name content-user-id-left">
                     <b>User ID :</b>
                 </div>
                 <div class="flex-item-2 field-name content-user-id-right">
-                    <input id="loginId" name="user.userId" value=""/>
+                    <input id="loginId" name="user.userId" value="demo001"/>
                     <!--SCUSER08-->
                 </div>
             </div>
@@ -106,7 +106,7 @@
                     <b>Password :</b>
                 </div>
                 <div class="flex-item-2 field-name content-password-right">
-                    <input id="password" name="user.password" type="password" value=""/>
+                    <input id="password" name="user.password" type="password" value="password"/>
                 </div>
             </div>
             <div class="flex-container">

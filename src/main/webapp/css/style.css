@@ -19,6 +19,13 @@
     font-size: 14px;
 }
 
+.RedLink {
+    color: #BF5564;
+    font-family: Arial;
+    font-size: 14px;
+    text-decoration: underline;
+}
+
 .ButtonStyle {
     border-bottom: 1px solid #152C54;
     border-top: 1px solid #FFE1B3;
@@ -29,6 +36,34 @@
     font-weight: bold;
     color: #FFFFFF;
     background: #39624C;
+}
+
+.SmallButtonStyle {border-bottom: 1px solid #152C54;
+    border-top: 1px solid #FFE1B3;
+    border-left: 1px solid #FFE1B3;
+    font-size: 14px;
+    font-family: "Arial";
+    color: White;
+    background: #39624C;
+    font-weight: bold;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+
+.SmallButtonStyle > a {
+    text-decoration: none;
+    color: white;
+}
+
+.LargeButtonStyle  {border-bottom: 1px solid #152C54;
+    border-top: 1px solid #FFE1B3;
+    border-left: 1px solid #FFE1B3;
+    border-right: 1px solid #152C54;
+    font-size: 15px;font-family: "Arial";
+    color: White;
+    background: #39624C;
+    font-weight: bold;
 }
 
 .TopLabel {

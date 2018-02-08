@@ -49,7 +49,7 @@ public class ChangePasswordController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ChangePasswordController.class);
 
-    @RequestMapping(value = "/changePassword.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/changePassword.do", method = RequestMethod.GET)
     public String changePwdPage() {
         return "/Auth/change-pwd";
     }

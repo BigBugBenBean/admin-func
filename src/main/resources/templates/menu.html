@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8"></meta>
-    <title>Title</title>
+    <title>e-Services Admin Function</title>
 
     <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
     <script src="/adminfunc/js/lib/lodash.min.js"></script>
@@ -84,10 +84,16 @@
                                 <div id="sub-content-1-1">
                                     <ul class="func-parent">
                                         <li class="func-child">
-                                            <a th:href="@{/applicationFeeEnquiry.html}" class="func-bullet">Application Fee Enquiry</a>
+                                            <a th:href="@{/applicationFeeEnquiry.do}" class="func-bullet">Application Fee Enquiry</a>
                                         </li>
                                         <li class="func-child">
                                             <a class="func-bullet">System Holiday View</a>
+                                        </li>
+                                        <li class="func-child">
+                                            <a class="func-bullet">Schedule Job View</a>
+                                        </li>
+                                        <li class="func-child">
+                                            <a class="func-bullet">Schedule Job View History</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -100,10 +106,13 @@
                                             <a class="func-bullet">Surge Control</a>
                                         </li>
                                         <li class="func-child">
-                                            <a class="func-bullet">Access Control</a>
+                                            <a th:href="@{/accessControl.do}" class="func-bullet">Access Control</a>
                                         </li>
                                         <li class="func-child">
                                             <a class="func-bullet">Audit Log</a>
+                                        </li>
+                                        <li class="func-child">
+                                            <a class="func-bullet">Schedule Job</a>
                                         </li>
                                     </ul>
                                 </div>

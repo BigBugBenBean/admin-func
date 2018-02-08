@@ -12,12 +12,12 @@ public class AuthController {
 
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
-    @GetMapping(value = "/login_form.html")
+    @GetMapping(value = "/login_form.do")
     public String loginForm() {
         return "auth/login_form";
     }
 
-    @PostMapping("/login.html")
+    @PostMapping("/login.do")
     public String submit(@ModelAttribute UserDTO userDTO) {
         LOG.info("Hello~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         return "auth/result-2";
