@@ -8,8 +8,8 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--classpath:properties/application.properties,-->
     <context:property-placeholder location="
-            classpath:properties/application.properties,
             classpath:properties/upms.properties,
             classpath:properties/rest.properties,
             classpath:properties/web.properties,

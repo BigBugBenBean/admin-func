@@ -24,9 +24,32 @@
     <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
     <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en" />
+    </bean>
+
+    <bean id="messageSourceAdapter" class="com.pccw.immd.adminfunc.utils.MessageSourceAdapter"/>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="i18n/message" />
+    </bean>
     <!--<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">-->
         <!--<property name="templateEngine" ref="templateEngine" />-->
         <!--<property name="order" value="1" />-->
         <!--<property name="viewNames" value="*.html,*.xhtml" />-->
     <!--</bean>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- intercept multiple urls -->
+            <mvc:mapping path="/**/*.html"/>
+            <bean id="menuInterceptor" class="com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- intercept multiple urls -->
+            <mvc:mapping path="/**/*.html"/>
+            <bean id="permissionInterceptor" class="com.pccw.immd.adminfunc.web.interceptor.PermissionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>  

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.dto.UserDTO;
 import com.pccw.immd.adminfunc.dto.ValidationerrorDTO;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITISysException;
+import ws.upms.immd.v1.ITIAppException;
+import ws.upms.immd.v1.ITISysException;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

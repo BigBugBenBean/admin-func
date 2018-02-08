@@ -14,25 +14,25 @@ public class AccessControlSetting {
     private String acsId;
 
     @Column(name = "IS_ENABLE_WHITE_LIST")
-    private Number isEnableWhiteList;
+    private String isEnableWhiteList;
 
     @Column(name = "IS_ENABLE_BLACK_LIST")
-    private Number isEnableBlackList;
+    private String isEnableBlackList;
 
     @Column(name = "IS_BLOCK_COUNTER")
-    private Number isBlockCounter;
+    private String isBlockCounter;
 
     @Column(name = "MAX_NO_OF_TRANSACTIONS")
-    private Number maxNoOfTransactions;
+    private Integer maxNoOfTransactions;
 
     @Column(name = "TRANSACTIONS_DAYS_COUNT")
-    private Number transactionsDaysCount;
+    private Integer transactionsDaysCount;
 
     @Column(name = "MAX_NO_OF_APPOINTMENTS")
-    private Number maxNoOfAppointments;
+    private Integer maxNoOfAppointments;
 
     @Column(name = "APPOINTMENTS_DAYS_COUNT")
-    private Number appointmentsDaysCount;
+    private Integer appointmentsDaysCount;
 
     public String getAcsId() {
         return acsId;
@@ -42,59 +42,60 @@ public class AccessControlSetting {
         this.acsId = acsId;
     }
 
-    public Number getIsEnableWhiteList() {
+    public String getIsEnableWhiteList() {
         return isEnableWhiteList;
     }
 
-    public void setIsEnableWhiteList(Number isEnableWhiteList) {
+    public void setIsEnableWhiteList(String isEnableWhiteList) {
         this.isEnableWhiteList = isEnableWhiteList;
     }
 
-    public Number getIsEnableBlackList() {
+    public String getIsEnableBlackList() {
         return isEnableBlackList;
     }
 
-    public void setIsEnableBlackList(Number isEnableBlackList) {
+    public void setIsEnableBlackList(String isEnableBlackList) {
         this.isEnableBlackList = isEnableBlackList;
     }
 
-    public Number getIsBlockCounter() {
+    public String getIsBlockCounter() {
         return isBlockCounter;
     }
 
-    public void setIsBlockCounter(Number isBlockCounter) {
+    public void setIsBlockCounter(String isBlockCounter) {
         this.isBlockCounter = isBlockCounter;
     }
 
-    public Number getMaxNoOfTransactions() {
+    public Integer getMaxNoOfTransactions() {
         return maxNoOfTransactions;
     }
 
-    public void setMaxNoOfTransactions(Number maxNoOfTransactions) {
+    public void setMaxNoOfTransactions(Integer maxNoOfTransactions) {
         this.maxNoOfTransactions = maxNoOfTransactions;
     }
 
-    public Number getTransactionsDaysCount() {
+    public Integer getTransactionsDaysCount() {
         return transactionsDaysCount;
     }
 
-    public void setTransactionsDaysCount(Number transactionsDaysCount) {
+    public void setTransactionsDaysCount(Integer transactionsDaysCount) {
         this.transactionsDaysCount = transactionsDaysCount;
     }
 
-    public Number getMaxNoOfAppointments() {
+    public Integer getMaxNoOfAppointments() {
         return maxNoOfAppointments;
     }
 
-    public void setMaxNoOfAppointments(Number maxNoOfAppointments) {
+    public void setMaxNoOfAppointments(Integer maxNoOfAppointments) {
         this.maxNoOfAppointments = maxNoOfAppointments;
     }
 
-    public Number getAppointmentsDaysCount() {
+    public Integer getAppointmentsDaysCount() {
         return appointmentsDaysCount;
     }
 
-    public void setAppointmentsDaysCount(Number appointmentsDaysCount) {
+    public void setAppointmentsDaysCount(Integer appointmentsDaysCount) {
         this.appointmentsDaysCount = appointmentsDaysCount;
     }
+
 }

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,6 +23,7 @@ import org.springframework.security.web.context.SecurityContextPersistenceFilter
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled=true)
 @ImportResource ("classpath:config/security-context.xml")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -105,12 +107,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .loginProcessingUrl(logInProcessingUrl)
             .defaultSuccessUrl(logInDefaultTargetUrl)
             .failureForwardUrl(authenticationFailureUrl)
+//        .and()
+//            .exceptionHandling()
             .failureHandler(authenticationFailureHandler)
         .and()
             .logout().permitAll()
             .logoutUrl(logOutUrl)
             .logoutSuccessUrl(logOutSuccessUrl)
-            .invalidateHttpSession(true)
             .clearAuthentication(true)
         .and()
             .sessionManagement().invalidSessionUrl(invalidSessionUrl)
@@ -126,6 +129,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/css/**",
                 "/images/**",
                 "/js/**"
+        );
+        web.ignoring().antMatchers(
+                "/AUTH/login-fail.html"
         );
     }
 }
