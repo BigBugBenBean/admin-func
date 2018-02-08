@@ -189,8 +189,12 @@
                     <div class="RowSeparator"></div>
 
                     <div style=" float: right; padding-top: 1em;">
-                        <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
-                        <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                        <a th:href="@{/createAccessControlSuccess.do}">
+                            <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                        </a>
+                        <a th:href="@{/accessControl.do}">
+                            <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                        </a>
                     </div>
                 </div>
             </div>

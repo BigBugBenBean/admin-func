@@ -76,79 +76,11 @@
                 <div class="content-container " style=" height: 300px;">
                     <h3>Global Parameters</h3>
 
-                    <div class="RowSeparator"></div>
-                    <div class="flex-container param-container">
-                        <div class="param-item-left">Whitelist</div>
-                        <div class="param-item-right">
-                            <input type="radio" name="whitelist" value="" checked="checked">
-                            <span class="item-margin-right">Enable</span>
-                            </input>
-                            <input type="radio" name="whitelist" value="">
-                            <span>Disable</span>
-                            </input>
-                        </div>
-                    </div>
-                    <div class="RowSeparator"></div>
-                    <div class="flex-container param-container">
-                        <div class="param-item-left">Blacklist</div>
-                        <div class="param-item-right">
-                            <input type="radio" name="blacklist" value="" checked="checked">
-                            <span class="item-margin-right">Enable</span>
-                            </input>
-                            <input type="radio" name="blacklist" value="">
-                            <span>Disable</span>
-                            </input>
-                        </div>
-                    </div>
-                    <div class="RowSeparator"></div>
-                    <div class="flex-container param-container">
-                        <div class="param-item-left">Counter Blocking</div>
-                        <div class="param-item-right">
-                            <input type="radio" name="counterBlocking" value="" checked="checked">
-                            <span class="item-margin-right">Enable</span>
-                            </input>
-                            <input type="radio" name="counterBlocking" value="">
-                            <span>Disable</span>
-                            </input>
-                        </div>
-                    </div>
-                    <div class="RowSeparator"></div>
-                    <div class="flex-container param-container">
-                        <div class="param-item-left">Maximum No. of Transactions Allowed</div>
-                        <div class="param-item-right">
-                            <input class="input-box" type="text" maxlength="10" value="1000"></input>
-                        </div>
-                    </div>
-                    <div class="RowSeparator"></div>
-                    <div class="flex-container param-container">
-                        <div class="param-item-left">No. of Days for Counting the Accumulated Transactions</div>
-                        <div class="param-item-right">
-                            <input class="input-box" type="text" maxlength="10" value="100"></input>
-                        </div>
-                    </div>
-                    <div class="RowSeparator"></div>
-                    <div class="flex-container param-container">
-                        <div class="param-item-left">Maximum No. of Appointments Allowed</div>
-                        <div class="param-item-right">
-                            <input class="input-box" type="text" maxlength="10" value="100"></input>
-                        </div>
-                    </div>
-                    <div class="RowSeparator"></div>
-                    <div class="flex-container param-container">
-                        <div class="param-item-left">No. of Days for Counting the Accumulated Appointments</div>
-                        <div class="param-item-right">
-                            <input class="input-box" type="text" maxlength="10" value="100"></input>
-                        </div>
-                    </div>
-                    <div class="RowSeparator"></div>
+                    <h3>success</h3>
 
                     <div style=" float: right; padding-top: 1em;">
-                        <a th:href="@{/accessControlGlobalSuccess.do}">
-                            <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
-                        </a>
-                        <a th:href="@{/accessControl.do}">
-                            <input type="text" value="Cancel" class="ButtonStyle submit-button" />
-                        </a>
+                        <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                        <input type="text" value="Cancel" class="ButtonStyle submit-button" />
                     </div>
 
                 </div>

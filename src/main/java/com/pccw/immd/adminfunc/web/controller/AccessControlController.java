@@ -22,9 +22,19 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control-global";
     }
 
+    @GetMapping(value = "/accessControlGlobalSuccess.do")
+    public String accessControlGlobalSuccessPage() {
+        return "/eServices2/AccessControl/access-control-global-success";
+    }
+
     @GetMapping(value = "/createAccessControl.do")
     public String accessControlCreatePage() {
         return "/eServices2/AccessControl/access-control-create";
+    }
+
+    @GetMapping(value = "/createAccessControlSuccess.do")
+    public String accessControlCreateSuccessPage() {
+        return "/eServices2/AccessControl/access-control-create-success";
     }
 
 }
