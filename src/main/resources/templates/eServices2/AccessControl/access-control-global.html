@@ -10,93 +10,16 @@
 
     <script src="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid.min.js"></script>
 
-    <script th:inline="javascript" src="/adminfunc/js/common.js"></script>
+    <script src="/adminfunc/js/common.js"></script>
 
     <link rel="stylesheet" href="/adminfunc/css/style.css"/>
+    <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
 
     <link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-custom.css"/>
     <link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-theme-custom.css"/>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
-
-            updateNavTitle();
-
-            var names = [
-                {
-                    'Application Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                    'Price Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                    'Valid From': '2017-01-01',
-                    'Valid To': '2018-01-01',
-                    'Payment Code': '500',
-                    'Payment Description': 'Application for HKSAR Passport ',
-                    'Effective Date': '2017-01-01',
-                    'Receipt Print Indicator': 'BOCI',
-                    'Document Issue Indicator': 'ImmD',
-                    'Revenue Code': '500'
-                },
-                {
-                    'Application Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                    'Price Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                    'Valid From': '2017-01-01',
-                    'Valid To': '2018-01-01',
-                    'Payment Code': '500',
-                    'Payment Description': 'Application for HKSAR Passport ',
-                    'Effective Date': '2017-01-01',
-                    'Receipt Print Indicator': 'BOCI',
-                    'Document Issue Indicator': 'ImmD',
-                    'Revenue Code': '500'
-                },
-                {
-                    'Application Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                    'Price Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                    'Valid From': '2017-01-01',
-                    'Valid To': '2018-01-01',
-                    'Payment Code': '500',
-                    'Payment Description': 'Application for HKSAR Passport ',
-                    'Effective Date': '2017-01-01',
-                    'Receipt Print Indicator': 'BOCI',
-                    'Document Issue Indicator': 'ImmD',
-                    'Revenue Code': '500'
-                }
-            ];
-
-            $("#appFeeEnqGrid").jsGrid({
-                width: '100%',
-                height: '100%',
-
-
-                sorting: false,
-                noDataContent: 'NO data',
-                selecting: false,
-
-                // paging: true,
-                // pageSize: 3,
-                // pageButtonCount: 5,
-                // pagerContainer: '#externalPager',
-                // pagerFormat: 'current page: {pageIndex} &nbsp;&nbsp; {first} {prev} {pages} {next} {last} &nbsp;&nbsp; total pages: {pageCount}',
-                // pagePrevText: 'prev',
-                // pageNextText: 'next',
-                // pageFirstText: 'first',
-                // pageLastText: 'last',
-                // pageNavigatorNextText: '&#8230;',
-                // pageNavigatorPrevText: '&#8230;',
-
-                data: names,
-
-                fields: [
-                    {name: 'Application Name', type: 'text', width: 100},
-                    {name: 'Price Name', type: 'text', width: 80},
-                    {name: 'Valid From', type: 'text', width: 60},
-                    {name: 'Valid To', type: 'text', width: 60},
-                    {name: 'Payment Code', type: 'text', width: 50},
-                    {name: 'Payment Description', type: 'text', width: 80},
-                    {name: 'Effective Date', type: 'text', width: 80},
-                    {name: 'Receipt Print Indicator', type: 'text', width: 80},
-                    {name: 'Document Issue Indicator', type: 'text', width: 80},
-                    {name: 'Revenue Code', type: 'text', width: 80}
-                ]
-            });
 
         });
     </script>
@@ -117,20 +40,19 @@
                 </span>
         </div>
     </div>
-    <div class="grid-container ">
+    <div class="grid-container " style="height: 600px;">
         <div class="main-menu">
 
             <input type="radio" id="main-tab-1" name="main-tabs" checked="checked"/>
             <label for="main-tab-1" style="margin-left: 30px;">e-Services-2</label>
 
-            <input type="radio" id="main-tab-2" name="main-tabs" />
+            <input type="radio" id="main-tab-2" name="main-tabs"/>
             <label for="main-tab-2">SMARTICS-2</label>
 
 
-            <!--<a th:href="@{/applicationFeeEnquiry.html}">-->
-            <input type="radio" id="main-tab-3" name="main-tabs" />
+            <input type="radio" id="main-tab-3" name="main-tabs"/>
             <label for="main-tab-3">RM</label>
-            <!--</a>-->
+
             <div style="float: right;">
                 <a th:href="@{/AUTH/logout.do}" class="exit-btn">
                     <input type="submit" id="exit-tab" name="" />
@@ -143,16 +65,88 @@
                 <div class="flex-container grid-nav-container">
                     <div class="flex-item-1 nav-title-left">
                             <span style=" width: '100%'">e-Services-2 >
-                                <span id="eServices2SubCat">Enquiry</span> >
-                                <span id="eServices2Func">Application Fee Enquiry</span>
+                                <span id="eServices2SubCat">Maintenance</span> >
+                                <span id="eServices2Func">Access Control</span>
                             </span>
                     </div>
                     <div class="flex-item-1 nav-title-right">
-                        <span style="width: 100%;">AFE0001</span>
+                        <span style="width: 100%;">ACM0011</span>
                     </div>
                 </div>
                 <div class="content-container " style=" height: 300px;">
-                    <div id="appFeeEnqGrid"></div>
+                    <h3>Global Parameters</h3>
+
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Whitelist</div>
+                        <div class="param-item-right">
+                            <input type="radio" name="whitelist" value="" checked="checked">
+                            <span class="item-margin-right">Enable</span>
+                            </input>
+                            <input type="radio" name="whitelist" value="">
+                            <span>Disable</span>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Blacklist</div>
+                        <div class="param-item-right">
+                            <input type="radio" name="blacklist" value="" checked="checked">
+                            <span class="item-margin-right">Enable</span>
+                            </input>
+                            <input type="radio" name="blacklist" value="">
+                            <span>Disable</span>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Counter Blocking</div>
+                        <div class="param-item-right">
+                            <input type="radio" name="counterBlocking" value="" checked="checked">
+                            <span class="item-margin-right">Enable</span>
+                            </input>
+                            <input type="radio" name="counterBlocking" value="">
+                            <span>Disable</span>
+                            </input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Maximum No. of Transactions Allowed</div>
+                        <div class="param-item-right">
+                            <input class="input-box" type="text" maxlength="10" value="1000"></input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">No. of Days for Counting the Accumulated Transactions</div>
+                        <div class="param-item-right">
+                            <input class="input-box" type="text" maxlength="10" value="100"></input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Maximum No. of Appointments Allowed</div>
+                        <div class="param-item-right">
+                            <input class="input-box" type="text" maxlength="10" value="100"></input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">No. of Days for Counting the Accumulated Appointments</div>
+                        <div class="param-item-right">
+                            <input class="input-box" type="text" maxlength="10" value="100"></input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+
+                    <div style=" float: right; padding-top: 1em;">
+                        <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                        <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                    </div>
+
                 </div>
             </div>
             <!--<div id="main-content-2">-->

@@ -1,0 +1,53 @@
+
+.param-container {
+    min-height: 30px;
+    /* line-height: 40px; */
+}
+
+.param-item-left {
+    flex: 2;
+    /* border: 1px solid red; */
+}
+
+.param-item-right {
+    flex: 7;
+    /* border: 1px solid blue; */
+}
+
+.item-margin-right {
+    margin-right: 50px;
+}
+
+.input-box {
+    width: 100px;
+}
+
+.submit-button {
+    width: 80px;
+    text-align: center;
+}
+
+.access-name-field {
+    width: 215px;
+}
+
+.effective-code {
+    color: #1B6742;
+    font-family: Verdana, Arial;
+    font-size: 11px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.effective-code-padding {
+    margin-right: 10px;
+}
+
+.effective-long {
+    width: 40px;
+}
+
+.effective-medium {
+    width: 20px;
+    text-align: center;
+}

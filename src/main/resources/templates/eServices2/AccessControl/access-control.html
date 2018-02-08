@@ -40,6 +40,7 @@
 
                     sorting: true,
                     noDataContent: 'NO data',
+                    selecting: false,
 
                     data: names,
 
@@ -67,7 +68,8 @@
                                 str += '</a>';
                                 str += '</span>';
 
-                                result = result.add(str);
+                                // result = result.add(str);
+                                result = str;
 
                                 return result;
                             }
@@ -97,7 +99,7 @@
                 </span>
         </div>
     </div>
-    <div class="grid-container ">
+    <div class="grid-container "  >
         <div class="main-menu">
 
             <input type="radio" id="main-tab-1" name="main-tabs" checked="checked"/>
@@ -111,10 +113,10 @@
             <label for="main-tab-3">RM</label>
 
             <div style="float: right;">
-                <form action="login.html" method="GET">
-                    <input type="submit" id="exit-tab" name=""/>
-                    <label for="exit-tab">Exit</label>
-                </form>
+                <a th:href="@{/AUTH/logout.do}" class="exit-btn">
+                    <input type="submit" id="exit-tab" name="" />
+                    <label for="exit-tab" >Exit</label>
+                </a >
             </div>
 
 
@@ -126,20 +128,23 @@
                                 <span id="eServices2Func">Access Control</span>
                             </span>
                     </div>
+                    <div class="flex-item-1 nav-title-right">
+                        <span style="width: 100%;">ACM0011</span>
+                    </div>
                 </div>
-                <div class="content-container " style=" height: 300px;">
+                <div class="content-container " >
                     <div class="flex-container">
                         <div class="flex-item-1 ">
                             <span class="field-name" style="font-size: large; line-height: 30px;">Access Control</span>
                         </div>
                         <div style="flex: auto;"></div>
                         <div class="flex-item-1 SmallButtonStyle" style="margin: 0px 10px;">
-                            <a href="">
+                            <a th:href="@{/accessControlGlobal.do}">
                                 <span>Edit Global Parameters</span>
                             </a>
                         </div>
                         <div class="flex-item-1 SmallButtonStyle">
-                            <a href="">
+                            <a th:href="@{/createAccessControl.do}">
                                 <span>Create New White/Black List</span>
                             </a>
                         </div>
