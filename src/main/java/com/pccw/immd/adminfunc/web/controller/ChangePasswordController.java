@@ -144,7 +144,7 @@ public class ChangePasswordController {
 
          if (errCode == -1) {
              // success
-             return "redirect:/AUTH/login_form.html";
+             return "redirect:/AUTH/login-form.html";
          } else if (errCode == 1001) {
 
              return "/auth/change-pwd";

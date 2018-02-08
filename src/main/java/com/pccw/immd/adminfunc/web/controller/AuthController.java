@@ -12,9 +12,9 @@ public class AuthController {
 
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
-    @GetMapping(value = "/login_form.do")
+    @GetMapping(value = "/login-form.do")
     public String loginForm() {
-        return "auth/login_form";
+        return "auth/login-form";
     }
 
     @PostMapping("/login.do")

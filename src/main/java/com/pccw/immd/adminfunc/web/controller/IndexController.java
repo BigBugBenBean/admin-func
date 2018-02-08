@@ -44,7 +44,7 @@ public class IndexController {
     @GetMapping("/login")
     public String backToLogin() {
         LOG.info("Calling backToLogin ....... ");
-        return "/auth/login_form";
+        return "/auth/login-form";
     }
 
     @RequestMapping(value = "/login-fail.do", method = RequestMethod.GET)

@@ -6,7 +6,7 @@ const today = moment().format(dateFormat);
 // console.log(today);
 
 const PAGE_MENU = {
-    LOGIN: '/AUTH/login_form.html',
+    LOGIN: '/AUTH/login-form.html',
     LANDING: 'landing',
     APPLICATION_FEE_ENQUIRY: 'applicationFeeEnquiry.html'
 };
