@@ -29,4 +29,8 @@
         <!--<property name="order" value="1" />-->
         <!--<property name="viewNames" value="*.html,*.xhtml" />-->
     <!--</bean>-->
+    <mvc:interceptors>
+        <bean id="menuInterceptor" class="com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor"/>
+        <bean id="permissionInterceptor" class="com.pccw.immd.adminfunc.web.interceptor.PermissionInterceptor"/>
+    </mvc:interceptors>
 </beans>  
