@@ -58,7 +58,7 @@
             Configures the naming strategy that is used when Hibernate creates
             new database objects and schema elements
         -->
-        <entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}"/>
+        <!--<entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}"/>-->
         <!--
             If the value of this property is true, Hibernate writes all SQL
             statements to the console.

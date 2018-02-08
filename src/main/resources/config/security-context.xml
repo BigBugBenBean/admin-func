@@ -11,7 +11,7 @@
         <!--<constructor-arg ref="securityContextRepository"/>-->
     <!--</bean>-->
 
-    <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+    <bean id="authenticationFailureHandler" class="com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationFailureHandler">
         <property name="exceptionMappings">
             <props>
                 <prop key="org.springframework.security.authentication.BadCredentialsException">${web.auth.exception.badCredentialsException}</prop>

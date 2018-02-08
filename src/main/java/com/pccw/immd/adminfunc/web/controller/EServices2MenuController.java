@@ -24,8 +24,8 @@ import com.pccw.immd.adminfunc.dto.UserDTO;
 import com.pccw.immd.adminfunc.dto.UserDTO3;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import com.pccw.immd.adminfunc.web.rest.AuthApi;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITISysException;
+import ws.upms.immd.v1.ITIAppException;
+import ws.upms.immd.v1.ITISysException;
 
 import io.swagger.annotations.ApiParam;
 

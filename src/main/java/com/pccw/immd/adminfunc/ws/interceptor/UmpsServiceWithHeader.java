@@ -20,11 +20,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.pccw.immd.adminfunc.ws.upms.cxf.AppUserInfoHeader;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITISysException;
-import com.pccw.immd.adminfunc.ws.upms.cxf.Iss3UserSignOnDTO;
-import com.pccw.immd.adminfunc.ws.upms.cxf.LDAPImmdUserServiceExtWS;
+import ws.upms.immd.v1.AppUserInfoHeader;
+import ws.upms.immd.v1.ITIAppException;
+import ws.upms.immd.v1.ITISysException;
+import ws.upms.immd.v1.Iss3UserSignOnDTO;
+import ws.upms.immd.v1.LDAPImmdUserServiceExtWS;
 
 @Service("umpsServiceWithHeader")
 public class UmpsServiceWithHeader {

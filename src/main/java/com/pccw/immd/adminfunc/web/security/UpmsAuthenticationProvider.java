@@ -3,10 +3,10 @@ package com.pccw.immd.adminfunc.web.security;
 import com.pccw.immd.adminfunc.dto.LoginUser;
 import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.service.UpmsService;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITISysException;
+import com.pccw.immd.adminfunc.utils.MessageSourceAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +15,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import ws.upms.immd.v1.ITIAppException;
+import ws.upms.immd.v1.ITISysException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,11 @@ import java.util.List;
  */
 @Component("upmsAuthenticationProvider")
 public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+
+    @Autowired
+    @Qualifier("messageSourceAdapter")
+    MessageSourceAdapter messageSourceAdapter;
+
     @Autowired
     @Qualifier("upmsService")
     private UpmsService upmsService;
@@ -43,7 +50,7 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         String termialId = "";
 
         if (userName.isEmpty() || password.isEmpty())
-            return null;
+            throw new BadCredentialsException(messageSourceAdapter.getMessage("umps.useridandpassword.notempty"));
 
 
         String demoPrefix = "demo";
@@ -94,7 +101,6 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         } catch (ITIAppException | ITISysException e){
             throw new BadCredentialsException(e.getMessage(), e);
         }
-
 
         if (loginUser == null) {
             throw new InternalAuthenticationServiceException("LoginedUser null, which is an interface contract violation");
