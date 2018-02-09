@@ -131,7 +131,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/js/**"
         );
         web.ignoring().antMatchers(
-                "/AUTH/login-fail.html"
+                "/AUTH/login-fail.html",
+                "/AUTH/login-fail.do",
+                "/changePassword.do",
+                "/changePassword"
         );
     }
 }
