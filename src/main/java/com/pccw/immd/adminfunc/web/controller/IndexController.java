@@ -66,53 +66,64 @@ public class IndexController {
 
         String termialId = "";
 
-        String demoPrefix = "demo";
+//        String demoPrefix = "demo";
 
-        if (loginId.contains(demoPrefix)) {
-
-
-
-            String errTitle = "";
-            String errMsg = "";
-
-
-            LOGIN_STATUS status = validateAccount(loginId);
-            LOG.info("validateAccount status: " + status);
-            switch (status) {
-                case LOGIN_SUCCESS: {
-                    return "menu";
-                }
-                case FIRST_LOGIN: {
-                    return "/auth/change-pwd";
-                }
-                case EXPIRED: {
-                    errTitle = "Login Rejected";
-                    errMsg= "Your account has been locked after 180 days of inactivity. Please contact your supervisor to activate the account if necessary.";
-                    break;
-                }
-                case INVALID_LOGIN_ID:
-                case INVALID_PASSWORD:
-                    errTitle = "Login Rejected";
-                    errMsg = "Invalid user ID or incorrect password";
-                    break;
-                default: {
-                    break;
-                }
-            }
-
-            userDTO.setErrorTitle(errTitle);
-            userDTO.setErrorMessage(errMsg);
-
-            return "/auth/login-fail";
+        boolean isDemo = isDemoAccount(loginId);
+        if (isDemo) {
+            return demoPage(loginId, userDTO);
         }
-
-
+        
 //        return "/Auth/login-fail";
 //        return "result";
 //        return "/Auth/login";
         return "menu";
     }
 
+    private boolean isDemoAccount(String loginId) {
+        boolean isDemo = false;
+
+        String demoPrefix = "demo";
+        if (loginId.contains(demoPrefix)) {
+            isDemo = true;
+        }
+
+        return isDemo;
+    }
+
+    private String demoPage(String loginId, UserDTO userDTO) {
+        LOGIN_STATUS status = validateAccount(loginId);
+        LOG.info("validateAccount status: " + status);
+
+        String errTitle = "";
+        String errMsg = "";
+
+        switch (status) {
+            case LOGIN_SUCCESS: {
+                return "menu";
+            }
+            case FIRST_LOGIN: {
+                return "/auth/change-pwd";
+            }
+            case EXPIRED: {
+                errTitle = "Login Rejected";
+                errMsg= "Your account has been locked after 180 days of inactivity. Please contact your supervisor to activate the account if necessary.";
+                break;
+            }
+            case INVALID_LOGIN_ID:
+            case INVALID_PASSWORD:
+                errTitle = "Login Rejected";
+                errMsg = "Invalid user ID or incorrect password";
+                break;
+            default: {
+                break;
+            }
+        }
+
+        userDTO.setErrorTitle(errTitle);
+        userDTO.setErrorMessage(errMsg);
+
+        return "/auth/login-fail";
+    }
 
     private LOGIN_STATUS validateAccount(String loginId) {
 
