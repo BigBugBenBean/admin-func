@@ -37,4 +37,9 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control-create-success";
     }
 
+    @GetMapping(value = "/accessControlView.do")
+    public String accessControlViewPage() {
+        return "/eServices2/AccessControl/access-control-view";
+    }
+
 }

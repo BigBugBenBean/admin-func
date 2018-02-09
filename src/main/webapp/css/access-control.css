@@ -52,6 +52,10 @@
     text-align: center;
 }
 
+.effective-lock {
+    background-color: #c4d6e8;
+}
+
 .global-success-frame {
     height: auto;
 }

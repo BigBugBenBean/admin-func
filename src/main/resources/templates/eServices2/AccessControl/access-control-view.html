@@ -13,74 +13,24 @@
     <script src="/adminfunc/js/common.js"></script>
 
     <link rel="stylesheet" href="/adminfunc/css/style.css"/>
+    <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
 
     <link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-custom.css"/>
     <link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-theme-custom.css"/>
 
     <script type="text/javascript">
         $(document).ready(function () {
-            let names = [
-                {
-                    'Effective Date': '13/02/2010 00:00:00',
-                    'To': '01/01/2099 00:00:00',
-                    'Name': '',
-                    'White/Black': 'White',
-                    'Channel': 'W',
-                    'IP/Telephone Number': '10.26.171.83'
+            $('#deleteBtn').click(function () {
+                var answer = confirm("Confirm to delete")
+                if (answer) {
+                    // document.forms[0].action.value = 'DELETE';
+                    // document.forms[0].submit();
                 }
-            ];
-
-            let grid = $("#accessControlGrid");
-            // console.log(grid);
-
-            grid.jsGrid(
-                {
-                    width: '100%',
-                    height: '100%',
-
-                    sorting: true,
-                    noDataContent: 'NO data',
-                    selecting: false,
-
-                    data: names,
-
-                    fields: [
-                        { name: 'Effective Date', type: 'text', width: 70 },
-                        { name: 'To', type: 'text', width: 40 },
-                        { name: 'Name', type: 'text', width: 50 },
-                        { name: 'White/Black', type: 'text', width: 80 },
-                        { name: 'Channel', type: 'text', width: 40 },
-                        { name: 'IP/Telephone Number', type: 'text', width: 80 },
-                        {
-                            type: 'control',
-                            headerTemplate: function () {
-                                let title = '<span>Detail</span>';
-                                return title;
-                            },
-                            itemTemplate: function (value, item) {
-                                let result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
-
-                                let str = '';
-
-                                str += '<span>';
-                                str += '<a th:href="@{/accessControlView.do}" class="RedLink">';
-                                str += 'View';
-                                str += '</a>';
-                                str += '</span>';
-
-                                // result = result.add(str);
-                                result = str;
-
-                                return result;
-                            }
-                        }
-                    ]
-
-                }
-            )
-
-
+            });
         });
+
+
+
     </script>
 
 </head>
@@ -99,7 +49,7 @@
                 </span>
         </div>
     </div>
-    <div class="grid-container "  >
+    <div class="grid-container " style="height: 600px;">
         <div class="main-menu">
 
             <input type="radio" id="main-tab-1" name="main-tabs" checked="checked"/>
@@ -129,28 +79,135 @@
                             </span>
                     </div>
                     <div class="flex-item-1 nav-title-right">
-                        <span style="width: 100%;">ACM0001</span>
+                        <span style="width: 100%;">ACM0002</span>
                     </div>
                 </div>
-                <div class="content-container " >
-                    <div class="flex-container">
-                        <div class="flex-item-1 ">
-                            <span class="field-name" style="font-size: large; line-height: 30px;">Access Control</span>
+                <div class="content-container " style=" height: 300px;">
+                    <h3>Access Control Detail</h3>
+
+                    <div class="RowSeparator"></div>
+                    <div class="param-container">
+                        <div class="" style="padding-left: 15px;">
+                            <input type="radio" name="accesslist" value="" checked="checked">
+                            <span class="item-margin-right">WHITELIST</span>
+                            </input>
+                            <input type="radio" name="accesslist" value="">
+                            <span>BLACKLIST</span>
+                            </input>
                         </div>
-                        <div style="flex: auto;"></div>
-                        <div class="flex-item-1 SmallButtonStyle" style="margin: 0px 10px;">
-                            <a th:href="@{/accessControlGlobal.do}">
-                                <span>Edit Global Parameters</span>
-                            </a>
-                        </div>
-                        <div class="flex-item-1 SmallButtonStyle">
-                            <a th:href="@{/createAccessControl.do}">
-                                <span>Create New White/Black List</span>
-                            </a>
+                        <div class="param-item-right"></div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Name</div>
+                        <div class="param-item-right">
+                            <input class="access-name-field" type="text" maxlength="10" value="100"></input>
                         </div>
                     </div>
-                    <div style=" margin-top: 1.5em; width: 100%; height: 200px; ">
-                        <div id="accessControlGrid"></div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Channel</div>
+                        <div class="param-item-right">
+                            <select>
+                                <option value="">IVRS</option>
+                                <option value="">Web application and Mobile App</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">IP Address/Telephone Number</div>
+                        <div class="param-item-right">
+                            <input class="access-name-field" type="text" maxlength="10" value="100"></input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Effective From</div>
+                        <div class="param-item-right flex-container effective-code">
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-long effective-lock" type="text" maxlength="4" readonly="readonly" value="2010"></input>
+                                <br />
+                                <span>YYYY</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="02"></input>
+                                <br />
+                                <span>MM</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="13"></input>
+                                <br />
+                                <span>DD</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="00"></input>
+                                <br />
+                                <span>hh</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="00"></input>
+                                <br />
+                                <span>mm</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="00"></input>
+                                <br />
+                                <span>ss</span>
+                            </div>
+                            <div style="flex: 100;"></div>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left">Effective To</div>
+                        <div class="param-item-right flex-container effective-code">
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-long" type="text" maxlength="4" value="2022"></input>
+                                <br />
+                                <span>YYYY</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" value="09"></input>
+                                <br />
+                                <span>MM</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" value="21"></input>
+                                <br />
+                                <span>DD</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" value="00"></input>
+                                <br />
+                                <span>hh</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" value="00"></input>
+                                <br />
+                                <span>mm</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" value="00"></input>
+                                <br />
+                                <span>ss</span>
+                            </div>
+                            <div style="flex: 100;"></div>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+
+                    <div style=" float: right; padding-top: 1em;">
+                        <a th:href="@{/createAccessControlSuccess.do}">
+                            <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                        </a>
+                        <a >
+                            <input id="deleteBtn" type="text" value="Delete" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                        </a>
+                        <a th:href="@{/accessControl.do}">
+                            <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                        </a>
                     </div>
                 </div>
             </div>
