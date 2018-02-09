@@ -9,6 +9,7 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 
+import org.apache.cxf.common.util.SystemPropertyAction;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.headers.Header;
@@ -61,6 +62,15 @@ public class UmpsServiceWithHeader {
 
     private String decoratePassword(String hashedPassword) {
         return "{sha256}" + hashedPassword;
+    }
+
+    public static void main(String arg[]) throws  NoSuchAlgorithmException{
+        String input = "password1";
+        String hashedValue = "";
+        MessageDigest digester = MessageDigest.getInstance("SHA-256");
+        digester.update(input.getBytes());
+        hashedValue = Base64.getEncoder().encodeToString(digester.digest());
+        System.out.println("{sha256}" + hashedValue);
     }
 
     private String performHash(String password) {
