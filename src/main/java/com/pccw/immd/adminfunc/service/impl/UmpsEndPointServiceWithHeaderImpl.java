@@ -1,36 +1,31 @@
-package com.pccw.immd.adminfunc.ws.interceptor;
+package com.pccw.immd.adminfunc.service.impl;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.namespace.QName;
-
-import org.apache.cxf.common.util.SystemPropertyAction;
+import com.pccw.immd.adminfunc.service.UmpsEndPointServiceWithHeader;
+import com.pccw.immd.adminfunc.utils.PasswordUtil;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.jaxb.JAXBDataBinding;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import ws.upms.immd.v1.AppUserInfoHeader;
 import ws.upms.immd.v1.ITIAppException;
 import ws.upms.immd.v1.ITISysException;
 import ws.upms.immd.v1.Iss3UserSignOnDTO;
 import ws.upms.immd.v1.LDAPImmdUserServiceExtWS;
 
-@Service("umpsServiceWithHeader")
-public class UmpsServiceWithHeader {
+import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
+import java.util.ArrayList;
+import java.util.List;
 
-    private final static Logger LOOGER = LoggerFactory.getLogger(UmpsServiceWithHeader.class);
+@Service("umpsEndPointServiceWithHeader")
+public class UmpsEndPointServiceWithHeaderImpl implements UmpsEndPointServiceWithHeader {
+
+    private final static Logger LOOGER = LoggerFactory.getLogger(UmpsEndPointServiceWithHeaderImpl.class);
 
     private static final String NAMESPACE_URI = "http://immd.itifwk.ws/v1";
 
@@ -49,40 +44,14 @@ public class UmpsServiceWithHeader {
             proxy = ClientProxy.getClient(upmsClientProxy);
         }
         String systemId = "";
-        String hashedPassword = performHash(password);
+        String hashedPassword = PasswordUtil.performHash(password);
 
         // TODO: Waiting Jason Tam  confirm the System ID for AdminFunc
         // Temporary set to "UP"
         systemId = "UP";
         addSoapHeader(userId, systemId, terminalId);
-        String decoratedHashedPassword = decoratePassword(hashedPassword);
-        Iss3UserSignOnDTO authenticatedUser = upmsClientProxy.userAuthenticate(userId, decoratedHashedPassword, terminalId);
+        Iss3UserSignOnDTO authenticatedUser = upmsClientProxy.userAuthenticate(userId, hashedPassword, terminalId);
         return authenticatedUser;
-    }
-
-    private String decoratePassword(String hashedPassword) {
-        return "{sha256}" + hashedPassword;
-    }
-
-    public static void main(String arg[]) throws  NoSuchAlgorithmException{
-        String input = "password1";
-        String hashedValue = "";
-        MessageDigest digester = MessageDigest.getInstance("SHA-256");
-        digester.update(input.getBytes());
-        hashedValue = Base64.getEncoder().encodeToString(digester.digest());
-        System.out.println("{sha256}" + hashedValue);
-    }
-
-    private String performHash(String password) {
-        byte[] data = password.getBytes();
-        try {
-            MessageDigest digester = MessageDigest.getInstance("SHA-256");
-            digester.update(data);
-            return Base64.getEncoder().encodeToString(digester.digest());
-        } catch (NoSuchAlgorithmException ex){
-            LOOGER.debug("PerformHash Password Exception ... ");
-        }
-        return password;
     }
 
     private void addSoapHeader(String userId, String systemId, String terminalId) {

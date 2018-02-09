@@ -77,27 +77,26 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         try {
 
          UpmsUser user = upmsService.login(authentication.getName(), authentication.getCredentials().toString(), termialId);
+            List<SimpleGrantedAuthority> authList = new ArrayList<>();
+            authList.add(new SimpleGrantedAuthority("ROLE_UMPS_USER"));
+            // TODO: for complete those
+            boolean enabled = true;
+            boolean accountNonLocked = true;
+            boolean accountNonExpired = true;
+            boolean credentialsNonExpired = true;
 
-        List<SimpleGrantedAuthority> authList = new ArrayList<>();
-        authList.add(new SimpleGrantedAuthority("ROLE_UMPS_USER"));
-        // TODO: for complete those
-        boolean enabled = true;
-        boolean accountNonLocked = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-
-        loginUser = new LoginUser(
-                userName,
-                user.getIss3UserSignOnDTO().getUserEngName(),
-                password,
-                enabled,
-                accountNonExpired,
-                credentialsNonExpired,
-                accountNonLocked,
-                authList);
+            loginUser = new LoginUser(
+                    userName,
+                    user.getIss3UserSignOnDTO().getUserEngName(),
+                    password,
+                    enabled,
+                    accountNonExpired,
+                    credentialsNonExpired,
+                    accountNonLocked,
+                    authList);
 
 
-        } catch (ITIAppException | ITISysException e){
+        } catch (ITIAppException | ITISysException e) {
             throw new BadCredentialsException(e.getMessage(), e);
         }
 
