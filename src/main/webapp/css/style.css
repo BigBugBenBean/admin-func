@@ -256,7 +256,7 @@ main menu
     /* padding: 10px; */
 }
 
-.main-menu > input {
+.main-menu > span > input {
     display: none;
 }
 
@@ -264,8 +264,8 @@ main menu
     display: none;
 }
 
-.main-menu > #exit-tab:checked + label,
-.main-menu > label,
+.main-menu > span > #exit-tab:checked + label,
+.main-menu > span > label,
 .main-menu > div > form > label {
     box-sizing: border-box;
     display: inline-block;
