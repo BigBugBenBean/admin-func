@@ -7,4 +7,7 @@ import ws.upms.immd.v1.ITISysException;
 public interface UpmsService {
 
     public UpmsUser login(String userId, String password, String terminalId) throws ITIAppException, ITISysException;
+
+    public void changePassword(String userId, String password, String newPassword)throws ITIAppException, ITISysException;
+
 }
