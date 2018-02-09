@@ -34,6 +34,10 @@
     padding-right: 15px;
 }
 
+.border-frame {
+    border: 10px solid #79A775;
+}
+
 .RowSeparator {
     background: #79A775;
     width: 100%;

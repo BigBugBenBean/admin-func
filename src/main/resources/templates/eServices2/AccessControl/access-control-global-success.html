@@ -70,17 +70,77 @@
                             </span>
                     </div>
                     <div class="flex-item-1 nav-title-right">
-                        <span style="width: 100%;">ACM0011</span>
+                        <span style="width: 100%;">ACM0012</span>
                     </div>
                 </div>
                 <div class="content-container " style=" height: 300px;">
                     <h3>Global Parameters</h3>
 
-                    <h3>success</h3>
+                    <div class="border-frame global-success-frame " style="padding: 1em;">
+                        <div class="flex-container success-item-container">
+                            <div class="success-item-left">
+                                <span>Whitelist</span>
+                            </div>
+                            <div class="success-item-right">
+                                <span>Enabled</span>
+                            </div>
+                        </div>
+                        <div class="flex-container success-item-container">
+                            <div class="success-item-left">
+                                <span>Blacklist</span>
+                            </div>
+                            <div class="success-item-right">
+                                <span>Enabled</span>
+                            </div>
+                        </div>
+                        <div class="flex-container success-item-container">
+                            <div class="success-item-left">
+                                <span>Counter Blocking</span>
+                            </div>
+                            <div class="success-item-right">
+                                <span>Enabled</span>
+                            </div>
+                        </div>
+                        <div class="flex-container success-item-container">
+                            <div class="success-item-left">
+                                <span>Number of Transactions</span>
+                            </div>
+                            <div class="success-item-right">
+                                <span>1000</span>
+                            </div>
+                        </div>
+                        <div class="flex-container success-item-container">
+                            <div class="success-item-left">
+                                <span>Number of Days for Transactions</span>
+                            </div>
+                            <div class="success-item-right">
+                                <span>100</span>
+                            </div>
+                        </div>
+                        <div class="flex-container success-item-container">
+                            <div class="success-item-left">
+                                <span>Number of Appointments</span>
+                            </div>
+                            <div class="success-item-right">
+                                <span>100</span>
+                            </div>
+                        </div>
+                        <div class="flex-container success-item-container">
+                            <div class="success-item-left">
+                                <span>Number of Days for Appointments</span>
+                            </div>
+                            <div class="success-item-right">
+                                <span>100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-label">The changes is saved.</div>
 
                     <div style=" float: right; padding-top: 1em;">
-                        <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
-                        <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                        <a th:href="@{/accessControl.do}">
+                            <input type="text" value="Back to Access Control" class="ButtonStyle back-button" style="margin-right: 20px;" />
+                        </a>
                     </div>
 
                 </div>
