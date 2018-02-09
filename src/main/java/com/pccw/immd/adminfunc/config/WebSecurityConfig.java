@@ -134,6 +134,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/AUTH/login-fail.html",
                 "/AUTH/login-fail.do",
                 "/changePassword.do",
+                "/submitChangePassword.do",
                 "/changePassword"
         );
     }

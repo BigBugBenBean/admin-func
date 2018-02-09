@@ -70,9 +70,9 @@ public class ChangePasswordController {
 //     private UpmsService upmsService;
 
 
-     @PostMapping("/changePassword")
+     @PostMapping("/submitChangePassword.do")
      public String submit(@ModelAttribute PasswordDTO passwordDTO) {
-         LOG.info("Calling changePassword ....... ");
+         LOG.info("Calling submitChangePassword ....... ");
 
          String oldPassword = passwordDTO.getOldPassword();
          String newPassword = passwordDTO.getNewPassword();
@@ -86,7 +86,7 @@ public class ChangePasswordController {
          String errTitle = "";
          String errMsg = "";
 
-
+//         status = CHANGE_PWD_STATUS.OLD_PWD_INCORRECT;
 
          switch (status) {
              case CHANGE_PWD_SUCCESS: {
@@ -142,9 +142,12 @@ public class ChangePasswordController {
          passwordDTO.setErrorCode(errCode);
          passwordDTO.setErrorMessage(errMsg);
 
+
+
          if (errCode == -1) {
              // success
-             return "redirect:/AUTH/login-form.html";
+            return "redirect:/AUTH/login-form.html";
+            //  return "redirect:/eServices2/menu";
          } else if (errCode == 1001) {
 
              return "/auth/change-pwd";

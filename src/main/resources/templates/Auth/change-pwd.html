@@ -82,7 +82,7 @@
             <div class="content-container FieldName title">
                 <span>Create your new password in the fields below.</span>
             </div>
-            <form action="changePassword" method="post">
+            <form method="post" th:action="@{/submitChangePassword.do}">
                 <div class="flex-container">
                     <div style="flex: 6;">
                         <div class="flex-container box-container">
@@ -118,7 +118,6 @@
                             <div class="box-3">
                                 <div class="flex-container">
                                     <input type="submit" class="ButtonStyle change-pwd-confirm" value="Confirm" />
-
                                     <input type="button" class="ButtonStyle change-pwd-clear" value="Clear" onclick="onClear()" />
                                 </div>
 
