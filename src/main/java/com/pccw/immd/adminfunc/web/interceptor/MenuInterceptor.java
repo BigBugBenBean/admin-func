@@ -43,7 +43,8 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         long executeTime = endTime - startTime;
         
         //modified the exisitng modelAndView
-        modelAndView.addObject("executeTime",executeTime);
+        if (modelAndView != null)
+            modelAndView.addObject("executeTime",executeTime);
         
         //log it
         if(LOG.isDebugEnabled()){

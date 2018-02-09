@@ -88,8 +88,7 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 
         loginUser = new LoginUser(
                 userName,
-                // user.getIss3UserSignOnDTO().getUserEngName(),
-                "FULL NAME",
+                user.getIss3UserSignOnDTO().getUserEngName(),
                 password,
                 enabled,
                 accountNonExpired,
@@ -103,7 +102,7 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         }
 
         if (loginUser == null) {
-            throw new InternalAuthenticationServiceException("LoginedUser null, which is an interface contract violation");
+            throw new BadCredentialsException(messageSourceAdapter.getMessage("umps.useridandpassword.notempty"));
         } else {
             return loginUser;
         }
