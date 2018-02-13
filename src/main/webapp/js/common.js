@@ -26,6 +26,10 @@ var eServices2SelectedSubCat = SUB_CAT_MENU.ENQUIRY;
 var smartics2SelectedSubCat = SUB_CAT_MENU.ENQUIRY;
 var rmSelectedSubCat = SUB_CAT_MENU.ENQUIRY;
 
+commonHeader = function () {
+    return "<div>" + ( (this.title === undefined || this.title === null) ? this.name : this.title ) + '</div>';
+};
+
 function onEServices2SubCatSelected(subCat) {
     switch (subCat) {
         case SUB_CAT_MENU.ENQUIRY: {
@@ -98,30 +102,23 @@ function onMainCatSelected(cat) {
 }
 
 function navigatePage(page) {
+    // console.log('navigatePage');
     console.log('navigatePage: ' + page);
 
-    let formData = {
-        firstname: 'alex',
-        lastname:  'wong'
-    };
+    var link = window.location.href;
+    console.log('link: ' + link);
 
-    let url = '/adminfunc/navMenu';
 
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: url,
-        data: JSON.stringify(formData),
-        dataType: 'json',
-        success: function(result) {
-            alert('done: ' + JSON.stringify(result));
-            console.log(result);
-        },
-        error: function(e) {
-            alert("Error!");
-            console.log("ERROR: ", e);
-        }
-    })
+    var tmpArr = link.split('://');
+    var http = tmpArr[0];
+    var pathArr = tmpArr[1].split('/');
+
+    var menu = 'landing';
+    var contextPath = http + '://' + pathArr[0] + '/' + pathArr[1] + '/' + menu + '#' + page;
+    console.log(contextPath);
+
+    window.location.href = contextPath;
+    // window.location.href = "http://localhost:8080/adminfunc/landing";
 
 }
 
@@ -130,3 +127,4 @@ function updateNavTitle() {
     $('#smartics2SubCat').html(smartics2SelectedSubCat);
     $('#rmSubCat').html(rmSelectedSubCat);
 }
+

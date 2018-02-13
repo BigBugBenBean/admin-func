@@ -1,22 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
 <head>
     <meta charset="UTF-8"></meta>
     <title>e-Services Admin Function</title>
 
-    <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
-    <script src="/adminfunc/js/lib/lodash.min.js"></script>
-    <script src="/adminfunc/js/lib/moment.min.js"></script>
-
-    <script src="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid.min.js"></script>
-
-    <script src="/adminfunc/js/common.js"></script>
-
-    <link rel="stylesheet" href="/adminfunc/css/style.css"/>
     <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
-
-    <link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-custom.css"/>
-    <link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-theme-custom.css"/>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -27,232 +15,83 @@
 </head>
 <body>
 <div>
-    <div class="flex-container">
-        <div class="flex-item-1 header-item-left">
-            <span>e-Services-2</span>
-        </div>
-        <div></div>
-        <div class="flex-item-1 header-item-right">
-                <span>| userID:
-                    <b></b> |</span>
-            <span>Date:
-                    <b id="todayDate"></b>
-                </span>
-        </div>
-    </div>
-    <div class="grid-container " style="height: 600px;">
-        <div class="main-menu">
 
-            <input type="radio" id="main-tab-1" name="main-tabs" checked="checked"/>
-            <label for="main-tab-1" style="margin-left: 30px;">e-Services-2</label>
+    <div layout:fragment="header(${ROOT})"></div>
 
-            <input type="radio" id="main-tab-2" name="main-tabs"/>
-            <label for="main-tab-2">SMARTICS-2</label>
+    <div layout:fragment="content">
+        <div style="padding: 1.5em;">
+            <h3>Global Parameters</h3>
 
-
-            <input type="radio" id="main-tab-3" name="main-tabs"/>
-            <label for="main-tab-3">RM</label>
-
-            <div style="float: right;">
-                <a th:href="@{/AUTH/logout.do}" class="exit-btn">
-                    <input type="submit" id="exit-tab" name="" />
-                    <label for="exit-tab" >Exit</label>
-                </a >
-            </div>
-
-
-            <div id="main-content-1">
-                <div class="flex-container grid-nav-container">
-                    <div class="flex-item-1 nav-title-left">
-                            <span style=" width: '100%'">e-Services-2 >
-                                <span id="eServices2SubCat">Maintenance</span> >
-                                <span id="eServices2Func">Access Control</span>
-                            </span>
+            <div class="border-frame global-success-frame " style="padding: 1em;">
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Whitelist</span>
                     </div>
-                    <div class="flex-item-1 nav-title-right">
-                        <span style="width: 100%;">ACM0012</span>
+                    <div class="success-item-right">
+                        <span>Enabled</span>
                     </div>
                 </div>
-                <div class="content-container " style=" height: 300px;">
-                    <h3>Global Parameters</h3>
-
-                    <div class="border-frame global-success-frame " style="padding: 1em;">
-                        <div class="flex-container success-item-container">
-                            <div class="success-item-left">
-                                <span>Whitelist</span>
-                            </div>
-                            <div class="success-item-right">
-                                <span>Enabled</span>
-                            </div>
-                        </div>
-                        <div class="flex-container success-item-container">
-                            <div class="success-item-left">
-                                <span>Blacklist</span>
-                            </div>
-                            <div class="success-item-right">
-                                <span>Enabled</span>
-                            </div>
-                        </div>
-                        <div class="flex-container success-item-container">
-                            <div class="success-item-left">
-                                <span>Counter Blocking</span>
-                            </div>
-                            <div class="success-item-right">
-                                <span>Enabled</span>
-                            </div>
-                        </div>
-                        <div class="flex-container success-item-container">
-                            <div class="success-item-left">
-                                <span>Number of Transactions</span>
-                            </div>
-                            <div class="success-item-right">
-                                <span>1000</span>
-                            </div>
-                        </div>
-                        <div class="flex-container success-item-container">
-                            <div class="success-item-left">
-                                <span>Number of Days for Transactions</span>
-                            </div>
-                            <div class="success-item-right">
-                                <span>100</span>
-                            </div>
-                        </div>
-                        <div class="flex-container success-item-container">
-                            <div class="success-item-left">
-                                <span>Number of Appointments</span>
-                            </div>
-                            <div class="success-item-right">
-                                <span>100</span>
-                            </div>
-                        </div>
-                        <div class="flex-container success-item-container">
-                            <div class="success-item-left">
-                                <span>Number of Days for Appointments</span>
-                            </div>
-                            <div class="success-item-right">
-                                <span>100</span>
-                            </div>
-                        </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Blacklist</span>
                     </div>
-
-                    <div class="success-label">The changes is saved.</div>
-
-                    <div style=" float: right; padding-top: 1em;">
-                        <a th:href="@{/accessControl.do}">
-                            <input type="text" value="Back to Access Control" class="ButtonStyle back-button" style="margin-right: 20px;" />
-                        </a>
+                    <div class="success-item-right">
+                        <span>Enabled</span>
                     </div>
-
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Counter Blocking</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span>Enabled</span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Number of Transactions</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span>1000</span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Number of Days for Transactions</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span>100</span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Number of Appointments</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span>100</span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Number of Days for Appointments</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span>100</span>
+                    </div>
                 </div>
             </div>
-            <!--<div id="main-content-2">-->
-            <!--<div class="flex-container grid-nav-container">-->
-            <!--<div class="flex-item-1 nav-title-left">-->
-            <!--<span style=" width: '100%'">SMARTICS-2 >-->
-            <!--<span id="smartics2SubCat"></span>-->
-            <!--</span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="content-container " >-->
-            <!--<div class="menu-container flex-container">-->
-            <!--<div class="flex-item-1">&nbsp;</div>-->
-            <!--<div class="sub-menu">-->
-            <!--<input type="radio" id="sub-tab-2-1" name="sub-tabs-2" checked="checked" onchange="onSmartics2SubCatSelected(SUB_CAT_MENU.ENQUIRY)" />-->
-            <!--<label for="sub-tab-2-1">Enquiry</label>-->
-            <!--<input type="radio" id="sub-tab-2-2" name="sub-tabs-2" onchange="onSmartics2SubCatSelected(SUB_CAT_MENU.MAINTENANCE)" />-->
-            <!--<label for="sub-tab-2-2">Manatenance</label>-->
-            <!--&lt;!&ndash;<input type="radio" id="sub-tab-2-3" name="sub-tabs-2" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<label for="sub-tab-2-3">Management</label>&ndash;&gt;-->
-            <!--<div id="sub-content-2-1">-->
-            <!--<ul class="func-parent">-->
-            <!--<li class="func-child">-->
-            <!--<a class="func-bullet">Appointment Booking Enquiry</a>-->
-            <!--</li>-->
-            <!--<li class="func-child">-->
-            <!--<a class="func-bullet">Online Submission Enquiry</a>-->
-            <!--</li>-->
-            <!--<li class="func-child">-->
-            <!--<a class="func-bullet">Enquiry Code</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--<div id="sub-content-2-2">-->
-            <!--<ul class="func-parent">-->
-            <!--<li class="func-child">-->
-            <!--<a class="func-bullet">Delete Appointment</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<div id="sub-content-2-3">&ndash;&gt;-->
-            <!--&lt;!&ndash;<ul class="func-parent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<li class="func-child">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a>555</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<li class="func-child">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a>666</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--</div>-->
-            <!--<div class="flex-item-1">&nbsp;</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div id="main-content-3">-->
-            <!--<div class="flex-container grid-nav-container">-->
-            <!--<div class="flex-item-1 nav-title-left">-->
-            <!--<span style=" width: '100%'">RM >-->
-            <!--<span id="rmSubCat"></span>-->
-            <!--</span>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="content-container ">-->
-            <!--<div class="menu-container flex-container">-->
-            <!--<div class="flex-item-1">&nbsp;</div>-->
-            <!--<div class="sub-menu">-->
-            <!--<input type="radio" id="sub-tab-3-1" name="sub-tabs-3" checked="checked" onchange="onRmSubCatSelected(SUB_CAT_MENU.ENQUIRY)"-->
-            <!--/>-->
-            <!--<label for="sub-tab-3-1">Enquiry</label>-->
-            <!--&lt;!&ndash;<input type="radio" id="sub-tab-3-2" name="sub-tabs-3" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<label for="sub-tab-3-2">Manatenance</label>&ndash;&gt;-->
-            <!--&lt;!&ndash;<input type="radio" id="sub-tab-3-3" name="sub-tabs-3" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<label for="sub-tab-3-3">Management</label>&ndash;&gt;-->
-            <!--<div id="sub-content-3-1">-->
-            <!--<ul class="func-parent">-->
-            <!--<li class="func-child">-->
-            <!--<a>Online Submission Enquiry</a>-->
-            <!--</li>-->
-            <!--</ul>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<div id="sub-content-3-2">&ndash;&gt;-->
-            <!--&lt;!&ndash;<ul class="func-parent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<li class="func-child">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a>cccc</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<li class="func-child">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a>dddd</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--&lt;!&ndash;<div id="sub-content-3-3">&ndash;&gt;-->
-            <!--&lt;!&ndash;<ul class="func-parent">&ndash;&gt;-->
-            <!--&lt;!&ndash;<li class="func-child">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a>eeee</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;<li class="func-child">&ndash;&gt;-->
-            <!--&lt;!&ndash;<a>ffff</a>&ndash;&gt;-->
-            <!--&lt;!&ndash;</li>&ndash;&gt;-->
-            <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--</div>-->
-            <!--<div class="flex-item-1">&nbsp;</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
 
+            <div class="success-label">The changes is saved.</div>
 
+            <div style=" float: right; padding-top: 1em;">
+                <a th:href="@{/accessControl.do}">
+                    <input type="text" value="Back to Access Control" class="ButtonStyle back-button" style="margin-right: 20px;" />
+                </a>
+            </div>
         </div>
     </div>
+
+
 </div>
 </body>
 </html>

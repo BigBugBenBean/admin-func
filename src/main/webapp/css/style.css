@@ -185,9 +185,8 @@
 
 .grid-container {
     background-color: #C7DBB8;
-    border-radius: 20px 20px 0px 0px;
+
     overflow: hidden;
-    height: 400px;
 }
 
 .grid-nav-container {
@@ -256,6 +255,7 @@ main menu
     /* padding: 10px; */
 }
 
+.main-menu > input,
 .main-menu > span > input {
     display: none;
 }
@@ -264,6 +264,8 @@ main menu
     display: none;
 }
 
+.main-menu > #exit-tab:checked + label,
+.main-menu > label,
 .main-menu > span > #exit-tab:checked + label,
 .main-menu > span > label,
 .main-menu > div > form > label {

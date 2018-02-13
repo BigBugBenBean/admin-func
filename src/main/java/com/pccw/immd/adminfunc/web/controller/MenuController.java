@@ -28,16 +28,16 @@ public class MenuController {
 
     private static final Logger LOG = LoggerFactory.getLogger(MenuController.class);
 
-    @RequestMapping(value = "/menu.html", method = RequestMethod.GET)
-    public String menuPage() {
-        return "menu";
-    }
+//    @RequestMapping(value = "/menu.html", method = RequestMethod.GET)
+//    public String menuPage() {
+//        return "menu";
+//    }
 
-    @PostMapping(value = "/navMenu")
-    public String navMenu(@RequestBody Object page) {
+    @GetMapping(value = "/menu.do")
+    public String navMenu() {
         LOG.info("navMenu~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        LOG.info("page: " + page);
-        return "redirect:/AUTH/login-form.html";
+//        LOG.info("page: " + page);
+        return "redirect:/menu";
     }
 
 
