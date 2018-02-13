@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AccessControlController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MenuController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AccessControlController.class);
 
     @GetMapping(value = "/accessControl.do")
     public String accessControlPage() {

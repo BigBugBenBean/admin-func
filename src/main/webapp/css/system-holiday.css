@@ -1,0 +1,8 @@
+#holidayDate {
+    max-height: 90%;
+    overflow-y: scroll;
+}
+
+.holiday-date-header, .holiday-date-row {
+    padding-left: 15px;
+}

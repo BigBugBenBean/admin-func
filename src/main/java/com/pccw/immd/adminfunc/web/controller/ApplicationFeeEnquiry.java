@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ApplicationFeeEnquiry {
 
-    private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationFeeEnquiry.class);
 
     @GetMapping(value = "/applicationFeeEnquiry.do")
     public String appFeeEnqPage() {
