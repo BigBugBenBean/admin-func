@@ -1,10 +1,7 @@
 
 package util.itifwk.immd.v1;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
@@ -41,12 +38,24 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class ITIAppException {
 
+
+    @XmlTransient
+    private String loginId;
+
     protected String forceLogoutByTerminal;
     protected String errMsg;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar date;
     protected String errCode;
     protected String message;
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
 
     /**
      * Gets the value of the forceLogoutByTerminal property.

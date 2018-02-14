@@ -97,6 +97,10 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 
 
         } catch (ITIAppException | ITISysException e) {
+            if (e instanceof ITIAppException) {
+                ITIAppException ex = (ITIAppException)e;
+                ex.getFaultInfo().setLoginId(authentication.getName());
+            }
             throw new BadCredentialsException(e.getMessage(), e);
         }
 

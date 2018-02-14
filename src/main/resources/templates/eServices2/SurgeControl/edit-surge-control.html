@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/surge-control.css"/>
+
+    <script type="text/javascript">
+        $(function () {
+            let names = [
+                {
+                    'appID': '500',
+                    'GST': '20/20',
+                    'Desc': '',
+                    'MST': '22/30',
+                    'Priority': '1',
+                    'Clawback': '123'
+                }
+            ];
+
+            let grid = $("#surgeControlGrid");
+            // console.log(grid);
+
+
+
+            grid.jsGrid(
+                {
+                    width: '100%',
+                    height: '100%',
+
+                    sorting: true,
+                    noDataContent: 'NO data',
+                    selecting: false,
+
+                    data: names,
+
+                    paging: true,
+                    pageSize: 5,
+                    pageButtonCount: 5,
+                    pagerContainer: '#externalPager',
+                    pagerFormat: `current page: {pageIndex}  &nbsp;&nbsp; {first} {prev} <select> <option> {pages} </option> </select>  {next} {last} &nbsp;&nbsp; total pages: {pageCount}`,
+                    pagePrevText: 'prev',
+                    pageNextText: 'next',
+                    pageFirstText: 'first',
+                    pageLastText: 'last',
+                    pageNavigatorNextText: '&#8230;',
+                    pageNavigatorPrevText: '&#8230;',
+
+                    fields: [
+                        { name: 'appID', title: 'App ID', type: 'text', width: 40, headerTemplate: commonHeader },
+                        { name: 'GST', title: 'GST (Usage/Assigned)', type: 'text', width: 80, headerTemplate: commonHeader },
+                        { name: 'desc', title: 'Description', type: 'text', width: 50, headerTemplate: commonHeader },
+                        { name: 'MST', title: 'MST (Usage/Assigned)', type: 'text', width: 80, headerTemplate: commonHeader },
+                        { name: 'Priority', title: 'Priority', type: 'text', width: 40, headerTemplate: commonHeader },
+                        // { name: 'Clawback', title: 'Clawback', type: 'text', width: 80, headerTemplate: commonHeader }
+                        { name: 'Clawback', title: 'Clawback', type: "checkbox", width: 80, headerTemplate: commonHeader }
+                    ]
+
+                }
+            )
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content" style="">
+        <div style="padding: 1.5em; ">
+
+            <div>
+                <h3>Search Criteria</h3>
+                <div class="RowSeparator"></div>
+
+                <div style="width: 30%;">
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1">App ID</div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1">GST</div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1">Description</div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1">MST</div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1">Priority</div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1">Clawback</div>
+                        <div class="flex-item-1">
+                            <input type="checkbox" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <div style="flex: 10"></div>
+                    <div style="flex: 1;  ">
+                        <input type="text" class="ButtonStyle search-btn" value="Search" />
+                    </div>
+                </div>
+
+                <div class="RowSeparator"></div>
+            </div>
+
+            <div style=" margin-top: 1.5em; width: 100%; height: 200px;">
+                <div id="surgeControlGrid"></div>
+            </div>
+            <div class="data-grid-footer">&nbsp;</div>
+
+            <div class="flex-container" style="padding-top: 10px;">
+                <div class="flex-item-1" >
+                    <span>Share Ticket Pool(Usage/Assigned): 3067/6000</span>
+                </div>
+                <div class="flex-item-1" style="min-width: 320px; ">
+                    <input type="text" class="ButtonStyle edit-btn" value="Cancel" />
+                </div>
+            </div>
+
+
+
+            <div style="padding-top: 10px;">
+                <div th:replace="fragments/surge-control-footer::surgeControlFooter" ></div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

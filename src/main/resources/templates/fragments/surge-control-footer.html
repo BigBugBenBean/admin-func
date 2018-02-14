@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link rel="stylesheet" href="/adminfunc/css/style.css"/>
+
+</head>
+<body>
+
+<div th:fragment="surgeControlFooter">
+    <div>-----------------------</div>
+    <div><span>Remark:</span></div>
+    <div>-----------------------</div>
+    <div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span>GST</span></div>
+            <div class="flex-item-7"><span>Number of service tickets assigned in the dedicated ticket pool of an online service</span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span>MST</span></div>
+            <div class="flex-item-7"><span>Maximum number of service tickets to be deployed for an online service</span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span>Priority</span></div>
+            <div class="flex-item-7"><span>The ordering of the items(1 is highest)</span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span>Clawback</span></div>
+            <div class="flex-item-7"><span>Retrieve tickets from applications with lower priority when the share ticket pool is full</span></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

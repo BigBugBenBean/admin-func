@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+      <!-- xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+      <!--layout:decorator="layout"-->
+
 
 <head>
     <meta charset="UTF-8"></meta>
@@ -18,14 +21,18 @@
         /*<![CDATA[*/
 
 
-        var oldPassword = "[[${passwordDTO.oldPassword}]]";
-        var newPassword = "[[${passwordDTO.newPassword}]]";
-        var confirmNewPassword = "[[${passwordDTO.confirmNewPassword}]]";
-        var errorCode = "[[${passwordDTO.errorCode}]]";
-        var errorMessage = "[[${passwordDTO.errorMessage}]]";
+        var loginId = [[${passwordDTO.loginId}]];
+        var oldPassword = [[${passwordDTO.oldPassword}]];
+        var newPassword = [[${passwordDTO.newPassword}]];
+        var confirmNewPassword = [[${passwordDTO.confirmNewPassword}]];
+        var errorCode = [[${passwordDTO.errorCode}]];
+        var errorMessage = [[${passwordDTO.errorMessage}]];
 
+        var loginStr = 'loginId: ' + loginId;
         var str = 'oldPassword: ' + oldPassword + ' , newPassword: ' + newPassword + ' , confirmNewPassword: ' + confirmNewPassword;
         var err = 'errorCode: ' + errorCode + ' , errorMessage: ' + errorMessage;
+
+        // alert(loginStr);
         // alert(str);
         // alert(err);
 
@@ -57,6 +64,7 @@
 
 <body>
     <div>
+
         <div class="flex-container">
             <div class="flex-item-1 header-item-left">
                 <span>e-Services-2</span>
@@ -83,6 +91,7 @@
                 <span>Create your new password in the fields below.</span>
             </div>
             <form method="post" th:action="@{/submitChangePassword.do}">
+                <input type="hidden" name="loginId" th:value="${passwordDTO.loginId}" />
                 <div class="flex-container">
                     <div style="flex: 6;">
                         <div class="flex-container box-container">

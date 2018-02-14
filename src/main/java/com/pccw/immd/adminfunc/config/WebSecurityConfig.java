@@ -133,6 +133,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
                 "/AUTH/login-fail.html",
                 "/AUTH/login-fail.do",
+                "/AUTH/logout-result.do",
                 "/changePassword.do",
                 "/submitChangePassword.do",
                 "/changePassword"

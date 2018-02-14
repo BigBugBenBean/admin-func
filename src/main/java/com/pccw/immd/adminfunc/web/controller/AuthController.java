@@ -1,10 +1,11 @@
 package com.pccw.immd.adminfunc.web.controller;
 
+import com.pccw.immd.adminfunc.dto.PasswordDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,13 +28,23 @@ public class AuthController {
     }
 
 
+    @RequestMapping(value = "/logout-result.do", method = RequestMethod.GET)
+    public String logoutResult() {
+        return "/Auth/logout-success";
+    }
+
+
     @GetMapping("/login-fail.html")
-    public String loginFail(HttpServletRequest request, HttpSession session) {
+    public String loginFail(@ModelAttribute PasswordDTO passwordDTO, HttpServletRequest request, HttpSession session) {
         LOG.info("login-fail ... ");
         String returnResult = "redirect:/AUTH/login_form.html";
         if (session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION) != null) {
             if ( isPasswordExpired(session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION)) ){
-                returnResult = "redirect:/changePassword.do";
+                String loginId = getLoginId( session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION) );
+                LOG.info("Password expired, loginId: " + loginId);
+                passwordDTO.setLoginId(loginId);
+//                returnResult = "redirect:/changePassword.do";
+                returnResult = "auth/change-pwd";
             } else {
                 // General Error will goto error page.
                 request.setAttribute(SPRING_SECURITY_LAST_EXCEPTION, session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION));
@@ -47,6 +58,18 @@ public class AuthController {
     }
 
     private static String LDAPI1120 = "LDAPI1120";
+
+    private String getLoginId(Object attribute) {
+        if (attribute !=null && attribute instanceof Exception  ){
+            Exception ex = (Exception)attribute;
+            if (ex.getCause() instanceof ITIAppException){
+                ITIAppException appEx = (ITIAppException)ex.getCause();
+                String loginId = appEx.getFaultInfo().getLoginId();
+                return loginId;
+            }
+        }
+        return null;
+    }
 
     private boolean isPasswordExpired(Object attribute) {
         if (attribute !=null && attribute instanceof Exception  ){
