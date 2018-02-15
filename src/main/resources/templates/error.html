@@ -64,8 +64,12 @@
                         <b>Warning</b>
                     </span>
 
+                <p th:if="${status}">
+                    <b>Response Status:</b> <span th:text="${status}">status-code</span>
+                </p>
+
                 <p id="loginFailContent" class="login-fail-content">
-                    Error Message:<span th:if="${message} and ${message.length() != 0}"
+                    <b>Error Message:</b> <span th:if="${message} and ${message.length() != 0}"
                                         th:text="${message}">message ...</span>
                 </p>
 
