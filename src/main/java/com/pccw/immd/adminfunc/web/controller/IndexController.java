@@ -36,17 +36,6 @@ public class IndexController {
         return "index";
     }
 
-//    @RequestMapping(value = "/login.html", method = RequestMethod.GET)
-//    public String loginPage() {
-//        return "/Auth/login";
-//    }
-
-    @GetMapping("/login")
-    public String backToLogin() {
-        LOG.info("Calling backToLogin ....... ");
-        return "/auth/login-form";
-    }
-
     @RequestMapping(value = "/login-fail.do", method = RequestMethod.GET)
     public String loginFailPage() {
         return "/Auth/login-fail";
@@ -57,25 +46,18 @@ public class IndexController {
     private UpmsService upmsService;
 
 
-    @GetMapping("/landing")
+    @GetMapping({"/landing", "/AUTH/login.do"})
     public String submit(@ModelAttribute UserDTO userDTO, Principal principal)   {
-        LOG.info("Calling login ....... ");
+        LOG.info("Calling landing ....... ");
 
         String loginId = principal.getName();
-        LOG.info("loginID: " + loginId  );
-
-        String termialId = "";
-
-//        String demoPrefix = "demo";
+        LOG.info("loginId: " + loginId  );
 
         boolean isDemo = isDemoAccount(loginId);
         if (isDemo) {
             return demoPage(loginId, userDTO);
         }
-        
-//        return "/Auth/login-fail";
-//        return "result";
-//        return "/Auth/login";
+
         return "menu";
     }
 
@@ -126,16 +108,6 @@ public class IndexController {
     }
 
     private LOGIN_STATUS validateAccount(String loginId) {
-
-
-        String okPwd = "password";
-
-//        if (loginId.equals("demo001")) {
-//
-//        } else if (loginId.equals("demo002")) {
-//
-//        }
-
         switch (loginId) {
             case "demo001": {
                 return LOGIN_STATUS.LOGIN_SUCCESS;
@@ -150,8 +122,6 @@ public class IndexController {
                 return LOGIN_STATUS.INVALID_LOGIN_ID;
             }
         }
-
-//        return LOGIN_STATUS.INVALID_LOGIN_ID;
     }
 
 }

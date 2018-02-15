@@ -4,13 +4,16 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <jpa:repositories
         base-package="com.pccw.immd.adminfunc.repository"
@@ -77,6 +80,11 @@
           p:packagesToScan="com.pccw.immd.adminfunc.domain"
           p:jpaPropertyMap-ref="jpaProperties.adminfunc">
     </bean>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory.adminfunc"
+    />
+
+    <tx:annotation-driven />
 
     <!--
     <bean id="auditingProvider" class="net.petrikainulainen.springdata.jpa.common.UsernameAuditorAware"/>
@@ -86,7 +94,7 @@
     </bean>
 
     <jpa:auditing auditor-aware-ref="auditingProvider" set-dates="true"/>
-    <jpa:repositories base-package="net.petrikainulainen.springdata.jpa.todo"/>
+    <jpa:repositories base-package="net.petrikainulainen.springdata.jpa"/>
 
 
    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -98,4 +106,12 @@
    <bean id="persistenceExceptionTranslationPostProcessor"
       class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
     -->
+
+    <!--<tx:annotation-driven />-->
+    <!--<tx:jta-transaction-manager></tx:jta-transaction-manager>-->
+    <!--<bean id="transactionManager"-->
+          <!--class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+        <!--<property name="hibernateManagedSession" value="true" />-->
+    <!--</bean>-->
+
 </beans>

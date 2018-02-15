@@ -13,5 +13,5 @@ import java.util.List;
 @Repository ("umSystemHolidayRepository.eservice2")
 public interface UmSystemHolidayRepository extends JpaRepository<SystemHoliday,Integer>{
 
-    List<SystemHoliday> findAllByOrderByHolidayDateDesc();
+    List<SystemHoliday> findAllByOrderByHolidayDateAsc();
 }

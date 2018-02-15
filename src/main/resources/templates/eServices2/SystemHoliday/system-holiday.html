@@ -30,33 +30,9 @@
                 <div class="RowSeparator"></div>
 
                 <div id="holidayDate">
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
-                    <div class="holiday-date-row"><span>2017-01-02</span></div>
-                    <div class="holiday-date-row"><span>2017-01-03</span></div>
-                    <div class="holiday-date-row"><span>2017-01-04</span></div>
+                    <th:block th:each="systemHoliday,index : ${systemHolidayDTO.systemHolidayList}" >
+                        <div class="holiday-date-row"><span th:text="${#dates.format(systemHoliday.holidayDate, 'yyyy-MM-dd')}">2017-01-02</span></div>
+                    </th:block>
                 </div>
 
 
