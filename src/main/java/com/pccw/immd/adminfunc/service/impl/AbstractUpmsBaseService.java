@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import ws.upms.immd.v1.LDAPImmdUserServiceExtWS;
 
-public abstract class AbstractUmpsBaseService {
+public abstract class AbstractUpmsBaseService {
 
-    private final static Logger LOOGER = LoggerFactory.getLogger(AbstractUmpsBaseService.class);
+    private final static Logger LOOGER = LoggerFactory.getLogger(AbstractUpmsBaseService.class);
 
     protected final static String NAMESPACE_URI = "http://immd.itifwk.ws/v1";
 

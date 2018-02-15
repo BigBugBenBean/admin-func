@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +37,7 @@ public class FunctionIdResolverInterceptor extends HandlerInterceptorAdapter {
         request.setAttribute("startTime", startTime);
 
         String funcId = functionService.resoloveFunctionId(request.getRequestURI());
-        request.setAttribute("FUNCTION_ID_KEY", funcId);
+        request.setAttribute(FUNCTION_ID_KEY, funcId);
 
         request.setAttribute("startTime", startTime);
         return true;

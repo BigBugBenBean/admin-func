@@ -1,8 +1,8 @@
 package com.pccw.immd.adminfunc.service.impl;
 
 import com.pccw.immd.adminfunc.dto.UpmsUser;
-import com.pccw.immd.adminfunc.service.UmpsEndPointService;
-import com.pccw.immd.adminfunc.service.UmpsEndPointServiceWithHeader;
+import com.pccw.immd.adminfunc.service.UpmsEndPointService;
+import com.pccw.immd.adminfunc.service.UpmsEndPointServiceWithHeader;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,11 +16,11 @@ public class UpmsServiceImpl implements UpmsService {
 
     @Autowired
     @Qualifier ("umpsEndPointService")
-    private UmpsEndPointService umpsEndPointService;
+    private UpmsEndPointService umpsEndPointService;
 
     @Autowired
     @Qualifier ("umpsEndPointServiceWithHeader")
-    private UmpsEndPointServiceWithHeader umpsServiceWithHeader;
+    private UpmsEndPointServiceWithHeader umpsServiceWithHeader;
 
 
 //    public UpmsUser login(String userId, String password, String terminalId) throws ITIAppException, ITISysException {

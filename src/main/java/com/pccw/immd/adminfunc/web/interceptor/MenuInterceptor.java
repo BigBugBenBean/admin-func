@@ -1,18 +1,14 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /** 
  ** 
@@ -24,45 +20,17 @@ import java.util.Map;
 public class MenuInterceptor extends HandlerInterceptorAdapter {
     
     private static final Logger LOG = LoggerFactory.getLogger(MenuInterceptor.class);
+    private static final String MENU_ROOT_KEY = "ROOT";
 
     //before the actual handler will be executed
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
         throws Exception {
 
-        long startTime = System.currentTimeMillis();
-        request.setAttribute("MenuInterceptor ... startTime", startTime);
-
-        return true;
-    }
-
-    //after the handler is executed
-    public void postHandle(
-        HttpServletRequest request, HttpServletResponse response, 
-        Object handler, ModelAndView modelAndView)
-        throws Exception {
-        
-        long startTime = (Long)request.getAttribute("startTime");
-        
-        long endTime = System.currentTimeMillis();
-
-        long executeTime = endTime - startTime;
-        
-        //modified the exisitng modelAndView
-        if (modelAndView == null)
-            return;
-
-        modelAndView.addObject("executeTime",executeTime);
-        
-        //log it
-        if(LOG.isDebugEnabled()){
-            LOG.debug("[" + handler + "] executeTime : " + executeTime + "ms");
-            LOG.debug("MenuInterceptor ... ");
-        }
-
-        MenuItem root = new MenuItem("ROOT","ROOT");
+        MenuItem root = new MenuItem(MENU_ROOT_KEY,"ROOT");
         root.addAllMenu(getService2SubMenu());
 
-        modelAndView.addObject("ROOT", root);
+        request.setAttribute(MENU_ROOT_KEY, root);
+        return true;
     }
 
     private List<MenuItem> getService2SubMenu() {

@@ -1,6 +1,6 @@
 package com.pccw.immd.adminfunc.service.impl;
 
-import com.pccw.immd.adminfunc.service.UmpsEndPointServiceWithHeader;
+import com.pccw.immd.adminfunc.service.UpmsEndPointServiceWithHeader;
 import com.pccw.immd.adminfunc.utils.PasswordUtil;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.jaxb.JAXBDataBinding;
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("umpsEndPointServiceWithHeader")
-public class UmpsEndPointServiceWithHeaderImpl extends AbstractUmpsBaseService implements UmpsEndPointServiceWithHeader {
+public class UpmsEndPointServiceWithHeaderImpl extends AbstractUpmsBaseService implements UpmsEndPointServiceWithHeader {
 
-    private final static Logger LOOGER = LoggerFactory.getLogger(UmpsEndPointServiceWithHeaderImpl.class);
+    private final static Logger LOOGER = LoggerFactory.getLogger(UpmsEndPointServiceWithHeaderImpl.class);
 
     public Iss3UserSignOnDTO userAuthenticate(String userId, String password, String terminalId) throws ITIAppException, ITISysException {
         // TODO: Waiting Jason Tam  confirm the System ID for AdminFunc

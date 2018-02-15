@@ -4,7 +4,7 @@ import ws.upms.immd.v1.ITIAppException;
 import ws.upms.immd.v1.ITISysException;
 import ws.upms.immd.v1.Iss3UserSignOnDTO;
 
-public interface UmpsEndPointService {
+public interface UpmsEndPointService {
 
     public void changePassword(String userId, String password, String newPassword) throws ITIAppException, ITISysException;
 }
