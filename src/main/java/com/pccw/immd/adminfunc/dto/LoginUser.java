@@ -11,6 +11,9 @@ import java.util.Collection;
 
 public class LoginUser extends User {
 
+    private String sessionId;
+    private String immdToken;
+    private String officeCode;
     private String displayName;
 
     public LoginUser(String username, String displayName, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
@@ -35,4 +38,27 @@ public class LoginUser extends User {
         return displayName;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getImmdToken() {
+        return immdToken;
+    }
+
+    public void setImmdToken(String immdToken) {
+        this.immdToken = immdToken;
+    }
+
+    public String getOfficeCode() {
+        return officeCode;
+    }
+
+    public void setOfficeCode(String officeCode) {
+        this.officeCode = officeCode;
+    }
 }

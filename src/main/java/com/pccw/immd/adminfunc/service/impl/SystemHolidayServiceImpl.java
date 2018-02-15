@@ -1,5 +1,6 @@
 package com.pccw.immd.adminfunc.service.impl;
 
+import com.pccw.immd.adminfunc.annotation.AccessAudit;
 import com.pccw.immd.adminfunc.domain.SystemHoliday;
 import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.repository.UmSystemHolidayRepository;
@@ -24,12 +25,8 @@ public class SystemHolidayServiceImpl implements SystemHolidayService {
     @Qualifier ("umSystemHolidayRepository.eservice2")
     private UmSystemHolidayRepository umSystemHolidayRepository;
 
-    @Autowired
-    @Qualifier ("umpsEndPointServiceWithHeader")
-    private UmpsEndPointServiceWithHeader umpsServiceWithHeader;
-
     @Override
     public List<SystemHoliday> listAll() {
-        return umSystemHolidayRepository.findAllByOrderByHolidayDateDesc();
+        return umSystemHolidayRepository.findAllByOrderByHolidayDateAsc();
     }
 }

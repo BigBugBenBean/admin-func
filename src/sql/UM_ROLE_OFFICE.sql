@@ -1,0 +1,14 @@
+--------------------------------------------------------
+--  DDL for Table UM_ROLE_OFFICE
+--------------------------------------------------------
+
+  CREATE TABLE "UM_ROLE_OFFICE"
+   (	"ROLD_ID" VARCHAR2(4 BYTE), 
+	"OFFICE_CODE" VARCHAR2(10 BYTE)
+   );
+
+  ALTER TABLE "UM_ROLE_OFFICE" MODIFY ("ROLD_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE "UM_ROLE_OFFICE" MODIFY ("OFFICE_CODE" NOT NULL ENABLE);
+ 
+  ALTER TABLE "UM_ROLE_OFFICE" ADD CONSTRAINT "UM_ROLE_OFFICE_PK" PRIMARY KEY ("ROLD_ID", "OFFICE_CODE");

@@ -52,13 +52,25 @@
             <!-- intercept multiple urls -->
             <mvc:mapping path="/**/*.html"/>
             <mvc:mapping path="/**/*.do"/>
-            <bean id="menuInterceptor" class="com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor"/>
+            <bean class="com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <!-- intercept multiple urls -->
             <mvc:mapping path="/**/*.html"/>
             <mvc:mapping path="/**/*.do"/>
-            <bean id="permissionInterceptor" class="com.pccw.immd.adminfunc.web.interceptor.PermissionInterceptor"/>
+            <bean class="com.pccw.immd.adminfunc.web.interceptor.PermissionInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- intercept multiple urls -->
+            <mvc:mapping path="/**/*.html"/>
+            <mvc:mapping path="/**/*.do"/>
+            <bean class="com.pccw.immd.adminfunc.web.interceptor.FunctionIdResolverInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- intercept multiple urls -->
+            <mvc:mapping path="/**/*.html"/>
+            <mvc:mapping path="/**/*.do"/>
+            <bean class="com.pccw.immd.adminfunc.web.interceptor.AuditInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>  

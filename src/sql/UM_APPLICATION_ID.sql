@@ -1,0 +1,63 @@
+--------------------------------------------------------
+--  DDL for Table UM_APPLICATION_CODE
+--------------------------------------------------------
+
+  CREATE TABLE     "UM_APPLICATION_CODE"
+   (	"APP_ID" VARCHAR2(4 BYTE),
+	"CREATE_AT" TIMESTAMP (6) DEFAULT SYSDATE,
+	"MODIFY_AT" TIMESTAMP (6) DEFAULT SYSDATE,
+	"MODIFY_BY" VARCHAR2(1 BYTE),
+	"ENG_APP_NAME" VARCHAR2(480 BYTE), 
+	"CHT_APP_NAME" NVARCHAR2(50), 
+	"CHS_APP_NAME" NVARCHAR2(50), 
+	"REQUIRE_REMINDER" VARCHAR2(1 BYTE) DEFAULT 'N', 
+	"REMINDER_DAY" NUMBER(3,0), 
+	"EFFECTIVE_DATE" DATE, 
+	"UPDATE_FLAG" VARCHAR2(1 BYTE), 
+	"ACTION_TYPE" VARCHAR2(10 BYTE)
+   )  ;
+ 
+
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."APP_ID" IS 'The application id for this status code.';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."CREATE_AT" IS 'Create date time of this record';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."MODIFY_AT" IS 'Last modified date time of this record';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."MODIFY_BY" IS '"Last modified party of this record:  I - IVRS W - Web client O - Others"';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."ENG_APP_NAME" IS 'Application name in English';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."CHT_APP_NAME" IS 'Application name in Traditional Chinese';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."CHS_APP_NAME" IS 'Application name in Simplified Chinese';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."REQUIRE_REMINDER" IS 'Determine whether an appointment_reminder record should be generated when the appointment is saved';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."REMINDER_DAY" IS 'Calculate the reminder_date on the appointment_reminder table';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."EFFECTIVE_DATE" IS 'effective Date for temp table data to real table';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."UPDATE_FLAG" IS 'check for update ';
+ 
+   COMMENT ON COLUMN     "UM_APPLICATION_CODE"."ACTION_TYPE" IS 'action for temp table to real table -ADD, DELETE, UPDATE';
+ 
+   COMMENT ON TABLE     "UM_APPLICATION_CODE"  IS 'Temporary table of Application ID of Admin program';
+  
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("APP_ID" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("CREATE_AT" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("MODIFY_AT" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("MODIFY_BY" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("ENG_APP_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("CHT_APP_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("CHS_APP_NAME" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" MODIFY ("REQUIRE_REMINDER" NOT NULL ENABLE);
+ 
+  ALTER TABLE     "UM_APPLICATION_CODE" ADD CONSTRAINT "UM_APPLICATION_CODE_PK" PRIMARY KEY ("APP_ID")

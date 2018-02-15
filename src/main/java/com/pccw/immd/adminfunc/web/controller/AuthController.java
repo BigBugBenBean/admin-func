@@ -1,8 +1,11 @@
 package com.pccw.immd.adminfunc.web.controller;
 
 import com.pccw.immd.adminfunc.dto.PasswordDTO;
+import com.pccw.immd.adminfunc.service.SystemHolidayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +25,12 @@ public class AuthController {
 
     private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
 
+    private static String PASSWORD_EXPIRED = "LDAPI1120";
+
+    @Autowired
+    @Qualifier("systemHolidayService")
+    private SystemHolidayService systemHolidayService;
+
     @GetMapping(value = "/login-form.do")
     public String loginForm() {
         return "Auth/login-form";
@@ -34,10 +43,11 @@ public class AuthController {
     }
 
 
-    @GetMapping("/login-fail.html")
+    @GetMapping("/login-fail.do")
     public String loginFail(@ModelAttribute PasswordDTO passwordDTO, HttpServletRequest request, HttpSession session) {
         LOG.info("login-fail ... ");
-        String returnResult = "redirect:/AUTH/login_form.html";
+        String returnResult = "redirect:/AUTH/login_form.do";
+        request.setAttribute(SPRING_SECURITY_LAST_EXCEPTION, session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION));
         if (session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION) != null) {
             if ( isPasswordExpired(session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION)) ){
                 String loginId = getLoginId( session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION) );
@@ -47,7 +57,6 @@ public class AuthController {
                 returnResult = "auth/change-pwd";
             } else {
                 // General Error will goto error page.
-                request.setAttribute(SPRING_SECURITY_LAST_EXCEPTION, session.getAttribute(SPRING_SECURITY_LAST_EXCEPTION));
                 returnResult = "auth/login-fail";
             }
             request.setAttribute("hasError", true);
@@ -77,7 +86,7 @@ public class AuthController {
             if (ex.getCause() instanceof ITIAppException){
                 ITIAppException appEx = (ITIAppException)ex.getCause();
                 String errCode = appEx.getFaultInfo().getErrCode();
-                if (errCode.equals(LDAPI1120))
+                if (errCode.equals(PASSWORD_EXPIRED))
                     return true;
             }
         }

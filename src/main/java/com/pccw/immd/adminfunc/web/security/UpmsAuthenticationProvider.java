@@ -6,9 +6,7 @@ import com.pccw.immd.adminfunc.service.UpmsService;
 import com.pccw.immd.adminfunc.utils.MessageSourceAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -75,14 +73,21 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 
 
         try {
+//            String newPassword = "password1";
+//            upmsService.changePassword(authentication.getName(),authentication.getCredentials().toString(), newPassword);
+            UpmsUser user = upmsService.login(authentication.getName(), authentication.getCredentials().toString(), termialId);
 
-         UpmsUser user = upmsService.login(authentication.getName(), authentication.getCredentials().toString(), termialId);
             List<SimpleGrantedAuthority> authList = new ArrayList<>();
             authList.add(new SimpleGrantedAuthority("ROLE_UMPS_USER"));
-            // TODO: for complete those
+            /**
+             * Hard code all values to TRUE, no handling to Spring-Security
+             * All error from UPMS only display message to error page.
+             * If return error is "Password Expired" then togo change password flow
+             */
+
             boolean enabled = true;
             boolean accountNonLocked = true;
-            boolean accountNonExpired = true;
+            boolean accountNonExpired = true; // isNonExpired(user);
             boolean credentialsNonExpired = true;
 
             loginUser = new LoginUser(
@@ -95,6 +100,8 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
                     accountNonLocked,
                     authList);
 
+            LoginUser lu = (LoginUser)loginUser;
+            lu.setImmdToken(user.getIss3UserSignOnDTO().getImmdToken());
 
         } catch (ITIAppException | ITISysException e) {
             if (e instanceof ITIAppException) {
@@ -110,4 +117,16 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
             return loginUser;
         }
     }
+
+    /*
+    private boolean isNonExpired(UpmsUser user) {
+        Date current = new Date();
+        Calendar expiryDate = user.getIss3UserSignOnDTO().getPasswordExpiryDateTime().toGregorianCalendar();
+        expiryDate.add(Calendar.DAY_OF_YEAR, -1 * passwordExpiryDay);
+        if(current.after(expiryDate.getTime()))
+            return false;
+        return true;
+    }
+    */
+
 }

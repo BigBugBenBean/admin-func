@@ -8,15 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 
 /**
  * Created by jeff on 5/7/17.
@@ -131,7 +128,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/js/**"
         );
         web.ignoring().antMatchers(
-                "/AUTH/login-fail.html",
                 "/AUTH/login-fail.do",
                 "/AUTH/logout-result.do",
                 "/changePassword.do",

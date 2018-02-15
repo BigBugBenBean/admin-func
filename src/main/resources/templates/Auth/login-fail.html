@@ -72,14 +72,13 @@
                     </span>
 
                     <p id="loginFailContent" class="login-fail-content">
-
                         <span style=" width: '100%'" th:text="${SPRING_SECURITY_LAST_EXCEPTION?.message}"></span>
                     </p>
 
-                    <a th:href="@{/AUTH/login-form.html}">
+                    <a th:href="@{/AUTH/login-form.do}">
                         <input type="submit" value="Confirm" />
                     </a >
-                    <span th:text="${#messages.msg('umps.useridandpassword.notempty')}"></span>
+                    <!-- <span th:text="${#messages.msg('umps.useridandpassword.notempty')}"></span> -->
                 </div>
             </div>
         </div>

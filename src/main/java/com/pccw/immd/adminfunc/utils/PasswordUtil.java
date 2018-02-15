@@ -27,7 +27,7 @@ public class PasswordUtil {
     }
 
     public static void main(String arg[]) throws  NoSuchAlgorithmException{
-        String input = "password1";
+        String input = "C123456";
         String hashedValue = "";
         MessageDigest digester = MessageDigest.getInstance("SHA-256");
         digester.update(input.getBytes());

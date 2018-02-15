@@ -79,6 +79,7 @@ public class ChangePasswordController {
          String errMsg = "";
 
 //         status = CHANGE_PWD_STATUS.OLD_PWD_INCORRECT;
+//         upmsService.changePassword(loginId, oldPassword, newPassword);
 
          switch (status) {
              case CHANGE_PWD_SUCCESS: {
