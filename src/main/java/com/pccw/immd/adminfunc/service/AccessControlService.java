@@ -29,4 +29,6 @@ public interface AccessControlService {
     List<AccessControlGlobalParam> getGlobalParam();
 
     void updateGlobalParam(AccessControlGlobalParam accessControlGlobalParam);
+
+    List<AccessControlBlackList> listAllBlackList();
 }

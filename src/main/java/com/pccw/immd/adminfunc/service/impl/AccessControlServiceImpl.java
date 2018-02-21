@@ -7,9 +7,7 @@ import com.pccw.immd.adminfunc.domain.AccessControlWhiteList;
 import com.pccw.immd.adminfunc.repository.UmAccessControlBlackListRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlGlobalParamRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlWhiteListRepository;
-import com.pccw.immd.adminfunc.repository.UmAppointment;
 import com.pccw.immd.adminfunc.service.AccessControlService;
-import com.pccw.immd.adminfunc.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -46,7 +44,7 @@ public class AccessControlServiceImpl implements AccessControlService {
 
     @Override
     public void createBlackList(AccessControlBlackList accessControlBlackList) {
-
+        blackListRepository.saveAndFlush(accessControlBlackList);
     }
 
     @Override
@@ -56,7 +54,7 @@ public class AccessControlServiceImpl implements AccessControlService {
 
     @Override
     public void updateBlackList(AccessControlBlackList accessControlBlackList) {
-
+        blackListRepository.saveAndFlush(accessControlBlackList);
     }
 
     @Override
@@ -66,7 +64,7 @@ public class AccessControlServiceImpl implements AccessControlService {
 
     @Override
     public void deleteBlackList(AccessControlBlackList accessControlBlackList) {
-
+        blackListRepository.delete(accessControlBlackList);
     }
 
     @Override
@@ -77,5 +75,10 @@ public class AccessControlServiceImpl implements AccessControlService {
     @Override
     public void updateGlobalParam(AccessControlGlobalParam accessControlGlobalParam) {
 
+    }
+
+    @Override
+    public List<AccessControlBlackList> listAllBlackList() {
+        return blackListRepository.findAll();
     }
 }
