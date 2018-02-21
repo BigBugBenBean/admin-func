@@ -20,4 +20,9 @@ public class SurgeControlController {
         return "/eServices2/SurgeControl/edit-surge-control";
     }
 
+    @GetMapping(value = "/surgeControlUpdated.do")
+    public String updateSurgeControlPage() {
+        return "/eServices2/SurgeControl/surge-control-updated";
+    }
+
 }

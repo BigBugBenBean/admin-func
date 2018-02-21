@@ -9,24 +9,24 @@
 
 <div th:fragment="surgeControlFooter">
     <div>-----------------------</div>
-    <div><span>Remark:</span></div>
+    <div><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.remark')}"></span></div>
     <div>-----------------------</div>
     <div>
         <div class="flex-container">
-            <div class="flex-item-1"><span>GST</span></div>
-            <div class="flex-item-7"><span>Number of service tickets assigned in the dedicated ticket pool of an online service</span></div>
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.gst.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.gst.message')}"></span></div>
         </div>
         <div class="flex-container">
-            <div class="flex-item-1"><span>MST</span></div>
-            <div class="flex-item-7"><span>Maximum number of service tickets to be deployed for an online service</span></div>
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.mst.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.mst.message')}"></span></div>
         </div>
         <div class="flex-container">
-            <div class="flex-item-1"><span>Priority</span></div>
-            <div class="flex-item-7"><span>The ordering of the items(1 is highest)</span></div>
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.priority.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.priority.message')}"></span></div>
         </div>
         <div class="flex-container">
-            <div class="flex-item-1"><span>Clawback</span></div>
-            <div class="flex-item-7"><span>Retrieve tickets from applications with lower priority when the share ticket pool is full</span></div>
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.clawback.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.clawback.message')}"></span></div>
         </div>
     </div>
 </div>

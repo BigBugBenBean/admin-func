@@ -73,42 +73,42 @@
         <div style="padding: 1.5em; ">
 
             <div>
-                <h3>Search Criteria</h3>
+                <h3 th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.search.title')}"></h3>
                 <div class="RowSeparator"></div>
 
                 <div style="width: 30%;">
                     <div class="flex-container search-row-padding">
-                        <div class="flex-item-1">App ID</div>
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.appid')}"></span></div>
                         <div class="flex-item-1">
                             <input type="text" maxlength="10" size="10" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
-                        <div class="flex-item-1">GST</div>
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.gst')}"></span></div>
                         <div class="flex-item-1">
                             <input type="text" maxlength="10" size="10" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
-                        <div class="flex-item-1">Description</div>
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.desc')}"></span></div>
                         <div class="flex-item-1">
                             <input type="text" maxlength="10" size="10" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
-                        <div class="flex-item-1">MST</div>
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.mst')}"></span></div>
                         <div class="flex-item-1">
                             <input type="text" maxlength="10" size="10" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
-                        <div class="flex-item-1">Priority</div>
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.priority')}"></span></div>
                         <div class="flex-item-1">
                             <input type="text" maxlength="10" size="10" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
-                        <div class="flex-item-1">Clawback</div>
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.clawback')}"></span></div>
                         <div class="flex-item-1">
                             <input type="checkbox" />
                         </div>
@@ -118,7 +118,7 @@
                 <div class="flex-container">
                     <div style="flex: 10"></div>
                     <div style="flex: 1;  ">
-                        <input type="text" class="ButtonStyle search-btn" value="Search" />
+                        <input type="text" class="ButtonStyle search-btn" th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.search.btn')}" />
                     </div>
                 </div>
 

@@ -6,73 +6,18 @@
 
     <link rel="stylesheet" href="/adminfunc/css/surge-control.css"/>
 
-    <script type="application/javascript">
+    <script type="text/javascript">
         $(function () {
             let names = [
                 {
                     'appID': '500',
-                    'GST': '13/20',
+                    'GST': '20/20',
                     'Desc': '',
                     'MST': '22/30',
                     'Priority': '1',
                     'Clawback': '123'
                 }
             ];
-
-            var getSurgeFieldFirstValue = function (value) {
-                // console.log('getSurgeFieldFirstValue');
-                // console.log(value);
-
-                var tmpArr = value.split('/');
-                var first = tmpArr[0];
-
-                return first;
-            };
-
-            var getSurgeFieldSecondValue = function (value) {
-                // console.log('getSurgeFieldSecondValue');
-                // console.log(value);
-
-                var tmpArr = value.split('/');
-                var second = tmpArr[1];
-
-                return second;
-            };
-
-            var SurgeField = function (config) {
-                jsGrid.Field.call(this, config);
-            };
-
-            SurgeField.prototype = new jsGrid.Field({
-                itemTemplate: function (value, item) {
-                    var tmpArr = value.split('/');
-
-                    var first = tmpArr[0];
-                    var second = tmpArr[1];
-
-                    var div = jQuery('<div></div>');
-                    var span = jQuery('<span></span>').text(first);
-                    var slash = jQuery('<span></span>').text('/');
-                    var input = jQuery('<input />').val(second).css({ 'width': '30px' }).attr({ 'maxlength': '2' }).data('rowItem', item).on('change paste keyup', function () {
-                        var newVal = jQuery(this).val();
-                        var rowItem = jQuery(this).data('rowItem');
-                        var oldValue = rowItem['GST'];
-
-                        var first = getSurgeFieldFirstValue(oldValue);
-                        var second = getSurgeFieldSecondValue(oldValue);
-
-
-                        rowItem['GST'] = first + '/' + newVal;
-                        console.log(rowItem);
-                    });
-
-                    div.append(span).append(slash).append(input);
-                    return div;
-
-
-                }
-            });
-            jsGrid.fields.surgeField = SurgeField;
 
             let grid = $("#surgeControlGrid");
             // console.log(grid);
@@ -87,7 +32,7 @@
                     sorting: true,
                     noDataContent: 'NO data',
                     selecting: false,
-                    editing: false,
+                    editing: true,
 
                     data: names,
 
@@ -105,7 +50,7 @@
 
                     fields: [
                         { name: 'appID', title: 'App ID', type: 'text', width: 40, headerTemplate: commonHeader },
-                        { name: 'GST', title: 'GST (Usage/Assigned)', type: 'surgeField', width: 80, headerTemplate: commonHeader },
+                        { name: 'GST', title: 'GST (Usage/Assigned)', type: 'text', width: 80, headerTemplate: commonHeader },
                         { name: 'desc', title: 'Description', type: 'text', width: 50, headerTemplate: commonHeader },
                         { name: 'MST', title: 'MST (Usage/Assigned)', type: 'text', width: 80, headerTemplate: commonHeader },
                         { name: 'Priority', title: 'Priority', type: 'text', width: 40, headerTemplate: commonHeader, editable: true, edittype: 'select', editoptions: {value: "ALFKI:ALFKI;WOLZA:WOLZA"}   },
@@ -117,20 +62,27 @@
                                 return title;
                             },
                             itemTemplate: function (value, item) {
-                                // let result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+                                let result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
 
-                                var updateButton = jQuery('<button></button>>').addClass('SmallButtonStyle').data('rowItem', item).text('Update').on('click', function (e) {
-                                    var rowItem = jQuery(this).data('rowItem');
-                                    console.log(rowItem);
-                                });
+                                let str = '';
 
-                                return updateButton;
-                            },
-                            modeSwitchButton: false,
-                            editButton: false,
-                            deleteButton: false
+                                str += '<div>';
+                                str += '<input type="button" class="SmallButtonStyle" value="Update" />';
+                                str += '</div>';
+
+                                result = str;
+                                // result = result.add(str);
+
+                                return result;
+                            }
                         }
                     ]
+
+                    // ,gridComplete: function () {
+                    //     alert('gridComplete');
+                    //     console.log('gridComplete');
+                    // }
+
                 }
             )
         });
@@ -155,12 +107,10 @@
 
             <div class="flex-container" style="padding-top: 10px;">
                 <div class="flex-item-1" >
-                    <span>Share Ticket Pool(Usage/Assigned): 3067/6000</span>
+                    <span style="color: red;" th:text="${#messages.msg('umps.adminfunc.surgecontrol.update.message')}"></span>
                 </div>
                 <div class="flex-item-1" style="min-width: 320px; ">
-                    <a th:href="@{/surgeControlUpdated.do}">
-                        <input type="text" class="ButtonStyle edit-btn" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" />
-                    </a>
+                    <input type="text" class="ButtonStyle edit-btn" style="width: 250px;" th:value="${#messages.msg('umps.adminfunc.common.backtoeditconfig')}" />
                 </div>
             </div>
 

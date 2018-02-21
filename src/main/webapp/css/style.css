@@ -24,6 +24,10 @@
     font-size: 14px;
 }
 
+.round-border {
+    border-radius: 20px 20px 0 0;
+}
+
 .exit-btn {
     text-decoration: none;
     color: white;
