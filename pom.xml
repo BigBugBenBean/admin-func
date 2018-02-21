@@ -19,6 +19,7 @@
     </parent>
 
     <properties>
+        <profileId>local</profileId>
         <!--<build.war.name>adminfunc</build.war.name>-->
         <springframework.version>4.3.0.RELEASE</springframework.version>
         <pccw-util>0.0.6-SNAPSHOT</pccw-util>
@@ -77,7 +78,23 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
@@ -131,16 +148,9 @@
             <artifactId>lombok</artifactId>
             <version>1.16.18</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -261,6 +271,24 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <targetPath>${project.build.outputDirectory}/</targetPath>
+                <excludes>
+                    <exclude>env/</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/env/${profileId}</directory>
+                <targetPath>${project.build.outputDirectory}/</targetPath>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -355,31 +383,35 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.eclipse.jetty</groupId>
-                        <artifactId>jetty-maven-plugin</artifactId>
-                        <version>9.4.8.v20171121</version>
-                        <configuration>
-                            <webApp>
-                                <contextPath>/adminfunc</contextPath>
-                            </webApp>
-                            <scanTargetPatterns>
-                                <scanTargetPattern>
-                                    <directory>src/main/resources</directory>
-                                    <includes>
-                                        <include>**/*.html</include>
-                                        <include>**/*.properties</include>
-                                        <include>**/*.xml</include>
-                                    </includes>
-                                </scanTargetPattern>
-                            </scanTargetPatterns>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-jetty</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
         </profile>
+
+        <!-- for build env -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileId>dev</profileId>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <profileId>uat</profileId>
+            </properties>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <profileId>prd</profileId>
+            </properties>
+        </profile>
+
         <profile>
             <id>withModule</id>
             <!--<build>
