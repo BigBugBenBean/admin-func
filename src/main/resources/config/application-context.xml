@@ -11,6 +11,7 @@
     <context:property-placeholder location="
             classpath:properties/upms.properties,
             classpath:properties/rest.properties,
+            classpath:properties/spring-security.properties,
             classpath:properties/web.properties,
             classpath:properties/database.properties"
     />
@@ -22,5 +23,6 @@
     <import resource="classpath:config/web-context.xml"/>
     <import resource="classpath:config/database-context.xml"/>
 
+    <!-- Don't remove, it is for import another Admin Function -->
     <import resource="classpath*:config/*-application-context.xml"/>
 </beans>

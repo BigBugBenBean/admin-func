@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8"></meta>
@@ -13,6 +13,7 @@
     <script src="/adminfunc/js/lib/moment.min.js"></script>
 
     <script src="/adminfunc/js/common.js"></script>
+
     <script type="text/javascript"  >
 
         jQuery(document).ready(function () {
@@ -25,17 +26,6 @@
 
 <body>
 <div>
-
-    <!--<h3 th:if="${userDTO}">-->
-    <!--loginId: <span th:text="${userDTO.loginId}"></span><br/>-->
-    <!--password: <span th:text="${userDTO.password}"></span><br/>-->
-    <!--tilte: <span th:text="${userDTO.errorTitle}"></span><br/>-->
-    <!--error: <span th:text="${userDTO.errorMessage}"></span><br/>-->
-    <!--</h3>-->
-
-
-    <!--<h3 th:text="${userDTO}"></h3>-->
-
     <div class="flex-container">
         <div class="flex-item-1 header-item-left">
             <span>e-Services-2</span>
@@ -47,11 +37,11 @@
                 </span>
         </div>
     </div>
-    <div class="grid-container round-border">
+    <div class="grid-container">
         <div class="grid-header">&nbsp;</div>
         <div class="flex-container grid-nav-container">
             <div class="flex-item-1 nav-title-left">
-                <span>Error Page</span>
+                <span style=" width: '100%'" >Error Page</span>
             </div>
             <div></div>
             <div class="flex-item-1 nav-title-right">
@@ -64,18 +54,12 @@
                         <b>Warning</b>
                     </span>
 
-                <p th:if="${status}">
-                    <b>Response Status:</b> <span th:text="${status}">status-code</span>
-                </p>
-
                 <p id="loginFailContent" class="login-fail-content">
-                    <b>Error Message:</b> <span th:if="${message} and ${message.length() != 0}"
-                                        th:text="${message}">message ...</span>
+                     <b th:text="${#messages.msg('web.auth.nopermission')}"></b>
                 </p>
-
-                <a th:href="@{/AUTH/login-form.do}">
-                    <input type="submit" value="Login Page" />
-                </a >
+                <a th:href="@{/landing}">
+                    <input type="button" value="Go to Landing Page" />
+                </a>
             </div>
         </div>
     </div>

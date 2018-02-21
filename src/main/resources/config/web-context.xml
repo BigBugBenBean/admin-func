@@ -12,7 +12,10 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- For common jar -->
-    <context:component-scan base-package="com.pccw.immd.commons"/>
+    <context:component-scan base-package="com.pccw.immd.commons">
+        <!-- The common exception handling is for RESTful -->
+        <context:exclude-filter type="regex" expression="com\.pccw\.immd\.commons\.errors\..*"/>
+    </context:component-scan>
     <!-- For HTML controller -->
     <context:component-scan base-package="com.pccw.immd.adminfunc.web.controller"/>
 

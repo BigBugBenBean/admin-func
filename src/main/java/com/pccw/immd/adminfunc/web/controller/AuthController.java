@@ -1,11 +1,8 @@
 package com.pccw.immd.adminfunc.web.controller;
 
 import com.pccw.immd.adminfunc.dto.PasswordDTO;
-import com.pccw.immd.adminfunc.service.SystemHolidayService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,15 +24,15 @@ public class AuthController {
 
     private static String PASSWORD_EXPIRED = "LDAPI1120";
 
-    @Autowired
-    @Qualifier("systemHolidayService")
-    private SystemHolidayService systemHolidayService;
-
     @GetMapping(value = "/login-form.do")
     public String loginForm() {
         return "Auth/login-form";
     }
 
+    @GetMapping(value = "/no-permission.do")
+    public String noPermission() {
+        return "Auth/no-permission";
+    }
 
     @RequestMapping(value = "/logout-result.do", method = RequestMethod.GET)
     public String logoutResult() {

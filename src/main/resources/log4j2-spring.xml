@@ -20,7 +20,27 @@
             <AppenderRef ref="webappFileAppender"/>
         </Async>
     </Appenders>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${sys:LOG_PATTERN}" />
+        </Console>
+    </Appenders>
     <Loggers>
+        <!-- copy from "C:\Users\Dell\.m2\repository\org\springframework\boot\spring-boot\1.5.9.RELEASE\spring-boot-1.5.9.RELEASE.jar!\org\springframework\boot\logging\log4j2\log4j2-file.xml" -->
+        <Logger name="org.apache.catalina.startup.DigesterFactory" level="error" />
+        <Logger name="org.apache.catalina.util.LifecycleBase" level="error" />
+        <Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn" />
+        <logger name="org.apache.sshd.common.util.SecurityUtils" level="warn"/>
+        <Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn" />
+        <Logger name="org.crsh.plugin" level="warn" />
+        <logger name="org.crsh.ssh" level="warn"/>
+        <Logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="error" />
+        <Logger name="org.hibernate.validator.internal.util.Version" level="warn" />
+        <logger name="org.springframework.boot.actuate.autoconfigure.CrshAutoConfiguration" level="warn"/>
+        <logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn"/>
+        <logger name="org.thymeleaf" level="warn"/>
+
+        <!-- Custom Logging level -->
         <Logger name="org.hibernate.validator.internal.util.Version" level="warn" />
         <Logger name="org.apache.coyote.http11.Http11NioProtocol" level="warn" />
         <Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn" />
@@ -30,6 +50,7 @@
 
         <Root level="info">
             <AppenderRef ref="Async"/>
+            <AppenderRef ref="Console" />
         </Root>
     </Loggers>
 </Configuration>
