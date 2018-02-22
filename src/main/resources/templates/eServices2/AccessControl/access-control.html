@@ -4,24 +4,52 @@
     <meta charset="UTF-8"></meta>
     <title>e-Services Admin Function</title>
 
+    <!--<script type="text/javascript" th:inline="javascript" th:if="${accessControlDTO}" >-->
+        <!--/*<![CDATA[*/-->
 
-    <script type="text/javascript">
+
+        <!--var accessControlList = [[${accessControlDTO.accessControlList}]];-->
+
+
+        <!--var accessControlStr = 'accessControlList: ' + accessControlList.length;-->
+        <!--// var str = 'oldPassword: ' + oldPassword + ' , newPassword: ' + newPassword + ' , confirmNewPassword: ' + confirmNewPassword;-->
+        <!--// var err = 'errorCode: ' + errorCode + ' , errorMessage: ' + errorMessage;-->
+
+        <!--console.log(accessControlStr);-->
+
+        <!--/*]]>*/-->
+    <!--</script>-->
+
+    <script type="text/javascript" th:inline="javascript" th:if="${accessControlDTO}">
+        /*<![CDATA[*/
+
         $(document).ready(function () {
-            let names = [
-                {
-                    'Effective Date': '13/02/2010 00:00:00',
-                    'To': '01/01/2099 00:00:00',
-                    'Name': '',
-                    'White/Black': 'White',
-                    'Channel': 'W',
-                    'IP/Telephone Number': '10.26.171.83'
-                }
-            ];
+            var list = [];
+
+            var accessControlList = [[${accessControlDTO.accessControlList}]];
+
+            if (isNotEmptyNullUndfined(accessControlList) && accessControlList.length) {
+                jQuery.each(accessControlList, function (index, object) {
+                   var fromDate = new Date(object['effectDateFrom']);
+                   var toDate = new Date(object['effectDateTo']);
+                   var fromDateFormatted =  moment().format('DD/MM/YYYY HH:mm:ss', fromDate);
+                    var toDateFormatted = moment().format('DD/MM/YYYY HH:mm:ss', toDate);
+
+                    var newObj = {
+                        'Effective Date': fromDateFormatted,
+                        'To': toDateFormatted,
+                        'Name': object['acName'],
+                        'White/Black': '',
+                        'Channel': object['channel'],
+                        'IP/Telephone Number': object['acIp']
+                    };
+
+                    list.push(newObj);
+                });
+            }
 
             let grid = $("#accessControlGrid");
             // console.log(grid);
-
-
 
             grid.jsGrid(
                 {
@@ -32,7 +60,7 @@
                     noDataContent: 'NO data',
                     selecting: false,
 
-                    data: names,
+                    data: list,
 
                     fields: [
                         { name: 'Effective Date', type: 'text', width: 60, headerTemplate: commonHeader },
@@ -71,6 +99,8 @@
 
 
         });
+
+        /*]]>*/
     </script>
 
 </head>

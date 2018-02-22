@@ -128,3 +128,6 @@ function updateNavTitle() {
     $('#rmSubCat').html(rmSelectedSubCat);
 }
 
+function isNotEmptyNullUndfined(obj) {
+    return ( (obj != null) && (obj !== '') && (obj !== 'undefined') );
+}
