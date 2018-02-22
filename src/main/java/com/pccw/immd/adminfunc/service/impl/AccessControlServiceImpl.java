@@ -8,13 +8,11 @@ import com.pccw.immd.adminfunc.repository.UmAccessControlBlackListRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlGlobalParamRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlWhiteListRepository;
 import com.pccw.immd.adminfunc.service.AccessControlService;
-import com.pccw.immd.adminfunc.service.AppointmentService;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,7 +41,6 @@ public class AccessControlServiceImpl implements AccessControlService {
     private UmAccessControlGlobalParamRepository globalParamRepository;
 
     @Override
-    @Transactional
     public List<AccessControl> listAll() {
         Order order = Order.asc("acId");
         Session session = em.unwrap(Session.class);
@@ -51,7 +48,6 @@ public class AccessControlServiceImpl implements AccessControlService {
         List<AccessControl> accessControlList = session
                 .createCriteria(AccessControl.class).addOrder(order)
                 .list();
-
         accessControlList.sort(new Comparator<AccessControl>() {
             @Override
             public int compare(AccessControl ac1, AccessControl ac2) {

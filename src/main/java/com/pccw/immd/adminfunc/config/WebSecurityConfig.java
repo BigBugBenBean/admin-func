@@ -72,18 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("upmsAuthenticationProvider")
     private AuthenticationProvider upmsAuthenticationProvider;
 
-
-
-    protected void configure1(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(loginUrl).permitAll();
