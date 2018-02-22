@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface AccessControlService {
 
-    List<AccessControl> getByEnable();
+    List<AccessControl> listAll();
 
     void createWhiteList(AccessControlWhiteList accessControlWhiteList);
 

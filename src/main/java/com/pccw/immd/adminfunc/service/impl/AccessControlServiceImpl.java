@@ -8,17 +8,27 @@ import com.pccw.immd.adminfunc.repository.UmAccessControlBlackListRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlGlobalParamRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlWhiteListRepository;
 import com.pccw.immd.adminfunc.service.AccessControlService;
+import com.pccw.immd.adminfunc.service.AppointmentService;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Created by Dell on 13/2/2018.
  */
-@Service("accessControlServiceImpl.eservice2")
+@Service("accessControlService.eservice2")
 public class AccessControlServiceImpl implements AccessControlService {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     @Qualifier("umAccessControlBlackListRepository.eservice2")
@@ -33,8 +43,23 @@ public class AccessControlServiceImpl implements AccessControlService {
     private UmAccessControlGlobalParamRepository globalParamRepository;
 
     @Override
-    public List<AccessControl> getByEnable() {
-        return null;
+    @Transactional
+    public List<AccessControl> listAll() {
+        Order order = Order.asc("acId");
+        Session session = em.unwrap(Session.class);
+
+        List<AccessControl> accessControlList = session
+                .createCriteria(AccessControl.class).addOrder(order)
+                .list();
+
+        accessControlList.sort(new Comparator<AccessControl>() {
+            @Override
+            public int compare(AccessControl ac1, AccessControl ac2) {
+                return ac1.getAcId() < ac2.getAcId() ? -1 :
+                        ac1.getAcId() == ac2.getAcId() ? 0 : 1;
+            }
+        });
+        return accessControlList;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.pccw.immd.adminfunc.web.controller;
 
-import com.pccw.immd.adminfunc.domain.AccessControlBlackList;
+import com.pccw.immd.adminfunc.domain.AccessControl;
 import com.pccw.immd.adminfunc.service.AccessControlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +17,11 @@ public class AccessControlController {
     private static final Logger LOG = LoggerFactory.getLogger(AccessControlController.class);
 
     @Autowired
-    @Qualifier("accessControlServiceImpl.eservice2")
-    private AccessControlService accessControlService;
+    @Qualifier("accessControlService.eservice2")   private AccessControlService accessControlService;
 
     @GetMapping(value = "/accessControl.do")
     public String accessControlPage() {
-        List<AccessControlBlackList> list = accessControlService.listAllBlackList();
+        List<AccessControl> list = accessControlService.listAll();
 
         return "/eServices2/AccessControl/access-control";
     }
