@@ -1,11 +1,14 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
+import com.pccw.immd.adminfunc.service.MenuService.MenuItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.MENU_ROOT_KEY;
 
 /** 
  ** 
@@ -31,6 +34,16 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
             response.sendRedirect(request.getContextPath() +"/AUTH/no-permission.do");
             return false;
         }
+
+        resolveMenuAccessRight(request);
         return true;
+    }
+
+    /**
+     * TODO: Here should check the menu access right with database / UPMS return values
+     */
+    private void resolveMenuAccessRight(HttpServletRequest request) {
+        MenuItem applicationMenu = (MenuItem)request.getAttribute( MENU_ROOT_KEY );
+
     }
 }

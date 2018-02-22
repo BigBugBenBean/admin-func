@@ -19,8 +19,8 @@
         ">
 
     <!-- For RESful controller -->
-    <context:component-scan base-package="com.pccw.immd.adminfunc.service.impl"/>
     <context:component-scan base-package="com.pccw.immd.adminfunc.ws.interceptor"/>
+
     <http-conf:conduit name="*.http-conduit">
         <!--<http-conf:client ProxyServer="${proxy.server}" ProxyServerPort="${proxy.port}" />-->
         <http-conf:tlsClientParameters>

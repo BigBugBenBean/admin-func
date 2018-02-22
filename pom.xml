@@ -46,6 +46,9 @@
         <javax.servlet.version>3.1.0</javax.servlet.version>
         <javax.jsp.version>2.3.0</javax.jsp.version>
         <!-- J2EE 7 lib END -->
+
+        <!-- Testing -->
+        <testng.version>6.8.14</testng.version>
     </properties>
     <dependencies>
 
@@ -58,6 +61,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
             <!--<version>1.4.4.RELEASE</version>-->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
 

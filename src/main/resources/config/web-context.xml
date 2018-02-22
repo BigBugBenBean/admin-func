@@ -19,6 +19,9 @@
     <!-- For HTML controller -->
     <context:component-scan base-package="com.pccw.immd.adminfunc.web.controller"/>
 
+    <!-- For Backend service -->
+    <context:component-scan base-package="com.pccw.immd.adminfunc.service.impl"/>
+
     <!-- Config for static load first -->
     <!--<mvc:resources mapping="*.html" location="/" />-->
     <!--<mvc:resources order="0" mapping="index.html" location="index.html"/>-->
@@ -68,6 +71,12 @@
             <mvc:mapping path="/**/*.html"/>
             <mvc:mapping path="/**/*.do"/>
             <bean class="com.pccw.immd.adminfunc.web.interceptor.FunctionIdResolverInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- intercept multiple urls -->
+            <mvc:mapping path="/**/*.html"/>
+            <mvc:mapping path="/**/*.do"/>
+            <bean class="com.pccw.immd.adminfunc.web.interceptor.CommonVariableInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <!-- intercept multiple urls -->

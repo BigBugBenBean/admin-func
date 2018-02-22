@@ -44,7 +44,7 @@
                     <div class="main-menu">
                         <span style="margin-left: 30px;"></span>
 
-                        <span th:each="item, idx : ${ROOT.childern}">
+                        <span th:each="item, idx : ${ROOT.child}">
                             <input type="radio" id="main-tab-" th:attrappend="id=${idx.index + 1}" name="main-tabs" checked="checked"  />
                             <label for="main-tab-" th:attrappend="for=${idx.index + 1}" style="" url="${item.url}"
                                    th:text="${item.label}" th:onclick="'navigatePage('+${idx.index}+');'"  ></label>
