@@ -90,7 +90,7 @@ public class AccessControlServiceImpl implements AccessControlService {
 
     @Override
     public List<AccessControlGlobalParam> getGlobalParam() {
-        return null;
+        return globalParamRepository.findAll();
     }
 
     @Override

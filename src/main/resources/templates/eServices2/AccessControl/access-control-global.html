@@ -6,10 +6,14 @@
 
     <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
 
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript" th:if="${accessControlDTO}">
+        /*<![CDATA[*/
+
         $(document).ready(function () {
 
         });
+
+        /*]]>*/
     </script>
 
 </head>
@@ -20,84 +24,106 @@
 
     <div layout:fragment="content">
         <div style="padding: 1.5em;">
-            <h3>Global Parameters</h3>
+            <form method="post" th:action="@{/saveAccessControlGlobalParams.do}">
+                <h3>Global Parameters</h3>
 
-            <div>
-                <div class="RowSeparator"></div>
-                <div class="flex-container param-container">
-                    <div class="param-item-left">Whitelist</div>
-                    <div class="param-item-right">
-                        <input type="radio" name="whitelist" value="" checked="checked">
-                        <span class="item-margin-right">Enable</span>
-                        </input>
-                        <input type="radio" name="whitelist" value="">
-                        <span>Disable</span>
-                        </input>
-                    </div>
-                </div>
-                <div class="RowSeparator"></div>
-                <div class="flex-container param-container">
-                    <div class="param-item-left">Blacklist</div>
-                    <div class="param-item-right">
-                        <input type="radio" name="blacklist" value="" checked="checked">
-                        <span class="item-margin-right">Enable</span>
-                        </input>
-                        <input type="radio" name="blacklist" value="">
-                        <span>Disable</span>
-                        </input>
-                    </div>
-                </div>
-                <div class="RowSeparator"></div>
-                <div class="flex-container param-container">
-                    <div class="param-item-left">Counter Blocking</div>
-                    <div class="param-item-right">
-                        <input type="radio" name="counterBlocking" value="" checked="checked">
-                        <span class="item-margin-right">Enable</span>
-                        </input>
-                        <input type="radio" name="counterBlocking" value="">
-                        <span>Disable</span>
-                        </input>
-                    </div>
-                </div>
-                <div class="RowSeparator"></div>
-                <div class="flex-container param-container">
-                    <div class="param-item-left">Maximum No. of Transactions Allowed</div>
-                    <div class="param-item-right">
-                        <input class="input-box" type="text" maxlength="10" value="1000"></input>
-                    </div>
-                </div>
-                <div class="RowSeparator"></div>
-                <div class="flex-container param-container">
-                    <div class="param-item-left">No. of Days for Counting the Accumulated Transactions</div>
-                    <div class="param-item-right">
-                        <input class="input-box" type="text" maxlength="10" value="100"></input>
-                    </div>
-                </div>
-                <div class="RowSeparator"></div>
-                <div class="flex-container param-container">
-                    <div class="param-item-left">Maximum No. of Appointments Allowed</div>
-                    <div class="param-item-right">
-                        <input class="input-box" type="text" maxlength="10" value="100"></input>
-                    </div>
-                </div>
-                <div class="RowSeparator"></div>
-                <div class="flex-container param-container">
-                    <div class="param-item-left">No. of Days for Counting the Accumulated Appointments</div>
-                    <div class="param-item-right">
-                        <input class="input-box" type="text" maxlength="10" value="100"></input>
-                    </div>
-                </div>
-                <div class="RowSeparator"></div>
-            </div>
+                <div>
+                    <div class="RowSeparator"></div>
 
-            <div style=" float: right; padding-top: 1em;">
-                <a th:href="@{/accessControlGlobalSuccess.do}">
-                    <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
-                </a>
-                <a th:href="@{/accessControl.do}">
-                    <input type="text" value="Cancel" class="ButtonStyle submit-button" />
-                </a>
-            </div>
+                    <div th:each="item : ${accessControlDTO.accessControlGlobalParamList}">
+                        <div th:switch="${item.key}">
+                            <div th:case="'WHITE_LIST_ACTIVATE'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.whitelist')}"></div>
+                                    <div class="param-item-right">
+                                        <input type="radio" name="whitelist" checked="checked" th:checked="${item.value}" >
+                                        <span class="item-margin-right">Enable</span>
+                                        </input>
+                                        <input type="radio" name="whitelist" th:checked="${!item.value}" >
+                                        <span>Disable</span>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'BLACK_LIST_ACTIVATE'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.blacklist')}"></div>
+                                    <div class="param-item-right">
+                                        <input type="radio" name="blacklist" value="" th:checked="${item.value}" >
+                                        <span class="item-margin-right">Enable</span>
+                                        </input>
+                                        <input type="radio" name="blacklist" value="" th:checked="${!item.value}">
+                                        <span>Disable</span>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'COUNTER_BLOCKING_ACTIVATE'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.counterblocking')}"></div>
+                                    <div class="param-item-right">
+                                        <input type="radio" name="counterBlocking" value="" th:checked="${item.value}" >
+                                        <span class="item-margin-right">Enable</span>
+                                        </input>
+                                        <input type="radio" name="counterBlocking" value="" th:checked="${!item.value}" >
+                                        <span>Disable</span>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_TRANS'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.maxNumOfTran')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_TRANS_PERIOD'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.tranNumOfDay')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_APM'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.maxNumOfAppoint')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_APM_PERIOD'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.appointNumOfDay')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style=" float: right; padding-top: 1em;">
+                    <!--<a th:href="@{/accessControlGlobalSuccess.do}">-->
+                        <input type="submit" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                    <!--</a>-->
+                    <a th:href="@{/accessControl.do}">
+                        <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 

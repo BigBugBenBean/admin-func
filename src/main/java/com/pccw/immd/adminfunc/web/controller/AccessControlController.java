@@ -1,6 +1,7 @@
 package com.pccw.immd.adminfunc.web.controller;
 
 import com.pccw.immd.adminfunc.domain.AccessControl;
+import com.pccw.immd.adminfunc.domain.AccessControlGlobalParam;
 import com.pccw.immd.adminfunc.dto.AccessControlDTO;
 import com.pccw.immd.adminfunc.service.AccessControlService;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -33,8 +35,20 @@ public class AccessControlController {
     }
 
     @GetMapping(value = "/accessControlGlobal.do")
-    public String accessControlGlobalPage() {
+    public String accessControlGlobalPage(@ModelAttribute AccessControlDTO accessControlDTO) {
+        List<AccessControlGlobalParam> params = accessControlService.getGlobalParam();
+
+        if (params.size() > 0) {
+            accessControlDTO.setAccessControlGlobalParamList(params);
+        }
+
         return "/eServices2/AccessControl/access-control-global";
+    }
+
+    @PostMapping(value = "/saveAccessControlGlobalParams.do")
+    public String saveAccessControlGlobalParams() {
+
+        return "/eServices2/AccessControl/access-control-global-success";
     }
 
     @GetMapping(value = "/accessControlGlobalSuccess.do")
