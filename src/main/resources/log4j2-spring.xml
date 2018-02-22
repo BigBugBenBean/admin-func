@@ -48,6 +48,10 @@
         <Logger name="util.itifwk.immd" level="debug" />
         <Logger name="ws.upms.immd" level="debug" />
 
+        <logger name="org.springframework.transaction" level="debug"/>
+        <logger name="org.springframework.transaction.interceptor" level="trace"/>
+        <logger name="org.springframework.orm.jpa" level="trace"/>
+
         <Root level="info">
             <AppenderRef ref="Async"/>
             <AppenderRef ref="Console" />
