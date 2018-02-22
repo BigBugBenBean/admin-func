@@ -1,19 +1,25 @@
 package com.pccw.immd.adminfunc.service.impl;
 
 import com.pccw.immd.adminfunc.service.MenuService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Properties;
 
 @Service ("menuService.eservice2")
 public class MenuServiceImpl implements MenuService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MenuServiceImpl.class);
+
 
     private static final String MENU_DELIMITER = ".";
 
@@ -26,15 +32,39 @@ public class MenuServiceImpl implements MenuService {
     private String landingUrl;
 
     public MenuItem buildMenuTree() throws IOException {
-        PropertiesFactoryBean menuPropertiesFile = new PropertiesFactoryBean();
-        menuPropertiesFile.setLocation(new ClassPathResource(propertiesFilePath));
-        menuPropertiesFile.afterPropertiesSet();
+        Map<String, String> mapping = getFromFile(propertiesFilePath);
         MenuItem root = new MenuItem(null, "ROOT", landingUrl);
-        formMenuTree(root, menuPropertiesFile.getObject());
+        formMenuTree(root, mapping);
+
+        LOG.info("Menu Generation Completed.");
         return root;
     }
 
-    private void formMenuTree(MenuItem root, Properties menuProperties ){
+    private Map<String,String> getFromFile(String propertiesFilePath) {
+        Map<String, String> mapping = new LinkedHashMap<>();
+        try (
+                FileReader fr = new FileReader(new ClassPathResource(propertiesFilePath).getFile());
+                BufferedReader br = new BufferedReader(fr);
+            ) {
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null ) {
+                if (sCurrentLine.trim().length() == 0
+                        || sCurrentLine.startsWith("#")
+                        || sCurrentLine.indexOf("=") == -1)
+                    continue;
+                String[] keyValue = sCurrentLine.split("=");
+                if ( keyValue.length > 0 )
+                    mapping.put(keyValue[0], keyValue.length > 1 ? keyValue[1] : "");
+            }
+
+        } catch (IOException e) {
+            LOG.info("Generate Menu Error.");
+        }
+        return mapping;
+    }
+
+    private void formMenuTree(MenuItem root, Map<String, String> menuProperties ){
         Map<String, MenuItem> allMenu = new HashMap<>();
         allMenu.put(root.getLabel(), root);
 
@@ -50,7 +80,7 @@ public class MenuServiceImpl implements MenuService {
         }
     }
 
-    private MenuItem getMenuItem(Map<String, MenuItem> allMenu, MenuItem parent, String key, Properties menuProperties){
+    private MenuItem getMenuItem(Map<String, MenuItem> allMenu, MenuItem parent, String key, Map<String, String> menuProperties){
         if (allMenu.containsKey(key))
             return allMenu.get(key);
 
@@ -59,18 +89,18 @@ public class MenuServiceImpl implements MenuService {
             String[] labels = label.split(MENU_DELIMITER_REG);
             label = labels[labels.length - 1];
         }
-        MenuItem menu = new MenuItem(parent, label, menuProperties.getProperty(key));
+        MenuItem menu = new MenuItem(parent, label, menuProperties.get(key));
         allMenu.put(key, menu);
         return menu;
     }
 
-    private MenuItem formFirstLevel(Map<String, MenuItem> allMenu, MenuItem root, String key, Properties menuProperties ){
+    private MenuItem formFirstLevel(Map<String, MenuItem> allMenu, MenuItem root, String key, Map<String, String> menuProperties ){
         MenuItem menu = getMenuItem(allMenu, root, key, menuProperties);
         setChildern(allMenu, menu, key, menuProperties);
         return menu;
     }
 
-    private void setChildern(Map<String, MenuItem> allMenu, MenuItem parentMenu, String parentKey, Properties menuProperties) {
+    private void setChildern(Map<String, MenuItem> allMenu, MenuItem parentMenu, String parentKey, Map<String, String> menuProperties) {
         for (Object key : menuProperties.keySet()){
             String keyStr = (String)key;
             if ( !keyStr.equals(parentKey) && keyStr.startsWith(parentKey) && keyStr.lastIndexOf(MENU_DELIMITER) == parentKey.length()){
@@ -81,7 +111,7 @@ public class MenuServiceImpl implements MenuService {
         }
     }
 
-    private MenuItem formChildLevel(Map<String, MenuItem> allMenu, String parentKey, String key, Properties menuProperties ){
+    private MenuItem formChildLevel(Map<String, MenuItem> allMenu, String parentKey, String key, Map<String, String> menuProperties ){
         MenuItem parent = allMenu.get(parentKey);
         MenuItem menu = getMenuItem(allMenu, parent, key, menuProperties);
         return menu;
