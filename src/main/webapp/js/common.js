@@ -96,28 +96,55 @@ function onMainCatSelected(cat) {
             break;
         }
     }
-    // $.post({
-    //     url: '/menu',
-    // });
 }
 
-function navigatePage(page) {
-    // console.log('navigatePage');
-    console.log('navigatePage: ' + page);
+function createThymeleafForm(method, path, inputParams) {
+    var form = jQuery('<form style="display: none;" method="method" th:action="@{' + path + '}"></form>');
 
+    jQuery.each(inputParams, function (key, value) {
+        console.log('key: ' + key + ' , value: ' + value);
+
+        var input = jQuery('<input name="' + key + '" value="' + value + '" />');
+        form.append(input);
+    });
+
+    return form;
+}
+
+function getContextPath() {
     var link = window.location.href;
-    console.log('link: ' + link);
-
 
     var tmpArr = link.split('://');
     var http = tmpArr[0];
     var pathArr = tmpArr[1].split('/');
+    var contextPath = http + '://' + pathArr[0] + '/' + pathArr[1];
+
+    return contextPath;
+}
+
+function navigatePage(page, hasValue) {
+    // console.log('navigatePage');
+    console.log('navigatePage_hasVal: ' + hasValue + ' , page: ' + page);
+
+    var append = '';
+    if (hasValue == true) {
+        append = '#' + page;
+    }
+
+    // var link = window.location.href;
+    // console.log('link: ' + link);
+    //
+    // var tmpArr = link.split('://');
+    // var http = tmpArr[0];
+    // var pathArr = tmpArr[1].split('/');
+
+    var contextPath = getContextPath();
 
     var menu = 'landing';
-    var contextPath = http + '://' + pathArr[0] + '/' + pathArr[1] + '/' + menu + '#' + page;
-    console.log(contextPath);
+    var path = contextPath + '/' + menu + append;
+    console.log(path);
 
-    window.location.href = contextPath;
+    window.location.href = path;
     // window.location.href = "http://localhost:8080/adminfunc/landing";
 
 }

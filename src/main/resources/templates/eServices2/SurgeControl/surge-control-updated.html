@@ -32,7 +32,7 @@
                     sorting: true,
                     noDataContent: 'NO data',
                     selecting: false,
-                    editing: true,
+                    editing: false,
 
                     data: names,
 
@@ -54,28 +54,28 @@
                         { name: 'desc', title: 'Description', type: 'text', width: 50, headerTemplate: commonHeader },
                         { name: 'MST', title: 'MST (Usage/Assigned)', type: 'text', width: 80, headerTemplate: commonHeader },
                         { name: 'Priority', title: 'Priority', type: 'text', width: 40, headerTemplate: commonHeader, editable: true, edittype: 'select', editoptions: {value: "ALFKI:ALFKI;WOLZA:WOLZA"}   },
-                        { name: 'Clawback', title: 'Clawback', type: "checkbox", editType: 'checkbox', width: 80, headerTemplate: commonHeader, editoptions: { value: 'true:false' }, formatter: 'checkbox', formatoptions: {disabled: false } },
-                        {
-                            type: 'control',
-                            headerTemplate: function () {
-                                let title = '<span></span>';
-                                return title;
-                            },
-                            itemTemplate: function (value, item) {
-                                let result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
-
-                                let str = '';
-
-                                str += '<div>';
-                                str += '<input type="button" class="SmallButtonStyle" value="Update" />';
-                                str += '</div>';
-
-                                result = str;
-                                // result = result.add(str);
-
-                                return result;
-                            }
-                        }
+                        { name: 'Clawback', title: 'Clawback', type: "checkbox", editType: 'checkbox', width: 80, headerTemplate: commonHeader, editoptions: { value: 'true:false' }, formatter: 'checkbox', formatoptions: {disabled: false } }
+                        // {
+                        //     type: 'control',
+                        //     headerTemplate: function () {
+                        //         let title = '<span></span>';
+                        //         return title;
+                        //     },
+                        //     itemTemplate: function (value, item) {
+                        //         let result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+                        //
+                        //         let str = '';
+                        //
+                        //         str += '<div>';
+                        //         str += '<input type="button" class="SmallButtonStyle" value="Update" />';
+                        //         str += '</div>';
+                        //
+                        //         result = str;
+                        //         // result = result.add(str);
+                        //
+                        //         return result;
+                        //     }
+                        // }
                     ]
 
                     // ,gridComplete: function () {
@@ -98,8 +98,6 @@
     <div layout:fragment="content" style="">
         <div style="padding: 1.5em; ">
 
-
-
             <div style=" margin-top: 1.5em; width: 100%; height: 200px;">
                 <div id="surgeControlGrid"></div>
             </div>
@@ -110,7 +108,9 @@
                     <span style="color: red;" th:text="${#messages.msg('umps.adminfunc.surgecontrol.update.message')}"></span>
                 </div>
                 <div class="flex-item-1" style="min-width: 320px; ">
-                    <input type="text" class="ButtonStyle edit-btn" style="width: 250px;" th:value="${#messages.msg('umps.adminfunc.common.backtoeditconfig')}" />
+                    <a th:href="@{/editSurgeControl.do}">
+                        <input type="text" class="ButtonStyle edit-btn" style="width: 250px;" th:value="${#messages.msg('umps.adminfunc.common.backtoeditconfig')}" />
+                    </a>
                 </div>
             </div>
 

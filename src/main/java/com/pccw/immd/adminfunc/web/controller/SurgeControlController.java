@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class SurgeControlController {
@@ -20,7 +21,7 @@ public class SurgeControlController {
         return "/eServices2/SurgeControl/edit-surge-control";
     }
 
-    @GetMapping(value = "/surgeControlUpdated.do")
+    @PostMapping(value = "/surgeControlUpdated.do")
     public String updateSurgeControlPage() {
         return "/eServices2/SurgeControl/surge-control-updated";
     }
