@@ -241,6 +241,7 @@
                     <span>Date:
                     <b id="todayDate"></b>
                 </span>
+                    <a th:href="@{/noPermission.do}">No Permission</a>
                 </div>
             </div>
             <div class="grid-container " style="border-radius: 20px 20px 0px 0px; height: 400px;">
@@ -304,7 +305,7 @@
                                                 <a th:href="@{/accessControl.do}" class="func-bullet">Access Control</a>
                                             </li>
                                             <li class="func-child">
-                                                <a class="func-bullet">Audit Log</a>
+                                                <a th:href="@{/eservices2/auditLogSearchForm.do}" class="func-bullet">Audit Log</a>
                                             </li>
                                             <li class="func-child">
                                                 <a class="func-bullet">Schedule Job</a>

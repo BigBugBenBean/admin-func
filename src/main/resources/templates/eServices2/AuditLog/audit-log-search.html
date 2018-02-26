@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" th:href="@{/css/access-control.css}" />
+
+    <script type="text/javascript" th:inline="javascript" th:if="${auditLogDTO}">
+        /*<![CDATA[*/
+
+        $(document).ready(function () {
+            var list = [];
+
+            var auditLogList = [[${auditLogDTO.auditLogList}]];
+
+            if (isNotEmptyNullUndfined(auditLogList) && auditLogList.length) {
+                jQuery.each(auditLogList, function (index, object) {
+                    var fromDate = new Date(object['effectDateFrom']);
+                    var toDate = new Date(object['effectDateTo']);
+                    var fromDateFormatted =  moment().format('DD/MM/YYYY HH:mm:ss', fromDate);
+                    var toDateFormatted = moment().format('DD/MM/YYYY HH:mm:ss', toDate);
+
+                    var newObj = {
+                        'Effective Date': fromDateFormatted,
+                        'To': toDateFormatted,
+                        'Name': object['acName'],
+                        'White/Black': '',
+                        'Channel': object['channel'],
+                        'IP/Telephone Number': object['acIp']
+                    };
+
+                    list.push(newObj);
+                });
+            }
+
+            let grid = $("#auditLogGrid");
+            // console.log(grid);
+
+            grid.jsGrid(
+                    {
+                        width: '100%',
+                        height: '100%',
+
+                        sorting: true,
+                        noDataContent: 'NO data',
+                        selecting: false,
+
+                        data: list,
+
+                        fields: [
+                            { name: 'Effective Date', type: 'text', width: 60, headerTemplate: commonHeader },
+                            { name: 'To', type: 'text', width: 40, headerTemplate: commonHeader },
+                            { name: 'Name', type: 'text', width: 50, headerTemplate: commonHeader },
+                            { name: 'White/Black', type: 'text', width: 80, headerTemplate: commonHeader },
+                            { name: 'Channel', type: 'text', width: 40, headerTemplate: commonHeader },
+                            { name: 'IP/Telephone Number', type: 'text', width: 80, headerTemplate: commonHeader },
+                            {
+                                type: 'control',
+                                headerTemplate: function () {
+                                    let title = '<span>Detail</span>';
+                                    return title;
+                                },
+                                itemTemplate: function (value, item) {
+                                    let result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+
+                                    let str = '';
+
+                                    str += '<span>';
+                                    str += '<a th:href="@{/accessControlView.do}" class="RedLink">';
+                                    str += 'View';
+                                    str += '</a>';
+                                    str += '</span>';
+
+                                    // result = result.add(str);
+                                    result = str;
+
+                                    return result;
+                                }
+                            }
+                        ]
+
+                    }
+            )
+
+
+        });
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div style="padding: 1.5em;">
+            <div style=" margin-top: 1.5em; width: 100%; height: 200px; ">
+                <div id="auditLogGrid"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

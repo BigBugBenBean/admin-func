@@ -72,6 +72,8 @@
             when it writes SQL to the console.
         -->
         <entry key="hibernate.format_sql" value="${hibernate.format_sql}"/>
+        <!--<entry key="hibernate.current_session_context_class" value="org.hibernate.context.internal.ThreadLocalSessionContext" />-->
+
     </util:map>
     <!-- Creates the bean that creates the JPA entity manager factory. -->
     <bean id="entityManagerFactory.adminfunc" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
@@ -114,4 +116,5 @@
         <!--<property name="hibernateManagedSession" value="true" />-->
     <!--</bean>-->
 
+    <bean class="com.pccw.immd.adminfunc.repository.HibernateHelper" />
 </beans>

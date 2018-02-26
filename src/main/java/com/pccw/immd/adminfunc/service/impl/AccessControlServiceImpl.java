@@ -4,18 +4,16 @@ import com.pccw.immd.adminfunc.domain.AccessControl;
 import com.pccw.immd.adminfunc.domain.AccessControlBlackList;
 import com.pccw.immd.adminfunc.domain.AccessControlGlobalParam;
 import com.pccw.immd.adminfunc.domain.AccessControlWhiteList;
+import com.pccw.immd.adminfunc.repository.HibernateUtils;
 import com.pccw.immd.adminfunc.repository.UmAccessControlBlackListRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlGlobalParamRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlWhiteListRepository;
 import com.pccw.immd.adminfunc.service.AccessControlService;
-import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Comparator;
 import java.util.List;
 
@@ -24,9 +22,6 @@ import java.util.List;
  */
 @Service("accessControlService.eservice2")
 public class AccessControlServiceImpl implements AccessControlService {
-
-    @PersistenceContext
-    private EntityManager em;
 
     @Autowired
     @Qualifier("umAccessControlBlackListRepository.eservice2")
@@ -43,11 +38,8 @@ public class AccessControlServiceImpl implements AccessControlService {
     @Override
     public List<AccessControl> listAll() {
         Order order = Order.asc("acId");
-        Session session = em.unwrap(Session.class);
+        List<AccessControl> accessControlList = HibernateUtils.listByDomain(AccessControl.class, order);
 
-        List<AccessControl> accessControlList = session
-                .createCriteria(AccessControl.class).addOrder(order)
-                .list();
         accessControlList.sort(new Comparator<AccessControl>() {
             @Override
             public int compare(AccessControl ac1, AccessControl ac2) {
