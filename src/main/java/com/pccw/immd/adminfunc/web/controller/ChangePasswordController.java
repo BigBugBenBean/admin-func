@@ -44,22 +44,6 @@ public class ChangePasswordController {
         return "/Auth/change-pwd";
     }
 
-//    @RequestMapping( value = "/{module}/module.html", method = RequestMethod.POST)
-//    public String handleLogin(
-////            @PathVariable("username") String username,
-////            @PathVariable("password") String password
-//            @PathVariable("password") String password
-//    ) {
-//        LOG.debug("username: " + username + " , password: " + password);
-//        if ()
-//        return "";
-//    }
-
-//     @Autowired
-//     @Qualifier ("upmsService")
-//     private UpmsService upmsService;
-
-
      @PostMapping("/submitChangePassword.do")
      public String submit(@ModelAttribute PasswordDTO passwordDTO) {
          LOG.info("Calling submitChangePassword ....... ");
@@ -75,11 +59,7 @@ public class ChangePasswordController {
          CHANGE_PWD_STATUS status = validateChangePassword(oldPassword, newPassword, confirmNewPassword);
 
          Integer errCode = passwordDTO.getErrorCode();
-         String errTitle = "";
          String errMsg = "";
-
-//         status = CHANGE_PWD_STATUS.OLD_PWD_INCORRECT;
-//         upmsService.changePassword(loginId, oldPassword, newPassword);
 
          switch (status) {
              case CHANGE_PWD_SUCCESS: {
@@ -153,29 +133,12 @@ public class ChangePasswordController {
              }
 
 
-
-
          } else if (errCode == 1001) {
 
              return "/auth/change-pwd";
          } else if (errCode == 1002) {
              return "/auth/change-pwd-fail";
          }
-
-//         String termialId = "";
-
-//         try {
-//             UpmsUser user = upmsService.login(userDTO.getUmpsException(), userDTO.getPassword(), termialId);
-//         } catch (ITIAppException|ITISysException e) {
-
-//             userDTO.setErrorTitle("Login Rejected");
-//             userDTO.setErrorMessage(e.getMessage());
-
-//             return "login-fail";
-//         }
-//         return "login-fail";
-// //        return "result";
-
          return "/Auth/change-pwd";
      }
 
