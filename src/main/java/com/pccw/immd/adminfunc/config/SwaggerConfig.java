@@ -30,8 +30,8 @@ public class SwaggerConfig {
     public Docket customImplementation() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.pccw.immd.adminfunc.web.rest"))
-//                .apis(RequestHandlerSelectors.basePackage("com.pccw.immd.adminfunc.web.controller"))
+//                .apis(RequestHandlerSelectors.basePackage("com.pccw.immd.adminfunc.web.rest"))
+                .apis(RequestHandlerSelectors.basePackage("com.pccw.immd.adminfunc.web.controller"))
                 .build()
                 ;
     }
