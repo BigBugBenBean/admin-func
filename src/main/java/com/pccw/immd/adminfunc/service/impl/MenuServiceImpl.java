@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-@Service ("menuService.eservice2")
+@Service ("menuService.eservices2")
 public class MenuServiceImpl implements MenuService {
 
     private static final Logger LOG = LoggerFactory.getLogger(MenuServiceImpl.class);
@@ -96,17 +96,17 @@ public class MenuServiceImpl implements MenuService {
 
     private MenuItem formFirstLevel(Map<String, MenuItem> allMenu, MenuItem root, String key, Map<String, String> menuProperties ){
         MenuItem menu = getMenuItem(allMenu, root, key, menuProperties);
-        setChildern(allMenu, menu, key, menuProperties);
+        setChildren(allMenu, menu, key, menuProperties);
         return menu;
     }
 
-    private void setChildern(Map<String, MenuItem> allMenu, MenuItem parentMenu, String parentKey, Map<String, String> menuProperties) {
+    private void setChildren(Map<String, MenuItem> allMenu, MenuItem parentMenu, String parentKey, Map<String, String> menuProperties) {
         for (Object key : menuProperties.keySet()){
             String keyStr = (String)key;
             if ( !keyStr.equals(parentKey) && keyStr.startsWith(parentKey) && keyStr.lastIndexOf(MENU_DELIMITER) == parentKey.length()){
                 MenuItem menu = formChildLevel(allMenu, parentKey, keyStr, menuProperties);
                 parentMenu.addChild(menu);
-                setChildern(allMenu, menu, keyStr, menuProperties);
+                setChildren(allMenu, menu, keyStr, menuProperties);
             }
         }
     }

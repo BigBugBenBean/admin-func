@@ -46,8 +46,8 @@ public interface MenuService {
                     '}';
         }
 
-        public void addAllChild(List<MenuItem> childern) {
-            this.child.addAll(childern);
+        public void addAllChild(List<MenuItem> children) {
+            this.child.addAll(children);
         }
     }
 }

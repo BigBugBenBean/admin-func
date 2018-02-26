@@ -1,5 +1,6 @@
 package com.pccw.immd.adminfunc.service.test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pccw.immd.adminfunc.service.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import static com.pccw.immd.adminfunc.service.MenuService.MenuItem;
 public class MenuServiceTest extends AbstractTestNGSpringContextTests {
 
     private static final Logger LOG = LoggerFactory.getLogger(MenuServiceTest.class);
+    private ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
     @Qualifier ("menuService")
@@ -26,7 +28,7 @@ public class MenuServiceTest extends AbstractTestNGSpringContextTests {
     public void generateMenuTree() throws IOException {
         MenuItem root = menuService.buildMenuTree();
 
-        LOG.info("Tree result: " + root);
+        LOG.info("Tree result: " + mapper.writeValueAsString(root));
     }
 
 }

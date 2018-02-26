@@ -1,6 +1,5 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
-
 import com.pccw.immd.adminfunc.service.MenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /** 
- ** 
- **  File Name   : PermissionInterceptor.java
+ **
+ **  File Name   : MenuInterceptor.java
  **  Create Date : 7 Feb 2018
  **  Author      : Dell
  **
@@ -26,7 +25,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
     private MenuService.MenuItem applicationMenu;
 
     @Autowired
-    @Qualifier("menuService.eservice2")
+    @Qualifier("menuService.eservices2")
     MenuService menuService;
 
     //before the actual handler will be executed
@@ -35,7 +34,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
             applicationMenu = menuService.buildMenuTree();
         }
 
-        request.setAttribute( MENU_ROOT_KEY,applicationMenu );
+        request.setAttribute( MENU_ROOT_KEY, applicationMenu );
         return true;
     }
 
