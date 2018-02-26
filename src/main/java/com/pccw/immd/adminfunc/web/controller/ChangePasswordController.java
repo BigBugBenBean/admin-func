@@ -165,7 +165,7 @@ public class ChangePasswordController {
 //         String termialId = "";
 
 //         try {
-//             UpmsUser user = upmsService.login(userDTO.getLoginId(), userDTO.getPassword(), termialId);
+//             UpmsUser user = upmsService.login(userDTO.getUmpsException(), userDTO.getPassword(), termialId);
 //         } catch (ITIAppException|ITISysException e) {
 
 //             userDTO.setErrorTitle("Login Rejected");

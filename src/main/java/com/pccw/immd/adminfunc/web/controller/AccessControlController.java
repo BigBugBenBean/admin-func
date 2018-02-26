@@ -28,7 +28,7 @@ public class AccessControlController {
         List<AccessControl> list = accessControlService.listAll();
         
         if (list.size() > 0) {
-            accessControlDTO.getAccessControlList().addAll(list);
+            accessControlDTO.setAccessControlList(list);
         }
 
         return "/eServices2/AccessControl/access-control";

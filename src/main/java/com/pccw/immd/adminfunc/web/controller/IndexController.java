@@ -1,20 +1,16 @@
 package com.pccw.immd.adminfunc.web.controller;
 
-import com.pccw.immd.adminfunc.dto.LoginUser;
-import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.dto.UserDTO;
 import com.pccw.immd.adminfunc.service.UpmsService;
-import ws.upms.immd.v1.ITIAppException;
-import ws.upms.immd.v1.ITISysException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.security.Principal;
 
@@ -31,6 +27,12 @@ public class IndexController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
 
+//    @GetMapping(value = "/error")
+////    @PostMapping(value = "/error")
+//    public String error(){
+//        return "error";
+//    }
+
     @GetMapping(value = "/index.html")
     public String indexPage(){
         return "index";
@@ -46,7 +48,7 @@ public class IndexController {
     private UpmsService upmsService;
 
 
-    @GetMapping({"/landing", "/AUTH/login.do"})
+    @GetMapping({"/landing.do"})
     public String submit(@ModelAttribute UserDTO userDTO, Principal principal)   {
         LOG.info("Calling landing ....... ");
 
