@@ -4,15 +4,24 @@ import com.pccw.immd.adminfunc.dto.LoginUser;
 import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import com.pccw.immd.adminfunc.utils.MessageSourceAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
+import org.springframework.context.MessageSourceAware;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.SpringSecurityMessageSource;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import ws.upms.immd.v1.ITIAppException;
 import ws.upms.immd.v1.ITISysException;
 
@@ -23,7 +32,15 @@ import java.util.List;
  * Created by Dell on 30/1/2018.
  */
 @Component("upmsAuthenticationProvider")
-public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+public class UpmsAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UpmsAuthenticationProvider.class);
+
+//    @Autowired
+//    @Qualifier("accessAuditService")
+//    public AccessAuditService accessAuditService;
+
+    protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
     @Autowired
     @Qualifier("messageSourceAdapter")
@@ -33,29 +50,31 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
     @Qualifier("upmsService")
     private UpmsService upmsService;
 
-    @Override
-    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        if (authentication.getCredentials() == null) {
-            this.logger.debug("Authentication failed: no credentials provided");
-            throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
-        }
+    public final void afterPropertiesSet() throws Exception {
+        Assert.notNull(this.messages, "A message source must be set");
+    }
+    public void setMessageSource(MessageSource messageSource) {
+        this.messages = new MessageSourceAccessor(messageSource);
     }
 
     @Override
-    protected UserDetails retrieveUser(String userName, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UserDetails loginUser = null;
+        String userName = authentication.getName();
         String password = authentication.getCredentials().toString();
         String termialId = "";
+
+        // Hard code authority list
+        List<SimpleGrantedAuthority> authList = new ArrayList<>();
+        authList.add(new SimpleGrantedAuthority("ROLE_UMPS_USER"));
 
         if (userName.isEmpty() || password.isEmpty())
             throw new BadCredentialsException(messageSourceAdapter.getMessage("umps.useridandpassword.notempty"));
 
-
         String demoPrefix = "demo";
 
         if (userName.startsWith(demoPrefix)) {
-            List<SimpleGrantedAuthority> authList = new ArrayList<>();
-            authList.add(new SimpleGrantedAuthority("ROLE_UMPS_USER"));
+            LOG.info("Using demo account in testing env. ONLY.");
 
             loginUser = new LoginUser(
                     userName,
@@ -68,17 +87,17 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
                     true,
                     authList);
 
-            return loginUser;
+            return new UsernamePasswordAuthenticationToken(loginUser, authentication.getCredentials(), authList);
         }
 
 
         try {
 //            String newPassword = "password1";
 //            upmsService.changePassword(authentication.getName(),authentication.getCredentials().toString(), newPassword);
-            UpmsUser user = upmsService.login(authentication.getName(), authentication.getCredentials().toString(), termialId);
+            UpmsUser user = upmsService.login(authentication.getName(), password, termialId);
 
-            List<SimpleGrantedAuthority> authList = new ArrayList<>();
-            authList.add(new SimpleGrantedAuthority("ROLE_UMPS_USER"));
+            LOG.debug("Login Success.");
+
             /**
              * Hard code all values to TRUE, no handling to Spring-Security
              * All error from UPMS only display message to error page.
@@ -103,6 +122,7 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
             LoginUser lu = (LoginUser)loginUser;
             lu.setImmdToken(user.getIss3UserSignOnDTO().getImmdToken());
 
+//            accessAuditService.log(request.getRequestedSessionId(), loginUser, funcId, action);
         } catch (ITIAppException | ITISysException e) {
             if (e instanceof ITIAppException) {
                 ITIAppException ex = (ITIAppException)e;
@@ -114,19 +134,13 @@ public class UpmsAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         if (loginUser == null) {
             throw new BadCredentialsException(messageSourceAdapter.getMessage("umps.useridandpassword.notempty"));
         } else {
-            return loginUser;
+            authentication = new UsernamePasswordAuthenticationToken(loginUser, authentication.getCredentials(), authList);
+            return authentication;
         }
     }
 
-    /*
-    private boolean isNonExpired(UpmsUser user) {
-        Date current = new Date();
-        Calendar expiryDate = user.getIss3UserSignOnDTO().getPasswordExpiryDateTime().toGregorianCalendar();
-        expiryDate.add(Calendar.DAY_OF_YEAR, -1 * passwordExpiryDay);
-        if(current.after(expiryDate.getTime()))
-            return false;
-        return true;
+    public boolean supports(Class<?> authentication) {
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
     }
-    */
 
 }
