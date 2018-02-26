@@ -1,6 +1,5 @@
 package com.pccw.immd.adminfunc.config;
 
-import com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationSuccessHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 /**
  * Created by jeff on 5/7/17.
@@ -64,8 +64,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationFailureHandler authenticationFailureHandler;
 
     @Autowired
+    @Qualifier("logoutHandler")
+    private LogoutHandler logoutHandler;
+
+    @Autowired
     @Qualifier("authenticationSuccessHandler")
-    private AdminFuncAuthenticationSuccessHandler authenticationSuccessHandler;
+    private SimpleUrlAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Autowired
     @Qualifier("upmsAuthenticationProvider")
@@ -91,15 +95,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .loginProcessingUrl(logInProcessingUrl).permitAll()
             .successHandler(authenticationSuccessHandler)
             .failureForwardUrl(authenticationFailureUrl)
-//        .and()
-//            .exceptionHandling()
             .failureHandler(authenticationFailureHandler)
         .and()
             .logout().permitAll()
             .logoutUrl(logOutUrl)
             .logoutSuccessUrl(logOutSuccessUrl)
-            .clearAuthentication(true)
-            .invalidateHttpSession(true)
+            .addLogoutHandler(logoutHandler)
         .and()
             .sessionManagement().invalidSessionUrl(invalidSessionUrl)
         .and()
@@ -123,23 +124,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/changePassword"
         );
     }
+/*
+    @Bean
+    public FilterRegistrationBean delegatingFilterProxy(){
+        FilterRegistrationBean registration=new FilterRegistrationBean();
 
-    public class MvcWebApplicationInitializer extends
-            AbstractAnnotationConfigDispatcherServletInitializer {
-
-        @Override
-        protected Class<?>[] getRootConfigClasses() {
-            return new Class[] { WebSecurityConfig.class };
-        }
-
-        @Override
-        protected String[] getServletMappings() {
-            return new String[] {};
-        }
-
-        @Override
-        protected Class<?>[] getServletConfigClasses(){
-            return new Class[] {};
-        }
+        Filter filter = new DelegatingFilterProxy();
+        registration.setFilter(filter);
+        registration.addUrlPatterns("*//*");
+        registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
+        return registration;
     }
+    */
 }
