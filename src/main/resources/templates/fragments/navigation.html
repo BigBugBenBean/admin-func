@@ -11,9 +11,11 @@
 <div th:fragment="nav(navObj)" >
     <div class="flex-container grid-nav-container">
         <div class="flex-item-2 nav-title-left">
-            <span style=" width: '100%'">e-Services-2 >
-                <span id="eServices2SubCat">Enquiry</span> >
-                <span id="eServices2Func">Application Fee Enquiry</span>
+            <span style=" width: '100%'">
+                <span th:each="item, iter: ${navObj.navigationList}">
+                    <span th:text="${item}"></span>
+                    <span th:if="( ${iter.index} != ( ${iter.size} -1 ) )" > > </span>
+                </span>
             </span>
         </div>
         <div class="nav-title-right">

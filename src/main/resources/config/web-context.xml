@@ -76,6 +76,12 @@
             <!-- intercept multiple urls -->
             <mvc:mapping path="/**/*.html"/>
             <mvc:mapping path="/**/*.do"/>
+            <bean class="com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <!-- intercept multiple urls -->
+            <mvc:mapping path="/**/*.html"/>
+            <mvc:mapping path="/**/*.do"/>
             <bean class="com.pccw.immd.adminfunc.web.interceptor.CommonVariableInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
