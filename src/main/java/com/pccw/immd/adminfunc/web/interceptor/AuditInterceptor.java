@@ -47,9 +47,10 @@ public class AuditInterceptor extends HandlerInterceptorAdapter {
         Method method = hm.getMethod();
         if (method.getDeclaringClass().isAnnotationPresent(Controller.class)) {
             if (method.isAnnotationPresent(AccessAudit.class)) {
-                LOG.info(method.getAnnotation(AccessAudit.class).value().toString());
+                AccessAudit accessAudit = method.getAnnotation(AccessAudit.class);
+                LOG.info(accessAudit.value().toString());
                 LoginUser loginUser = (LoginUser)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                AccessActionType action = (AccessActionType)method.getAnnotation(AccessAudit.class).value();
+                AccessActionType action = accessAudit.value();
                 String funcId = (String)request.getAttribute("funcId");
                 accessAuditService.log(request.getRequestedSessionId(), loginUser, funcId, action);
             }

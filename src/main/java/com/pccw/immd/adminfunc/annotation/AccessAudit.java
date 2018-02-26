@@ -12,7 +12,10 @@ public @interface AccessAudit{
         LOGIN_SUCCESS("LOGIN"),
         LOGIN_FAIL("FAIL"),
         LOGOUT("LOGOUT"),
-        FUNCTION("FUNCTION");
+        FUNCTION("FUNCTION"),
+
+        // Determine from UPMS result.
+        LOGIN_ACCOUNT_LOCKED("LOCKED");
 
         private String _code;
 

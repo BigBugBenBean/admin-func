@@ -1,5 +1,6 @@
 package com.pccw.immd.adminfunc.config;
 
+import com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationSuccessHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  * Created by jeff on 5/7/17.
@@ -35,9 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${web.auth.logInProcessingUrl}")
     private String logInProcessingUrl;
-
-    @Value("${web.auth.logInDefaultTargetUrl}")
-    private String logInDefaultTargetUrl;
 
     @Value("${web.auth.authenticationFailureUrl}")
     private String authenticationFailureUrl;
@@ -64,9 +63,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("authenticationFailureHandler")
     private AuthenticationFailureHandler authenticationFailureHandler;
 
-//    @Autowired
-//    @Qualifier("securityContextFilter")
-//    private SecurityContextPersistenceFilter securityContextFilter;
+    @Autowired
+    @Qualifier("authenticationSuccessHandler")
+    private AdminFuncAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Autowired
     @Qualifier("upmsAuthenticationProvider")
@@ -85,12 +84,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .hasRole(interceptUrlAccess)
             .anyRequest().authenticated()
         .and()
-            .formLogin()
+            .formLogin().permitAll()
             .usernameParameter("user.userId")
             .passwordParameter("user.password")
-            .loginPage(loginUrl).permitAll()
-            .loginProcessingUrl(logInProcessingUrl)
-            .defaultSuccessUrl(logInDefaultTargetUrl)
+            .loginPage(loginUrl)
+            .loginProcessingUrl(logInProcessingUrl).permitAll()
+            .successHandler(authenticationSuccessHandler)
             .failureForwardUrl(authenticationFailureUrl)
 //        .and()
 //            .exceptionHandling()
@@ -100,6 +99,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutUrl(logOutUrl)
             .logoutSuccessUrl(logOutSuccessUrl)
             .clearAuthentication(true)
+            .invalidateHttpSession(true)
         .and()
             .sessionManagement().invalidSessionUrl(invalidSessionUrl)
         .and()
@@ -122,5 +122,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/submitChangePassword.do",
                 "/changePassword"
         );
+    }
+
+    public class MvcWebApplicationInitializer extends
+            AbstractAnnotationConfigDispatcherServletInitializer {
+
+        @Override
+        protected Class<?>[] getRootConfigClasses() {
+            return new Class[] { WebSecurityConfig.class };
+        }
+
+        @Override
+        protected String[] getServletMappings() {
+            return new String[] {};
+        }
+
+        @Override
+        protected Class<?>[] getServletConfigClasses(){
+            return new Class[] {};
+        }
     }
 }

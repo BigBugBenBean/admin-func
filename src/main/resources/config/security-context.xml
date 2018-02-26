@@ -10,6 +10,11 @@
     <!--<bean id="securityContextFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter" >-->
         <!--<constructor-arg ref="securityContextRepository"/>-->
     <!--</bean>-->
+    <bean id="authenticationSuccessHandler" class="com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationSuccessHandler">
+        <constructor-arg>
+            <value>${web.auth.logInDefaultTargetUrl}</value>
+        </constructor-arg>
+    </bean>
 
     <bean id="authenticationFailureHandler" class="com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationFailureHandler">
         <property name="exceptionMappings">
