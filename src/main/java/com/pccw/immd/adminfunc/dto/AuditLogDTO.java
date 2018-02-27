@@ -2,6 +2,7 @@ package com.pccw.immd.adminfunc.dto;
 
 import com.pccw.immd.adminfunc.domain.AuditLog;
 import com.pccw.immd.commons.dto.BaseDTO;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +14,10 @@ public class AuditLogDTO extends BaseDTO {
 
     private String userId;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date startDate;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date endDate;
 
     private List<AuditLog> auditLogList = new ArrayList<>();

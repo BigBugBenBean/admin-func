@@ -1,7 +1,7 @@
 package com.pccw.immd.adminfunc.web.security;
 
 import com.pccw.immd.adminfunc.annotation.AccessAudit;
-import com.pccw.immd.adminfunc.audit.AccessAuditService;
+import com.pccw.immd.adminfunc.audit.AuditTrailSearchService;
 import com.pccw.immd.adminfunc.dto.LoginUser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,8 +20,8 @@ public class AdminFuncLogoutHandler  implements LogoutHandler {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    @Qualifier("accessAuditService")
-    public AccessAuditService accessAuditService;
+    @Qualifier("auditTrailSearch")
+    public AuditTrailSearchService auditTrailSearchService;
 
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         logoutAccessAudit(request, response, authentication);
@@ -33,6 +33,6 @@ public class AdminFuncLogoutHandler  implements LogoutHandler {
         AccessAudit.AccessActionType action = AccessAudit.AccessActionType.LOGOUT;
         String funcId = null;
 
-        accessAuditService.log(sessionId, loginUser, funcId, action);
+        auditTrailSearchService.log(sessionId, loginUser, funcId, action);
     }
 }

@@ -4,24 +4,33 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "UM_SEARCH_AUDIT_TRAIL")
-public class SearchAuditTrail extends AuditLog {
+@Table(name = "UM_AUDIT_TRAIL_ACTION")
+public class AuditTrailAction extends AuditLog {
+    @Column(name = "TABLE_NAME", length = 100)
+    public String tableName;
+
+    @Column(name = "FIELD_NAME", length = 100)
+    public String fieldName;
+
+    @Column(name = "VALUE_OLD", length = 4000)
+    public String valueOld;
+
+    @Column(name = "VALUE_NEW", length = 4000)
+    public String valueNew;
+
     //    @Enumerated(EnumType.STRING)
     @Column(name = "ACTION_TYPE", length = 10)
     public String type;
 
-    @Column(name = "SEARCH_TABLE_NAME", length = 100)
-    public String tableName;
+    public String getType() {
+        return type;
+    }
 
-    @Column(name = "SEARCH_FIELD_NAME", length = 100)
-    public String fieldName;
-
-    @Column(name = "SEARCH_VALUE", length = 4000)
-    public String valueOld;
-
-    @Column(name = "SEARCH_RESULT", length = 1)
-    public String valueNew;
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getTableName() {
         return tableName;

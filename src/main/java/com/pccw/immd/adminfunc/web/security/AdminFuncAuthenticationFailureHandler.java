@@ -1,7 +1,7 @@
 package com.pccw.immd.adminfunc.web.security;
 
 import com.pccw.immd.adminfunc.annotation.AccessAudit;
-import com.pccw.immd.adminfunc.audit.AccessAuditService;
+import com.pccw.immd.adminfunc.audit.AuditTrailSearchService;
 import com.pccw.immd.adminfunc.dto.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,8 +24,8 @@ public class AdminFuncAuthenticationFailureHandler extends ExceptionMappingAuthe
     public static String SPRING_SECURITY_LAST_EXCEPTION = "SPRING_SECURITY_LAST_EXCEPTION";
 
     @Autowired
-    @Qualifier("accessAuditService")
-    public AccessAuditService accessAuditService;
+    @Qualifier("auditTrailSearch")
+    public AuditTrailSearchService auditTrailSearchService;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
@@ -47,6 +47,6 @@ public class AdminFuncAuthenticationFailureHandler extends ExceptionMappingAuthe
         AccessAudit.AccessActionType action = AccessAudit.AccessActionType.LOGIN_FAIL;
         String funcId = null;
 
-        accessAuditService.log(sessionId, loginUser, funcId, action);
+        auditTrailSearchService.log(sessionId, loginUser, funcId, action);
     }
 }

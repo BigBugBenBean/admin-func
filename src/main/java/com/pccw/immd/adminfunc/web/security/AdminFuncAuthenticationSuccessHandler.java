@@ -2,7 +2,7 @@ package com.pccw.immd.adminfunc.web.security;
 
 
 import com.pccw.immd.adminfunc.annotation.AccessAudit;
-import com.pccw.immd.adminfunc.audit.AccessAuditService;
+import com.pccw.immd.adminfunc.audit.AuditTrailSearchService;
 import com.pccw.immd.adminfunc.dto.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,8 +20,8 @@ import java.io.IOException;
 public class AdminFuncAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     @Autowired
-    @Qualifier("accessAuditService")
-    public AccessAuditService accessAuditService;
+    @Qualifier("auditTrailSearch")
+    public AuditTrailSearchService auditTrailSearchService;
 
     public AdminFuncAuthenticationSuccessHandler() {
 
@@ -43,6 +43,6 @@ public class AdminFuncAuthenticationSuccessHandler extends SimpleUrlAuthenticati
         AccessAudit.AccessActionType action = AccessAudit.AccessActionType.LOGIN_SUCCESS;
         String funcId = null;
 
-        accessAuditService.log(sessionId, loginUser, funcId, action);
+        auditTrailSearchService.log(sessionId, loginUser, funcId, action);
     }
 }
