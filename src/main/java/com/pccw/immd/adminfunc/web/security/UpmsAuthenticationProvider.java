@@ -36,10 +36,6 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
 
     private static final Logger LOG = LoggerFactory.getLogger(UpmsAuthenticationProvider.class);
 
-//    @Autowired
-//    @Qualifier("accessAuditService")
-//    public AccessAuditService accessAuditService;
-
     protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
 
     @Autowired
@@ -93,7 +89,6 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
 
         try {
 //            String newPassword = "password1";
-//            upmsService.changePassword(authentication.getName(),authentication.getCredentials().toString(), newPassword);
             UpmsUser user = upmsService.login(authentication.getName(), password, termialId);
 
             LOG.debug("Login Success.");
@@ -122,7 +117,6 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
             LoginUser lu = (LoginUser)loginUser;
             lu.setImmdToken(user.getIss3UserSignOnDTO().getImmdToken());
 
-//            accessAuditService.log(request.getRequestedSessionId(), loginUser, funcId, action);
         } catch (ITIAppException | ITISysException e) {
             if (e instanceof ITIAppException) {
                 ITIAppException ex = (ITIAppException)e;

@@ -25,13 +25,4 @@ public class PasswordUtil {
         }
         return password;
     }
-
-    public static void main(String arg[]) throws  NoSuchAlgorithmException{
-        String input = "C123456";
-        String hashedValue = "";
-        MessageDigest digester = MessageDigest.getInstance("SHA-256");
-        digester.update(input.getBytes());
-        hashedValue = Base64.getEncoder().encodeToString(digester.digest());
-        System.out.println("{sha256}" + hashedValue);
-    }
 }
