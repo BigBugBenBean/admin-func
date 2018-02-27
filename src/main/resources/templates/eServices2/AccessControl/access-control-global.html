@@ -36,10 +36,10 @@
                                 <div class="flex-container param-container">
                                     <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.whitelist')}"></div>
                                     <div class="param-item-right">
-                                        <input type="radio" name="whitelist" checked="checked" th:checked="${item.value}" >
+                                        <input type="radio" name="WHITE_LIST_ACTIVATE" th:value="${true}" th:checked="${item.value}" >
                                         <span class="item-margin-right">Enable</span>
                                         </input>
-                                        <input type="radio" name="whitelist" th:checked="${!item.value}" >
+                                        <input type="radio" name="WHITE_LIST_ACTIVATE" th:value="${false}" th:checked="${!item.value}" >
                                         <span>Disable</span>
                                         </input>
                                     </div>
@@ -50,10 +50,10 @@
                                 <div class="flex-container param-container">
                                     <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.blacklist')}"></div>
                                     <div class="param-item-right">
-                                        <input type="radio" name="blacklist" value="" th:checked="${item.value}" >
+                                        <input type="radio" name="BLACK_LIST_ACTIVATE" th:value="${true}" th:checked="${item.value}" >
                                         <span class="item-margin-right">Enable</span>
                                         </input>
-                                        <input type="radio" name="blacklist" value="" th:checked="${!item.value}">
+                                        <input type="radio" name="BLACK_LIST_ACTIVATE" th:value="${false}" th:checked="${!item.value}">
                                         <span>Disable</span>
                                         </input>
                                     </div>
@@ -64,10 +64,10 @@
                                 <div class="flex-container param-container">
                                     <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.counterblocking')}"></div>
                                     <div class="param-item-right">
-                                        <input type="radio" name="counterBlocking" value="" th:checked="${item.value}" >
+                                        <input type="radio" name="COUNTER_BLOCKING_ACTIVATE" th:value="${true}" th:checked="${item.value}" >
                                         <span class="item-margin-right">Enable</span>
                                         </input>
-                                        <input type="radio" name="counterBlocking" value="" th:checked="${!item.value}" >
+                                        <input type="radio" name="COUNTER_BLOCKING_ACTIVATE" th:value="${false}" th:checked="${!item.value}" >
                                         <span>Disable</span>
                                         </input>
                                     </div>
@@ -78,7 +78,7 @@
                                 <div class="flex-container param-container">
                                     <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.maxNumOfTran')}"></div>
                                     <div class="param-item-right">
-                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_TRANS"  th:value="${item.value}"></input>
                                     </div>
                                 </div>
                                 <div class="RowSeparator"></div>
@@ -87,7 +87,7 @@
                                 <div class="flex-container param-container">
                                     <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.tranNumOfDay')}"></div>
                                     <div class="param-item-right">
-                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_TRANS_PERIOD" th:value="${item.value}"></input>
                                     </div>
                                 </div>
                                 <div class="RowSeparator"></div>
@@ -96,7 +96,7 @@
                                 <div class="flex-container param-container">
                                     <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.maxNumOfAppoint')}"></div>
                                     <div class="param-item-right">
-                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_APM" th:value="${item.value}"></input>
                                     </div>
                                 </div>
                                 <div class="RowSeparator"></div>
@@ -105,7 +105,7 @@
                                 <div class="flex-container param-container">
                                     <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.appointNumOfDay')}"></div>
                                     <div class="param-item-right">
-                                        <input class="input-box" type="text" maxlength="10" th:value="${item.value}"></input>
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_APM_PERIOD" th:value="${item.value}"></input>
                                     </div>
                                 </div>
                                 <div class="RowSeparator"></div>
@@ -117,10 +117,10 @@
 
                 <div style=" float: right; padding-top: 1em;">
                     <!--<a th:href="@{/accessControlGlobalSuccess.do}">-->
-                        <input type="submit" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                        <input type="submit" th:value="${#messages.msg('umps.adminfunc.common.save')}" class="ButtonStyle submit-button" style="margin-right: 20px;" />
                     <!--</a>-->
                     <a th:href="@{/accessControl.do}">
-                        <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                        <input type="text" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" class="ButtonStyle submit-button" />
                     </a>
                 </div>
             </form>

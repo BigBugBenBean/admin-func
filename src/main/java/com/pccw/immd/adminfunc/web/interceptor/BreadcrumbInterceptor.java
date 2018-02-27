@@ -42,21 +42,11 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
         throws Exception {
 
-        LOG.info("-----------------------BreadcrumbInterceptor_preHandle---------------------------------");
-
         MenuService.MenuItem root = (MenuService.MenuItem)request.getAttribute(MENU_ROOT_KEY);
-//        LOG.info("root: " + root);
-
 
         String requestLink = convertLink(request.getRequestURI().toString(), request.getContextPath());
 
-
-
-//        String url = request.getRequestURL().toString();
         List<String> navList = navigationService.generateNavigationBar(requestLink, root);
-        LOG.info(  "req: " + navList    );
-
-        LOG.info("");
 
         request.setAttribute( BREADCRUMB_NAV_KEY, navigationService );
         return true;

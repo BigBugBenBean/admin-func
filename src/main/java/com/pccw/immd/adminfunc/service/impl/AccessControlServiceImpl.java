@@ -1,9 +1,11 @@
 package com.pccw.immd.adminfunc.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pccw.immd.adminfunc.domain.AccessControl;
 import com.pccw.immd.adminfunc.domain.AccessControlBlackList;
 import com.pccw.immd.adminfunc.domain.AccessControlGlobalParam;
 import com.pccw.immd.adminfunc.domain.AccessControlWhiteList;
+import com.pccw.immd.adminfunc.dto.AccessControlGlobalParamsDTO;
 import com.pccw.immd.adminfunc.repository.HibernateUtils;
 import com.pccw.immd.adminfunc.repository.UmAccessControlBlackListRepository;
 import com.pccw.immd.adminfunc.repository.UmAccessControlGlobalParamRepository;
@@ -14,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Dell on 13/2/2018.
@@ -86,7 +90,47 @@ public class AccessControlServiceImpl implements AccessControlService {
     }
 
     @Override
-    public void updateGlobalParam(AccessControlGlobalParam accessControlGlobalParam) {
+    public void updateGlobalParam(AccessControlGlobalParamsDTO accessControlGlobalParamsDTO) {
+        List<AccessControlGlobalParam> dbGlobalParams = this.getGlobalParam();
+
+        List<AccessControlGlobalParam> updateParamList = new ArrayList<>();
+
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> map = objectMapper.convertValue(accessControlGlobalParamsDTO, Map.class);
+
+
+        // find and update edited value into list
+        for (AccessControlGlobalParam param: dbGlobalParams) {
+            for (String key: map.keySet() ) {
+                if (key.equals(param.getKey())) {
+                    AccessControlGlobalParam updateParam = new AccessControlGlobalParam();
+                    Object tmpNewValue = map.get(key);
+
+                    String dbValue = param.getValue();
+
+                    String newValue = "";
+                    if (tmpNewValue instanceof Boolean) {
+                        newValue = ( (Boolean) tmpNewValue) ? "1" : "0";
+                    } else if (tmpNewValue instanceof Integer) {
+                        newValue = tmpNewValue.toString();
+                    }
+
+                    // add edited param into list
+                    if ( !newValue.equals(dbValue) ) {
+                        updateParam.setValue(newValue);
+                        updateParam.setKey(key);
+
+                        updateParamList.add(updateParam);
+                    }
+
+                }
+            }
+        }
+
+        if (updateParamList.size() > 0) {
+            globalParamRepository.save(updateParamList);
+        }
 
     }
 

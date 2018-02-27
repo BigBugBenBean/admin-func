@@ -3,6 +3,7 @@ package com.pccw.immd.adminfunc.web.controller;
 import com.pccw.immd.adminfunc.domain.AccessControl;
 import com.pccw.immd.adminfunc.domain.AccessControlGlobalParam;
 import com.pccw.immd.adminfunc.dto.AccessControlDTO;
+import com.pccw.immd.adminfunc.dto.AccessControlGlobalParamsDTO;
 import com.pccw.immd.adminfunc.service.AccessControlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,9 @@ public class AccessControlController {
     }
 
     @PostMapping(value = "/saveAccessControlGlobalParams.do")
-    public String saveAccessControlGlobalParams() {
+    public String saveAccessControlGlobalParams(@ModelAttribute AccessControlGlobalParamsDTO accessControlGlobalParamsDTO) {
+
+        accessControlService.updateGlobalParam(accessControlGlobalParamsDTO);
 
         return "/eServices2/AccessControl/access-control-global-success";
     }

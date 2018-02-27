@@ -4,6 +4,7 @@ import com.pccw.immd.adminfunc.domain.AccessControl;
 import com.pccw.immd.adminfunc.domain.AccessControlBlackList;
 import com.pccw.immd.adminfunc.domain.AccessControlGlobalParam;
 import com.pccw.immd.adminfunc.domain.AccessControlWhiteList;
+import com.pccw.immd.adminfunc.dto.AccessControlGlobalParamsDTO;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public interface AccessControlService {
 
     List<AccessControlGlobalParam> getGlobalParam();
 
-    void updateGlobalParam(AccessControlGlobalParam accessControlGlobalParam);
+    void updateGlobalParam(AccessControlGlobalParamsDTO accessControlGlobalParamsDTO);
 
     List<AccessControlBlackList> listAllBlackList();
 }

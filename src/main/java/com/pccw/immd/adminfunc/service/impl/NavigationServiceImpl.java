@@ -20,42 +20,23 @@ public class NavigationServiceImpl implements NavigationService {
 
     public List<String> generateNavigationBar(String url, MenuService.MenuItem root) throws IOException {
         List<String> list = new ArrayList<>();
-//        list.clear();
-
-        LOG.info("-----------------------generateNavigationBar-----------------------");
-
-        LOG.info("root: " + root);
-        LOG.info("url: " + url);
 
         String[] urlArray = url.split("/");
         String targetURL = urlArray[urlArray.length-1];
-        LOG.info("targetURL: " + targetURL);
 
-//        String action = getFuncAction(url);
-
-
-
-        LOG.info("-----------------------firstItem(" + root.getChild().size() + ")-----------------------");
         for (MenuService.MenuItem firstItem : root.getChild() ) {
             String firstLabel = firstItem.getLabel();
-            LOG.info("firstItem: " + firstLabel);
-            LOG.info("-------------secondItem(" + firstItem.getChild().size() + ")-------------");
             for (MenuService.MenuItem secondItem : firstItem.getChild() ) {
                 String secondLabel = secondItem.getLabel();
-                LOG.info("secondItem: " + secondLabel);
-                LOG.info("---thirdItem(" + secondItem.getChild().size() + ")---");
                 for (MenuService.MenuItem thirdItem : secondItem.getChild() ) {
                     String thirdLabel = thirdItem.getLabel();
-                    LOG.info("thirdItem: " + thirdLabel);
 
                     String[] tmpURLArr = thirdItem.getUrl().split("/");
 
                     String tmpTargetURL = targetURL.toLowerCase();
                     String tmpThirdURL = tmpURLArr[tmpURLArr.length-1].toLowerCase();
-                    LOG.info("tmpTargetURL: " + tmpTargetURL + " , tmpThirdURL: " + tmpThirdURL);
 
                     if (tmpTargetURL.contains(tmpThirdURL)) {
-                        LOG.info("**********  HIT  ***********");
                         list.add(firstLabel);
                         list.add(secondLabel);
                         list.add(thirdLabel);
@@ -66,14 +47,7 @@ public class NavigationServiceImpl implements NavigationService {
             }
         }
 
-
-//        list.add("e-Services-2");
-//        list.add("Enquiry");
-//        list.add("System Holiday View");
-
         this.setNavigationList(list);
-
-        LOG.info("-----------------------End of generateNavigationBar-----------------------");
 
         return list;
     }
