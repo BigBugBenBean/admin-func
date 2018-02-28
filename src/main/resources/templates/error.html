@@ -70,8 +70,11 @@
                 </p>
 
                 <p id="loginFailContent" class="login-fail-content">
-                    <b>Error Message:</b> <span th:if="${message} and ${message.length() != 0}"
-                                        th:text="${message}">message ...</span>
+                    <b>Error Message:</b>
+                    <span th:if="${message} and ${message.length() != 0} and !${#strings.contains(message,'Exception:')}"
+                          th:text="${message}">message ...</span>
+                    <span th:if="${message} and ${message.length() != 0} and ${#strings.contains(message,'Exception:')}"
+                          th:text="${#strings.substringAfter(message, 'Exception:')}">message ...</span>
                 </p>
 
                 <a th:href="@{/landing.do}">

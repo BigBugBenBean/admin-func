@@ -101,6 +101,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutUrl(logOutUrl)
             .logoutSuccessUrl(logOutSuccessUrl)
             .addLogoutHandler(logoutHandler)
+            .clearAuthentication(true)
         .and()
             .sessionManagement().invalidSessionUrl(invalidSessionUrl)
         .and()
