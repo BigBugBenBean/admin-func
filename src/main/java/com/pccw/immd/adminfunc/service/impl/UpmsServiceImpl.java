@@ -22,32 +22,19 @@ public class UpmsServiceImpl implements UpmsService {
     @Qualifier ("umpsEndPointServiceWithHeader")
     private UpmsEndPointServiceWithHeader umpsServiceWithHeader;
 
-
-//    public UpmsUser login(String userId, String password, String terminalId) throws ITIAppException, ITISysException {
-//        ObjectFactory factory = new ObjectFactory();
-//        AppUserInfoHeader appUser = new AppUserInfoHeader();
-//        appUser.setUserID(userId);
-//        appUser.setSystemID("UP");
-//        UserAuthenticate userAuthenticate = new UserAuthenticate();
-//        userAuthenticate.setUserID(userId);
-//        userAuthenticate.setHashedPassword(password);
-//
-//        LDAPImmdUserServiceExtWS service = ( new LDAPImmdUserServiceExtWS_Service()).getLDAPImmdUserServiceExtWSImplPort();
-////        UserAuthenticateResponse userAuthenticateResponse = service.userAuthenticate(userAuthenticate, appUser);
-////        return userAuthenticateResponse;
-//        Iss3UserSignOnDTO userAuthenticateResponse = service.userAuthenticate(userId, password, terminalId);
-//        UpmsUser user = new UpmsUser(userAuthenticateResponse);
-//        return user;
-//    }
-
-
     public UpmsUser login(String userId, String password, String terminalId) throws ITIAppException, ITISysException {
         Iss3UserSignOnDTO userAuthenticateResponse = umpsServiceWithHeader.userAuthenticate(userId, password, terminalId);
         UpmsUser user = new UpmsUser(userAuthenticateResponse);
         return user;
     }
 
-    public void changePassword(String userId, String password, String newPassword)throws ITIAppException, ITISysException {
-        umpsEndPointService.changePassword(userId, password, newPassword);
+    @Override
+    public void changePassword(String userId, String password, String newPassword) throws ITIAppException, ITISysException {
+            umpsEndPointService.changePassword(userId, password, newPassword);
+    }
+
+    @Override
+    public void logout(String userId)throws ITIAppException, ITISysException {
+        umpsEndPointService.logout(userId);
     }
 }

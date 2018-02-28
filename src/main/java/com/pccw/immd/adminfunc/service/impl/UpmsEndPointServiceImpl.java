@@ -16,4 +16,11 @@ public class UpmsEndPointServiceImpl extends AbstractUpmsBaseService implements 
 
         getUpmsClientProxy().changePassword(userId, hashedPassword, hashedNewPassword);
     }
+
+    @Override
+    public void logout(String userId) throws ITIAppException, ITISysException {
+        getUpmsClientProxy().forceLogout(userId);
+    }
+
+
 }

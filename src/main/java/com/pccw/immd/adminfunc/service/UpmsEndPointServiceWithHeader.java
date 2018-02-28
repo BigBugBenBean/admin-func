@@ -6,5 +6,7 @@ import ws.upms.immd.v1.Iss3UserSignOnDTO;
 
 public interface UpmsEndPointServiceWithHeader {
 
-    public Iss3UserSignOnDTO userAuthenticate(String userId, String password, String terminalId) throws ITIAppException, ITISysException;
+    Iss3UserSignOnDTO userAuthenticate(String userId, String password, String terminalId) throws ITIAppException, ITISysException;
+
+    void validateImmdToken(String userId, String immdToken) throws ITIAppException, ITISysException;
 }
