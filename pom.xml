@@ -19,28 +19,20 @@
     </parent>
 
     <properties>
-        <profileId>local</profileId>
-        <!--<build.war.name>adminfunc</build.war.name>-->
-        <springframework.version>4.3.0.RELEASE</springframework.version>
-        <pccw-util>0.0.6-SNAPSHOT</pccw-util>
+        <!-- Java version for compile -->
         <java.version>1.8</java.version>
-        <version.jboss.spec.javaee7>1.0.0.Final</version.jboss.spec.javaee7>
-        <profile>dev</profile>
-        <springfox-version>2.7.0</springfox-version>
-        <spring.security.version>4.2.3.RELEASE</spring.security.version>
+        <!-- Default profile -->
+        <profileId>local</profileId>
 
-        <hikaricp.version>2.7.6</hikaricp.version>
-        <local.config>${project.basedir}/local_config</local.config>
-        <local.java.lib>${local.config}/lib</local.java.lib>
+        <!-- PCCW Util -->
+        <pccw-util>0.0.6-SNAPSHOT</pccw-util>
+
+        <!-- Swagger -->
+        <springfox-version>2.7.0</springfox-version>
 
         <hibernate.version>5.0.12.Final</hibernate.version>
         <!-- CXF -->
         <cxf.version>3.1.14</cxf.version>
-
-        <!-- Frontend -->
-        <frontend.plugin.version>1.6</frontend.plugin.version>
-        <node.version>v8.5.0</node.version>
-        <npm.version>5.3.0</npm.version>
 
         <!-- J2EE 7 lib BEGIN -->
         <javax.servlet.version>3.1.0</javax.servlet.version>
@@ -49,6 +41,11 @@
 
         <!-- Testing -->
         <testng.version>6.8.14</testng.version>
+
+        <!-- Folder Structure for Maven Build -->
+        <env.config.root>${project.basedir}/src/main/env</env.config.root>
+        <local.config>${project.basedir}/env_config/local</local.config>
+        <local.java.lib>${local.config}/lib</local.java.lib>
     </properties>
     <dependencies>
 
@@ -131,28 +128,7 @@
             <version>${javax.servlet.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet.jsp</groupId>-->
-            <!--<artifactId>javax.servlet.jsp-api</artifactId>-->
-            <!--<version>${javax.jsp.version}</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
 
-        <!-- END - For compile, which are provided by running env. machine -->
-
-        <!--Util-->
-        <!--<dependency>-->
-            <!--<groupId>joda-time</groupId>-->
-            <!--<artifactId>joda-time</artifactId>-->
-            <!--<version>2.9.9</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -269,9 +245,9 @@
         <dependency>
             <groupId>local</groupId>
             <artifactId>oracle.ojdbc</artifactId>
-            <version>6</version>
+            <version>7</version>
             <scope>system</scope>
-            <systemPath>${local.java.lib}/ojdbc6.jar</systemPath>
+            <systemPath>${local.java.lib}/ojdbc7.jar</systemPath>
         </dependency>
     </dependencies>
 
@@ -285,7 +261,7 @@
                 </excludes>
             </resource>
             <resource>
-                <directory>src/main/resources/env/${profileId}</directory>
+                <directory>${env.config.root}/${profileId}</directory>
                 <targetPath>${project.build.outputDirectory}/</targetPath>
                 <includes>
                     <include>**/*.xml</include>
