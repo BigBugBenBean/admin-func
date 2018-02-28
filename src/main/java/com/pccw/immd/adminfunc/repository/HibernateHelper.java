@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 
 public class HibernateHelper implements InitializingBean {
 
-    @PersistenceContext
+    @PersistenceContext ( unitName = "adminfunc")
     private EntityManager em;
 
     @Override

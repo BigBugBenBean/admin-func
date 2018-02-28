@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pccw.immd</groupId>
+    <artifactId>admin-func</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>Admin Functions</name>
+    <description>Smartics2 Administrative Function</description>
+
+    <parent>
+        <groupId>com.pccw.immd</groupId>
+        <artifactId>admin-func-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <profileId>local</profileId>
+        <!--<build.war.name>adminfunc</build.war.name>-->
+        <springframework.version>4.3.0.RELEASE</springframework.version>
+        <pccw-util>0.0.6-SNAPSHOT</pccw-util>
+        <version.jboss.spec.javaee7>1.0.0.Final</version.jboss.spec.javaee7>
+        <profile>dev</profile>
+        <springfox-version>2.7.0</springfox-version>
+        <spring.security.version>4.2.3.RELEASE</spring.security.version>
+
+        <hikaricp.version>2.7.6</hikaricp.version>
+        <local.config>${project.basedir}/local_config</local.config>
+        <local.java.lib>${local.config}/lib</local.java.lib>
+
+        <hibernate.version>5.0.12.Final</hibernate.version>
+        <!-- CXF -->
+        <cxf.version>3.1.14</cxf.version>
+
+        <!-- Frontend -->
+        <node.version>v8.5.0</node.version>
+        <npm.version>5.3.0</npm.version>
+
+        <!-- J2EE 7 lib BEGIN -->
+        <javax.servlet.version>3.1.0</javax.servlet.version>
+        <javax.jsp.version>2.3.0</javax.jsp.version>
+        <!-- J2EE 7 lib END -->
+
+        <!-- Testing -->
+        <testng.version>6.8.14</testng.version>
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <!--<version>1.4.4.RELEASE</version>-->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- DataSource (HikariCP) -->
+        <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>${hikaricp.version}</version>
+        </dependency>
+
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>2.0.3-1</version>
+        </dependency>
+
+
+        <!-- CXF BEGIN -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <!-- CXF END -->
+
+        <!-- BEGIN - For compile, which are provided by running env. machine -->
+        <!-- TODO: xml.jar is not published on Maven repository. -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <!--<artifactId>jstl</artifactId>-->
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
+        <!--<dependency>-->
+        <!--<groupId>javax.servlet.jsp</groupId>-->
+        <!--<artifactId>javax.servlet.jsp-api</artifactId>-->
+        <!--<version>${javax.jsp.version}</version>-->
+        <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
+        <!-- END - For compile, which are provided by running env. machine -->
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.pccw.immd</groupId>
+            <artifactId>pccw-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>oro</groupId>
+            <artifactId>oro</artifactId>
+            <version>2.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>local</groupId>
+            <artifactId>oracle.ojdbc</artifactId>
+            <version>7</version>
+            <scope>system</scope>
+            <systemPath>${local.java.lib}/ojdbc7.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <targetPath>${project.build.outputDirectory}/</targetPath>
+                <excludes>
+                    <exclude>env/</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/env/${profileId}</directory>
+                <targetPath>${project.build.outputDirectory}/</targetPath>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <containerConfigXML>src/main/webapp/META-INF/context.xml</containerConfigXML>
+                    <attachClasses>true</attachClasses>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArguments>
+                        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+                    </jvmArguments>
+                </configuration>
+            </plugin>
+
+
+            <!--
+                        <plugin>
+                            <groupId>com.github.eirslett</groupId>
+                            <artifactId>frontend-maven-plugin</artifactId>
+                            <version>${frontend.plugin.version}</version>
+                            <configuration>
+                                <installDirectory>target</installDirectory>
+                                <workingDirectory>${project.root.dir}/frontend</workingDirectory>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>install node and npm</id>
+                                    <goals>
+                                        <goal>install-node-and-npm</goal>
+                                    </goals>
+                                    <configuration>
+                                        <nodeVersion>${node.version}</nodeVersion>
+                                        <npmVersion>${npm.version}</npmVersion>
+                                    </configuration>
+                                </execution>
+                                <execution>
+                                    <id>npm install</id>
+                                    <goals>
+                                        <goal>npm</goal>
+                                    </goals>
+                                    <configuration>
+                                        <arguments>install</arguments>
+                                    </configuration>
+                                </execution>
+                                <execution>
+                                    <id>webpack build</id>
+                                    <goals>
+                                        <goal>webpack</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                -->
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>undertow</id>
+            <properties>
+                <undertwo-jsp.version>1.0.0.Beta27</undertwo-jsp.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-undertow</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <!--<dependency>-->
+                <!--<groupId>io.undertow</groupId>-->
+                <!--<artifactId>undertow-jsp</artifactId>-->
+                <!--<version>${undertwo-jsp.version}</version>-->
+                <!--</dependency>-->
+            </dependencies>
+        </profile>
+        <profile>
+            <id>tomcat</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>jetty</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-jetty</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <!-- for build env -->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profileId>dev</profileId>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <profileId>uat</profileId>
+            </properties>
+        </profile>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <profileId>prd</profileId>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>withModule</id>
+            <!--<build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <overlays>
+                                <overlay>
+                                    <artifactId>admin-func-module</artifactId>
+                                    <version>1.0-SNAPSHOT</version>
+                                </overlay>
+                            </overlays>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>-->
+            <dependencies>
+                <dependency>
+                    <groupId>com.pccw.immd</groupId>
+                    <artifactId>admin-func-module</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+    <!--
+    -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Internal Mirror of Central Plugins Repository</name>
+            <url>http://10.89.105.44/nexus/repository/maven-public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+    <repositories>
+
+
+        <!--
+        -->
+        <repository>
+            <id>central</id>
+            <name>the nexus repository of pccw framework team</name>
+            <url>http://10.89.105.44/nexus/repository/maven-public</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-pccw-snapshot</id>
+            <name>the nexus repository of pccw framework team</name>
+            <url>http://10.89.105.44/nexus/repository/mvn-pccw-snapshot</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>Maven 2</id>
+            <name>Maven 2 Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>mvnrepository</id>
+            <name>mvnrepository Repository</name>
+            <url>http://central.maven.org/maven2</url>
+        </repository>
+
+
+    </repositories>
+</project>

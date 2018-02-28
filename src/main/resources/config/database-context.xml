@@ -35,7 +35,7 @@
     </bean>
     -->
 
-    <bean id="datasource.adminfunc" class="oracle.jdbc.pool.OracleDataSource"
+    <bean primary="true" id="datasource.adminfunc" class="oracle.jdbc.pool.OracleDataSource"
           p:user="${eservice2.web.datasource.username}"
           p:password="${eservice2.web.datasource.password}"
           p:driverType="${eservice2.web.datasource.className}"
@@ -76,7 +76,8 @@
 
     </util:map>
     <!-- Creates the bean that creates the JPA entity manager factory. -->
-    <bean id="entityManagerFactory.adminfunc" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+    <bean primary="true" id="entityManagerFactory.adminfunc" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:persistenceUnitName="adminfunc"
           p:dataSource-ref="datasource.adminfunc"
           p:jpaVendorAdapter-ref="hibernateJpaVendorAdapter.adminfunc"
           p:packagesToScan="com.pccw.immd.adminfunc.domain"
