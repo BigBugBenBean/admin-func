@@ -93,7 +93,11 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
             userId = SecurityContextHolder.getContext().getAuthentication().getName();
             String immdToken = ((LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getImmdToken();
 
-            upmsService.validateImmdToken(userId, immdToken);
+            boolean isDemo = isDemoAccount(userId);
+            if (!isDemo) {
+                upmsService.validateImmdToken(userId, immdToken);
+            }
+
 
         } else {
             if (LOG.isDebugEnabled())
@@ -108,4 +112,17 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
         MenuItem applicationMenu = (MenuItem)request.getAttribute( MENU_ROOT_KEY );
 
     }
+
+
+    private boolean isDemoAccount(String loginId) {
+        boolean isDemo = false;
+
+        String demoPrefix = "demo";
+        if (loginId.contains(demoPrefix)) {
+            isDemo = true;
+        }
+
+        return isDemo;
+    }
+
 }

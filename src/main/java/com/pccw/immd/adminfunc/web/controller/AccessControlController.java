@@ -24,7 +24,7 @@ public class AccessControlController {
     @Autowired
     @Qualifier("accessControlService.eservice2")   private AccessControlService accessControlService;
 
-    @GetMapping(value = "/accessControl.do")
+    @GetMapping(value = "/e-Services-2/maintenance/accessControl.do")
     public String accessControlPage(@ModelAttribute AccessControlDTO accessControlDTO) {
         List<AccessControl> list = accessControlService.listAll();
         
@@ -35,7 +35,7 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control";
     }
 
-    @GetMapping(value = "/accessControlGlobal.do")
+    @GetMapping(value = "/e-Services-2/maintenance/accessControl_Global.do")
     public String accessControlGlobalPage(@ModelAttribute AccessControlDTO accessControlDTO) {
         List<AccessControlGlobalParam> params = accessControlService.getGlobalParam();
 
@@ -46,7 +46,7 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control-global";
     }
 
-    @PostMapping(value = "/saveAccessControlGlobalParams.do")
+    @PostMapping(value = "/e-Services-2/maintenance/accessControl_GlobalParamsSave.do")
     public String saveAccessControlGlobalParams(@ModelAttribute AccessControlGlobalParamsDTO accessControlGlobalParamsDTO) {
 
         accessControlService.updateGlobalParam(accessControlGlobalParamsDTO);
@@ -54,22 +54,22 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control-global-success";
     }
 
-    @GetMapping(value = "/accessControlGlobalSuccess.do")
-    public String accessControlGlobalSuccessPage() {
-        return "/eServices2/AccessControl/access-control-global-success";
-    }
+//    @GetMapping(value = "/accessControlGlobalSuccess.do")
+//    public String accessControlGlobalSuccessPage() {
+//        return "/eServices2/AccessControl/access-control-global-success";
+//    }
 
-    @GetMapping(value = "/createAccessControl.do")
+    @GetMapping(value = "/e-Services-2/maintenance/accessControl_Create.do")
     public String accessControlCreatePage() {
         return "/eServices2/AccessControl/access-control-create";
     }
 
-    @GetMapping(value = "/createAccessControlSuccess.do")
+    @GetMapping(value = "/e-Services-2/maintenance/accessControl_CreateSuccess.do")
     public String accessControlCreateSuccessPage() {
         return "/eServices2/AccessControl/access-control-create-success";
     }
 
-    @GetMapping(value = "/accessControlView.do")
+    @GetMapping(value = "/e-Services-2/maintenance/accessControl_View.do")
     public String accessControlViewPage() {
         return "/eServices2/AccessControl/access-control-view";
     }

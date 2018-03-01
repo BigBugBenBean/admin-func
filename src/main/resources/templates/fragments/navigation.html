@@ -13,7 +13,17 @@
         <div class="flex-item-2 nav-title-left">
             <span style=" width: '100%'">
                 <span th:each="item, iter: ${navObj.navigationList}">
-                    <span th:text="${item}"></span>
+                    <span th:switch="${iter.index}">
+                        <span th:case="0" class="nav-title-left">
+                            <span th:text="${item.label}"></span>
+                        </span>
+                        <span th:case="*">
+                            <a th:href="${CONTEXT_PATH} + ${item.url}" class="nav-title-left nav-title">
+                                <span th:text="${item.label}"></span>
+                            </a>
+                        </span>
+                    </span>
+
                     <span th:if="( ${iter.index} != ( ${iter.size} -1 ) )" > > </span>
                 </span>
             </span>

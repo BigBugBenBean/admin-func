@@ -1,5 +1,6 @@
 
 const dateFormat = 'dddd, D MMMM YYYY';
+var UI_DATE_FORMAT = "DD/MM/YYYY";
 
 const today = moment().format(dateFormat);
 
@@ -140,7 +141,7 @@ function navigatePage(page, hasValue) {
 
     var contextPath = getContextPath();
 
-    var menu = 'landing';
+    var menu = 'landing.do';
     var path = contextPath + '/' + menu + append;
     console.log(path);
 

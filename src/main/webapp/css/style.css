@@ -217,6 +217,10 @@
     padding-left: 0.5em;
 }
 
+.nav-title:hover {
+    color: #93de83;
+}
+
 .nav-title-right, .nav-title-exit {
     text-align: right;
     padding-right: 0.5em;
@@ -284,7 +288,6 @@ main menu
     padding: 5px 25px;
     color: white;
     background-color: #BF5564;
-    margin-bottom: -1px;
     margin-left: -1px;
     border-radius: 0px 10px 0px 0px;
     margin-right: -3px;
@@ -325,7 +328,6 @@ main menu
 #main-tab-3:checked ~ #main-content-3 {
     display: block;
 }
-
 
 #exit-tab {
 

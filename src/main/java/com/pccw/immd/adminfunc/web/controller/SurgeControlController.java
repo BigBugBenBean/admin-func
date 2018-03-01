@@ -11,17 +11,17 @@ public class SurgeControlController {
 
     private static final Logger LOG = LoggerFactory.getLogger(MenuController.class);
 
-    @GetMapping(value = "/surgeControl.do")
+    @GetMapping(value = "/e-Services-2/maintenance/surgeControl.do")
     public String surgeControlPage() {
         return "/eServices2/SurgeControl/surge-control";
     }
 
-    @GetMapping(value = "/editSurgeControl.do")
+    @GetMapping(value = "/e-Services-2/maintenance/surgeControl_Edit.do")
     public String editSurgeControlPage() {
         return "/eServices2/SurgeControl/edit-surge-control";
     }
 
-    @PostMapping(value = "/surgeControlUpdated.do")
+    @PostMapping(value = "/e-Services-2/maintenance/surgeControl_Updated.do")
     public String updateSurgeControlPage() {
         return "/eServices2/SurgeControl/surge-control-updated";
     }

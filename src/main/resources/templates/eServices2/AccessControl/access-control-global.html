@@ -24,7 +24,7 @@
 
     <div layout:fragment="content">
         <div style="padding: 1.5em;">
-            <form method="post" th:action="@{/saveAccessControlGlobalParams.do}">
+            <form method="post" th:action="@{/e-Services-2/maintenance/accessControl_GlobalParamsSave.do}">
                 <h3>Global Parameters</h3>
 
                 <div>
@@ -119,7 +119,7 @@
                     <!--<a th:href="@{/accessControlGlobalSuccess.do}">-->
                         <input type="submit" th:value="${#messages.msg('umps.adminfunc.common.save')}" class="ButtonStyle submit-button" style="margin-right: 20px;" />
                     <!--</a>-->
-                    <a th:href="@{/accessControl.do}">
+                    <a th:href="@{/e-Services-2/enquiry/accessControl.do}">
                         <input type="text" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" class="ButtonStyle submit-button" />
                     </a>
                 </div>

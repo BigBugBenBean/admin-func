@@ -13,7 +13,7 @@ public class ApplicationFeeEnquiry {
 
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationFeeEnquiry.class);
 
-    @GetMapping(value = "/applicationFeeEnquiry.do")
+    @GetMapping(value = "/e-Services-2/enquiry/applicationFeeEnquiry.do")
     public String appFeeEnqPage() {
         return "/eServices2/application-fee-enquiry";
     }

@@ -21,7 +21,7 @@ public class SystemHolidayController {
     private SystemHolidayService systemHolidayService;
 
     @AccessAudit()
-    @GetMapping(value = "/systemHoliday.do")
+    @GetMapping(value = "/e-Services-2/enquiry/systemHoliday.do")
     public String systemHolidayPage(@ModelAttribute SystemHolidayDTO systemHolidayDTO) {
         systemHolidayDTO.setSystemHolidayList(systemHolidayService.listAll());
         return "/eServices2/SystemHoliday/system-holiday";

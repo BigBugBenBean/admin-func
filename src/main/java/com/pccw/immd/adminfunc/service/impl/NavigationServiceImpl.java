@@ -16,10 +16,11 @@ public class NavigationServiceImpl implements NavigationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BreadcrumbInterceptor.class);
 
-    private List<String> navigationList = new ArrayList<String>();
 
-    public List<String> generateNavigationBar(String url, MenuService.MenuItem root) throws IOException {
-        List<String> list = new ArrayList<>();
+    private List<MenuService.MenuItem> navigationList = new ArrayList<>();
+
+    public List<MenuService.MenuItem> generateNavigationBar(String url, MenuService.MenuItem root) throws IOException {
+        List<MenuService.MenuItem> list = new ArrayList<>();
 
         String[] urlArray = url.split("/");
         String targetURL = urlArray[urlArray.length-1];
@@ -35,17 +36,20 @@ public class NavigationServiceImpl implements NavigationService {
 
                     String tmpTargetURL = targetURL.toLowerCase();
                     String tmpThirdURL = tmpURLArr[tmpURLArr.length-1].toLowerCase();
+                    String tmpFuncName = tmpTargetURL.split("_")[0];
 
-                    if (tmpTargetURL.contains(tmpThirdURL)) {
-                        list.add(firstLabel);
-                        list.add(secondLabel);
-                        list.add(thirdLabel);
+                    if (tmpThirdURL.startsWith(tmpFuncName)) {
+                        list.add(firstItem);
+                        list.add(secondItem);
+                        list.add(thirdItem);
                         break;
                     }
 
                 }
             }
         }
+
+        LOG.debug("generateNavigationBar.navigationList: " + this.navigationList.size());
 
         this.setNavigationList(list);
 
@@ -62,11 +66,11 @@ public class NavigationServiceImpl implements NavigationService {
         return action;
     }
 
-    public List<String> getNavigationList() {
+    public List<MenuService.MenuItem> getNavigationList() {
         return navigationList;
     }
 
-    public void setNavigationList(List<String> navigationList) {
+    public void setNavigationList(List<MenuService.MenuItem> navigationList) {
         this.navigationList = navigationList;
     }
 

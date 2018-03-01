@@ -125,7 +125,7 @@
                                     var rowItem = jQuery(this).data('rowItem');
                                     console.log(rowItem);
 
-                                    var form = jQuery('<form style="display: none;" method="POST" th:action="@{/surgeControlUpdated.do}"></form>');
+                                    var form = jQuery('<form style="display: none;" method="POST" th:action="@{/e-Services-2/maintenance/surgeControl_Updated.do}"></form>');
 
                                     jQuery.each(rowItem, function (key, value) {
                                         console.log('key: ' + key + ' , value: ' + value);
@@ -177,7 +177,7 @@
                     <span>Share Ticket Pool(Usage/Assigned): 3067/6000</span>
                 </div>
                 <div class="flex-item-1" style="min-width: 320px; ">
-                    <a th:href="@{/surgeControl.do}">
+                    <a th:href="@{/e-Services-2/maintenance/surgeControl.do}">
                         <input type="text" class="ButtonStyle edit-btn" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" />
                     </a>
                 </div>

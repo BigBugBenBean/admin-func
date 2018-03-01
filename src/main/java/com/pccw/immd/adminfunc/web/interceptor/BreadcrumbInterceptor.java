@@ -1,7 +1,7 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
-
 import com.pccw.immd.adminfunc.service.MenuService;
+import com.pccw.immd.adminfunc.service.MenuService.MenuItem;
 import com.pccw.immd.adminfunc.service.NavigationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +29,7 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(BreadcrumbInterceptor.class);
     private static final String BREADCRUMB_MENU_KEY = "BREADCRUMB_MENU_KEY";
     private static final String BREADCRUMB_NAV_KEY = "NAVBAR";
+    private static final String CONTEXT_PATH_KEY = "CONTEXT_PATH";
 
     @Autowired
     @Qualifier("navigationService.eservice2")
@@ -44,10 +45,12 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
 
         MenuService.MenuItem root = (MenuService.MenuItem)request.getAttribute(MENU_ROOT_KEY);
 
-        String requestLink = convertLink(request.getRequestURI().toString(), request.getContextPath());
+        String contextPath = request.getContextPath();
+        String requestLink = convertLink(request.getRequestURI().toString(), contextPath);
 
-        List<String> navList = navigationService.generateNavigationBar(requestLink, root);
+        List<MenuService.MenuItem> navList = navigationService.generateNavigationBar(requestLink, root);
 
+        request.setAttribute( CONTEXT_PATH_KEY, contextPath );
         request.setAttribute( BREADCRUMB_NAV_KEY, navigationService );
         return true;
     }

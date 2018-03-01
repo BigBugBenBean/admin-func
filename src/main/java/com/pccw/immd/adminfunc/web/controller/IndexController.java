@@ -55,24 +55,11 @@ public class IndexController {
         String loginId = principal.getName();
         LOG.info("loginId: " + loginId  );
 
-        boolean isDemo = isDemoAccount(loginId);
-        if (isDemo) {
-            return demoPage(loginId, userDTO);
-        }
 
         return "menu";
     }
 
-    private boolean isDemoAccount(String loginId) {
-        boolean isDemo = false;
 
-        String demoPrefix = "demo";
-        if (loginId.contains(demoPrefix)) {
-            isDemo = true;
-        }
-
-        return isDemo;
-    }
 
     private String demoPage(String loginId, UserDTO userDTO) {
         LOGIN_STATUS status = validateAccount(loginId);
