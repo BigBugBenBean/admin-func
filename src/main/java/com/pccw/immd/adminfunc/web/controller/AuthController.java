@@ -40,7 +40,8 @@ public class AuthController {
 
     @RequestMapping(value = "/logout-result.do", method = RequestMethod.GET)
     public String logoutResult() {
-        return "/Auth/logout-success";
+//        return "/Auth/logout-success";
+        return "redirect:/AUTH/login_form.do";
     }
 
 

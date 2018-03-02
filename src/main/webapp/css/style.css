@@ -205,6 +205,23 @@
     line-height: 35px;
 }
 
+.nav-border-left {
+    border-right-color: #964350;
+    border-right-width: 2px;
+    border-right-style: solid;
+}
+
+.nav-border-right {
+    float: right;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 8px;
+    padding-right: 15px;
+    border-left-color: #964350;
+    border-left-style: solid;
+    border-left-width: 2px;
+}
+
 .nav-title-left, .nav-title-right {
     color: White;
     font-family: Arial;
@@ -219,6 +236,7 @@
 
 .nav-title:hover {
     color: #93de83;
+    cursor: pointer;
 }
 
 .nav-title-right, .nav-title-exit {
