@@ -5,21 +5,14 @@
     <meta charset="UTF-8"></meta>
     <title>e-Services Admin Function</title>
 
-    <!--<script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>-->
-    <!--<script src="/adminfunc/js/lib/lodash.min.js"></script>-->
-    <!--<script src="/adminfunc/js/lib/moment.min.js"></script>-->
+    <script type="text/javascript" th:inline="javascript" th:if="${applicationFeeEnquiryDTO}">
+        /*<![CDATA[*/
 
-    <!--<script src="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid.min.js"></script>-->
-
-    <!--<script th:inline="javascript" src="/adminfunc/js/common.js"></script>-->
-
-    <!--<link rel="stylesheet" href="/adminfunc/css/style.css"/>-->
-
-    <!--<link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-custom.css"/>-->
-    <!--<link rel="stylesheet" href="/adminfunc/js/lib/jsgrid-1.5.3/jsgrid-theme-custom.css"/>-->
-
-    <script>
         $(document).ready(function () {
+
+            var applicationCodeList = [[${applicationFeeEnquiryDTO.applicationCodeList}]];
+            console.log('applicationCodeList');
+            console.log(applicationCodeList);
 
             updateNavTitle();
 
@@ -101,11 +94,7 @@
 
         });
 
-
-        var menu = [
-
-        ];
-
+        /*]]>*/
     </script>
 
 </head>
@@ -121,64 +110,6 @@
             <div id="appFeeEnqGrid"></div>
         </div>
     </div>
-
-
-
-    <!--
-        <div class="flex-container">
-            <div class="flex-item-1 header-item-left">
-                <span>e-Services-2</span>
-            </div>
-            <div></div>
-            <div class="flex-item-1 header-item-right">
-                    <span>| userID:
-                        <b></b> |</span>
-                <span>Date:
-                        <b id="todayDate"></b>
-                    </span>
-            </div>
-        </div>
-        <div class="grid-container ">
-
-
-            <div class="main-menu">
-                <span th:each="m,i : ${ROOT.childern}">
-                    <input type="radio" id="main-tab-" th:attrappend="id=${i.index + 1}"  name="main-tabs" checked="checked"/>
-                    <label for="main-tab-" th:attrappend="for=${i.index + 1}" style="" url="${m.url}" th:text="${m.label}"></label>
-
-                </span>
-
-
-                <div style="float: right;">
-                    <a th:href="@{/AUTH/logout.do}" class="exit-btn">
-                        <input type="submit" id="exit-tab" name="" />
-                        <label for="exit-tab" >Exit</label>
-                    </a >
-                </div>
-
-
-                <div id="main-content-1">
-                    <div class="flex-container grid-nav-container">
-                        <div class="flex-item-1 nav-title-left">
-                                <span style=" width: '100%'">e-Services-2 >
-                                    <span id="eServices2SubCat">Enquiry</span> >
-                                    <span id="eServices2Func">Application Fee Enquiry</span>
-                                </span>
-                        </div>
-                        <div class="flex-item-1 nav-title-right">
-                            <span style="width: 100%;">AFE0001</span>
-                        </div>
-                    </div>
-                    <div class="content-container " style=" height: 300px;">
-
-                    </div>
-                </div>
-
-        </div>
-
-    </div> -->
-
-
 </div>
 </body>
 </html>
