@@ -1,0 +1,24 @@
+.search-padding {
+    padding: 5px;
+}
+
+.search-field-left {
+    padding-left: 50px;
+    line-height: 30px;
+}
+
+.search-input {
+    width: 200px;
+}
+
+.search-input-time {
+    width: 100px;
+}
+
+.search-input-minute {
+    width: 30px;
+}
+
+.search-time-padding {
+    padding-right: 20px;
+}

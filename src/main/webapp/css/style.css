@@ -14,6 +14,10 @@
     flex: 2;
 }
 
+.flex-item-3 {
+    flex: 3;
+}
+
 .flex-item-7 {
     flex: 7;
 }
@@ -22,6 +26,10 @@
     color: Black;
     font-family: Arial;
     font-size: 14px;
+}
+
+.content-padding {
+    padding: 1.5em;
 }
 
 .round-border {
@@ -57,13 +65,22 @@
 }
 
 .RowSeparator {
+    height: 3px;
+}
+
+.RowSeparatorThin {
+    height: 1px;
+}
+
+.RowSeparatorThin, .RowSeparator {
     background: #79A775;
     width: 100%;
-    height: 3px;
     margin: 5px 0px;
     /* margin-top: 10px;
     margin-bottom: 10px; */
 }
+
+
 
 .RedLink {
     color: #BF5564;
@@ -299,7 +316,7 @@ main menu
 .main-menu {
     background: #BF5564;
     /* padding: 10px; */
-    height: 30px;
+    height: 28px;
 }
 
 .main-menu > input,
