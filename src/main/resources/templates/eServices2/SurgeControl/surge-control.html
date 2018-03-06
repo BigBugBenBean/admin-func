@@ -7,9 +7,120 @@
     <link rel="stylesheet" href="/adminfunc/css/surge-control.css"/>
 
     <script type="text/javascript">
+        function onHistoricalBlockChanged() {
+            var showHistDataContainer = $('#showHistDataContainer');
+            if (showHistDataContainer.css('display') == 'none') {
+                showHistDataContainer.show();
+            } else {
+                showHistDataContainer.hide();
+            }
+        }
+
         $(function () {
             $( "#startDatepicker" ).datepicker();
             $( "#endDatepicker" ).datepicker();
+
+
+
+            //
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Year', 'Sales', 'Expenses'],
+                    ['2004', 1000, 400],
+                    ['2005', 1170, 460],
+                    ['2006', 660, 1120],
+                    ['2007', 1030, 540]
+                ]);
+
+                var options = {
+                    hAxis: {
+                        title: 'Time'
+                    },
+                    vAxis: {
+                        title: 'Ticket usage'
+                    },
+                    // title: 'Company Performance',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                chart.draw(data, options);
+            }
+
+
+            //
+            $('.list-group.checked-list-box .list-group-item').each(function () {
+
+                // Settings
+                var $widget = $(this),
+                    $checkbox = $('<input type="checkbox" class="hidden" />'),
+                    color = ($widget.data('color') ? $widget.data('color') : "primary"),
+                    style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+                    settings = {
+                        on: {
+                            icon: 'glyphicon glyphicon-check'
+                        },
+                        off: {
+                            icon: 'glyphicon glyphicon-unchecked'
+                        }
+                    };
+
+                $widget.css('cursor', 'pointer')
+                $widget.append($checkbox);
+
+                // Event Handlers
+                $widget.on('click', function () {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    $checkbox.triggerHandler('change');
+                    updateDisplay();
+                });
+                $checkbox.on('change', function () {
+                    updateDisplay();
+                });
+
+
+                // Actions
+                function updateDisplay() {
+                    var isChecked = $checkbox.is(':checked');
+
+                    // Set the button's state
+                    $widget.data('state', (isChecked) ? "on" : "off");
+
+                    // Set the button's icon
+                    $widget.find('.state-icon')
+                        .removeClass()
+                        .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+                    // Update the button's color
+                    if (isChecked) {
+                        $widget.addClass(style + color + ' active');
+                    } else {
+                        $widget.removeClass(style + color + ' active');
+                    }
+                }
+
+                // Initialization
+                function init() {
+
+                    if ($widget.data('checked') == true) {
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    }
+
+                    updateDisplay();
+
+                    // Inject the icon if applicable
+                    if ($widget.find('.state-icon').length == 0) {
+                        $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                    }
+                }
+                init();
+            });
+
 
             let names = [
                 {
@@ -138,17 +249,17 @@
                     <span>Share Ticket Pool(Usage/Assigned): 3067/6000</span>
                 </div>
                 <div class="flex-item-1" style="min-width: 320px; ">
-                    <input type="text" class="ButtonStyle edit-btn" value="Show Historial Data" />
+                    <input type="button" class="ButtonStyle edit-btn pointer" value="Show Historical Data" id="showHistData" onclick="onHistoricalBlockChanged()" />
                     <a th:href="@{/e-Services-2/maintenance/surgeControl_Edit.do}">
-                        <input type="text" class="ButtonStyle edit-btn" value="Edit Configuration" />
+                        <input type="text" class="ButtonStyle edit-btn pointer" value="Edit Configuration" />
                     </a>
                 </div>
             </div>
 
-            <div style="border: 1px solid red; margin-top: 10px; height: 200px;">
+            <div id="showHistDataContainer" style="margin-top: 10px; height: 200px; display: none;">
                 <div class="flex-container">
-                    <div class="flex-item-2" style="border: 1px solid blue;">
-                        <!--<div id="curve_chart" style="width: 100%; height: 100%;"></div>-->
+                    <div class="flex-item-2">
+                        <div id="curve_chart"></div>
                     </div>
                     <div class="flex-item-1">
                         <div>
@@ -158,7 +269,15 @@
                             <input type="text" id="endDatepicker" />
                         </div>
                     </div>
-                    <div class="flex-item-1">333</div>
+                    <div class="flex-item-1 well" style="max-height: 150px; overflow-y: auto;">
+                        <ul class="list-group checked-list-box">
+                            <li class="list-group-item pointer">Application for Search of Record of Death in Hong Kong (502)</li>
+                            <li class="list-group-item pointer">Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong) (500)</li>
+                            <li class="list-group-item pointer">Supplementary Document Submission (592)</li>
+                            <li class="list-group-item pointer">Application Status Enquiry (504)</li>
+                            <li class="list-group-item pointer">Pre-arrival Registration for Taiwan Residents (622)</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
