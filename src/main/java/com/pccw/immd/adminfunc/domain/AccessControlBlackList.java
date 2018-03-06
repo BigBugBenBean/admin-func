@@ -1,6 +1,8 @@
 package com.pccw.immd.adminfunc.domain;
 
 
+import com.pccw.immd.adminfunc.dto.AccessControlCreateDTO;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,5 @@ import java.util.Date;
 @Entity
 @Table(name = "UM_ACCESS_CONTROL_BLACK_LIST")
 public class AccessControlBlackList extends AccessControl{
-
 
 }

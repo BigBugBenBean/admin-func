@@ -9,12 +9,37 @@
         /*<![CDATA[*/
 
         $(document).ready(function () {
+            var list = [];
 
             var applicationCodeList = [[${applicationFeeEnquiryDTO.applicationCodeList}]];
             console.log('applicationCodeList');
             console.log(applicationCodeList);
 
             updateNavTitle();
+
+            if (isNotEmptyNullUndfined(applicationCodeList) && applicationCodeList.length > 0) {
+                jQuery.each(applicationCodeList, function (index, object) {
+                    var fromDate = new Date(object['effectDateFrom']);
+                    var toDate = new Date(object['effectDateTo']);
+                    var fromDateFormatted =  moment(fromDate).format(TABLE_DATE_FORMAT);
+                    var toDateFormatted = moment(toDate).format(TABLE_DATE_FORMAT);
+
+                    var newObj = {
+                        'Application Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
+                        'Price Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
+                        'Valid From': '2017-01-01',
+                        'Valid To': '2018-01-01',
+                        'Payment Code': '500',
+                        'Payment Description': 'Application for HKSAR Passport ',
+                        'Effective Date': '2017-01-01',
+                        'Receipt Print Indicator': 'BOCI',
+                        'Document Issue Indicator': 'ImmD',
+                        'Revenue Code': '500'
+                    };
+
+                    list.push(newObj);
+                });
+            }
 
             var names = [
                 {
@@ -76,7 +101,7 @@
                 // pageNavigatorNextText: '&#8230;',
                 // pageNavigatorPrevText: '&#8230;',
 
-                data: names,
+                data: list,
 
                 fields: [
                     {name: 'Application Name', type: 'text', width: 100},

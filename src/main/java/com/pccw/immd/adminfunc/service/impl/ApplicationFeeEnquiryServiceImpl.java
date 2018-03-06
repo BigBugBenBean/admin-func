@@ -23,10 +23,6 @@ public class ApplicationFeeEnquiryServiceImpl implements ApplicationFeeEnquirySe
 
     @Override
     public List<ApplicationCode> listAll() {
-        List<ApplicationCode> tmpList = umApplicationCodeRepository.findAll();
-        LOG.debug("ApplicationFeeEnquiryServiceImpl_listAll=========================");
-        LOG.debug("umApplicationCodeRepository: " + tmpList);
-        return tmpList;
-//        return umApplicationCodeRepository.findAll();
+        return umApplicationCodeRepository.findAll();
     }
 }

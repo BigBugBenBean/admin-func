@@ -1,6 +1,7 @@
 
 const dateFormat = 'dddd, D MMMM YYYY';
 var UI_DATE_FORMAT = "DD/MM/YYYY";
+var TABLE_DATE_FORMAT = "DD/MM/YYYY HH:mm:ss";
 
 const today = moment().format(dateFormat);
 

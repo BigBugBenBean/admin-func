@@ -12,12 +12,12 @@
 
             var accessControlList = [[${accessControlDTO.accessControlList}]];
 
-            if (isNotEmptyNullUndfined(accessControlList) && accessControlList.length) {
+            if (isNotEmptyNullUndfined(accessControlList) && accessControlList.length > 0) {
                 jQuery.each(accessControlList, function (index, object) {
                    var fromDate = new Date(object['effectDateFrom']);
                    var toDate = new Date(object['effectDateTo']);
-                   var fromDateFormatted =  moment().format('DD/MM/YYYY HH:mm:ss', fromDate);
-                    var toDateFormatted = moment().format('DD/MM/YYYY HH:mm:ss', toDate);
+                   var fromDateFormatted =  moment(fromDate).format(TABLE_DATE_FORMAT);
+                   var toDateFormatted = moment(toDate).format(TABLE_DATE_FORMAT);
 
                     var newObj = {
                         'Effective Date': fromDateFormatted,
@@ -65,9 +65,15 @@
                                 let str = '';
 
                                 str += '<span>';
-                                str += '<a th:href="@{/e-Services-2/maintenance/accessControl_View.do}" class="RedLink">';
+                                // str += '<form method="get" th:action="@{/e-Services-2/maintenance/accessControl_View.do}">';
+
+                                str += '<a th:href="@{/e-Services-2/maintenance/accessControl_View.do}" class="RedLink pointer">';
                                 str += 'View';
                                 str += '</a>';
+
+                                // str += '<input type="submit" value="View" class="RedLink pointer" style="" />';
+                                // str += '</form>';
+
                                 str += '</span>';
 
                                 // result = result.add(str);

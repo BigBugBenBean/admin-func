@@ -5,6 +5,7 @@ import com.pccw.immd.adminfunc.domain.AccessControl;
 import com.pccw.immd.adminfunc.domain.AccessControlBlackList;
 import com.pccw.immd.adminfunc.domain.AccessControlGlobalParam;
 import com.pccw.immd.adminfunc.domain.AccessControlWhiteList;
+import com.pccw.immd.adminfunc.dto.AccessControlCreateDTO;
 import com.pccw.immd.adminfunc.dto.AccessControlGlobalParamsDTO;
 import com.pccw.immd.adminfunc.repository.HibernateUtils;
 import com.pccw.immd.adminfunc.repository.UmAccessControlBlackListRepository;
@@ -55,13 +56,32 @@ public class AccessControlServiceImpl implements AccessControlService {
     }
 
     @Override
-    public void createWhiteList(AccessControlWhiteList accessControlWhiteList) {
+    public void createWhiteList(AccessControlCreateDTO accessControlCreateDTO) {
+        AccessControlWhiteList whiteList = new AccessControlWhiteList();
 
+        whiteList.setAcIp(accessControlCreateDTO.getDesc());
+        whiteList.setAcList(accessControlCreateDTO.getType());
+        whiteList.setAcName(accessControlCreateDTO.getName());
+        whiteList.setChannel(accessControlCreateDTO.getChannel());
+        whiteList.setEffectDateFrom(accessControlCreateDTO.getEffectiveFrom());
+        whiteList.setEffectDateTo(accessControlCreateDTO.getEffectiveTo());
+
+        whiteListRepository.saveAndFlush(whiteList);
     }
 
     @Override
-    public void createBlackList(AccessControlBlackList accessControlBlackList) {
-        blackListRepository.saveAndFlush(accessControlBlackList);
+    public void createBlackList(AccessControlCreateDTO accessControlCreateDTO) {
+
+        AccessControlBlackList blackList = new AccessControlBlackList();
+
+        blackList.setAcIp(accessControlCreateDTO.getDesc());
+        blackList.setAcList(accessControlCreateDTO.getType());
+        blackList.setAcName(accessControlCreateDTO.getName());
+        blackList.setChannel(accessControlCreateDTO.getChannel());
+        blackList.setEffectDateFrom(accessControlCreateDTO.getEffectiveFrom());
+        blackList.setEffectDateTo(accessControlCreateDTO.getEffectiveTo());
+
+        blackListRepository.saveAndFlush(blackList);
     }
 
     @Override
@@ -71,7 +91,7 @@ public class AccessControlServiceImpl implements AccessControlService {
 
     @Override
     public void updateBlackList(AccessControlBlackList accessControlBlackList) {
-        blackListRepository.saveAndFlush(accessControlBlackList);
+//        blackListRepository.saveAndFlush(accessControlBlackList);
     }
 
     @Override

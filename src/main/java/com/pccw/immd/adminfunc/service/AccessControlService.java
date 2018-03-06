@@ -4,6 +4,7 @@ import com.pccw.immd.adminfunc.domain.AccessControl;
 import com.pccw.immd.adminfunc.domain.AccessControlBlackList;
 import com.pccw.immd.adminfunc.domain.AccessControlGlobalParam;
 import com.pccw.immd.adminfunc.domain.AccessControlWhiteList;
+import com.pccw.immd.adminfunc.dto.AccessControlCreateDTO;
 import com.pccw.immd.adminfunc.dto.AccessControlGlobalParamsDTO;
 
 import java.util.List;
@@ -15,9 +16,9 @@ public interface AccessControlService {
 
     List<AccessControl> listAll();
 
-    void createWhiteList(AccessControlWhiteList accessControlWhiteList);
+    void createWhiteList(AccessControlCreateDTO accessControlCreateDTO);
 
-    void createBlackList(AccessControlBlackList accessControlBlackList);
+    void createBlackList(AccessControlCreateDTO accessControlCreateDTO);
 
     void updateWhiteList(AccessControlWhiteList accessControlWhiteList);
 

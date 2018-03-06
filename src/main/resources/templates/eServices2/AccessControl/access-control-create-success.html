@@ -6,8 +6,19 @@
 
     <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
 
-    <script type="text/javascript">
+    <script type="application/javascript" th:inline="javascript" th:if="${accessControlCreateDTO}">
         $(document).ready(function () {
+
+            var effectiveFrom = [[${accessControlCreateDTO.effectiveFrom}]];
+            var effectiveTo = [[${accessControlCreateDTO.effectiveTo}]];
+
+            if (isNotEmptyNullUndfined(effectiveFrom)) {
+                var fromDateFormatted =  moment(effectiveFrom).format(TABLE_DATE_FORMAT);
+            }
+
+            if (isNotEmptyNullUndfined(effectiveTo)) {
+                var toDateFormatted = moment(effectiveTo).format(TABLE_DATE_FORMAT);
+            }
 
         });
     </script>
@@ -26,7 +37,7 @@
                         <span>Type</span>
                     </div>
                     <div class="success-item-right">
-                        <span>Whitelist</span>
+                        <span th:text="${accessControlCreateDTO.type}"></span>
                     </div>
                 </div>
                 <div class="flex-container success-item-container">
@@ -34,7 +45,10 @@
                         <span>Channel</span>
                     </div>
                     <div class="success-item-right">
-                        <span>Web</span>
+                        <span th:switch="${accessControlCreateDTO.channel}">
+                            <span th:case="I" th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.channel.ivrs')}"></span>
+                            <span th:case="W" th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.channel.web')}"></span>
+                        </span>
                     </div>
                 </div>
                 <div class="flex-container success-item-container">
@@ -42,7 +56,7 @@
                         <span>IP Address/Telephone Number</span>
                     </div>
                     <div class="success-item-right">
-                        <span>10.26.181.24</span>
+                        <span th:text="${accessControlCreateDTO.desc}"></span>
                     </div>
                 </div>
                 <div class="flex-container success-item-container">
@@ -50,7 +64,12 @@
                         <span>Effective From</span>
                     </div>
                     <div class="success-item-right">
-                        <span>10/02/2010 00:00:00</span>
+                        <span th:text="${accessControlCreateDTO.effectiveFromDay}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveFromMonth}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveFromYear}"></span>&nbsp;
+                        <span th:text="${accessControlCreateDTO.effectiveFromHour}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveFromMinute}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveFromSecond}"></span>
                     </div>
                 </div>
                 <div class="flex-container success-item-container">
@@ -58,7 +77,12 @@
                         <span>Effective To</span>
                     </div>
                     <div class="success-item-right">
-                        <span>11/12/2010 00:00:00</span>
+                        <span th:text="${accessControlCreateDTO.effectiveToDay}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveToMonth}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveToYear}"></span>&nbsp;
+                        <span th:text="${accessControlCreateDTO.effectiveToHour}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveToMinute}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveToSecond}"></span>
                     </div>
                 </div>
             </div>
