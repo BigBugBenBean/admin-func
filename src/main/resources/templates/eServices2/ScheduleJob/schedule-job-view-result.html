@@ -8,6 +8,156 @@
 
     <script type="text/javascript">
 
+        $(function () {
+            var list = [];
+
+            list = [
+                {
+                    'jobName': 'Job Name 1',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 2',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 3',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 4',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 5',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 6',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 7',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 8',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 9',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 10',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                }
+            ];
+
+            var totalPageList = [3, 5, 7];
+
+            var recordPerPage = 2;
+            var currPageNum = 1;
+
+            var totalPager = $('#totalPager');
+            totalPager.on('change', function () {
+                console.log('numPager');
+                console.log($(this).val());
+                // var page = parseInt($(this).val(), 10);
+                // grid.jsGrid('openPage', page);
+            });
+
+            var numPager = $('#numPager');
+            numPager.on('change', function () {
+                console.log('numPager');
+                console.log($(this).val());
+                var page = parseInt($(this).val(), 10);
+                console.log('page: ' + page);
+                grid.jsGrid('openPage', page);
+            });
+
+
+            var grid = $("#scheduleJobGrid");
+            grid.jsGrid(
+                {
+                    width: '100%',
+                    height: 'auto',
+
+                    sorting: true,
+                    noDataContent: 'NO data',
+                    selecting: false,
+
+                    // data: list,
+                    autoload: true,
+
+                    paging: true,
+                    pageLoading: true,
+                    pageSize: 3,
+
+                    controller: {
+                        loadData: function (filter) {
+                            var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                            return {
+                                data: list.slice(startIndex, startIndex + filter.pageSize),
+                                itemCount: list.length
+                            };
+                        }
+                    },
+
+                    fields: [
+                        { name: 'jobName', title: 'Job Name', type: 'text', width: 40, headerTemplate: commonHeader },
+                        { name: 'cronExp', title: 'Cron Expression', type: 'text', width: 40, headerTemplate: commonHeader },
+                        { name: 'dataMap', title: 'Data Map', type: 'text', width: 30, headerTemplate: commonHeader },
+                        { name: 'lastStatus', title: 'Last Status', type: 'text', width: 30, headerTemplate: commonHeader },
+                        { name: 'lastExTime', title: 'Last Execution Time', type: 'text', width: 40, headerTemplate: commonHeader },
+                        { name: 'nextExTime', title: 'Next Execution Time', type: 'text', width: 40, headerTemplate: commonHeader }
+                    ]
+
+                }
+            );
+
+        });
+
     </script>
 
 </head>
@@ -65,13 +215,35 @@
                             <span>24/09/2018 12:00</span>
                         </div>
                     </div>
-                    <!--<div class="RowSeparatorThin"></div>-->
-
-
                     <div class="RowSeparator"></div>
                 </div>
 
-                <div></div>
+                <div style="margin-top: 1em;">
+                    <div class="flex-container grid-page-header">
+                        <div style="flex: auto;"></div>
+                        <div>
+                            <span class="grid-page-header-text" th:text="${#messages.msg('umps.adminfunc.common.pagination.recordPerPage')}"></span>
+                            <span>
+                                <select id="totalPager">
+                                    <option value="" selected="selected">3</option>
+                                    <option value="">5</option>
+                                    <option value="">8</option>
+                                </select>
+                            </span>
+                            <span class="grid-page-header-text" style="padding-left: 10px;" th:text="${#messages.msg('umps.adminfunc.common.pagination.pageNo')}"></span>
+                            <span>
+                                <select id="numPager">
+                                    <option value="1" selected="selected">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </span>
+                        </div>
+                    </div>
+                    <div style="width: 100%;">
+                        <div id="scheduleJobGrid"></div>
+                    </div>
+                </div>
 
                 <div class="flex-container" style="padding-top: 30px;">
                     <div style="flex: auto;"></div>
@@ -81,8 +253,6 @@
                         </a>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

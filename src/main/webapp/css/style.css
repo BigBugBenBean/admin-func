@@ -36,6 +36,15 @@
     border-radius: 20px 20px 0 0;
 }
 
+.grid-page-header {
+    background-color: #82a579;
+}
+
+.grid-page-header-text {
+    color: white;
+    font-weight: bold;
+}
+
 .exit-btn {
     text-decoration: none;
     color: white;

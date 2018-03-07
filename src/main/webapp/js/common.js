@@ -32,6 +32,19 @@ commonHeader = function () {
     return "<div>" + ( (this.title === undefined || this.title === null) ? this.name : this.title ) + '</div>';
 };
 
+function getGridPageNumSize(recordPerPage, listSize) {
+    recordPerPage = parseInt(recordPerPage, 10);
+    listSize = parseInt(listSize, 10);
+
+    // console.log('recordPerPage: ' + recordPerPage + ' , listSize: ' + listSize);
+
+    var size = Math.ceil(listSize/recordPerPage);
+
+    // console.log('getGridPageSize: ' + size);
+
+    return size;
+}
+
 function onEServices2SubCatSelected(subCat) {
     switch (subCat) {
         case SUB_CAT_MENU.ENQUIRY: {
