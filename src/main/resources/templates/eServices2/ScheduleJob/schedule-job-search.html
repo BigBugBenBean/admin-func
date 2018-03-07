@@ -18,7 +18,83 @@
 
     <div layout:fragment="content">
         <div class="content-padding">
-            <h3>ScheduleJob</h3>
+            <div>
+                <div class="flex-container">
+                    <div class="flex-item-1">
+                        <b><span th:text="${#messages.msg('umps.adminfunc.common.searchCriteria')}"></span></b>
+                    </div>
+                    <div>
+                        <a th:href="@{/e-Services-2/maintenance/scheduleJob_Create.do}">
+                            <input class="ButtonStyle button pointer" type="text" th:value="${#messages.msg('umps.adminfunc.schedulejob.createJob')}" />
+                        </a>
+                    </div>
+                </div>
+                <div >
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobname')}"></span></b></div>
+                        <div class="flex-item-7">
+                            <input class="search-input" type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.cronexpression')}"></span></b></div>
+                        <div class="flex-item-7">
+                            <input class="search-input" type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.datamap')}"></span></b></div>
+                        <div class="flex-item-7">
+                            <input class="search-input" type="text" maxlength="10" size="10" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.laststatus')}"></span></b></div>
+                        <div class="flex-item-7">
+                            <select>
+                                <option value=""><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.select.success')}"></span></option>
+                                <option value=""><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.select.failed')}"></span></option>
+                                <option value=""><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.select.running')}"></span></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.lastExecutionTime')}"></span></b></div>
+                        <div class="flex-item-7">
+                            <input class="search-input-time" type="text" maxlength="10" size="10" />
+                            <span class="search-time-padding">(dd/mm/yyyy)</span>
+                            <input class="search-input-minute" type="text" maxlength="2" size="2" />
+                            <span> : </span>
+                            <input class="search-input-minute" type="text" maxlength="2" size="2" />
+                            <span>(hh:mm)</span>
+                        </div>
+                    </div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.nextExecutionTime')}"></span></b></div>
+                        <div class="flex-item-7">
+                            <input class="search-input-time" type="text" maxlength="10" size="10" />
+                            <span class="search-time-padding">(dd/mm/yyyy)</span>
+                            <input class="search-input-minute" type="text" maxlength="2" size="2" />
+                            <span> : </span>
+                            <input class="search-input-minute" type="text" maxlength="2" size="2" />
+                            <span>(hh:mm)</span>
+                        </div>
+                    </div>
+
+                    <div class="RowSeparatorThin"></div>
+                </div>
+                <div class="flex-container" style="padding-top: 30px;">
+                    <div style="flex: auto;"></div>
+                    <div style="padding: 15px;">
+                        <a class="DisableLinkUnderline" th:href="@{/e-Services-2/maintenance/scheduleJob_Result.do}">
+                            <input class="ButtonStyle button pointer" style="min-width: 80px;" type="submit" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -16,8 +16,13 @@ public class ScheduleJobController {
      */
 
     @GetMapping(value = "/e-Services-2/enquiry/scheduleJobView.do")
-    public String scheduleJobViewPage() {
+    public String scheduleJobViewSearchPage() {
         return "/eServices2/ScheduleJob/schedule-job-view-search";
+    }
+
+    @GetMapping(value = "/e-Services-2/enquiry/scheduleJobView_Result.do")
+    public String scheduleJobViewResultPage() {
+        return "/eServices2/ScheduleJob/schedule-job-view-result";
     }
 
 
@@ -27,8 +32,13 @@ public class ScheduleJobController {
      */
 
     @GetMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory.do")
-    public String scheduleJobViewHistPage() {
+    public String scheduleJobViewHistSearchPage() {
         return "/eServices2/ScheduleJob/schedule-job-view-history-search";
+    }
+
+    @GetMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory_Result.do")
+    public String scheduleJobViewHistResultPage() {
+        return "/eServices2/ScheduleJob/schedule-job-view-history-result";
     }
 
 
@@ -38,8 +48,23 @@ public class ScheduleJobController {
      */
 
     @GetMapping(value = "/e-Services-2/maintenance/scheduleJob.do")
-    public String scheduleJobPage() {
+    public String scheduleJobSearchPage() {
         return "/eServices2/ScheduleJob/schedule-job-search";
+    }
+
+    @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Result.do")
+    public String scheduleJobResultPage() {
+        return "/eServices2/ScheduleJob/schedule-job-result";
+    }
+
+    @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Create.do")
+    public String scheduleJobCreatePage() {
+        return "/eServices2/ScheduleJob/schedule-job-create";
+    }
+
+    @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Success.do")
+    public String scheduleJobCreateSuccessPage() {
+        return "/eServices2/ScheduleJob/schedule-job-create-success";
     }
 
 }

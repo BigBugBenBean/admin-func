@@ -20,7 +20,7 @@
         <div class="content-padding">
             <div>
                 <div>
-                    <b><span th:text="${#messages.msg('umps.adminfunc.common.searchCriteria')}"></span></b>
+                    <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.newScheduleJob')}"></span></b>
                 </div>
                 <div >
                     <div class="RowSeparatorThin"></div>
@@ -82,8 +82,12 @@
                 <div class="flex-container" style="padding-top: 30px;">
                     <div style="flex: auto;"></div>
                     <div style="padding: 15px;">
-                        <a th:href="@{/e-Services-2/enquiry/scheduleJobView_Result.do}">
-                            <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="submit" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                        <a class="DisableLinkUnderline" th:href="@{/e-Services-2/maintenance/scheduleJob_Success.do}">
+                            <input class="ButtonStyle button pointer" type="submit" th:value="${#messages.msg('umps.adminfunc.common.create')}" />
+                        </a>
+                        &nbsp;
+                        <a class="DisableLinkUnderline" th:href="@{/e-Services-2/maintenance/scheduleJob.do}">
+                            <input class="ButtonStyle button pointer" type="text" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" />
                         </a>
                     </div>
                 </div>

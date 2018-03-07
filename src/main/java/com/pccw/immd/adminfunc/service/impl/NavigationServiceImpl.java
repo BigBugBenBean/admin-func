@@ -23,31 +23,43 @@ public class NavigationServiceImpl implements NavigationService {
         List<MenuService.MenuItem> list = new ArrayList<>();
 
         String[] urlArray = url.split("/");
-        String targetURL = urlArray[urlArray.length-1];
 
-        for (MenuService.MenuItem firstItem : root.getChild() ) {
-            String firstLabel = firstItem.getLabel();
-            for (MenuService.MenuItem secondItem : firstItem.getChild() ) {
-                String secondLabel = secondItem.getLabel();
-                for (MenuService.MenuItem thirdItem : secondItem.getChild() ) {
-                    String thirdLabel = thirdItem.getLabel();
+        if (urlArray.length >= root.getChild().size()) {
+            String targetURL = urlArray[urlArray.length-1];
+            String targetSecendURL = urlArray[urlArray.length-2];
+            String targetFirstURL = urlArray[urlArray.length-3];
 
-                    String[] tmpURLArr = thirdItem.getUrl().split("/");
+            for (MenuService.MenuItem firstItem : root.getChild() ) {
+                String firstLabel = firstItem.getLabel();
+                for (MenuService.MenuItem secondItem : firstItem.getChild() ) {
+                    String secondLabel = secondItem.getLabel();
+                    for (MenuService.MenuItem thirdItem : secondItem.getChild() ) {
+                        String thirdLabel = thirdItem.getLabel();
 
-                    String tmpTargetURL = targetURL.toLowerCase();
-                    String tmpThirdURL = tmpURLArr[tmpURLArr.length-1].toLowerCase();
-                    String tmpFuncName = tmpTargetURL.split("_")[0];
+                        String[] tmpURLArr = thirdItem.getUrl().split("/");
 
-                    if (tmpThirdURL.startsWith(tmpFuncName)) {
-                        list.add(firstItem);
-                        list.add(secondItem);
-                        list.add(thirdItem);
-                        break;
+                        String tmpTargetURL = targetURL.toLowerCase();
+                        String tmpThirdURL = tmpURLArr[tmpURLArr.length-1].toLowerCase();
+                        String tmpFuncName = tmpTargetURL.split("_")[0];
+
+                        String tmpSecendURL = tmpURLArr[tmpURLArr.length-2].toLowerCase();
+                        String tmpFirstURL = tmpURLArr[tmpURLArr.length-3].toLowerCase();
+
+                        if (tmpThirdURL.startsWith(tmpFuncName)
+                                && targetSecendURL.toLowerCase().equals(tmpSecendURL)
+                                && targetFirstURL.toLowerCase().equals(tmpFirstURL)) {
+                            list.add(firstItem);
+                            list.add(secondItem);
+                            list.add(thirdItem);
+                            break;
+                        }
+
                     }
-
                 }
             }
         }
+
+
 
         LOG.debug("generateNavigationBar.navigationList: " + this.navigationList.size());
 

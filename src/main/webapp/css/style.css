@@ -80,7 +80,9 @@
     margin-bottom: 10px; */
 }
 
-
+.DisableLinkUnderline {
+    text-decoration-line: none;
+}
 
 .RedLink {
     color: #BF5564;
