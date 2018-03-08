@@ -29,10 +29,18 @@ public class NavigationServiceImpl implements NavigationService {
             String targetSecendURL = urlArray[urlArray.length-2];
             String targetFirstURL = urlArray[urlArray.length-3];
 
+            boolean isFound = false;
+
             for (MenuService.MenuItem firstItem : root.getChild() ) {
                 String firstLabel = firstItem.getLabel();
+                if (isFound) {
+                    break;
+                }
                 for (MenuService.MenuItem secondItem : firstItem.getChild() ) {
                     String secondLabel = secondItem.getLabel();
+                    if (isFound) {
+                        break;
+                    }
                     for (MenuService.MenuItem thirdItem : secondItem.getChild() ) {
                         String thirdLabel = thirdItem.getLabel();
 
@@ -42,15 +50,17 @@ public class NavigationServiceImpl implements NavigationService {
                         String tmpThirdURL = tmpURLArr[tmpURLArr.length-1].toLowerCase();
                         String tmpFuncName = tmpTargetURL.split("_")[0];
 
-                        String tmpSecendURL = tmpURLArr[tmpURLArr.length-2].toLowerCase();
+                        String tmpSecondURL = tmpURLArr[tmpURLArr.length-2].toLowerCase();
                         String tmpFirstURL = tmpURLArr[tmpURLArr.length-3].toLowerCase();
 
                         if (tmpThirdURL.startsWith(tmpFuncName)
-                                && targetSecendURL.toLowerCase().equals(tmpSecendURL)
+                                && targetSecendURL.toLowerCase().equals(tmpSecondURL)
                                 && targetFirstURL.toLowerCase().equals(tmpFirstURL)) {
                             list.add(firstItem);
                             list.add(secondItem);
                             list.add(thirdItem);
+
+                            isFound = true;
                             break;
                         }
 
@@ -59,23 +69,11 @@ public class NavigationServiceImpl implements NavigationService {
             }
         }
 
-
-
         LOG.debug("generateNavigationBar.navigationList: " + this.navigationList.size());
 
         this.setNavigationList(list);
 
         return list;
-    }
-
-    private String getRequestLinkFromURL(String url) {
-
-
-
-
-        String action = "";
-
-        return action;
     }
 
     public List<MenuService.MenuItem> getNavigationList() {
