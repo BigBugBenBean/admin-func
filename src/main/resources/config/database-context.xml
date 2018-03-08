@@ -43,7 +43,7 @@
     />
 
     <!-- Create default configuration for Hibernate -->
-    <bean id="hibernateJpaVendorAdapter.adminfunc"
+    <bean primary="true" id="hibernateJpaVendorAdapter.adminfunc"
           class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 
     <util:map id="jpaProperties.adminfunc">
