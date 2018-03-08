@@ -6,8 +6,174 @@
 
     <link rel="stylesheet" href="/adminfunc/css/schedule-job.css"/>
 
-    <script type="text/javascript">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
 
+        $(function () {
+
+            var list = [];
+
+            list = [
+                {
+                    'jobName': 'Job Name 1',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 2',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 3',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 4',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 5',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 6',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 7',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 8',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 9',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 10',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                },
+                {
+                    'jobName': 'Job Name 11',
+                    'cronExp': '0 15-45/30 ***?',
+                    'dataMap': 'Data map Filling',
+                    'lastStatus': 'Success',
+                    'lastExTime': '24/09/2018 10:00',
+                    'nextExTime': '24/09/2018 12:00'
+                }
+            ];
+
+            // table grid data
+            var totalPageList = GRID_RECORD_PER_PAGE_ARRAY_DEFAULT;
+            var recordPerPage = totalPageList[0];
+
+            // table grid record per page
+            var totalPager = $('#totalPager');
+            totalPager.on('change', function () {
+                recordPerPage = $(this).val();
+
+                var tmpNumSize = getGridPageNumSize(recordPerPage, list.length);
+                generateSelectOptionBySequence(numPager, tmpNumSize, GRID_TABLE_OFFSET);
+
+                grid.jsGrid('option', 'pageSize', recordPerPage);
+            });
+
+            // table grid page number
+            var numPager = $('#numPager');
+            numPager.on('change', function () {
+                var val = $(this).val();
+                var page = parseInt(val, 10);
+
+                grid.jsGrid('openPage', page);
+            });
+
+            //
+            generateSelectOptionByValue(totalPager, totalPageList);
+
+            var numSize = getGridPageNumSize(recordPerPage, list.length);
+            generateSelectOptionBySequence(numPager, numSize, GRID_TABLE_OFFSET);
+
+            // grid
+            var grid = $("#scheduleJobGrid");
+            var gridConfig = {
+                width: '100%',
+                height: '260px',
+
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
+
+                autoload: true,
+
+                paging: true,
+                pageLoading: true,
+                pageSize: recordPerPage,
+
+                controller: {
+                    loadData: function (filter) {
+                        var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                        return {
+                            data: list.slice(startIndex, startIndex + filter.pageSize),
+                            itemCount: list.length
+                        };
+                    }
+                },
+
+                fields: [
+                    { name: 'jobName', title: 'Job Name', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'cronExp', title: 'Cron Expression', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'dataMap', title: 'Data Map', type: 'text', width: 30, headerTemplate: commonHeader },
+                    { name: 'lastStatus', title: 'Last Status', type: 'text', width: 30, headerTemplate: commonHeader },
+                    { name: 'lastExTime', title: 'Last Execution Time', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'nextExTime', title: 'Next Execution Time', type: 'text', width: 40, headerTemplate: commonHeader }
+                ]
+
+            };
+            grid.jsGrid(gridConfig);
+        });
+
+        /*]]>*/
     </script>
 
 </head>
@@ -71,9 +237,26 @@
                     <div class="RowSeparator"></div>
                 </div>
 
-                <div></div>
+                <div style="margin-top: 1em;  ">
+                    <div class="flex-container grid-page-header">
+                        <div style="flex: auto;"></div>
+                        <div>
+                            <span class="grid-page-header-text" th:text="${#messages.msg('umps.adminfunc.common.pagination.recordPerPage')}"></span>
+                            <span>
+                                <select id="totalPager"></select>
+                            </span>
+                            <span class="grid-page-header-text" style="padding-left: 10px;" th:text="${#messages.msg('umps.adminfunc.common.pagination.pageNo')}"></span>
+                            <span>
+                                <select id="numPager"></select>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="scheduleJobGrid"></div>
+                    </div>
+                </div>
 
-                <div class="flex-container" style="padding-top: 30px;">
+                <div class="flex-container">
                     <div style="flex: auto;"></div>
                     <div style="padding: 15px;">
                         <a class="DisableLinkUnderline" th:href="@{/e-Services-2/maintenance/scheduleJob.do}">

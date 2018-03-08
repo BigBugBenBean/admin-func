@@ -59,7 +59,7 @@ function generateSelectOptionBySequence(element, size, valueOffset) {
         if (i === 0) {
             tmpSelectStr = ' selected="selected" ';
         }
-        elementStr += '<option value="' + tmpVal + '" ' + tmpSelectStr + '>' + tmpVal + '</option>';
+        elementStr += '<option value="' + tmpVal + '" ' + tmpSelectStr + '>' + tmpVal + '/' + size + '</option>';
     }
 
     element.html(elementStr);
