@@ -2,6 +2,8 @@
 const dateFormat = 'dddd, D MMMM YYYY';
 var UI_DATE_FORMAT = "DD/MM/YYYY";
 var TABLE_DATE_FORMAT = "DD/MM/YYYY HH:mm:ss";
+const GRID_TABLE_OFFSET = 1;
+const GRID_RECORD_PER_PAGE_ARRAY_DEFAULT = [10, 20, 50];
 
 const today = moment().format(dateFormat);
 
@@ -32,14 +34,45 @@ commonHeader = function () {
     return "<div>" + ( (this.title === undefined || this.title === null) ? this.name : this.title ) + '</div>';
 };
 
+function generateSelectOptionByValue(element, list) {
+    var elementStr = '';
+
+    for(var i=0; i < list.length; i++) {
+        var tmpVal = list[i];
+        var tmpSelectStr = '';
+        if (i === 0) {
+            tmpSelectStr = ' selected="selected" ';
+        }
+        elementStr += '<option value="' + tmpVal + '" ' + tmpSelectStr + '>' + tmpVal + '</option>';
+    }
+
+    element.html(elementStr);
+    // return element;
+}
+
+function generateSelectOptionBySequence(element, size, valueOffset) {
+    var elementStr = '';
+
+    for(var i=0; i < size; i++) {
+        var tmpVal = i + valueOffset;
+        var tmpSelectStr = '';
+        if (i === 0) {
+            tmpSelectStr = ' selected="selected" ';
+        }
+        elementStr += '<option value="' + tmpVal + '" ' + tmpSelectStr + '>' + tmpVal + '</option>';
+    }
+
+    element.html(elementStr);
+    // return element;
+}
+
 function getGridPageNumSize(recordPerPage, listSize) {
     recordPerPage = parseInt(recordPerPage, 10);
     listSize = parseInt(listSize, 10);
 
-    // console.log('recordPerPage: ' + recordPerPage + ' , listSize: ' + listSize);
-
     var size = Math.ceil(listSize/recordPerPage);
 
+    // console.log('recordPerPage: ' + recordPerPage + ' , listSize: ' + listSize);
     // console.log('getGridPageSize: ' + size);
 
     return size;
