@@ -45,6 +45,30 @@
     font-weight: bold;
 }
 
+.success-item-container {
+    padding: 0.5em;
+    /* border: 1px solid red; */
+}
+
+.success-item-left {
+    flex: 4;
+    padding-left: 10%;
+}
+
+.success-item-left > span {
+    font-weight: bold;
+}
+
+.success-item-right {
+    flex: 6;
+    padding-left: 1em;
+}
+
+.success-label {
+    padding-top: 1em;
+    color: red;
+}
+
 .exit-btn {
     text-decoration: none;
     color: white;

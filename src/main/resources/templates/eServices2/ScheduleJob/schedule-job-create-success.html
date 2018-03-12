@@ -18,7 +18,48 @@
 
     <div layout:fragment="content">
         <div class="content-padding">
-            <h3>ScheduleJobCreateSuccess</h3>
+            <div class="border-frame global-success-frame " style="padding: 1em;">
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobname')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span ></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobClass')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span ></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.cronexpression')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.datamap')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span ></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-label" th:text="${#messages.msg('umps.adminfunc.common.itemCreated')}"></div>
+
+            <div style=" float: right; padding-top: 1em;">
+                <a th:href="@{/e-Services-2/maintenance/scheduleJob.do}">
+                    <input type="button" th:value="${#messages.msg('umps.adminfunc.common.back')}" class="ButtonStyle back-button pointer" style="margin-right: 20px;" />
+                </a>
+            </div>
         </div>
     </div>
 

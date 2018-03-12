@@ -87,11 +87,11 @@
                 </div>
             </div>
 
-            <div class="success-label">The item is saved.</div>
+            <div class="success-label" th:text="${#messages.msg('umps.adminfunc.common.itemSaved')}"></div>
 
             <div style=" float: right; padding-top: 1em;">
                 <a th:href="@{/e-Services-2/maintenance/accessControl.do}">
-                    <input type="text" value="Back to Access Control" class="ButtonStyle back-button" style="margin-right: 20px;" />
+                    <input type="button" th:value="${#messages.msg('umps.adminfunc.accesscontrol.backToAccessControl')}" class="ButtonStyle back-button pointer" style="margin-right: 20px;" />
                 </a>
             </div>
         </div>

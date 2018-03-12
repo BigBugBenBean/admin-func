@@ -32,27 +32,64 @@
                 });
             }
 
-            let grid = $("#accessControlGrid");
+            console.log('AC_list');
+            console.log(list);
+
+            var grid = $("#accessControlGrid");
             // console.log(grid);
 
-            grid.jsGrid(
-                {
-                    width: '100%',
-                    height: '100%',
+            var gridConfig = {
+                width: '100%',
+                height: '500px',
 
-                    sorting: true,
-                    noDataContent: 'NO data',
-                    selecting: false,
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
 
-                    data: list,
+                // data: list,
+                autoload: true,
 
-                    fields: [
-                        { name: 'Effective Date', type: 'text', width: 60, headerTemplate: commonHeader },
-                        { name: 'To', type: 'text', width: 40, headerTemplate: commonHeader },
-                        { name: 'Name', type: 'text', width: 50, headerTemplate: commonHeader },
-                        { name: 'White/Black', type: 'text', width: 80, headerTemplate: commonHeader },
-                        { name: 'Channel', type: 'text', width: 40, headerTemplate: commonHeader },
-                        { name: 'IP/Telephone Number', type: 'text', width: 80, headerTemplate: commonHeader },
+                // rowClick: function (args) {
+                //     console.log(args);
+                //
+                //     var getData = args.item;
+                //     var keys = Object.keys(getData);
+                //     var outputs = [];
+                //
+                //     jQuery.each(keys, function (idx, key) {
+                //        outputs.push(key + ' : ' + getData[key] + '');
+                //     });
+                //
+                //     // console.log(outputs);
+                //
+                //     var target = jQuery(args.event.target);
+                //     console.log(target);
+                //     console.log(target.closest('.RedLink pointer'));
+                //     if (target.closest('.RedLink pointer').length) {
+                //         console.log('hhhhhh');
+                //     }
+                //
+                // },
+
+                controller: {
+                    loadData: function (filter) {
+                        // console.log(filter);
+                        // var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                        // return {
+                        //     data: list.slice(startIndex, startIndex + filter.pageSize),
+                        //     itemCount: list.length
+                        // };
+                        return list;
+                    }
+                },
+
+                fields: [
+                    { name: 'Effective Date', type: 'text', width: 60, headerTemplate: commonHeader },
+                    { name: 'To', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'Name', type: 'text', width: 50, headerTemplate: commonHeader },
+                    { name: 'White/Black', type: 'text', width: 80, headerTemplate: commonHeader },
+                    { name: 'Channel', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'IP/Telephone Number', type: 'text', width: 80, headerTemplate: commonHeader },
                         {
                             type: 'control',
                             headerTemplate: function () {
@@ -67,9 +104,19 @@
                                 str += '<span>';
                                 // str += '<form method="get" th:action="@{/e-Services-2/maintenance/accessControl_View.do}">';
 
+                                // str += '<a class="RedLink pointer">';
                                 str += '<a th:href="@{/e-Services-2/maintenance/accessControl_View.do}" class="RedLink pointer">';
                                 str += 'View';
                                 str += '</a>';
+
+
+                                // str += '<button id="abc">';
+                                // str += 'View';
+                                // str += '</button>';
+                                //
+                                // jQuery('#abc').click(function () {
+                                //     console.log('asdafsadf');
+                                // });
 
                                 // str += '<input type="submit" value="View" class="RedLink pointer" style="" />';
                                 // str += '</form>';
@@ -82,10 +129,10 @@
                                 return result;
                             }
                         }
-                    ]
+                ]
 
-                }
-            )
+            };
+            grid.jsGrid(gridConfig);
 
 
         });

@@ -232,7 +232,7 @@
                 <div class="flex-container">
                     <div style="flex: 10"></div>
                     <div style="flex: 1;  ">
-                        <input type="text" class="ButtonStyle search-btn" th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.search.btn')}" />
+                        <input type="button" class="ButtonStyle search-btn pointer" th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.search.btn')}" />
                     </div>
                 </div>
 
@@ -249,9 +249,9 @@
                     <span>Share Ticket Pool(Usage/Assigned): 3067/6000</span>
                 </div>
                 <div class="flex-item-1" style="min-width: 320px; ">
-                    <input type="button" class="ButtonStyle edit-btn pointer" value="Show Historical Data" id="showHistData" onclick="onHistoricalBlockChanged()" />
+                    <input type="button" class="ButtonStyle edit-btn pointer" th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.showHistData')}" id="showHistData" onclick="onHistoricalBlockChanged()" />
                     <a th:href="@{/e-Services-2/maintenance/surgeControl_Edit.do}">
-                        <input type="text" class="ButtonStyle edit-btn pointer" value="Edit Configuration" />
+                        <input type="button" class="ButtonStyle edit-btn pointer" th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.editConfig')}" />
                     </a>
                 </div>
             </div>
@@ -269,7 +269,7 @@
                             <input type="text" id="endDatepicker" />
                         </div>
                     </div>
-                    <div class="flex-item-1 well" style="max-height: 150px; overflow-y: auto;">
+                    <div class="flex-item-1 well" style="max-height: 200px; overflow-y: auto; ">
                         <ul class="list-group checked-list-box">
                             <li class="list-group-item pointer">Application for Search of Record of Death in Hong Kong (502)</li>
                             <li class="list-group-item pointer">Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong) (500)</li>
