@@ -11,7 +11,12 @@ public interface MenuService {
     public class MenuItem{
         private String label;
         private String url;
-        private MenuItem parent;
+
+        /**
+         * Failed when using getParent() method, Set public for preventing recursive loop error from Thymeleaf to render navigation menu.
+         * Ref.: https://stackoverflow.com/questions/29895541/hibernate-and-thymeleaf-infinite-recursion
+         */
+        public MenuItem parent;
         private List<MenuItem> child = new ArrayList<>();
 
         public MenuItem(MenuItem parent, String label, String url) {

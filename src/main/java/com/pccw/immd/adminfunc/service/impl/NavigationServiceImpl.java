@@ -22,56 +22,68 @@ public class NavigationServiceImpl implements NavigationService {
     public List<MenuService.MenuItem> generateNavigationBar(String url, MenuService.MenuItem root) throws IOException {
         List<MenuService.MenuItem> list = new ArrayList<>();
 
-        String[] urlArray = url.split("/");
+        LOG.debug("generateNavigationBar url: " + url);
 
-        if (urlArray.length >= root.getChild().size()) {
-            String targetURL = urlArray[urlArray.length-1];
-            String targetSecendURL = urlArray[urlArray.length-2];
-            String targetFirstURL = urlArray[urlArray.length-3];
+        String targetURL = getURL(url);
 
-            boolean isFound = false;
+        if (!targetURL.equals("")) {
+            MenuService.MenuItem foundItem = findMenuItemByURL(root, targetURL);
 
-            for (MenuService.MenuItem firstItem : root.getChild() ) {
-                String firstLabel = firstItem.getLabel();
-                if (isFound) {
-                    break;
-                }
-                for (MenuService.MenuItem secondItem : firstItem.getChild() ) {
-                    String secondLabel = secondItem.getLabel();
-                    if (isFound) {
-                        break;
-                    }
-                    for (MenuService.MenuItem thirdItem : secondItem.getChild() ) {
-                        String thirdLabel = thirdItem.getLabel();
-
-                        String[] tmpURLArr = thirdItem.getUrl().split("/");
-
-                        String tmpTargetURL = targetURL.toLowerCase();
-                        String tmpThirdURL = tmpURLArr[tmpURLArr.length-1].toLowerCase();
-                        String tmpFuncName = tmpTargetURL.split("_")[0];
-
-                        String tmpSecondURL = tmpURLArr[tmpURLArr.length-2].toLowerCase();
-                        String tmpFirstURL = tmpURLArr[tmpURLArr.length-3].toLowerCase();
-
-                        if (tmpThirdURL.startsWith(tmpFuncName)
-                                && targetSecendURL.toLowerCase().equals(tmpSecondURL)
-                                && targetFirstURL.toLowerCase().equals(tmpFirstURL)) {
-                            list.add(firstItem);
-                            list.add(secondItem);
-                            list.add(thirdItem);
-
-                            isFound = true;
-                            break;
-                        }
-
-                    }
-                }
-            }
+            list = getMenuTreeFromItem(foundItem);
         }
+
+        this.setNavigationList(list);
 
         LOG.debug("generateNavigationBar.navigationList: " + this.navigationList.size());
 
-        this.setNavigationList(list);
+        return list;
+    }
+
+    private String getURL(String srcUrl) {
+        String destUrl = "";
+        if (srcUrl.contains("_")) {
+            String[] urls = srcUrl.split("_");
+            destUrl = urls[0];
+        } else {
+            String[] urls = srcUrl.split(".do");
+            if (urls.length > 0) {
+                destUrl = urls[0];
+            }
+        }
+        return destUrl;
+    }
+
+    private MenuService.MenuItem findMenuItemByURL(MenuService.MenuItem root, String targetURL) {
+        MenuService.MenuItem traversingItem = root;
+
+        String url = getURL(traversingItem.getUrl());
+
+        if (url.equals(targetURL)) {
+            LOG.debug("findMenuItemByURL Found url: " + url);
+            return traversingItem;
+        } else {
+            for (MenuService.MenuItem tmpItem : traversingItem.getChild() ) {
+                 MenuService.MenuItem result = findMenuItemByURL(tmpItem, targetURL);
+//                LOG.debug("result: " + result + " , url: " + url);
+                 if (result != null) {
+                     return result;
+                 }
+            }
+        }
+
+        return null;
+    }
+
+    private List<MenuService.MenuItem> getMenuTreeFromItem(MenuService.MenuItem item) {
+        List<MenuService.MenuItem> list = new ArrayList<>();
+
+        if (item != null) {
+            MenuService.MenuItem tmpMenuItem = item;
+            while (tmpMenuItem.parent != null) {
+                list.add(0, tmpMenuItem);
+                tmpMenuItem = tmpMenuItem.parent;
+            }
+        }
 
         return list;
     }
