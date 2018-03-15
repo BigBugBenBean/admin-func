@@ -1,7 +1,8 @@
 
 const dateFormat = 'dddd, D MMMM YYYY';
 var UI_DATE_FORMAT = "DD/MM/YYYY";
-var TABLE_DATE_FORMAT = "DD/MM/YYYY HH:mm:ss";
+var TABLE_DATE_FORMAT = "DD/MM/YYYY HH:mm:ss"
+var REGEX_DDMMYYY = /^\d{2}\/\d{2}\/\d{4}$/;    // dd/mm/yyyy
 const GRID_TABLE_OFFSET = 1;
 const GRID_RECORD_PER_PAGE_ARRAY_DEFAULT = [10, 20, 50];
 
@@ -34,13 +35,69 @@ commonHeader = function () {
     return "<div>" + ( (this.title === undefined || this.title === null) ? this.name : this.title ) + '</div>';
 };
 
-function generateSelectOptionByValue(element, list) {
+/**
+ *
+ * @param date: dd/mm/yyyy
+ * @param hour: 00-23
+ * @param minute: 00-59
+ */
+function getDateFromInput(date, hour, minute) {
+    var newDate = null;
+
+    if(isNotEmptyNullUndfined(date) && isNotEmptyNullUndfined(hour) && isNotEmptyNullUndfined(minute)) {
+        if ( isValidDateFormat(REGEX_DDMMYYY, date) && isHour(hour) && isMinute(minute) ) {
+            var dateStr = date + ' ' + hour + ':' + minute;
+            newDate = new Date(dateStr);
+            if (isNotEmptyNullUndfined(newDate)) {
+                return newDate;
+            }
+        }
+    }
+
+    return newDate;
+}
+
+function isValidDateFormat(reg, dateStr) {
+    var isValid = false;
+    if (dateStr.match(reg)) {
+        isValid = true;
+    }
+    return isValid;
+}
+
+function isHour(value) {
+    var isValid = false;
+
+    if (jQuery.isNumeric(value)) {
+        if (value >= 0 && value < 24) {
+            isValid = true;
+        }
+    }
+    return isValid;
+}
+
+function isMinute(value) {
+    var isValid = false;
+
+    if (jQuery.isNumeric(value)) {
+        if (value >= 0 && value < 59) {
+            isValid = true;
+        }
+    }
+    return isValid;
+}
+
+function generateSelectOptionByValue(element, list, hasEmpty) {
     var elementStr = '';
+
+    if (hasEmpty) {
+        elementStr += '<option value="" selected="selected" ></option>';
+    }
 
     for(var i=0; i < list.length; i++) {
         var tmpVal = list[i];
         var tmpSelectStr = '';
-        if (i === 0) {
+        if (i === 0 && !hasEmpty) {
             tmpSelectStr = ' selected="selected" ';
         }
         elementStr += '<option value="' + tmpVal + '" ' + tmpSelectStr + '>' + tmpVal + '</option>';
