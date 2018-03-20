@@ -18,17 +18,16 @@
             console.log(scheduleJobDetailDTO);
 
             if (isNotEmptyNullUndfined(scheduleJobDetailDTO)) {
-                var tmpJobList = scheduleJobDetailDTO['jobDetailList'];
+                var tmpJobList = scheduleJobDetailDTO['jobNameList'];
                 var jobStatusList = scheduleJobDetailDTO['statusList'];
 
                 if (isNotEmptyNullUndfined(tmpJobList) && tmpJobList.length > 0) {
                     var jobListDom =jQuery('#jobList');
 
-                        var list = [];
-                        jQuery.each(tmpJobList, function (index, object) {
-                            var jobName = object['jobName'];
-
-                            list.push(jobName);
+                    var list = [];
+                    jQuery.each(tmpJobList, function (index, object) {
+                        var jobName = object;
+                        list.push(jobName);
                     });
                     generateSelectOptionByValue(jobListDom, list, false);
 

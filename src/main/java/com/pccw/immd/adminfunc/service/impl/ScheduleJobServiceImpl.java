@@ -50,6 +50,19 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
+    public List<String> listAllJobNameByJobHistory() {
+        List<String> list;
+
+        String hql = "select distinct jobName from ScheduleJobViewHistory ORDER BY jobName ASC";
+
+        EntityManager em = HibernateUtils.getEm();
+        Query query = em.createQuery(hql);
+        list = query.getResultList();
+
+        return list;
+    }
+
+    @Override
     public List<ScheduleJobViewHistory> searchScheduleJobHistoryList(ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO) {
         String name = "jh";
         String hql = "from ScheduleJobViewHistory " + name;

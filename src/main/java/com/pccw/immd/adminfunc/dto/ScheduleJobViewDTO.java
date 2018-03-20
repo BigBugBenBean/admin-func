@@ -21,9 +21,9 @@ public class ScheduleJobViewDTO extends BaseDTO {
     public ScheduleJobViewDTO() {
         super();
 
-        statusList.add(new JobStatus(0, "Success"));
-        statusList.add(new JobStatus(1, "Failed"));
-        statusList.add(new JobStatus(2, "Running"));
+        statusList.add(new JobStatus(0, "SUCCESS"));
+        statusList.add(new JobStatus(1, "FAILED"));
+        statusList.add(new JobStatus(2, "RUNNING"));
     }
 
     @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")

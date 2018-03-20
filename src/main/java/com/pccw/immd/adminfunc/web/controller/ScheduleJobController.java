@@ -1,6 +1,5 @@
 package com.pccw.immd.adminfunc.web.controller;
 
-import com.pccw.immd.adminfunc.domain.JobDetail;
 import com.pccw.immd.adminfunc.domain.ScheduleJobView;
 import com.pccw.immd.adminfunc.domain.ScheduleJobViewHistory;
 import com.pccw.immd.adminfunc.dto.JobStatus;
@@ -169,11 +168,14 @@ public class ScheduleJobController {
     @GetMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory.do")
     public String scheduleJobViewHistSearchPage(@ModelAttribute ScheduleJobDetailDTO scheduleJobDetailDTO) {
 
-        List<JobDetail> jobDetailList = scheduleJobService.listAllJobDetail("DEFAULT");
-        LOG.debug("scheduleJobViewHistSearchPage jobDetailList size: " + jobDetailList.size());
+//        List<JobDetail> jobDetailList = scheduleJobService.listAllJobDetail("DEFAULT");
+//        LOG.debug("scheduleJobViewHistSearchPage jobDetailList size: " + jobDetailList.size());
 
-        if (jobDetailList.size() > 0) {
-            scheduleJobDetailDTO.setJobDetailList(jobDetailList);
+        List<String> scheduleJobViewHistoryList = scheduleJobService.listAllJobNameByJobHistory();
+        LOG.debug("scheduleJobViewHistSearchPage scheduleJobViewHistoryList size: " + scheduleJobViewHistoryList.size());
+
+        if (scheduleJobViewHistoryList.size() > 0) {
+            scheduleJobDetailDTO.setJobNameList(scheduleJobViewHistoryList);
         }
 
         List<JobStatus> statusList = scheduleJobDetailDTO.getStatusList();
@@ -184,8 +186,6 @@ public class ScheduleJobController {
 
     @PostMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory_Search.do")
     public String searchScheduleJobViewHistory(@ModelAttribute ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO) {
-
-
 
         if (scheduleJobViewHistoryDTO.getStatus() != null && !scheduleJobViewHistoryDTO.equals("")) {
             scheduleJobViewHistoryDTO.setStatus(scheduleJobViewHistoryDTO.getStatus().toUpperCase());

@@ -1,6 +1,5 @@
 package com.pccw.immd.adminfunc.dto;
 
-import com.pccw.immd.adminfunc.domain.JobDetail;
 import com.pccw.immd.commons.dto.BaseDTO;
 
 import java.util.ArrayList;
@@ -8,24 +7,34 @@ import java.util.List;
 
 public class ScheduleJobDetailDTO extends BaseDTO {
 
-    private List<JobDetail> jobDetailList = new ArrayList<>();
+//    private List<JobDetail> jobDetailList = new ArrayList<>();
     private List<JobStatus> statusList = new ArrayList<>();
+    private List<String> jobNameList = new ArrayList<>();
 
     public ScheduleJobDetailDTO() {
         super();
 
 
-        statusList.add(new JobStatus(0, "Success"));
-        statusList.add(new JobStatus(1, "Failed"));
-        statusList.add(new JobStatus(2, "Running"));
+        statusList.add(new JobStatus(0, "SUCCESS"));
+        statusList.add(new JobStatus(1, "FAILED"));
+        statusList.add(new JobStatus(2, "RUNNING"));
     }
 
-    public List<JobDetail> getJobDetailList() {
-        return jobDetailList;
+//    public List<JobDetail> getJobDetailList() {
+//        return jobDetailList;
+//    }
+//
+//    public void setJobDetailList(List<JobDetail> jobDetailList) {
+//        this.jobDetailList = jobDetailList;
+//    }
+
+
+    public List<String> getJobNameList() {
+        return jobNameList;
     }
 
-    public void setJobDetailList(List<JobDetail> jobDetailList) {
-        this.jobDetailList = jobDetailList;
+    public void setJobNameList(List<String> jobNameList) {
+        this.jobNameList = jobNameList;
     }
 
     public List<JobStatus> getStatusList() {
