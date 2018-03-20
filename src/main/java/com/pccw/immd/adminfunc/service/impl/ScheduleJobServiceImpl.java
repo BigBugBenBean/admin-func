@@ -106,12 +106,13 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         if (scheduleJobViewDTO.getStatus() != null && !scheduleJobViewDTO.getStatus().equals("")) {
             whereClause += " and " + jobHistoryName + ".status like '%" + scheduleJobViewDTO.getStatus() + "%' ";
         }
-        if (scheduleJobViewDTO.getStartDate() != null) {
+        if (scheduleJobViewDTO.getStartDate() != null && scheduleJobViewDTO.getEndDate() != null) {
+
+        } else if (scheduleJobViewDTO.getStartDate() != null) {
             // TODO: search by start date
 //            whereClause += " and " + triggersName + ".startTime BETWEEN " + scheduleJobViewDTO.getStartDate() + " AND " + scheduleJobViewDTO.getEndDate();
 //            whereClause += " and " + triggersName + ".startTime BETWEEN " + "" + " AND " + scheduleJobViewDTO.getEndDate();
-        }
-        if (scheduleJobViewDTO.getEndDate() != null) {
+        } else if (scheduleJobViewDTO.getEndDate() != null) {
             // TODO: search by end date
         }
 
@@ -146,6 +147,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
 
     private String getWhereClause(String name, ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO, Map<String, Object> params) {
         String whereClause = "";
+        String orderBy = " order by " + name + ".startTime DESC";
 
         if (scheduleJobViewHistoryDTO.getJobName() != null || scheduleJobViewHistoryDTO.getStatus() != null
                 || scheduleJobViewHistoryDTO.getStartDate() != null || scheduleJobViewHistoryDTO.getEndDate() != null) {
@@ -161,9 +163,15 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
                 whereClause += " and " + name + ".startTime BETWEEN :startDate AND :endDate";
                 params.put("startDate", scheduleJobViewHistoryDTO.getStartDate());
                 params.put("endDate", scheduleJobViewHistoryDTO.getEndDate());
+            } else if (scheduleJobViewHistoryDTO.getStartDate() != null) {
+                whereClause += " and " + name + ".startTime >= :startDate ";
+                params.put("startDate", scheduleJobViewHistoryDTO.getStartDate());
+            } else if (scheduleJobViewHistoryDTO.getEndDate() != null) {
+                whereClause += " and " + name + ".endTime <= :endDate";
+                params.put("endDate", scheduleJobViewHistoryDTO.getEndDate());
             }
         }
 
-        return whereClause.trim().length() == 0? "" : WHERE_CLAUSE + whereClause.substring(4);
+        return whereClause.trim().length() == 0? "" : WHERE_CLAUSE + whereClause.substring(4) + orderBy;
     }
 }

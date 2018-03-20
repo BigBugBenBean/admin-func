@@ -191,27 +191,21 @@ public class ScheduleJobController {
             scheduleJobViewHistoryDTO.setStatus(scheduleJobViewHistoryDTO.getStatus().toUpperCase());
         }
 
+        String dateRegex = "\\d{2}/\\d{2}/\\d{4}\\d{2}\\d{2}";
+
+        // startDate
         if (!scheduleJobViewHistoryDTO.getStartTime().equals("")
                 && scheduleJobViewHistoryDTO.getStartHour() != null
-                && scheduleJobViewHistoryDTO.getStartMinute() != null
-                && !scheduleJobViewHistoryDTO.getEndTime().equals("")
-                && scheduleJobViewHistoryDTO.getEndHour() != null
-                && scheduleJobViewHistoryDTO.getEndMinute() != null
-                ) {
+                && scheduleJobViewHistoryDTO.getStartMinute() != null) {
 
             //
             String tmpStartHour = String.format("%02d", scheduleJobViewHistoryDTO.getStartHour());
             String tmpStartMinute = String.format("%02d", scheduleJobViewHistoryDTO.getStartMinute());
-            String tmpEndHour = String.format("%02d", scheduleJobViewHistoryDTO.getEndHour());
-            String tmpEndMinute = String.format("%02d", scheduleJobViewHistoryDTO.getEndMinute());
 
             //
-            String dateRegex = "\\d{2}/\\d{2}/\\d{4}\\d{2}\\d{2}";
             String startDateStr = scheduleJobViewHistoryDTO.getStartTime() + tmpStartHour + tmpStartMinute;
-            String endDateStr = scheduleJobViewHistoryDTO.getEndTime() + tmpEndHour + tmpEndMinute;
 
-            // date search: optional
-            if (!startDateStr.equals("") && !endDateStr.equals("")) {
+            if (!startDateStr.equals("")) {
                 if (scheduleJobViewHistoryDTO.getStartHour() < 0 || scheduleJobViewHistoryDTO.getStartHour() >= 24) {
                     // TODO: exception case
                     LOG.debug("InvalidStartHour");
@@ -220,6 +214,36 @@ public class ScheduleJobController {
                     // TODO: exception case
                     LOG.debug("InvalidStartMinute");
                 }
+
+                Boolean isValidStartDate = startDateStr.matches(dateRegex);
+                if (!isValidStartDate) {
+                    // TODO: exception case
+                    LOG.debug("InvalidStartDate");
+                }
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyyHHmm");
+                try {
+                    Date startDate = dateFormat.parse(startDateStr);
+                    scheduleJobViewHistoryDTO.setStartDate(startDate);
+                } catch (ParseException e) {
+                    // TODO: exception case
+                    LOG.debug("ERROR: Date parse error");
+                }
+            }
+        }
+
+        // endDate
+        if (!scheduleJobViewHistoryDTO.getEndTime().equals("")
+                && scheduleJobViewHistoryDTO.getEndHour() != null
+                && scheduleJobViewHistoryDTO.getEndMinute() != null) {
+
+            //
+            String tmpEndHour = String.format("%02d", scheduleJobViewHistoryDTO.getEndHour());
+            String tmpEndMinute = String.format("%02d", scheduleJobViewHistoryDTO.getEndMinute());
+
+            //
+            String endDateStr = scheduleJobViewHistoryDTO.getEndTime() + tmpEndHour + tmpEndMinute;
+
+            if (!endDateStr.equals("")) {
                 if (scheduleJobViewHistoryDTO.getEndHour() < 0 || scheduleJobViewHistoryDTO.getEndHour() >= 24) {
                     // TODO: exception case
                     LOG.debug("InvalidEndHour");
@@ -229,13 +253,7 @@ public class ScheduleJobController {
                     LOG.debug("InvalidEndMinute");
                 }
 
-                Boolean isValidStartDate = startDateStr.matches(dateRegex);
                 Boolean isValidEndDate = endDateStr.matches(dateRegex);
-
-                if (!isValidStartDate) {
-                    // TODO: exception case
-                    LOG.debug("InvalidStartDate");
-                }
                 if (!isValidEndDate) {
                     // TODO: exception case
                     LOG.debug("InvalidEndDate");
@@ -243,12 +261,8 @@ public class ScheduleJobController {
 
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyyHHmm");
                 try {
-                    Date startDate = dateFormat.parse(startDateStr);
                     Date endDate = dateFormat.parse(endDateStr);
-
-                    scheduleJobViewHistoryDTO.setStartDate(startDate);
                     scheduleJobViewHistoryDTO.setEndDate(endDate);
-
                 } catch (ParseException e) {
                     // TODO: exception case
                     LOG.debug("ERROR: Date parse error");
