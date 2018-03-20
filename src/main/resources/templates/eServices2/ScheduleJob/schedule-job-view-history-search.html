@@ -24,17 +24,17 @@
                 if (isNotEmptyNullUndfined(tmpJobList) && tmpJobList.length > 0) {
                     var jobListDom =jQuery('#jobList');
 
-                    var list = [];
-                    jQuery.each(tmpJobList, function (index, object) {
-                        var jobName = object['jobName'];
+                        var list = [];
+                        jQuery.each(tmpJobList, function (index, object) {
+                            var jobName = object['jobName'];
 
-                        list.push(jobName);
+                            list.push(jobName);
                     });
                     generateSelectOptionByValue(jobListDom, list, false);
 
                 }
 
-                if (isNotEmptyNullUndfined(statusList) && statusList.length > 0) {
+                if (isNotEmptyNullUndfined(jobStatusList) && jobStatusList.length > 0) {
                     var statusListDom =jQuery('#statusList');
 
                     var list = [];
@@ -62,90 +62,9 @@
 
             var submitBtnDom = jQuery('#submitBtn');
             submitBtnDom.on('click', function () {
-                console.log('submitBtnDom');
-
-
                 var form =jQuery('#submitForm');
 
-                // if (shouldIncludeSearchDateField) {
-                //     var tmpStartDate = getDateFromInput(startTimeDom.val(), startHourDom.val(), startMinDom.val());
-                //     if (!isNotEmptyNullUndfined(tmpStartDate)) {
-                //         alert('Invalid start date format');
-                //         return;
-                //     }
-                //
-                //     var tmpEndDate = getDateFromInput(endTimeDom.val(), endHourDom.val(), endMinDom.val());
-                //     if (!isNotEmptyNullUndfined(tmpEndDate)) {
-                //         alert('Invalid end date format');
-                //         return;
-                //     }
-                //
-                //     jQuery('#startDate').attr('name', tmpStartDate);
-                //     jQuery('#endDate').attr('name', '11/11/1999');
-                //
-                // }
-
-                var today = new Date();
-                // jQuery('#startDate').attr('name', moment(new Date()).format(UI_DATE_FORMAT));
-                // jQuery('#endDate').attr('name', moment(today).format(UI_DATE_FORMAT));
-                // document.getElementById('endDate').name = new Date();
-
-                console.log(form);
-                // console.log(jQuery('#startDate'));
-                // console.log(jQuery('#endDate'));
-
-
                 form.submit();
-
-
-            });
-
-            startTimeDom.on('change paste keyup', function () {
-                var val = $(this).val();
-
-                if (val != '') {
-                    shouldIncludeSearchDateField = true;
-                }
-            });
-
-            startHourDom.on('change paste keyup', function () {
-                var val = $(this).val();
-
-                if (isHour(val) && val != '') {
-                    shouldIncludeSearchDateField = true;
-                }
-            });
-
-            startMinDom.on('change paste keyup', function () {
-                var val = $(this).val();
-
-                if (isMinute(val) && val != '') {
-                    shouldIncludeSearchDateField = true;
-                }
-            });
-
-            endTimeDom.on('change paste keyup', function () {
-                var val = $(this).val();
-
-                if (val != '') {
-                    shouldIncludeSearchDateField = true;
-                }
-            });
-
-            endHourDom.on('change paste keyup', function () {
-                var val = $(this).val();
-
-                if (isHour(val) && val != '') {
-                    shouldIncludeSearchDateField = true;
-                }
-            });
-
-            endMinDom.on('change paste keyup', function () {
-                var val = $(this).val();
-
-                if (isMinute(val) && val != '') {
-                    shouldIncludeSearchDateField = true;
-                }
             });
 
         });

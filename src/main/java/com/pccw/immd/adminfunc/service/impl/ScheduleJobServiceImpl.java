@@ -1,7 +1,11 @@
 package com.pccw.immd.adminfunc.service.impl;
 
 import com.pccw.immd.adminfunc.domain.JobDetail;
+import com.pccw.immd.adminfunc.domain.QrtzCronTriggers;
+import com.pccw.immd.adminfunc.domain.QrtzTriggers;
+import com.pccw.immd.adminfunc.domain.ScheduleJobView;
 import com.pccw.immd.adminfunc.domain.ScheduleJobViewHistory;
+import com.pccw.immd.adminfunc.dto.ScheduleJobViewDTO;
 import com.pccw.immd.adminfunc.dto.ScheduleJobViewHistoryDTO;
 import com.pccw.immd.adminfunc.repository.HibernateUtils;
 import com.pccw.immd.adminfunc.repository.UmScheduleJobDetailRepository;
@@ -14,6 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +61,75 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
         return list;
     }
 
+    @Override
+    public List<ScheduleJobView> searchScheduleJobViewList(ScheduleJobViewDTO scheduleJobViewDTO) {
+        String jobDetailName = "jd";
+        String jobHistoryName = "jh";
+        String triggersName = "t";
+        String cronTriggersName = "ct";
+        String hql = "from JobDetail as " + jobDetailName
+                + " , ScheduleJobViewHistory as " + jobHistoryName
+                + " , QrtzTriggers as " + triggersName
+                + " , QrtzCronTriggers as " + cronTriggersName;
+
+        Map<String, Object> params = new HashMap<>();
+
+        hql += " WHERE "
+                + "  " + jobDetailName + ".jobName = " + jobHistoryName + ".jobName  "
+                + " AND " + jobDetailName + ".jobName = " + triggersName + ".jobName "
+                + " AND " + jobDetailName + ".jobName = " + cronTriggersName + ".triggerName" ;
+
+        //
+        String whereClause = "";
+        if (scheduleJobViewDTO.getJobName() != null) {
+            whereClause += " and " + jobDetailName + ".jobName like '%" + scheduleJobViewDTO.getJobName() + "%' ";
+        }
+        if (scheduleJobViewDTO.getDataMap() != null && !scheduleJobViewDTO.getDataMap().equals("")) {
+            whereClause += " and " + jobDetailName + ".dataMap like '%" + scheduleJobViewDTO.getDataMap() + "%' ";
+        }
+        if (scheduleJobViewDTO.getCronExpression() != null && !scheduleJobViewDTO.getCronExpression().equals("")) {
+            whereClause += " and " + cronTriggersName + ".cronExpression like '%" + scheduleJobViewDTO.getCronExpression() + "%' ";
+        }
+        if (scheduleJobViewDTO.getStatus() != null && !scheduleJobViewDTO.getStatus().equals("")) {
+            whereClause += " and " + jobHistoryName + ".status like '%" + scheduleJobViewDTO.getStatus() + "%' ";
+        }
+        if (scheduleJobViewDTO.getStartDate() != null) {
+            // TODO: search by start date
+//            whereClause += " and " + triggersName + ".startTime BETWEEN " + scheduleJobViewDTO.getStartDate() + " AND " + scheduleJobViewDTO.getEndDate();
+//            whereClause += " and " + triggersName + ".startTime BETWEEN " + "" + " AND " + scheduleJobViewDTO.getEndDate();
+        }
+        if (scheduleJobViewDTO.getEndDate() != null) {
+            // TODO: search by end date
+        }
+
+        hql += whereClause;
+
+
+        EntityManager em = HibernateUtils.getEm();
+        Query query = em.createQuery(hql);
+        List<?> list = query.getResultList();
+
+        // combine object
+        List<ScheduleJobView>viewList = new ArrayList<>();
+        for (int i =0; i < list.size(); i++) {
+            ScheduleJobView sjv = new ScheduleJobView();
+            Object[] objects = (Object[]) list.get(i);
+            for (Object obj: objects) {
+                if (obj instanceof JobDetail) {
+                    sjv.setJobDetail((JobDetail) obj);
+                } else if (obj instanceof ScheduleJobViewHistory) {
+                    sjv.setScheduleJobViewHistory((ScheduleJobViewHistory)obj);
+                } else if (obj instanceof QrtzTriggers) {
+                    sjv.setQrtzTriggers((QrtzTriggers)obj);
+                } else if (obj instanceof QrtzCronTriggers) {
+                    sjv.setQrtzCronTriggers((QrtzCronTriggers)obj);
+                }
+            }
+            viewList.add(sjv);
+        }
+
+        return viewList;
+    }
 
     private String getWhereClause(String name, ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO, Map<String, Object> params) {
         String whereClause = "";

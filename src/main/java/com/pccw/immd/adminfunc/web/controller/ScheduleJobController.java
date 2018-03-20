@@ -1,8 +1,11 @@
 package com.pccw.immd.adminfunc.web.controller;
 
 import com.pccw.immd.adminfunc.domain.JobDetail;
+import com.pccw.immd.adminfunc.domain.ScheduleJobView;
 import com.pccw.immd.adminfunc.domain.ScheduleJobViewHistory;
+import com.pccw.immd.adminfunc.dto.JobStatus;
 import com.pccw.immd.adminfunc.dto.ScheduleJobDetailDTO;
+import com.pccw.immd.adminfunc.dto.ScheduleJobViewDTO;
 import com.pccw.immd.adminfunc.dto.ScheduleJobViewHistoryDTO;
 import com.pccw.immd.adminfunc.service.ScheduleJobService;
 import org.slf4j.Logger;
@@ -34,12 +37,126 @@ public class ScheduleJobController {
      */
 
     @GetMapping(value = "/e-Services-2/enquiry/scheduleJobView.do")
-    public String scheduleJobViewSearchPage() {
+    public String scheduleJobViewSearchPage(@ModelAttribute ScheduleJobViewDTO scheduleJobViewDTO) {
+
+        List<JobStatus> statusList = scheduleJobViewDTO.getStatusList();
+        LOG.debug("scheduleJobViewHistSearchPage statusList size: " + statusList.size());
+
         return "/eServices2/ScheduleJob/schedule-job-view-search";
     }
 
-    @GetMapping(value = "/e-Services-2/enquiry/scheduleJobView_Result.do")
-    public String scheduleJobViewResultPage() {
+//    @GetMapping(value = "/e-Services-2/enquiry/scheduleJobView_Result.do")
+//    public String scheduleJobViewResultPage() {
+//        return "/eServices2/ScheduleJob/schedule-job-view-result";
+//    }
+
+    @PostMapping(value = "/e-Services-2/enquiry/scheduleJobView_Search.do")
+    public String scheduleJobViewResultPage(@ModelAttribute ScheduleJobViewDTO scheduleJobViewDTO) {
+
+        if (scheduleJobViewDTO.getStatus() != null && !scheduleJobViewDTO.equals("")) {
+            scheduleJobViewDTO.setStatus(scheduleJobViewDTO.getStatus().toUpperCase());
+        }
+
+
+        // dummy data
+//        String jobName = "tempJob";
+//        String cron = "0 0/1 * * * ?";
+//        String dataMap = "";
+//        String status = "FAILED";
+//
+//        String startTime = "13/03/2018";
+//        Integer startHour = 17;
+//        Integer startMinute = 40;
+//        String endTime = "13/03/2018";
+//        Integer endHour = 17;
+//        Integer endMinute = 45;
+//
+//        scheduleJobViewDTO.setJobName(jobName);
+//        scheduleJobViewDTO.setCronExpression(cron);
+//        scheduleJobViewDTO.setDataMap(dataMap);
+//        scheduleJobViewDTO.setStatus(status);
+//        scheduleJobViewDTO.setStartTime(startTime);
+//        scheduleJobViewDTO.setStartHour(startHour);
+//        scheduleJobViewDTO.setStartMinute(startMinute);
+//        scheduleJobViewDTO.setEndTime(endTime);
+//        scheduleJobViewDTO.setEndHour(endHour);
+//        scheduleJobViewDTO.setEndMinute(endMinute);
+
+        if (!scheduleJobViewDTO.getStartTime().equals("")
+                && scheduleJobViewDTO.getStartHour() != null
+                && scheduleJobViewDTO.getStartMinute() != null
+                && !scheduleJobViewDTO.getEndTime().equals("")
+                && scheduleJobViewDTO.getEndHour() != null
+                && scheduleJobViewDTO.getEndMinute() != null
+                ) {
+
+            //
+            String tmpStartHour = String.format("%02d", scheduleJobViewDTO.getStartHour());
+            String tmpStartMinute = String.format("%02d", scheduleJobViewDTO.getStartMinute());
+            String tmpEndHour = String.format("%02d", scheduleJobViewDTO.getEndHour());
+            String tmpEndMinute = String.format("%02d", scheduleJobViewDTO.getEndMinute());
+
+            //
+            String dateRegex = "\\d{2}/\\d{2}/\\d{4}\\d{2}\\d{2}";
+            String startDateStr = scheduleJobViewDTO.getStartTime() + tmpStartHour + tmpStartMinute;
+            String endDateStr = scheduleJobViewDTO.getEndTime() + tmpEndHour + tmpEndMinute;
+
+            // date search: optional
+            if (!startDateStr.equals("") && !endDateStr.equals("")) {
+                if (scheduleJobViewDTO.getStartHour() < 0 || scheduleJobViewDTO.getStartHour() >= 24) {
+                    // TODO: exception case
+                    LOG.debug("InvalidStartHour");
+                }
+                if (scheduleJobViewDTO.getStartMinute() < 0 || scheduleJobViewDTO.getStartMinute() >= 60) {
+                    // TODO: exception case
+                    LOG.debug("InvalidStartMinute");
+                }
+                if (scheduleJobViewDTO.getEndHour() < 0 || scheduleJobViewDTO.getEndHour() >= 24) {
+                    // TODO: exception case
+                    LOG.debug("InvalidEndHour");
+                }
+                if (scheduleJobViewDTO.getEndMinute() < 0 || scheduleJobViewDTO.getEndMinute() >= 60) {
+                    // TODO: exception case
+                    LOG.debug("InvalidEndMinute");
+                }
+
+                Boolean isValidStartDate = startDateStr.matches(dateRegex);
+                Boolean isValidEndDate = endDateStr.matches(dateRegex);
+
+                if (!isValidStartDate) {
+                    // TODO: exception case
+                    LOG.debug("InvalidStartDate");
+                }
+                if (!isValidEndDate) {
+                    // TODO: exception case
+                    LOG.debug("InvalidEndDate");
+                }
+
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyyHHmm");
+                try {
+                    Date startDate = dateFormat.parse(startDateStr);
+                    Date endDate = dateFormat.parse(endDateStr);
+
+                    scheduleJobViewDTO.setStartDate(startDate);
+                    scheduleJobViewDTO.setEndDate(endDate);
+
+                } catch (ParseException e) {
+                    // TODO: exception case
+                    LOG.debug("ERROR: Date parse error");
+                }
+            }
+
+
+        }
+
+
+        List<ScheduleJobView>list = scheduleJobService.searchScheduleJobViewList(scheduleJobViewDTO);
+        LOG.debug("list: " + list.size());
+
+        if (list.size() > 0) {
+            scheduleJobViewDTO.setScheduleJobViewList(list);
+        }
+
         return "/eServices2/ScheduleJob/schedule-job-view-result";
     }
 
@@ -59,7 +176,7 @@ public class ScheduleJobController {
             scheduleJobDetailDTO.setJobDetailList(jobDetailList);
         }
 
-        List<ScheduleJobDetailDTO.JobStatus> statusList = scheduleJobDetailDTO.getStatusList();
+        List<JobStatus> statusList = scheduleJobDetailDTO.getStatusList();
         LOG.debug("scheduleJobViewHistSearchPage statusList size: " + statusList.size());
 
         return "/eServices2/ScheduleJob/schedule-job-view-history-search";
@@ -68,7 +185,11 @@ public class ScheduleJobController {
     @PostMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory_Search.do")
     public String searchScheduleJobViewHistory(@ModelAttribute ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO) {
 
-        scheduleJobViewHistoryDTO.setStatus(scheduleJobViewHistoryDTO.getStatus().toUpperCase());
+
+
+        if (scheduleJobViewHistoryDTO.getStatus() != null && !scheduleJobViewHistoryDTO.equals("")) {
+            scheduleJobViewHistoryDTO.setStatus(scheduleJobViewHistoryDTO.getStatus().toUpperCase());
+        }
 
         if (!scheduleJobViewHistoryDTO.getStartTime().equals("")
                 && scheduleJobViewHistoryDTO.getStartHour() != null
@@ -143,20 +264,6 @@ public class ScheduleJobController {
 
         return "/eServices2/ScheduleJob/schedule-job-view-history-result";
     }
-
-    @GetMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory_Result.do")
-    public String scheduleJobViewHistResultPage() {
-
-        // dummy
-        String jobname = "job1";
-        String status = "FAILED";
-
-        List<ScheduleJobViewHistory> list = scheduleJobService.listAllHistory(jobname, status);
-        LOG.debug("scheduleJobViewHistResultPage jobHistory size: " + list.size());
-
-        return "/eServices2/ScheduleJob/schedule-job-view-history-result";
-    }
-
 
     /**
      * Schedule Job

@@ -22,6 +22,10 @@ public class HibernateUtils  {
         HibernateUtils.em = em;
     }
 
+    public static EntityManager getEm() {
+        return em;
+    }
+
     public static <T> List<T> listByDomain(Class<T> clazz){
         List<T> list = null;
         Session session = em.unwrap(Session.class);
@@ -31,6 +35,11 @@ public class HibernateUtils  {
                 .list();
 
         return list;
+    }
+
+    public static Session getSession() {
+        Session session = em.unwrap(Session.class);
+        return session;
     }
 
     public static <T> List<T> listByDomain(Class<T> clazz, Order ... orders){

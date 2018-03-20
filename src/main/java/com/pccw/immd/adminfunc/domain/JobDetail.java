@@ -37,6 +37,30 @@ public class JobDetail {
     @Column(name = "REQUESTS_RECOVERY")
     private String requestsRecovery;
 
+    public String getIsDurable() {
+        return isDurable;
+    }
+
+    public void setIsDurable(String isDurable) {
+        this.isDurable = isDurable;
+    }
+
+    public String getIsNonconcurrent() {
+        return isNonconcurrent;
+    }
+
+    public void setIsNonconcurrent(String isNonconcurrent) {
+        this.isNonconcurrent = isNonconcurrent;
+    }
+
+    public String getIsUpdateData() {
+        return isUpdateData;
+    }
+
+    public void setIsUpdateData(String isUpdateData) {
+        this.isUpdateData = isUpdateData;
+    }
+
     public String getSchedName() {
         return schedName;
     }

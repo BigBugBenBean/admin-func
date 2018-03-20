@@ -6,13 +6,88 @@
 
     <link rel="stylesheet" href="/adminfunc/css/schedule-job.css"/>
 
-    <script th:inline="javascript">
+    <script th:inline="javascript" th:if="${scheduleJobViewDTO}">
         /*<![CDATA[*/
 
         $(function () {
 
+            var scheduleJobViewDTO = [[${scheduleJobViewDTO}]];
+            console.log('scheduleJobViewDTO');
+            console.log(scheduleJobViewDTO);
+
             var list = [];
 
+            if (isNotEmptyNullUndfined(scheduleJobViewDTO)) {
+                var scheduleJobViewList = scheduleJobViewDTO['scheduleJobViewList'];
+
+                var jobName = scheduleJobViewDTO['jobName'];
+                var cronExp = scheduleJobViewDTO['cronExpression'];
+                var dataMap = scheduleJobViewDTO['dataMap'];
+                var lastStatus = scheduleJobViewDTO['status'];
+
+                var startDate = scheduleJobViewDTO['startDate'];
+                var endDate = scheduleJobViewDTO['endDate'];
+
+                if (isNotEmptyNullUndfined(jobName)) {
+                    var jobNameDom = $('#jobName');
+                    jobNameDom.html(jobName);
+                }
+                if (isNotEmptyNullUndfined(cronExp)) {
+                    var cronExpDom = $('#cronExp');
+                    cronExpDom.html(cronExp);
+                }
+                if (isNotEmptyNullUndfined(dataMap)) {
+                    var dataMapDom = $('#dataMap');
+                    dataMapDom.html(dataMap);
+                }
+                if (isNotEmptyNullUndfined(lastStatus)) {
+                    var lastStatusDom = $('#status');
+                    lastStatusDom.html(lastStatus);
+                }
+                if (isNotEmptyNullUndfined(startDate)) {
+                    var lastExeTimeDom = $('#lastExeTime');
+
+                    var tmpStartDate = new Date(startDate);
+                    var startDateFormatted = moment(tmpStartDate).format(TABLE_DATE_FORMAT);
+
+                    lastExeTimeDom.html(startDateFormatted);
+                }
+                if (isNotEmptyNullUndfined(endDate)) {
+                    var nextExeTimeDom = $('#nextExeTime');
+
+                    var tmpEndDate = new Date(endDate);
+                    var endDateFormatted = moment(tmpEndDate).format(TABLE_DATE_FORMAT);
+
+                    nextExeTimeDom.html(endDateFormatted);
+                }
+
+                if (isNotEmptyNullUndfined(scheduleJobViewList) && scheduleJobViewList.length > 0) {
+                    jQuery.each(scheduleJobViewList, function (index, object) {
+                        var tmpJobName = object['jobDetail']['jobName'];
+                        var tmpCronExpression = object['qrtzCronTriggers']['cronExpression'];
+                        var tmpDataMap = object['jobDetail']['dataMap'];
+                        var tmpLastStatus = object['scheduleJobViewHistory']['status'];
+                        var tmpLastExeTime = new Date(object['qrtzTriggers']['prevFireTime']);
+                        var tmpNextExeTime = new Date(object['qrtzTriggers']['nextFireTime']);
+
+                        var tmpLastExeTimeDateFormatted = moment(tmpLastExeTime).format(TABLE_DATE_FORMAT);
+                        var tmpNextExeTimeDateFormatted = moment(tmpNextExeTime).format(TABLE_DATE_FORMAT);
+
+                        var newObj = {
+                            'jobName': tmpJobName,
+                            'cronExp': tmpCronExpression,
+                            'dataMap': tmpDataMap,
+                            'lastStatus': tmpLastStatus,
+                            'lastExTime': tmpLastExeTimeDateFormatted,
+                            'nextExTime': tmpNextExeTimeDateFormatted
+                        };
+
+                        list.push(newObj);
+                    });
+                }
+            }
+
+            /*
             list = [
                 {
                     'jobName': 'Job Name 1',
@@ -103,6 +178,7 @@
                     'nextExTime': '24/09/2018 12:00'
                 }
             ];
+            */
 
             // table grid data
             var totalPageList = GRID_RECORD_PER_PAGE_ARRAY_DEFAULT;
@@ -193,42 +269,42 @@
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobname')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>Job Name A</span>
+                            <span id="jobName"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.cronexpression')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>0 15-45/30 ***?</span>
+                            <span id="cronExp"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.datamap')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>Data Map Filling</span>
+                            <span id="dataMap"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.laststatus')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>Success</span>
+                            <span id="status"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.lastExecutionTime')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>24/09/2018 10:00</span>
+                            <span id="lastExeTime"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.nextExecutionTime')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>24/09/2018 12:00</span>
+                            <span id="nextExeTime"></span>
                         </div>
                     </div>
                     <div class="RowSeparator"></div>
