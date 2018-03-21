@@ -41,6 +41,15 @@ public class ScheduleJobController {
         List<JobStatus> statusList = scheduleJobViewDTO.getStatusList();
         LOG.debug("scheduleJobViewHistSearchPage statusList size: " + statusList.size());
 
+//        List<JobDetail> jobDetailList = scheduleJobService.listAllJobDetail("DEFAULT");
+//        LOG.debug("scheduleJobViewHistSearchPage jobDetailList size: " + jobDetailList.size());
+
+        List<String> jobNameList = scheduleJobService.listAllJobNameByJobDetails();
+
+        if (jobNameList.size() > 0) {
+            scheduleJobViewDTO.setJobNameList(jobNameList);
+        }
+
         return "/eServices2/ScheduleJob/schedule-job-view-search";
     }
 
@@ -81,27 +90,23 @@ public class ScheduleJobController {
 //        scheduleJobViewDTO.setEndHour(endHour);
 //        scheduleJobViewDTO.setEndMinute(endMinute);
 
+        //
+        String dateRegex = "\\d{2}/\\d{2}/\\d{4}\\d{2}\\d{2}";
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyyHHmm");
+
+        // startDate
         if (!scheduleJobViewDTO.getStartTime().equals("")
                 && scheduleJobViewDTO.getStartHour() != null
                 && scheduleJobViewDTO.getStartMinute() != null
-                && !scheduleJobViewDTO.getEndTime().equals("")
-                && scheduleJobViewDTO.getEndHour() != null
-                && scheduleJobViewDTO.getEndMinute() != null
                 ) {
-
             //
             String tmpStartHour = String.format("%02d", scheduleJobViewDTO.getStartHour());
             String tmpStartMinute = String.format("%02d", scheduleJobViewDTO.getStartMinute());
-            String tmpEndHour = String.format("%02d", scheduleJobViewDTO.getEndHour());
-            String tmpEndMinute = String.format("%02d", scheduleJobViewDTO.getEndMinute());
 
             //
-            String dateRegex = "\\d{2}/\\d{2}/\\d{4}\\d{2}\\d{2}";
             String startDateStr = scheduleJobViewDTO.getStartTime() + tmpStartHour + tmpStartMinute;
-            String endDateStr = scheduleJobViewDTO.getEndTime() + tmpEndHour + tmpEndMinute;
 
-            // date search: optional
-            if (!startDateStr.equals("") && !endDateStr.equals("")) {
+            if (!startDateStr.equals("")) {
                 if (scheduleJobViewDTO.getStartHour() < 0 || scheduleJobViewDTO.getStartHour() >= 24) {
                     // TODO: exception case
                     LOG.debug("InvalidStartHour");
@@ -110,6 +115,37 @@ public class ScheduleJobController {
                     // TODO: exception case
                     LOG.debug("InvalidStartMinute");
                 }
+
+                Boolean isValidStartDate = startDateStr.matches(dateRegex);
+                if (!isValidStartDate) {
+                    // TODO: exception case
+                    LOG.debug("InvalidStartDate");
+                }
+
+                try {
+                    Date startDate = dateFormat.parse(startDateStr);
+                    Long startLong = startDate.getTime();
+                    scheduleJobViewDTO.setStartDate(startDate);
+                } catch (ParseException e) {
+                    // TODO: exception case
+                    LOG.debug("ERROR: Date parse error");
+                }
+            }
+        }
+
+        // endDate
+        if (!scheduleJobViewDTO.getEndTime().equals("")
+                && scheduleJobViewDTO.getEndHour() != null
+                && scheduleJobViewDTO.getEndMinute() != null
+                ) {
+            //
+            String tmpEndHour = String.format("%02d", scheduleJobViewDTO.getEndHour());
+            String tmpEndMinute = String.format("%02d", scheduleJobViewDTO.getEndMinute());
+
+            //
+            String endDateStr = scheduleJobViewDTO.getEndTime() + tmpEndHour + tmpEndMinute;
+
+            if (!endDateStr.equals("")) {
                 if (scheduleJobViewDTO.getEndHour() < 0 || scheduleJobViewDTO.getEndHour() >= 24) {
                     // TODO: exception case
                     LOG.debug("InvalidEndHour");
@@ -119,35 +155,23 @@ public class ScheduleJobController {
                     LOG.debug("InvalidEndMinute");
                 }
 
-                Boolean isValidStartDate = startDateStr.matches(dateRegex);
                 Boolean isValidEndDate = endDateStr.matches(dateRegex);
-
-                if (!isValidStartDate) {
-                    // TODO: exception case
-                    LOG.debug("InvalidStartDate");
-                }
                 if (!isValidEndDate) {
                     // TODO: exception case
                     LOG.debug("InvalidEndDate");
                 }
 
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyyHHmm");
                 try {
-                    Date startDate = dateFormat.parse(startDateStr);
                     Date endDate = dateFormat.parse(endDateStr);
-
-                    scheduleJobViewDTO.setStartDate(startDate);
+                    Long endLong = endDate.getTime();
                     scheduleJobViewDTO.setEndDate(endDate);
-
                 } catch (ParseException e) {
                     // TODO: exception case
                     LOG.debug("ERROR: Date parse error");
                 }
             }
 
-
         }
-
 
         List<ScheduleJobView>list = scheduleJobService.searchScheduleJobViewList(scheduleJobViewDTO);
         LOG.debug("list: " + list.size());
@@ -167,9 +191,6 @@ public class ScheduleJobController {
 
     @GetMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory.do")
     public String scheduleJobViewHistSearchPage(@ModelAttribute ScheduleJobDetailDTO scheduleJobDetailDTO) {
-
-//        List<JobDetail> jobDetailList = scheduleJobService.listAllJobDetail("DEFAULT");
-//        LOG.debug("scheduleJobViewHistSearchPage jobDetailList size: " + jobDetailList.size());
 
         List<String> scheduleJobViewHistoryList = scheduleJobService.listAllJobNameByJobHistory();
         LOG.debug("scheduleJobViewHistSearchPage scheduleJobViewHistoryList size: " + scheduleJobViewHistoryList.size());

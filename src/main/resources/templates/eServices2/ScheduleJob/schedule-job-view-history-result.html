@@ -12,6 +12,8 @@
         $(function () {
             var list = [];
 
+
+
             var scheduleJobViewHistoryDTO = [[${scheduleJobViewHistoryDTO}]];
 
             if (isNotEmptyNullUndfined(scheduleJobViewHistoryDTO)) {
@@ -41,6 +43,7 @@
 
                         list.push(newObj);
                     });
+
                 }
 
                 if (isNotEmptyNullUndfined(jobName)) {
@@ -99,7 +102,7 @@
             var numSize = getGridPageNumSize(recordPerPage, list.length);
             generateSelectOptionBySequence(numPager, numSize, GRID_TABLE_OFFSET);
 
-            // grid
+// grid
             var grid = $("#scheduleJobGrid");
             var gridConfig = {
                 width: '100%',
@@ -131,9 +134,10 @@
                     { name: 'startTime', title: 'Start Time', type: 'text', width: 30, headerTemplate: commonHeader },
                     { name: 'endTime', title: 'End Time', type: 'text', width: 30, headerTemplate: commonHeader }
                 ]
-
             };
             grid.jsGrid(gridConfig);
+
+
 
         });
 

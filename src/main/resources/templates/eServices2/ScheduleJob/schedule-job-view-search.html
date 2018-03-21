@@ -15,7 +15,19 @@
             console.log(scheduleJobViewDTO);
 
             if (isNotEmptyNullUndfined(scheduleJobViewDTO)) {
+                var tmpJobList = scheduleJobViewDTO['jobNameList'];
                 var jobStatusList = scheduleJobViewDTO['statusList'];
+
+                if (isNotEmptyNullUndfined(tmpJobList) && tmpJobList.length > 0) {
+                    var jobListDom =jQuery('#jobList');
+
+                    var list = [];
+                    jQuery.each(tmpJobList, function (index, object) {
+                        var jobName = object;
+                        list.push(jobName);
+                    });
+                    generateSelectOptionByValue(jobListDom, list, false);
+                }
 
                 if (isNotEmptyNullUndfined(jobStatusList) && jobStatusList.length > 0) {
                     var statusListDom =jQuery('#statusList');
@@ -81,7 +93,8 @@
                         <div class="flex-container search-padding">
                             <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobname')}"></span></b></div>
                             <div class="flex-item-7">
-                                <input class="search-input" type="text" maxlength="10" size="10" name="jobName" value="temp" />
+                                <!--<input class="search-input" type="text" maxlength="10" size="10" name="jobName" value="temp" />-->
+                                <select id="jobList" name="jobName"></select>
                             </div>
                         </div>
                         <div class="flex-container search-padding">

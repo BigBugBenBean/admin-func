@@ -20,13 +20,7 @@ public class ScheduleJobDetailDTO extends BaseDTO {
         statusList.add(new JobStatus(2, "RUNNING"));
     }
 
-//    public List<JobDetail> getJobDetailList() {
-//        return jobDetailList;
-//    }
-//
-//    public void setJobDetailList(List<JobDetail> jobDetailList) {
-//        this.jobDetailList = jobDetailList;
-//    }
+
 
 
     public List<String> getJobNameList() {

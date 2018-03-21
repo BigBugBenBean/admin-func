@@ -63,6 +63,19 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
+    public List<String> listAllJobNameByJobDetails() {
+        List<String> list;
+
+        String hql = "select distinct jobName from JobDetail ORDER BY jobName ASC";
+
+        EntityManager em = HibernateUtils.getEm();
+        Query query = em.createQuery(hql);
+        list = query.getResultList();
+
+        return list;
+    }
+
+    @Override
     public List<ScheduleJobViewHistory> searchScheduleJobHistoryList(ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO) {
         String name = "jh";
         String hql = "from ScheduleJobViewHistory " + name;
@@ -101,19 +114,19 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             whereClause += " and " + jobDetailName + ".dataMap like '%" + scheduleJobViewDTO.getDataMap() + "%' ";
         }
         if (scheduleJobViewDTO.getCronExpression() != null && !scheduleJobViewDTO.getCronExpression().equals("")) {
-            whereClause += " and " + cronTriggersName + ".cronExpression like '%" + scheduleJobViewDTO.getCronExpression() + "%' ";
+            whereClause += " and " + cronTriggersName + ".cronExpression like '" + scheduleJobViewDTO.getCronExpression() + "%' ";
         }
         if (scheduleJobViewDTO.getStatus() != null && !scheduleJobViewDTO.getStatus().equals("")) {
             whereClause += " and " + jobHistoryName + ".status like '%" + scheduleJobViewDTO.getStatus() + "%' ";
         }
         if (scheduleJobViewDTO.getStartDate() != null && scheduleJobViewDTO.getEndDate() != null) {
 
-        } else if (scheduleJobViewDTO.getStartDate() != null) {
-            // TODO: search by start date
-//            whereClause += " and " + triggersName + ".startTime BETWEEN " + scheduleJobViewDTO.getStartDate() + " AND " + scheduleJobViewDTO.getEndDate();
-//            whereClause += " and " + triggersName + ".startTime BETWEEN " + "" + " AND " + scheduleJobViewDTO.getEndDate();
-        } else if (scheduleJobViewDTO.getEndDate() != null) {
-            // TODO: search by end date
+        }
+        if (scheduleJobViewDTO.getStartDate() != null) {
+            whereClause += " and " + triggersName + ".prevFireTime >= " + scheduleJobViewDTO.getStartDate().getTime();
+        }
+        if (scheduleJobViewDTO.getEndDate() != null) {
+            whereClause += " and " + triggersName + ".nextFireTime <= " + scheduleJobViewDTO.getEndDate().getTime();
         }
 
         hql += whereClause;

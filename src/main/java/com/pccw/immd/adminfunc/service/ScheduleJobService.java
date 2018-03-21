@@ -11,6 +11,7 @@ import java.util.List;
 public interface ScheduleJobService {
     List<JobDetail> listAllJobDetail(String jobGroup);
     List<String> listAllJobNameByJobHistory();
+    List<String> listAllJobNameByJobDetails();
     List<ScheduleJobViewHistory> listAllHistory(String jobName, String status);
     List<ScheduleJobViewHistory> searchScheduleJobHistoryList(ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO);
 

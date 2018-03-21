@@ -93,13 +93,13 @@
                         {
                             type: 'control',
                             headerTemplate: function () {
-                                let title = '<span>Detail</span>';
+                                var title = '<span>Detail</span>';
                                 return title;
                             },
                             itemTemplate: function (value, item) {
-                                let result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+                                var result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
 
-                                let str = '';
+                                var str = '';
 
                                 str += '<span>';
                                 // str += '<form method="get" th:action="@{/e-Services-2/maintenance/accessControl_View.do}">';

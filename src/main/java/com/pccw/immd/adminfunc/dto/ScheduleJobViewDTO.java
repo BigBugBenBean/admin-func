@@ -1,5 +1,6 @@
 package com.pccw.immd.adminfunc.dto;
 
+import com.pccw.immd.adminfunc.domain.JobDetail;
 import com.pccw.immd.adminfunc.domain.ScheduleJobView;
 import com.pccw.immd.commons.dto.BaseDTO;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +18,7 @@ public class ScheduleJobViewDTO extends BaseDTO {
 
     private List<JobStatus> statusList = new ArrayList<>();
     private List<ScheduleJobView> scheduleJobViewList = new ArrayList<>();
+    private List<String> jobNameList = new ArrayList<>();
 
     public ScheduleJobViewDTO() {
         super();
@@ -152,4 +154,13 @@ public class ScheduleJobViewDTO extends BaseDTO {
     public void setScheduleJobViewList(List<ScheduleJobView> scheduleJobViewList) {
         this.scheduleJobViewList = scheduleJobViewList;
     }
+
+    public List<String> getJobNameList() {
+        return jobNameList;
+    }
+
+    public void setJobNameList(List<String> jobNameList) {
+        this.jobNameList = jobNameList;
+    }
+
 }
