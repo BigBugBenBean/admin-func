@@ -19,22 +19,34 @@
 
             if (isNotEmptyNullUndfined(applicationCodeList) && applicationCodeList.length > 0) {
                 jQuery.each(applicationCodeList, function (index, object) {
-                    var fromDate = new Date(object['effectDateFrom']);
-                    var toDate = new Date(object['effectDateTo']);
-                    var fromDateFormatted =  moment(fromDate).format(TABLE_DATE_FORMAT);
-                    var toDateFormatted = moment(toDate).format(TABLE_DATE_FORMAT);
+                    var appName = object['engAppName'];
+                    var priceName = object['engPriceName'];
+                    var paymentCode = object['payCode'];
+                    var paymentDesc = object['paymentDesc'];
+                    var receiptPrintInd = object['receiptPrintInd'];
+                    var docIssueInd = object['docIssueInd'];
+                    var revenueCode = object['revenueCode'];
+
+                    var validFrom = new Date(object['validFrom']);
+                    var validTo = new Date(object['validTo']);
+                    var effectiveDate = new Date(object['effectiveDate']);
+
+
+                    var validFromFormatted =  moment(validFrom).format(UI_DATE_FORMAT);
+                    var validToFormatted = moment(validTo).format(UI_DATE_FORMAT);
+                    var effectiveDateFormatted =  moment(effectiveDate).format(UI_DATE_FORMAT);
 
                     var newObj = {
-                        'Application Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                        'Price Name': 'Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)',
-                        'Valid From': '2017-01-01',
-                        'Valid To': '2018-01-01',
-                        'Payment Code': '500',
-                        'Payment Description': 'Application for HKSAR Passport ',
-                        'Effective Date': '2017-01-01',
-                        'Receipt Print Indicator': 'BOCI',
-                        'Document Issue Indicator': 'ImmD',
-                        'Revenue Code': '500'
+                        'Application Name': appName,
+                        'Price Name': priceName,
+                        'Valid From': validFromFormatted,
+                        'Valid To': validToFormatted,
+                        'Payment Code': paymentCode,
+                        'Payment Description': paymentDesc,
+                        'Effective Date': effectiveDateFormatted,
+                        'Receipt Print Indicator': receiptPrintInd,
+                        'Document Issue Indicator': docIssueInd,
+                        'Revenue Code': revenueCode
                     };
 
                     list.push(newObj);

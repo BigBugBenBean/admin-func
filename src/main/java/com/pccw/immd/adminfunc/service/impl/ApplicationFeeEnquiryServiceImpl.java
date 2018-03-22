@@ -1,7 +1,8 @@
 package com.pccw.immd.adminfunc.service.impl;
 
-import com.pccw.immd.adminfunc.domain.ApplicationCode;
+import com.pccw.immd.adminfunc.domain.VPricePayment;
 import com.pccw.immd.adminfunc.repository.UmApplicationCodeRepository;
+import com.pccw.immd.adminfunc.repository.UmVPricePaymentRepository;
 import com.pccw.immd.adminfunc.service.ApplicationFeeEnquiryService;
 import com.pccw.immd.adminfunc.web.controller.ApplicationFeeEnquiryController;
 import org.slf4j.Logger;
@@ -21,8 +22,12 @@ public class ApplicationFeeEnquiryServiceImpl implements ApplicationFeeEnquirySe
     @Qualifier("umApplicationCodeRepository.eservice2")
     private UmApplicationCodeRepository umApplicationCodeRepository;
 
+    @Autowired
+    @Qualifier("umVPricePaymentRepository.eservice2")
+    private UmVPricePaymentRepository umVPricePaymentRepository;
+
     @Override
-    public List<ApplicationCode> listAll() {
-        return umApplicationCodeRepository.findAll();
+    public List<VPricePayment> listAll() {
+        return umVPricePaymentRepository.findAll();
     }
 }

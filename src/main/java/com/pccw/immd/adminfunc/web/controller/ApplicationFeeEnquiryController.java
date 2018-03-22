@@ -1,6 +1,6 @@
 package com.pccw.immd.adminfunc.web.controller;
 
-import com.pccw.immd.adminfunc.domain.ApplicationCode;
+import com.pccw.immd.adminfunc.domain.VPricePayment;
 import com.pccw.immd.adminfunc.dto.ApplicationFeeEnquiryDTO;
 import com.pccw.immd.adminfunc.service.ApplicationFeeEnquiryService;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class ApplicationFeeEnquiryController {
     @GetMapping(value = "/e-Services-2/enquiry/applicationFeeEnquiry.do")
     public String appFeeEnqPage(@ModelAttribute ApplicationFeeEnquiryDTO applicationFeeEnquiryDTO) {
 
-        List<ApplicationCode> list = applicationFeeEnquiryService.listAll();
+        List<VPricePayment> list = applicationFeeEnquiryService.listAll();
         if (list.size() > 0) {
             applicationFeeEnquiryDTO.setApplicationCodeList(list);
         }
