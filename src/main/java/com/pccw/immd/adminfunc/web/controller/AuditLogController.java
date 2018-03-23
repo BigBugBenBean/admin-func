@@ -25,7 +25,7 @@ public class AuditLogController {
     @Qualifier("auditLogService.eservice2")
     private AuditLogService auditLogService;
 
-    @GetMapping(value = "/auditLog_SearchForm.do")
+    @GetMapping(value = "/auditLog.do")
     public String auditLogSearchForm(@ModelAttribute AuditLogDTO auditLogDTO) {
         return "/eServices2/AuditLog/audit-log-search-form";
     }
