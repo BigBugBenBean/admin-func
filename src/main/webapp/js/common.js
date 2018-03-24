@@ -1,7 +1,8 @@
 
 const dateFormat = 'dddd, D MMMM YYYY';
 var UI_DATE_FORMAT = "DD/MM/YYYY";
-var TABLE_DATE_FORMAT = "DD/MM/YYYY HH:mm:ss"
+var UI_TIME_FORMAT = "HH:mm:ss";
+var TABLE_DATE_FORMAT = "DD/MM/YYYY HH:mm:ss";
 var REGEX_DDMMYYY = /^\d{2}\/\d{2}\/\d{4}$/;    // dd/mm/yyyy
 const GRID_TABLE_OFFSET = 1;
 const GRID_RECORD_PER_PAGE_ARRAY_DEFAULT = [10, 20, 50];

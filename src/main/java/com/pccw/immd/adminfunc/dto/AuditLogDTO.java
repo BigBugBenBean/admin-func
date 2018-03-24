@@ -1,6 +1,6 @@
 package com.pccw.immd.adminfunc.dto;
 
-import com.pccw.immd.adminfunc.domain.AuditLog;
+import com.pccw.immd.adminfunc.domain.AuditLogResult;
 import com.pccw.immd.commons.dto.BaseDTO;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,17 +14,22 @@ public class AuditLogDTO extends BaseDTO {
 
     private String userId;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
     private Date startDate;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy hh:mm")
     private Date endDate;
 
-    private List<AuditLog> auditLogList = new ArrayList<>();
+    private String startTime;
+    private Integer startHour;
+    private Integer startMinute;
 
-    public List<AuditLog> getAuditLogList() {
-        return auditLogList;
-    }
+    private String endTime;
+    private Integer endHour;
+    private Integer endMinute;
+
+    private List<AuditLogResult> auditLogResultList = new ArrayList<>();
+
 
     public String getFuncId() {
         return funcId;
@@ -40,6 +45,54 @@ public class AuditLogDTO extends BaseDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public Integer getStartHour() {
+        return startHour;
+    }
+
+    public void setStartHour(Integer startHour) {
+        this.startHour = startHour;
+    }
+
+    public Integer getStartMinute() {
+        return startMinute;
+    }
+
+    public void setStartMinute(Integer startMinute) {
+        this.startMinute = startMinute;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public Integer getEndHour() {
+        return endHour;
+    }
+
+    public void setEndHour(Integer endHour) {
+        this.endHour = endHour;
+    }
+
+    public Integer getEndMinute() {
+        return endMinute;
+    }
+
+    public void setEndMinute(Integer endMinute) {
+        this.endMinute = endMinute;
     }
 
     public Date getStartDate() {
@@ -58,9 +111,11 @@ public class AuditLogDTO extends BaseDTO {
         this.endDate = endDate;
     }
 
-    public void setAuditLogList(List<AuditLog> auditLogList) {
-        this.auditLogList = auditLogList;
+    public List<AuditLogResult> getAuditLogResultList() {
+        return auditLogResultList;
     }
 
-
+    public void setAuditLogResultList(List<AuditLogResult> auditLogResultList) {
+        this.auditLogResultList = auditLogResultList;
+    }
 }

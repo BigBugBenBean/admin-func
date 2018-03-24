@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <script type="text/javascript" th:inline="javascript" th:if="${auditLogDTO}">
+        /*<![CDATA[*/
+
+        $(document).ready(function () {
+            var list = [];
+
+            var auditLogList = [[${auditLogDTO.auditLogList}]];
+
+            let COLUMN_1 = "User ID";
+            let COLUMN_2 = "Function Name"
+            let COLUMN_3 = "[Action]Field Name"
+            let COLUMN_4 = "Input(Old/New)"
+            let COLUMN_5 = "Result"
+            let COLUMN_6 = "Date"
+            let COLUMN_7 = "Time"
+            
+            if (isNotEmptyNullUndfined(auditLogList) && auditLogList.length) {
+                jQuery.each(auditLogList, function (index, auditLog) {
+                    var newObj = {};
+                    newObj[COLUMN_1] = auditLog.userId;
+                    newObj[COLUMN_2] = (auditLog.funcId?auditLog.funcId:"");
+                    newObj[COLUMN_3] = (auditLog.type?"[" + auditLog.type +"]":"") + (auditLog.fieldName?auditLog.fieldName:"")  ;
+                    newObj[COLUMN_4] = (auditLog.value?auditLog.value:(auditLog.valueOld?"("+auditLog.valueOld + "/"+ auditLog.valueNew+")":""));
+                    newObj[COLUMN_5] = (auditLog.searchResult?"Hit":"");
+                    newObj[COLUMN_6] = moment(auditLog.logDatetime).format('DD/MM/YYYY');
+                    newObj[COLUMN_7] = moment(auditLog.logDatetime).format('HH:mm:ss');
+
+                    list.push(newObj);
+                });
+            }
+
+            let grid = $("#auditLogGrid");
+            // console.log(grid);
+
+            grid.jsGrid(
+                    {
+                        width: '100%',
+                        height: '100%',
+
+                        sorting: true,
+                        noDataContent: 'NO data',
+                        selecting: false,
+
+                        data: list,
+
+                        fields: [
+                            { name: COLUMN_1, type: 'text', width: 60, headerTemplate: commonHeader },
+                            { name: COLUMN_2, type: 'text', width: 60, headerTemplate: commonHeader },
+                            { name: COLUMN_3, type: 'text', width: 40, headerTemplate: commonHeader },
+                            { name: COLUMN_4, type: 'text', width: 50, headerTemplate: commonHeader },
+                            { name: COLUMN_5, type: 'text', width: 40, headerTemplate: commonHeader },
+                            { name: COLUMN_6, type: 'text', width: 40, headerTemplate: commonHeader },
+                            { name: COLUMN_7, type: 'text', width: 20, headerTemplate: commonHeader },
+
+                        ]
+
+                    }
+            )
+
+
+        });
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div style=" margin-top: 1.5em; width: 100%; height: 200px; ">
+                <div id="auditLogGrid"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

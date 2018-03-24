@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "UM_FUNC")
-public class Function {
+public class Func {
 
     @Id
     @Column(name = "FUNC_ID", 
