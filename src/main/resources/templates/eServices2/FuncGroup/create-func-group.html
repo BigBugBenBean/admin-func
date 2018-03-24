@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/func-group.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+        <!--/*<![CDATA[*/-->
+
+        <!--$(document).ready(function () {-->
+            <!--// var jobList = [];-->
+            <!--// var statusList = [];-->
+
+            <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+            <!--console.log('scheduleJobDetailDTO');-->
+            <!--console.log(scheduleJobDetailDTO);-->
+            <!---->
+        <!--});-->
+
+        <!--/*]]>*/-->
+    <!--</script>-->
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <!--<h1>createFuncGroup</h1>-->
+
+                <div>
+                    <div class="flex-container ">
+                        <div class="flex-item-auto func-tab" >
+                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.detail')}"></span>
+                        </div>
+                        <div class="flex-item-1"></div>
+                    </div>
+                    <div class="func-border-frame">
+                        <div class="flex-container">
+                            <div class="flex-item-3 func-tab-padding-left">
+                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
+                        <div class="flex-container">
+                            <div class="flex-item-3 func-tab-padding-left">
+                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <input type="text" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding-top: 30px;">
+                    <div class="flex-container ">
+                        <div class="flex-item-auto func-tab" >
+                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.title')}"></span>
+                        </div>
+                        <div class="flex-item-1"></div>
+                    </div>
+                    <div class="func-border-frame">
+                        <div class="flex-container">
+                            <div class="flex-item-3 func-tab-padding-left">
+                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <div>
+                                    <select class="func-select" multiple="" size="5" >
+                                        <option value="MQM0001">Marriage Quota Transfer</option>
+                                        <option value="ECE0001">Enquiry Code Information</option>
+                                        <option value="ADM0001">User Maintenance</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="flex-item-3 func-tab-padding-left"></div>
+                            <div class="flex-item-7">
+                                <div class="func-select-middle">
+                                    <img class="func-arrow" th:src="@{/images/b_addImage.gif}" />
+                                    <img class="func-arrow" th:src="@{/images/b_removeImage.gif}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-container">
+                            <div class="flex-item-3 func-tab-padding-left">
+                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <div>
+                                    <select class="func-select" multiple="" size="5">
+                                        <option value="EFN0001">Office Quota Maintenance</option>
+                                        <option value="PFN0002">Payment Manual Reconciliation</option>
+                                        <option value="PFN0001">Payment Enquiry</option>
+                                        <option value="GFN0001">Online Submission Enquiry</option>
+                                        <option value="IAM0001">Important Announcement</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding-top: 30px;">
+                    <a th:href="@{/e-Services-2/management/createFunctionGroup_Success.do}">
+                        <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
