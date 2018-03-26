@@ -31,6 +31,11 @@ public class AppointmentBookingEnquiryController {
         return "/Smartics2/AppointmentBookingEnquiry/appointment-booking-enquiry-by-applicant-result";
     }
 
+    @GetMapping(value = "/appointmentBookingEnquiry_ApplicantDetail.do")
+    public String appointmentBookApplicantDetailPage() {
+        return "/Smartics2/AppointmentBookingEnquiry/appointment-booking-enquiry-by-applicant-detail";
+    }
+
     /**
      *  Search by Appointment Type
      */

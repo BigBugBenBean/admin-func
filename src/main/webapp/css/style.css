@@ -477,7 +477,7 @@ sub menu
 {
     display: none;
     padding: 15px;
-    height: 150px;
+    height: 180px;
 }
 #sub-tab-1-1:checked ~ #sub-content-1-1,
 #sub-tab-1-2:checked ~ #sub-content-1-2,

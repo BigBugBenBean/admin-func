@@ -38,7 +38,7 @@ public class AccessControlController {
             accessControlDTO.setAccessControlList(list);
         }
 
-        return "/eServices2/AccessControl/access-control";
+        return "/AccessControl/access-control";
     }
 
     @GetMapping(value = "/e-Services-2/maintenance/accessControl_Global.do")

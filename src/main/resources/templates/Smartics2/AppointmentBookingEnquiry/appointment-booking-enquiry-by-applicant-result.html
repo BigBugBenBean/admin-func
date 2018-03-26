@@ -111,7 +111,25 @@
                     { name: 'trn', title: 'TRN', type: 'text', width: 10, headerTemplate: commonHeader },
                     { name: 'channel', title: 'Channel', type: 'text', width: 10, headerTemplate: commonHeader },
                     { name: 'status', title: 'Status', type: 'text', width: 10, headerTemplate: commonHeader },
-                    { name: 'detail', title: 'Details', type: 'text', width: 10, headerTemplate: commonHeader }
+                    // ,{ name: 'detail', title: 'Details', type: 'text', width: 10, headerTemplate: commonHeader }
+                    {type: 'control', width: 10, headerTemplate: function () {
+                        var title = '<span>Details</span>';
+                        return title;
+                    }, itemTemplate: function (value, item) {
+                        var result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+
+                        var str = '';
+
+                        str += '<span>';
+                            str += '<a class="RedLink pointer" href="http://localhost:8080/adminfunc/SMARTICS-2/enquiry/appointmentBookingEnquiry_ApplicantDetail.do">';
+                                str += 'View';
+                            str += '</a>';
+                        str += '</span>';
+
+                        result = str;
+
+                        return result;
+                    }}
                 ]
             };
             grid.jsGrid(gridConfig);
