@@ -13,4 +13,31 @@ public class AppointmentBookingEnquiryController {
         return "/Smartics2/AppointmentBookingEnquiry/appointment-booking-enquiry-search";
     }
 
+    /**
+     *  Search by Office and Date
+     */
+
+    @GetMapping(value = "/appointmentBookingEnquiry_OfficeResult.do")
+    public String appointmentBookOfficeResultPage() {
+        return "/Smartics2/AppointmentBookingEnquiry/appointment-booking-enquiry-by-office-result";
+    }
+
+    /**
+     *  Search by Applicant ID
+     */
+
+    @GetMapping(value = "/appointmentBookingEnquiry_ApplicantResult.do")
+    public String appointmentBookApplicantResultPage() {
+        return "/Smartics2/AppointmentBookingEnquiry/appointment-booking-enquiry-by-applicant-result";
+    }
+
+    /**
+     *  Search by Appointment Type
+     */
+
+    @GetMapping(value = "/appointmentBookingEnquiry_AppointmentResult.do")
+    public String appointmentBookAppointmentResultPage() {
+        return "/Smartics2/AppointmentBookingEnquiry/appointment-booking-enquiry-by-appointment-result";
+    }
+
 }

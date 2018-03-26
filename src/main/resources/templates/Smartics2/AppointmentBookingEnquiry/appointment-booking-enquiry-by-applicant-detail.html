@@ -31,14 +31,74 @@
     <div layout:fragment="content">
         <div class="content-padding">
             <div>
-                <h3>appointmentBookDetail</h3>
+                <div>
+                    <div class="flex-container">
+                        <div class="flex-item-1">
+                            <b><span th:text="${#messages.msg('umps.adminfunc.common.searchResult')}"></span></b>
+                        </div>
+                        <div class="flex-item-auto">
+                            <!--<input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.printThisPage')}" />-->
+                        </div>
+                    </div>
+                    <div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container">
+                            <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.office')}"></span></b></div>
+                            <div class="flex-item-7 search-result-right">
+                                <span id="">Registration of Persons - Hong Kong Office</span>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container">
+                            <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.AppointmentType')}"></span></b></div>
+                            <div class="flex-item-7 search-result-right">
+                                <span id="">[ROPbooking] ROP Appointment Booking  Form Pre-fill</span>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container">
+                            <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.date')}"></span></b></div>
+                            <div class="flex-item-7 search-result-right">
+                                <span id="startDate">01/12/2017</span>
+                            </div>
+                        </div>
+                        <!--<div class="RowSeparatorThin"></div>-->
+
+
+                        <div class="RowSeparator"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1em;  ">
+                    <!--<div class="flex-container grid-page-header">-->
+                    <!--<div style="flex: auto;"></div>-->
+                    <!--<div>-->
+                    <!--<span class="grid-page-header-text" th:text="${#messages.msg('umps.adminfunc.common.pagination.recordPerPage')}"></span>-->
+                    <!--<span>-->
+                    <!--<select id="totalPager"></select>-->
+                    <!--</span>-->
+                    <!--<span class="grid-page-header-text" style="padding-left: 10px;" th:text="${#messages.msg('umps.adminfunc.common.pagination.pageNo')}"></span>-->
+                    <!--<span>-->
+                    <!--<select id="numPager"></select>-->
+                    <!--</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div>
+                        <div id="dataGrid"></div>
+                    </div>
+                </div>
 
                 <div class="flex-container" style="padding-top: 30px;">
                     <div style="flex: auto;"></div>
-                    <div style="padding: 15px;">
-                        <!--<a th:href="@{/SMARTICS-2/enquiry/deleteFunctionGroup_Result.do}">-->
-                        <input class="SmallButtonStyle pointer" id="submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
-                        <!--</a>-->
+                    <div>
+                        <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry.do}">
+                            <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.backToSearchCriteria')}" />
+                        </a>
+                    </div>
+                    <div style="padding-left: 10px;">
+                        <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry.do}">
+                            <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.backToPreviousPage')}" />
+                        </a>
                     </div>
                 </div>
             </div>
