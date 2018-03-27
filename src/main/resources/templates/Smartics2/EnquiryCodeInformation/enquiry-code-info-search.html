@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/enquiry-code.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <div>
+                    <div>
+                        <b><span th:text="${#messages.msg('umps.adminfunc.common.searchCriteria')}"></span></b>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span th:text="${#messages.msg('umps.adminfunc.enquiryCodeInfo.appointmentType')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <select class="appointment-list" id="" name="" >
+                                <option value="">--Please select an appointment type--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+                            <input type="radio" name="ENQ_SEARCH" />
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span th:text="${#messages.msg('umps.adminfunc.enquiryCodeInfo.hkic')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <input type="text" />
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+                            <input type="radio" name="ENQ_SEARCH" />
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span th:text="${#messages.msg('umps.adminfunc.enquiryCodeInfo.tdNo')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <input type="text" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span th:text="${#messages.msg('umps.adminfunc.enquiryCodeInfo.dob')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <span th:text="${#messages.msg('umps.adminfunc.enquiryCodeInfo.day')}"></span>
+                            <input type="text" style="width: 30px;" />
+                            <span th:text="${#messages.msg('umps.adminfunc.enquiryCodeInfo.month')}"></span>
+                            <input type="text" style="width: 30px;" />
+                            <span th:text="${#messages.msg('umps.adminfunc.enquiryCodeInfo.year')}"></span>
+                            <input type="text" style="width: 100px;" />
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                </div>
+
+                <div class="flex-container" style="padding-top: 10px;">
+                    <div style="flex: auto;"></div>
+                    <div style="padding: 15px;">
+                        <a th:href="@{/SMARTICS-2/enquiry/enquiryCodeInformation_Result.do}">
+                            <input class="SmallButtonStyle pointer" id="submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
