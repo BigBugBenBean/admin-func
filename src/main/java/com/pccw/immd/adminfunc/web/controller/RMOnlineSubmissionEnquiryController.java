@@ -13,4 +13,9 @@ public class RMOnlineSubmissionEnquiryController {
         return "/RM/OnlineSubmissionEnquiry/online-submission-enquiry-search";
     }
 
+    @GetMapping(value = "/onlineSubmissionEnquiry_Result.do")
+    public String onlineSubmissionResultPage() {
+        return "/RM/OnlineSubmissionEnquiry/online-submission-enquiry-result";
+    }
+
 }

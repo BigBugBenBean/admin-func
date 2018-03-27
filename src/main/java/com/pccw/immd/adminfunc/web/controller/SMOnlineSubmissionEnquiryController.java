@@ -13,4 +13,9 @@ public class SMOnlineSubmissionEnquiryController {
         return "/Smartics2/OnlineSubmissionEnquiry/online-submission-enquiry-search";
     }
 
+    @GetMapping(value = "/onlineSubmissionEnquiry_Result.do")
+    public String onlineSubmissionResultPage() {
+        return "/Smartics2/OnlineSubmissionEnquiry/online-submission-enquiry-result";
+    }
+
 }
