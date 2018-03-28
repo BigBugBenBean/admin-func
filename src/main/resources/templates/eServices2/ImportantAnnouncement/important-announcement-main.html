@@ -68,7 +68,25 @@
                     { name: 'effectiveTo', title: 'Effective Date To', type: 'text', width: 10, headerTemplate: commonHeader },
                     { name: 'application', title: 'Application', type: 'text', width: 40, headerTemplate: commonHeader },
                     { name: 'type', title: 'Type', type: 'text', width: 10, headerTemplate: commonHeader },
-                    { name: 'desc', title: 'Description', type: 'text', width: 20, headerTemplate: commonHeader }
+                    { name: 'desc', title: 'Description', type: 'text', width: 20, headerTemplate: commonHeader },
+                    {type: 'control', width: 10, headerTemplate: function () {
+                            var title = '<span>Details</span>';
+                            return title;
+                        }, itemTemplate: function (value, item) {
+                            var result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+
+                            var str = '';
+
+                            str += '<span>';
+                            str += '<a class="RedLink pointer" href="http://localhost:8080/adminfunc/e-Services-2/maintenance/importantAnnouncement_FreeTextDetail.do">';
+                            str += 'View / Edit';
+                            str += '</a>';
+                            str += '</span>';
+
+                            result = str;
+
+                            return result;
+                        }}
                 ]
             };
             grid.jsGrid(gridConfig);

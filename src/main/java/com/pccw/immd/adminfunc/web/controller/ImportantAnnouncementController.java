@@ -63,4 +63,9 @@ public class ImportantAnnouncementController {
         return "/eServices2/ImportantAnnouncement/important-announcement-free-text-create-success";
     }
 
+    @GetMapping(value = "/importantAnnouncement_FreeTextDetail.do")
+    public String importAnntFreeTextDetailPage() {
+        return "/eServices2/ImportantAnnouncement/important-announcement-free-text-detail";
+    }
+
 }

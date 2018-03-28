@@ -24,6 +24,39 @@
 
     <script>
         $(document).ready(function () {
+            var anntEngDom = jQuery('#anntEng');
+            var anntTradChinDom = jQuery('#anntTradChin');
+            var anntSimpChinDom = jQuery('#anntSimpChin');
+
+            var eng = '';
+            var trad ='';
+            var simp = '';
+
+            eng = 'Important Notice:\n' +
+                'Yuen Long Office will be relocated to the following address on 26 February 2018:\n' +
+                '1/F, Yuen Long Government Offices, 2 Kiu Lok Square, Yuen Long, New Territories\n' +
+                '\n' +
+                'The existing office at Manhattan Plaza will be closed and cease providing services on the same day.\n' +
+                'Services provided will not be affected during the relocation period.\n' +
+                '\t\t\t\t\t\t\t';
+
+            trad = '元朗辦事處將於二零一八年二月二十六日遷往以下地址 ﹕\n' +
+                '新界元朗橋樂坊2 號元朗政府合署1樓\n' +
+                '\n' +
+                '現時位於富逹廣場的辦事處將於同日起關閉及停止服務。\n' +
+                '在搬遷期間，辦事處所提供的服務將不受影響。\n' +
+                '\t\t\t\t        \t';
+
+            simp = '元朗办事处将于二零一八年二月二十六日迁往以下地址：\n' +
+                '新界元朗桥乐坊2号元朗政府合署1楼\n' +
+                '\n' +
+                '现时位于富逹广场的办事处将于同日起关闭及停止服务。\n' +
+                '在搬迁期间，办事处所提供的服务将不受影响。';
+
+            anntEngDom.html(eng);
+            anntTradChinDom.html(trad);
+            anntSimpChinDom.html(simp);
+
 
         });
     </script>
@@ -121,21 +154,21 @@
                                 <div style="padding-top: 30px;">
                                     <div><b><span th:text="${#messages.msg('umps.adminfunc.lang.eng')}"></span></b></div>
                                     <div>
-                                        <textarea class="announcement-textarea"></textarea>
+                                        <textarea class="announcement-textarea" id="anntEng"></textarea>
                                     </div>
                                 </div>
 
                                 <div style="padding-top: 30px;">
                                     <div><b><span th:text="${#messages.msg('umps.adminfunc.lang.tradChin')}"></span></b></div>
                                     <div>
-                                        <textarea class="announcement-textarea"></textarea>
+                                        <textarea class="announcement-textarea" id="anntTradChin"></textarea>
                                     </div>
                                 </div>
 
                                 <div style="padding-top: 30px;">
                                     <div><b><span th:text="${#messages.msg('umps.adminfunc.lang.simpChin')}"></span></b></div>
                                     <div>
-                                        <textarea class="announcement-textarea"></textarea>
+                                        <textarea class="announcement-textarea" id="anntSimpChin"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -154,23 +187,23 @@
                                     <div><span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.effectiveFrom')}"></span></div>
                                     <div class="annt-date-container">
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-year" />
+                                            <input type="text" class="annt-date-year" value="2017" />
                                             <div class="annt-date-value"><span>YYYY</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="11" />
                                             <div class="annt-date-value"><span>MM</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="25" />
                                             <div class="annt-date-value"><span>DD</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="00" />
                                             <div class="annt-date-value"><span>hh</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="00" />
                                             <div class="annt-date-value"><span>mm</span></div>
                                         </div>
                                     </div>
@@ -180,23 +213,23 @@
                                     <div><span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.effectiveTo')}"></span></div>
                                     <div class="annt-date-container">
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-year" />
+                                            <input type="text" class="annt-date-year" value="2017" />
                                             <div class="annt-date-value"><span>YYYY</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="11" />
                                             <div class="annt-date-value"><span>MM</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="25" />
                                             <div class="annt-date-value"><span>DD</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="12" />
                                             <div class="annt-date-value"><span>hh</span></div>
                                         </div>
                                         <div class="annt-date-content">
-                                            <input type="text" class="annt-date-non-year" />
+                                            <input type="text" class="annt-date-non-year" value="00" />
                                             <div class="annt-date-value"><span>mm</span></div>
                                         </div>
                                     </div>
