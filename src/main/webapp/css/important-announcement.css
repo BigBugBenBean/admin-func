@@ -1,0 +1,22 @@
+.announcement-content {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.announcement-textarea {
+    resize: none;
+    width: 100%;
+    height: 6em;
+}
+
+.free-text-frame {
+    padding: 1em 10%;
+}
+
+.annt-item-left {
+
+}
+
+.annt-item-left > span {
+    font-weight: bold;
+}

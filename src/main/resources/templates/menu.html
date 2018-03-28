@@ -126,7 +126,7 @@
                                     <div id="sub-content-1-2">
                                         <ul class="func-parent">
                                             <li class="func-child">
-                                                <a class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.importantannouncement')}"></a>
+                                                <a th:href="@{/e-Services-2/maintenance/importantAnnouncement.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.importantannouncement')}"></a>
                                             </li>
                                             <li class="func-child">
                                                 <a th:href="@{/e-Services-2/maintenance/surgeControl.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.surgecontrol')}"></a>
@@ -139,6 +139,9 @@
                                             </li>
                                             <li class="func-child">
                                                 <a th:href="@{/e-Services-2/maintenance/scheduleJob.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.schedulejob')}"></a>
+                                            </li>
+                                            <li class="func-child">
+                                                <a th:href="@{/e-Services-2/maintenance/ivrs.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.ivrs')}"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -178,20 +181,20 @@
                                     <div id="sub-content-2-1">
                                         <ul class="func-parent">
                                             <li class="func-child">
-                                                <a class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.appointmentbookingenquiry')}"></a>
+                                                <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.appointmentbookingenquiry')}"></a>
                                             </li>
                                             <li class="func-child">
-                                                <a class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.onlinesubmissionenquiry')}"></a>
+                                                <a th:href="@{/SMARTICS-2/enquiry/onlineSubmissionEnquiry.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.onlinesubmissionenquiry')}"></a>
                                             </li>
                                             <li class="func-child">
-                                                <a class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.enquirycode')}"></a>
+                                                <a th:href="@{/SMARTICS-2/enquiry/enquiryCodeInformation.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.enquirycode')}"></a>
                                             </li>
                                         </ul>
                                     </div>
                                     <div id="sub-content-2-2">
                                         <ul class="func-parent">
                                             <li class="func-child">
-                                                <a class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.maintenance.deleteappointment')}"></a>
+                                                <a th:href="@{/SMARTICS-2/maintenance/deleteAppointment.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.maintenance.deleteappointment')}"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -215,7 +218,7 @@
                                     <div id="sub-content-3-1">
                                         <ul class="func-parent">
                                             <li class="func-child">
-                                                <a class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.rm.enquiry.onlinesubmissionenquiry')}"></a>
+                                                <a th:href="@{/RM/enquiry/onlineSubmissionEnquiry.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.rm.enquiry.onlinesubmissionenquiry')}"></a>
                                             </li>
                                         </ul>
                                     </div>

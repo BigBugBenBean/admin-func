@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/delete-appointment.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+    <script>
+        $(document).ready(function () {
+            var list = [];
+
+            list = [
+                {
+                    'applicantID': 'A123456(G)',
+                    'trn': '5791712016000007',
+                    'appType': 'ROPbooking'
+                }
+            ];
+
+            var grid = $("#dataGrid");
+            var gridConfig = {
+                width: '100%',
+                height: '260px',
+
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
+
+                autoload: true,
+
+                // paging: true,
+                // pageLoading: true,
+                // pageSize: recordPerPage,
+
+                data: list,
+
+                // controller: {
+                //     loadData: function (filter) {
+                //         var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                //         return {
+                //             data: list.slice(startIndex, startIndex + filter.pageSize),
+                //             itemCount: list.length
+                //         };
+                //     }
+                // },
+
+                fields: [
+                    { name: 'applicantID', title: 'Applicant ID', type: 'text', width: 20, headerTemplate: commonHeader },
+                    { name: 'trn', title: 'TRN', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'appType', title: 'App Type', type: 'text', width: 10, headerTemplate: commonHeader }
+                ]
+            };
+            grid.jsGrid(gridConfig);
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+
+                <div style="margin-top: 1em;  ">
+                    <!--<div class="flex-container grid-page-header">-->
+                    <!--<div style="flex: auto;"></div>-->
+                    <!--<div>-->
+                    <!--<span class="grid-page-header-text" th:text="${#messages.msg('umps.adminfunc.common.pagination.recordPerPage')}"></span>-->
+                    <!--<span>-->
+                    <!--<select id="totalPager"></select>-->
+                    <!--</span>-->
+                    <!--<span class="grid-page-header-text" style="padding-left: 10px;" th:text="${#messages.msg('umps.adminfunc.common.pagination.pageNo')}"></span>-->
+                    <!--<span>-->
+                    <!--<select id="numPager"></select>-->
+                    <!--</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div>
+                        <div id="dataGrid"></div>
+                    </div>
+                    <div class="grid-page-header" style="height: 30px;">&nbsp;</div>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <span th:text="${#messages.msg('umps.adminfunc.deleteAppointment.deleteSuccess')}"></span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link rel="stylesheet" href="/adminfunc/css/style.css"/>
+
+</head>
+<body>
+
+<div th:fragment="appointmentBookingEnquiryFooter">
+    <div>-----------------------</div>
+    <div><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.appointmentType')}"></span></div>
+    <div>-----------------------</div>
+    <div>
+        <div class="flex-container">
+            <div class="flex-item-2"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.ropBooking')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.ropDesc')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-2"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.sidccBooking')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.sidccDesc')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-2"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.crpBooking')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.crpDesc')}"></span></div>
+        </div>
+    </div>
+    <div>-----------------------</div>
+    <div><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.channelType')}"></span></div>
+    <div>-----------------------</div>
+    <div>
+        <div class="flex-container">
+            <div class="flex-item-2"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.a')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.admin')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-2"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.i')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.ivrs')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-2"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.t')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.interface')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-2"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.w')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.footer.web')}"></span></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

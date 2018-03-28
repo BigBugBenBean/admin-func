@@ -22,6 +22,10 @@
     flex: 4;
 }
 
+.flex-item-4 {
+    flex: 4;
+}
+
 .flex-item-7 {
     flex: 7;
 }
@@ -39,6 +43,8 @@
 .round-border {
     border-radius: 20px 20px 0 0;
 }
+
+
 
 .grid-page-header {
     background-color: #82a579;
@@ -477,7 +483,7 @@ sub menu
 {
     display: none;
     padding: 15px;
-    height: 150px;
+    height: 180px;
 }
 #sub-tab-1-1:checked ~ #sub-content-1-1,
 #sub-tab-1-2:checked ~ #sub-content-1-2,

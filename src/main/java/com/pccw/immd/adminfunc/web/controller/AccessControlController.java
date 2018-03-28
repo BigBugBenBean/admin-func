@@ -14,12 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/e-Services-2/maintenance")
 public class AccessControlController {
 
     private static final Logger LOG = LoggerFactory.getLogger(AccessControlController.class);
@@ -28,9 +30,10 @@ public class AccessControlController {
     public static final String WHITELIST = "White";
 
     @Autowired
-    @Qualifier("accessControlService.eservice2")   private AccessControlService accessControlService;
+    @Qualifier("accessControlService.eservice2")
+    private AccessControlService accessControlService;
 
-    @GetMapping(value = "/e-Services-2/maintenance/accessControl.do")
+    @GetMapping(value = "/accessControl.do")
     public String accessControlPage(@ModelAttribute AccessControlDTO accessControlDTO) {
         List<AccessControl> list = accessControlService.listAll();
         
@@ -38,10 +41,10 @@ public class AccessControlController {
             accessControlDTO.setAccessControlList(list);
         }
 
-        return "/eServices2/AccessControl/access-control";
+        return "eServices2/AccessControl/access-control";
     }
 
-    @GetMapping(value = "/e-Services-2/maintenance/accessControl_Global.do")
+    @GetMapping(value = "/accessControl_Global.do")
     public String accessControlGlobalPage(@ModelAttribute AccessControlDTO accessControlDTO) {
         List<AccessControlGlobalParam> params = accessControlService.getGlobalParam();
 
@@ -52,7 +55,7 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control-global";
     }
 
-    @PostMapping(value = "/e-Services-2/maintenance/accessControl_GlobalParamsSave.do")
+    @PostMapping(value = "/accessControl_GlobalParamsSave.do")
     public String saveAccessControlGlobalParams(@ModelAttribute AccessControlGlobalParamsDTO accessControlGlobalParamsDTO) {
 
         accessControlService.updateGlobalParam(accessControlGlobalParamsDTO);
@@ -60,7 +63,7 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control-global-success";
     }
 
-    @PostMapping(value = "/e-Services-2/maintenance/accessControl_CreateSave.do")
+    @PostMapping(value = "/accessControl_CreateSave.do")
     public String accessControlCreateSave(@ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
 
         String fromYear = accessControlCreateDTO.getEffectiveFromYear();
@@ -95,17 +98,17 @@ public class AccessControlController {
         return "/eServices2/AccessControl/access-control-create-success";
     }
 
-    @GetMapping(value = "/e-Services-2/maintenance/accessControl_Create.do")
+    @GetMapping(value = "/accessControl_Create.do")
     public String accessControlCreatePage() {
         return "/eServices2/AccessControl/access-control-create";
     }
 
-    @PostMapping(value = "/e-Services-2/maintenance/accessControl_CreateSuccess.do")
+    @PostMapping(value = "/accessControl_CreateSuccess.do")
     public String accessControlCreateSuccessPage(@ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
         return "/eServices2/AccessControl/access-control-create-success";
     }
 
-    @GetMapping(value = "/e-Services-2/maintenance/accessControl_View.do")
+    @GetMapping(value = "/accessControl_View.do")
     public String accessControlViewPage(@ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
         return "/eServices2/AccessControl/access-control-view";
     }

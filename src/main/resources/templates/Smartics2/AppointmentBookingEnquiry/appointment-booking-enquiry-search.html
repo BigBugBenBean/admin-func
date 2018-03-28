@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/appointment-booking-enquiry.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <div>
+                    <b><span th:text="${#messages.msg('umps.adminfunc.common.searchCriteria')}"></span></b>
+                </div>
+
+                <div >
+                    <div>
+                        <div>
+                            <b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.byOffice')}"></span></b>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.office')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select class="appointment-list" id="" name="" >
+                                    <option value="">--Please select an office--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.AppointmentType')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select class="appointment-list" id="" name="" >
+                                    <option value="">--Please select an appointment type--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.date')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select id="" name="" >
+                                    <option value="">30/11/2017</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container" >
+                            <div style="flex: auto;"></div>
+                            <div style="padding: 15px;">
+                                <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry_OfficeResult.do}">
+                                <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.byApplicantID')}"></span></b>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.AppointmentType')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.startDate')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container" >
+                            <div style="flex: auto;"></div>
+                            <div style="padding: 15px;">
+                                <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry_ApplicantResult.do}">
+                                <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.byAppointmentType')}"></span></b>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.AppointmentType')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select class="appointment-list" id="" name="" >
+                                    <option value="">--Please select an appointment type--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.startDate')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select class="appointment-list" id="" name="" >
+                                    <option value="">30/11/2017</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.endDate')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select id="" name="" >
+                                    <option value="">30/11/2017</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container" >
+                            <div style="flex: auto;"></div>
+                            <div style="padding: 15px;">
+                                <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry_AppointmentResult.do}">
+                                <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/online-submission.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <div>
+                    <div>
+                        <b><span th:text="${#messages.msg('umps.adminfunc.common.searchCriteria')}"></span></b>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+                            <input type="radio" name="ONLINE_SEARCH" />
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span>1. </span>
+                                <span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.TRN')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <input type="text" />
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+                            <input type="radio" name="ONLINE_SEARCH" />
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span>2. </span>
+                                <span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.ARN')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <input type="text" style="width: 40px;" />
+                            <span> - </span>
+                            <input type="text" style="width: 70px;" />
+                            <span> - </span>
+                            <input type="text" style="width: 30px;" />
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+                            <input type="radio" name="ONLINE_SEARCH" />
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span>3. </span>
+                                <span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.start')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <input type="text" style="width: 100px;" />
+                            <span> (dd/mm/yyyy) </span>
+                            <input type="text" style="width: 30px;" />
+                            <span> : </span>
+                            <input type="text" style="width: 30px;" />
+                            <span> (hh:mm) </span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.end')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <input type="text" style="width: 100px;" />
+                            <span> (dd/mm/yyyy) </span>
+                            <input type="text" style="width: 30px;" />
+                            <span> : </span>
+                            <input type="text" style="width: 30px;" />
+                            <span> (hh:mm) </span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <div><span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.applicantID')}"></span></div>
+                                <div><span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.hkic')}"></span></div>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <div>
+                                <input type="text" />
+                            </div>
+                            <div><span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.hkicExample')}"></span></div>
+                            <div><span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.tdExample')}"></span></div>
+                            <div><span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.arnExample')}"></span></div>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.applicationType')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <select class="appointment-list" id="" name="" >
+                                <option value="">--Please select an appointment type--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container search-padding">
+                        <div class="flex-item-1">
+                            <input type="radio" name="ONLINE_SEARCH" />
+                        </div>
+                        <div class="flex-item-3 search-field-left">
+                            <b>
+                                <span>4. </span>
+                                <span th:text="${#messages.msg('umps.adminfunc.onlineSubmission.reportNo')}"></span>
+                            </b>
+                        </div>
+                        <div class="flex-item-7">
+                            <input type="text" />
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                </div>
+
+                <div class="flex-container" style="padding-top: 10px;">
+                    <div style="flex: auto;"></div>
+                    <div style="padding: 15px;">
+                        <a th:href="@{/RM/enquiry/onlineSubmissionEnquiry_Result.do}">
+                            <input class="SmallButtonStyle pointer" id="submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
