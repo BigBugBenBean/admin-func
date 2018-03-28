@@ -5,6 +5,10 @@
 
 }
 
+.flex-item-auto {
+    flex: auto;
+}
+
 .flex-item-1 {
     flex: 1;
 
