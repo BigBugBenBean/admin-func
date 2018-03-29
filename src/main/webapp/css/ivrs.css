@@ -1,0 +1,15 @@
+.param-container {
+    min-height: 30px;
+}
+
+.param-item-left {
+    flex: 2;
+}
+
+.param-item-right {
+    flex: 7;
+}
+
+.ivrs-frame {
+    padding: 1em 10%;
+}

@@ -4,23 +4,65 @@
     <meta charset="UTF-8"></meta>
     <title>e-Services Admin Function</title>
 
-    <link rel="stylesheet" href="/adminfunc/css/appointment-booking-enquiry.css"/>
+    <link rel="stylesheet" href="/adminfunc/css/ivrs.css"/>
 
-    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
-    <!--/*<![CDATA[*/-->
+    <script th:inline="javascript" th:if="${ivrsDTO}">
+    /*<![CDATA[*/
 
-    <!--$(document).ready(function () {-->
-    <!--// var jobList = [];-->
-    <!--// var statusList = [];-->
+    $(document).ready(function () {
+    // var jobList = [];
+    // var statusList = [];
 
-    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
-    <!--console.log('scheduleJobDetailDTO');-->
-    <!--console.log(scheduleJobDetailDTO);-->
-    <!---->
-    <!--});-->
+    var ivrsDTO = [[${ivrsDTO}]];
+    console.log('ivrsDTO');
+    console.log(ivrsDTO);
 
-    <!--/*]]>*/-->
-    <!--</script>-->
+    if (isNotEmptyNullUndfined(ivrsDTO)) {
+        var sysParamList = ivrsDTO['systemParamList'];
+        if (isNotEmptyNullUndfined(sysParamList) && sysParamList.length > 0) {
+            jQuery.each(sysParamList, function (index, object) {
+                var tmpKey = object['sysParamKey'];
+                var tmpVal = object['sysParamValue'];
+
+                console.log('sysParamKey: ' + tmpKey + ' , sysParamValue: ' + tmpVal);
+
+                var dom = null;
+
+                switch (tmpKey) {
+                    case 'IVRS_STATUS_ES1': {
+                        dom = jQuery('#es1Select');
+                        break;
+                    }
+                    case 'IVRS_STATUS_ES2': {
+                        dom = jQuery('#es2Select');
+                        break;
+                    }
+                }
+
+                if (isNotEmptyNullUndfined(dom)) {
+                    var elementStr = '';
+                    var tmpYSelectStr = '';
+                    var tmpNSelectStr = '';
+                    if (tmpVal === 'Y') {
+                        tmpYSelectStr = ' selected="selected" ';
+                    } else if (tmpVal === 'N') {
+                        tmpNSelectStr = ' selected="selected" ';
+                    }
+                    elementStr += '<option value="' + 'Y' + '" ' + tmpYSelectStr + '>' + 'Y' + '</option>';
+                    elementStr += '<option value="' + 'N' + '" ' + tmpNSelectStr + '>' + 'N' + '</option>';
+
+                    dom.html(elementStr);
+                }
+
+            });
+        }
+    }
+
+
+    });
+
+    /*]]>*/
+    </script>
 
 </head>
 <body>
@@ -32,6 +74,61 @@
         <div class="content-padding">
             <div>
                 <h3>IVRS</h3>
+
+                <form method="post" th:action="@{/e-Services-2/maintenance/ivrs_Success.do}">
+                    <div>
+                        <div class="RowSeparatorThin"></div>
+
+                        <div th:each="item : ${ivrsDTO.systemParamList}">
+                            <!--<h4 th:text="${item.sysParamKey}"></h4>-->
+
+                            <div th:switch="${item.sysParamKey}">
+                                <div th:case="'IVRS_STATUS_ES1'">
+                                    <div class="flex-container param-container">
+                                        <div class="param-item-left">
+                                            <!--<span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.whitelist')}"></span>-->
+                                            <span th:text="${item.sysParamKey}"></span>
+                                        </div>
+                                        <div class="param-item-right">
+                                            <!--<span th:text="${item.sysParamValue}"></span>-->
+                                            <select name="IVRS_STATUS_ES1" id="es1Select"></select>
+                                        </div>
+                                    </div>
+                                    <div class="RowSeparatorThin"></div>
+                                </div>
+                                <div th:case="'IVRS_STATUS_ES2'">
+                                    <div class="flex-container param-container">
+                                        <div class="param-item-left">
+                                            <!--<span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.whitelist')}"></span>-->
+                                            <span th:text="${item.sysParamKey}"></span>
+                                        </div>
+                                        <div class="param-item-right">
+                                            <!--<span th:text="${item.sysParamValue}"></span>-->
+                                            <select name="IVRS_STATUS_ES2" id="es2Select"></select>
+                                        </div>
+                                    </div>
+                                    <div class="RowSeparatorThin"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex-container" style="padding-top: 30px;">
+                        <div style="flex: auto;"></div>
+                        <div>
+                            <!--<a th:href="@{/e-Services-2/maintenance/ivrs_Success.do}">-->
+                                <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="submit" th:value="${#messages.msg('umps.adminfunc.common.save')}" />
+                            <!--</a>-->
+                        </div>
+                        <!--<div style="padding-left: 10px;">-->
+                            <!--<a th:href="@{/e-Services-2/maintenance/importantAnnouncement.do}">-->
+                                <!--<input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" />-->
+                            <!--</a>-->
+                        <!--</div>-->
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
