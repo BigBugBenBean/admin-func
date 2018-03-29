@@ -20,7 +20,7 @@ public class Group {
 
     @Id
     @Column(name = "GROUP_ID", 
-            length = 4)
+            length = 16)
     private String funcId;
 
     @Column(name = "GROUP_DESC", 

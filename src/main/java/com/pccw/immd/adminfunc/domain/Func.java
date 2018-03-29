@@ -25,10 +25,6 @@ public class Func {
             length = 2000)
     private String funcDesc;
 
-    @Column(name = "DEST_URL", 
-            length = 256)
-    private String destURL;
-
     @Column(name = "DISPLAY_POS", 
             length = 3)
     private String displayPos;
@@ -55,14 +51,6 @@ public class Func {
 
     public void setFuncDesc(String funcDesc) {
         this.funcDesc = funcDesc;
-    }
-
-    public String getDestURL() {
-        return destURL;
-    }
-
-    public void setDestURL(String destURL) {
-        this.destURL = destURL;
     }
 
     public String getDisplayPos() {
