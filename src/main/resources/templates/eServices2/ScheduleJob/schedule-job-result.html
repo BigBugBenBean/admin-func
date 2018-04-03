@@ -6,13 +6,18 @@
 
     <link rel="stylesheet" href="/adminfunc/css/schedule-job.css"/>
 
-    <script th:inline="javascript">
+    <script th:inline="javascript" th:if="${createScheduleJobDTO}">
         /*<![CDATA[*/
 
         $(function () {
 
+            var createScheduleJobDTO = [[${createScheduleJobDTO}]];
+            console.log('createScheduleJobDTO');
+            console.log(createScheduleJobDTO);
+
             var list = [];
 
+            /*
             list = [
                 {
                     'jobName': 'Job Name 1',
@@ -102,7 +107,53 @@
                     'lastExTime': '24/09/2018 10:00',
                     'nextExTime': '24/09/2018 12:00'
                 }
-            ];
+            ]
+            */
+
+            if (isNotEmptyNullUndfined(createScheduleJobDTO)) {
+                var scheduleJobList = createScheduleJobDTO['scheduleJobList'];
+                var jobName = createScheduleJobDTO['jobName'];
+                var cronExp = createScheduleJobDTO['cronExpression'];
+                var dataMap = createScheduleJobDTO['dataMap'];
+                var description = createScheduleJobDTO['description'];
+
+                if (isNotEmptyNullUndfined(jobName)) {
+                    var jobNameDom = $('#jobName');
+                    jobNameDom.html(jobName);
+                }
+                if (isNotEmptyNullUndfined(cronExp)) {
+                    var cronExpDom = $('#cronExp');
+                    cronExpDom.html(cronExp);
+                }
+                if (isNotEmptyNullUndfined(dataMap)) {
+                    var dataMapDom = $('#dataMap');
+                    dataMapDom.html(dataMap);
+                }
+                if (isNotEmptyNullUndfined(description)) {
+                    var descriptionDom = $('#description');
+                    descriptionDom.html(description);
+                }
+
+                if (isNotEmptyNullUndfined(scheduleJobList) && scheduleJobList.length > 0) {
+                    jQuery.each(scheduleJobList, function (index, object) {
+                        var tmpJobName = object['jobDetail']['jobName'];
+                        var tmpCronExpression = object['qrtzCronTriggers']['cronExpression'];
+                        var tmpDataMap = object['jobDetail']['dataMap'];
+                        var tmpDescription = object['jobDetail']['description'];
+
+                        var newObj = {
+                            'jobName': tmpJobName,
+                            'cronExp': tmpCronExpression,
+                            'dataMap': tmpDataMap,
+                            'description': tmpDescription
+                        };
+
+                        list.push(newObj);
+                    });
+                }
+
+            }
+
 
             // table grid data
             var totalPageList = GRID_RECORD_PER_PAGE_ARRAY_DEFAULT;
@@ -161,12 +212,10 @@
                 },
 
                 fields: [
-                    { name: 'jobName', title: 'Job Name', type: 'text', width: 40, headerTemplate: commonHeader },
-                    { name: 'cronExp', title: 'Cron Expression', type: 'text', width: 40, headerTemplate: commonHeader },
-                    { name: 'dataMap', title: 'Data Map', type: 'text', width: 30, headerTemplate: commonHeader },
-                    { name: 'lastStatus', title: 'Last Status', type: 'text', width: 30, headerTemplate: commonHeader },
-                    { name: 'lastExTime', title: 'Last Execution Time', type: 'text', width: 40, headerTemplate: commonHeader },
-                    { name: 'nextExTime', title: 'Next Execution Time', type: 'text', width: 40, headerTemplate: commonHeader }
+                    { name: 'jobName', title: 'Job Name', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'cronExp', title: 'Cron Expression', type: 'text', width: 20, headerTemplate: commonHeader },
+                    { name: 'dataMap', title: 'Data Map', type: 'text', width: 20, headerTemplate: commonHeader },
+                    { name: 'description', title: 'Description', type: 'text', width: 20, headerTemplate: commonHeader }
                 ]
 
             };
@@ -193,44 +242,51 @@
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobname')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>Job Name A</span>
+                            <span id="jobName"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.cronexpression')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>0 15-45/30 ***?</span>
+                            <span id="cronExp"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
                         <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.datamap')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>Data Map Filling</span>
+                            <span id="dataMap"></span>
                         </div>
                     </div>
                     <div class="RowSeparatorThin"></div>
                     <div class="flex-container">
-                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.laststatus')}"></span></b></div>
+                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.description')}"></span></b></div>
                         <div class="flex-item-7 search-result-right">
-                            <span>Success</span>
+                            <span id="description"></span>
                         </div>
                     </div>
-                    <div class="RowSeparatorThin"></div>
-                    <div class="flex-container">
-                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.lastExecutionTime')}"></span></b></div>
-                        <div class="flex-item-7 search-result-right">
-                            <span>24/09/2018 10:00</span>
-                        </div>
-                    </div>
-                    <div class="RowSeparatorThin"></div>
-                    <div class="flex-container">
-                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.nextExecutionTime')}"></span></b></div>
-                        <div class="flex-item-7 search-result-right">
-                            <span>24/09/2018 12:00</span>
-                        </div>
-                    </div>
+                    <!--<div class="RowSeparatorThin"></div>-->
+                    <!--<div class="flex-container">-->
+                        <!--<div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.laststatus')}"></span></b></div>-->
+                        <!--<div class="flex-item-7 search-result-right">-->
+                            <!--<span>Success</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="RowSeparatorThin"></div>-->
+                    <!--<div class="flex-container">-->
+                        <!--<div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.lastExecutionTime')}"></span></b></div>-->
+                        <!--<div class="flex-item-7 search-result-right">-->
+                            <!--<span>24/09/2018 10:00</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="RowSeparatorThin"></div>-->
+                    <!--<div class="flex-container">-->
+                        <!--<div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.nextExecutionTime')}"></span></b></div>-->
+                        <!--<div class="flex-item-7 search-result-right">-->
+                            <!--<span>24/09/2018 12:00</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <!--<div class="RowSeparatorThin"></div>-->
 
 

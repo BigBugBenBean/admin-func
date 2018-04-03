@@ -1,8 +1,10 @@
 package com.pccw.immd.adminfunc.service;
 
 import com.pccw.immd.adminfunc.domain.JobDetail;
+import com.pccw.immd.adminfunc.domain.ScheduleJob;
 import com.pccw.immd.adminfunc.domain.ScheduleJobView;
 import com.pccw.immd.adminfunc.domain.ScheduleJobViewHistory;
+import com.pccw.immd.adminfunc.dto.CreateScheduleJobDTO;
 import com.pccw.immd.adminfunc.dto.ScheduleJobViewDTO;
 import com.pccw.immd.adminfunc.dto.ScheduleJobViewHistoryDTO;
 
@@ -16,4 +18,7 @@ public interface ScheduleJobService {
     List<ScheduleJobViewHistory> searchScheduleJobHistoryList(ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO);
 
     List<ScheduleJobView> searchScheduleJobViewList(ScheduleJobViewDTO scheduleJobViewDTO);
+
+    void createScheduleJob(CreateScheduleJobDTO createScheduleJobDTO);
+    List<ScheduleJob> searchScheduleJobList(CreateScheduleJobDTO createScheduleJobDTO);
 }

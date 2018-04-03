@@ -1,7 +1,9 @@
 package com.pccw.immd.adminfunc.web.controller;
 
+import com.pccw.immd.adminfunc.domain.ScheduleJob;
 import com.pccw.immd.adminfunc.domain.ScheduleJobView;
 import com.pccw.immd.adminfunc.domain.ScheduleJobViewHistory;
+import com.pccw.immd.adminfunc.dto.CreateScheduleJobDTO;
 import com.pccw.immd.adminfunc.dto.JobStatus;
 import com.pccw.immd.adminfunc.dto.ScheduleJobDetailDTO;
 import com.pccw.immd.adminfunc.dto.ScheduleJobViewDTO;
@@ -310,19 +312,74 @@ public class ScheduleJobController {
         return "/eServices2/ScheduleJob/schedule-job-search";
     }
 
-    @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Result.do")
-    public String scheduleJobResultPage() {
+    @PostMapping(value = "/e-Services-2/maintenance/scheduleJob_Result.do")
+    public String scheduleJobResultPage(@ModelAttribute CreateScheduleJobDTO createScheduleJobDTO) {
+
+//        String jobName = "job";
+//        String cron = "0 0/1 * * * ?";
+//        String dataMap = "";
+//        String desc = "testDesc";
+
+        //
+//        createScheduleJobDTO.setJobName(jobName);
+//        createScheduleJobDTO.setCronExpression(cron);
+//        createScheduleJobDTO.setDataMap(dataMap);
+//        createScheduleJobDTO.setDescription(desc);
+
+
+
+
+        List<ScheduleJob> list = scheduleJobService.searchScheduleJobList(createScheduleJobDTO);
+        if (list.size() > 0) {
+            createScheduleJobDTO.setScheduleJobList(list);
+        }
+
+
         return "/eServices2/ScheduleJob/schedule-job-result";
     }
+
+//    @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Result.do")
+//    public String scheduleJobResultPage() {
+//        return "/eServices2/ScheduleJob/schedule-job-result";
+//    }
 
     @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Create.do")
     public String scheduleJobCreatePage() {
         return "/eServices2/ScheduleJob/schedule-job-create";
     }
 
-    @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Success.do")
-    public String scheduleJobCreateSuccessPage() {
+    @PostMapping(value = "/e-Services-2/maintenance/scheduleJob_Success.do")
+    public String scheduleJobCreateSuccessPage(@ModelAttribute CreateScheduleJobDTO createScheduleJobDTO) {
+
+        String jobName = "NewJob01";
+        String jobClass = "com.immd.eservice2.job.report.EC_ROP_201_01";
+        String cron = "0 0/1 * * * ?";
+        String dataMap = "";
+        String desc = "testDesc";
+
+        //
+        createScheduleJobDTO.setJobName(jobName);
+        createScheduleJobDTO.setJobClass(jobClass);
+        createScheduleJobDTO.setCronExpression(cron);
+        createScheduleJobDTO.setDataMap(dataMap);
+        createScheduleJobDTO.setDescription(desc);
+
+        createScheduleJobDTO.setSchedName("QuartzScheduler");
+        createScheduleJobDTO.setJobGroup("DEFAULT");
+        createScheduleJobDTO.setIsDurable("0");
+        createScheduleJobDTO.setIsNonconcurrent("0");
+        createScheduleJobDTO.setIsUpdateData("0");
+        createScheduleJobDTO.setRequestsRecovery("0");
+
+        scheduleJobService.createScheduleJob(createScheduleJobDTO);
+
+
         return "/eServices2/ScheduleJob/schedule-job-create-success";
     }
+
+//    @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Success.do")
+//    public String scheduleJobCreateSuccessPage() {
+//        return "/eServices2/ScheduleJob/schedule-job-create-success";
+//    }
 
 }
