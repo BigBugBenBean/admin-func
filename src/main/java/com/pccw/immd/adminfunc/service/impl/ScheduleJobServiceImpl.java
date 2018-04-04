@@ -1,6 +1,5 @@
 package com.pccw.immd.adminfunc.service.impl;
 
-import com.pccw.immd.adminfunc.domain.JobDetail;
 import com.pccw.immd.adminfunc.domain.QrtzCronTriggers;
 import com.pccw.immd.adminfunc.domain.QrtzTriggers;
 import com.pccw.immd.adminfunc.domain.ScheduleJob;
@@ -13,17 +12,26 @@ import com.pccw.immd.adminfunc.repository.HibernateUtils;
 import com.pccw.immd.adminfunc.repository.UmScheduleJobDetailRepository;
 import com.pccw.immd.adminfunc.repository.UmScheduleJobViewHistoryRepository;
 import com.pccw.immd.adminfunc.service.ScheduleJobService;
+import com.pccw.immd.adminfunc.utils.JobUtils;
 import com.pccw.immd.adminfunc.web.controller.ScheduleJobController;
-import org.hibernate.Session;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.CronTrigger;
+import org.quartz.Job;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.ObjectAlreadyExistsException;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +53,7 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     private UmScheduleJobDetailRepository scheduleJobDetailRepository;
 
     @Override
-    public List<JobDetail> listAllJobDetail(String jobGroup) {
+    public List<com.pccw.immd.adminfunc.domain.JobDetail> listAllJobDetail(String jobGroup) {
         return scheduleJobDetailRepository.findAllByJobGroup(jobGroup);
     }
 
@@ -55,43 +63,113 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
     }
 
     @Override
-    public void createScheduleJob(CreateScheduleJobDTO createScheduleJobDTO) {
+    public Boolean createScheduleJob(CreateScheduleJobDTO createScheduleJobDTO) {
 
-        EntityManager em = HibernateUtils.getEm();
-
-        Session session = HibernateUtils.getSession();
-        session.beginTransaction();
-
-        // Job Detail
-        JobDetail newJobDetail = new JobDetail();
-        newJobDetail.setJobName(createScheduleJobDTO.getJobName());
-        newJobDetail.setJobClassName(createScheduleJobDTO.getJobClass());
-        newJobDetail.setDescription(createScheduleJobDTO.getDescription());
-
-        newJobDetail.setSchedName(createScheduleJobDTO.getSchedName());
-        newJobDetail.setJobGroup(createScheduleJobDTO.getJobGroup());
-        newJobDetail.setIsDurable(createScheduleJobDTO.getIsDurable());
-        newJobDetail.setIsNonconcurrent(createScheduleJobDTO.getIsNonconcurrent());
-        newJobDetail.setIsUpdateData(createScheduleJobDTO.getIsUpdateData());
-        newJobDetail.setRequestsRecovery(createScheduleJobDTO.getRequestsRecovery());
-
-        // Qrtz Cron Triggers
-        QrtzCronTriggers newQrtzCronTriggers = new QrtzCronTriggers();
-        newQrtzCronTriggers.setSchedName(createScheduleJobDTO.getSchedName());
-        newQrtzCronTriggers.setTriggerName(createScheduleJobDTO.getJobName());
-        newQrtzCronTriggers.setTriggerGroup(createScheduleJobDTO.getJobGroup());
-        newQrtzCronTriggers.setCronExpression(createScheduleJobDTO.getCronExpression());
+        Boolean isCreated = false;
 
 
-        // save
-        session.save(newQrtzCronTriggers);
-        session.save(newJobDetail);
+        JobDetail jobDetail = null;
+        CronScheduleBuilder scheduleBuilder = null;
 
-        // commit
-        session.getTransaction().commit();
-        session.close();
+        String jobName = createScheduleJobDTO.getJobName();
+        String jobDesc = createScheduleJobDTO.getDescription();
+        String jobClassName = createScheduleJobDTO.getJobClass();
+        String cronExpression = createScheduleJobDTO.getCronExpression();
+        String jobDataMap = createScheduleJobDTO.getDataMap();
 
 
+        try {
+            SchedulerFactory sf = new StdSchedulerFactory();
+            Scheduler scheduler = sf.getScheduler();
+
+            try{
+                jobDetail = JobBuilder.newJob(
+                    JobUtils.getClass(jobClassName).getClass()
+                )
+                .withIdentity(jobName)
+                .withDescription(jobDesc)
+                .usingJobData(JobUtils.getJobDataMap(jobDataMap))
+                .build();
+
+            }catch (ClassNotFoundException e) {
+
+            }catch (IllegalArgumentException e) {
+
+            }catch (Exception e) {
+
+            }
+
+            try{
+                scheduleBuilder = CronScheduleBuilder
+                        .cronSchedule(cronExpression)
+                        .withMisfireHandlingInstructionDoNothing();
+            }catch (Exception e) {
+
+            }
+
+
+            CronTrigger trigger = TriggerBuilder.newTrigger()
+                    .withIdentity(jobName)
+                    .withSchedule(scheduleBuilder)
+                    .build();
+
+            if (jobDetail != null && scheduleBuilder != null) {
+                try {
+                    scheduler.scheduleJob(jobDetail, trigger);
+                    isCreated = true;
+                } catch (ObjectAlreadyExistsException e) {
+
+                } catch (Exception e) {
+
+                }
+            }
+
+        } catch(SchedulerException e) {
+
+        } catch(Exception e) {
+
+        }
+
+
+
+
+//        EntityManager em = HibernateUtils.getEm();
+//
+//        Session session = HibernateUtils.getSession();
+//        session.beginTransaction();
+//
+//        // Job Detail
+//        JobDetail newJobDetail = new JobDetail();
+//        newJobDetail.setJobName(createScheduleJobDTO.getJobName());
+//        newJobDetail.setJobClassName(createScheduleJobDTO.getJobClass());
+//        newJobDetail.setDescription(createScheduleJobDTO.getDescription());
+//
+//        newJobDetail.setSchedName(createScheduleJobDTO.getSchedName());
+//        newJobDetail.setJobGroup(createScheduleJobDTO.getJobGroup());
+//        newJobDetail.setIsDurable(createScheduleJobDTO.getIsDurable());
+//        newJobDetail.setIsNonconcurrent(createScheduleJobDTO.getIsNonconcurrent());
+//        newJobDetail.setIsUpdateData(createScheduleJobDTO.getIsUpdateData());
+//        newJobDetail.setRequestsRecovery(createScheduleJobDTO.getRequestsRecovery());
+//
+//        // Qrtz Cron Triggers
+//        QrtzCronTriggers newQrtzCronTriggers = new QrtzCronTriggers();
+//        newQrtzCronTriggers.setSchedName(createScheduleJobDTO.getSchedName());
+//        newQrtzCronTriggers.setTriggerName(createScheduleJobDTO.getJobName());
+//        newQrtzCronTriggers.setTriggerGroup(createScheduleJobDTO.getJobGroup());
+//        newQrtzCronTriggers.setCronExpression(createScheduleJobDTO.getCronExpression());
+//
+//
+//        // save
+//        session.save(newQrtzCronTriggers);
+//        session.save(newJobDetail);
+//
+//        // commit
+//        session.getTransaction().commit();
+//        session.close();
+
+
+
+        return isCreated;
     }
 
     @Override
@@ -187,8 +265,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             ScheduleJobView sjv = new ScheduleJobView();
             Object[] objects = (Object[]) list.get(i);
             for (Object obj: objects) {
-                if (obj instanceof JobDetail) {
-                    sjv.setJobDetail((JobDetail) obj);
+                if (obj instanceof com.pccw.immd.adminfunc.domain.JobDetail) {
+                    sjv.setJobDetail((com.pccw.immd.adminfunc.domain.JobDetail) obj);
                 } else if (obj instanceof ScheduleJobViewHistory) {
                     sjv.setScheduleJobViewHistory((ScheduleJobViewHistory)obj);
                 } else if (obj instanceof QrtzTriggers) {
@@ -243,8 +321,8 @@ public class ScheduleJobServiceImpl implements ScheduleJobService {
             ScheduleJob sjv = new ScheduleJob();
             Object[] objects = (Object[]) list.get(i);
             for (Object obj: objects) {
-                if (obj instanceof JobDetail) {
-                    sjv.setJobDetail((JobDetail) obj);
+                if (obj instanceof com.pccw.immd.adminfunc.domain.JobDetail) {
+                    sjv.setJobDetail((com.pccw.immd.adminfunc.domain.JobDetail) obj);
                 } else if (obj instanceof QrtzCronTriggers) {
                     sjv.setQrtzCronTriggers((QrtzCronTriggers)obj);
                 }

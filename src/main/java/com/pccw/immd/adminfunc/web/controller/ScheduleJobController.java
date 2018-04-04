@@ -352,26 +352,40 @@ public class ScheduleJobController {
     public String scheduleJobCreateSuccessPage(@ModelAttribute CreateScheduleJobDTO createScheduleJobDTO) {
 
         String jobName = "NewJob01";
-        String jobClass = "com.immd.eservice2.job.report.EC_ROP_201_01";
+        String jobClass = "com.immd.eservice2.job.report.EC_ROP_201_02_01";
         String cron = "0 0/1 * * * ?";
         String dataMap = "";
         String desc = "testDesc";
 
         //
-        createScheduleJobDTO.setJobName(jobName);
-        createScheduleJobDTO.setJobClass(jobClass);
-        createScheduleJobDTO.setCronExpression(cron);
-        createScheduleJobDTO.setDataMap(dataMap);
-        createScheduleJobDTO.setDescription(desc);
+//        createScheduleJobDTO.setJobName(jobName);
+//        createScheduleJobDTO.setJobClass(jobClass);
+//        createScheduleJobDTO.setCronExpression(cron);
+//        createScheduleJobDTO.setDataMap(dataMap);
+//        createScheduleJobDTO.setDescription(desc);
 
-        createScheduleJobDTO.setSchedName("QuartzScheduler");
-        createScheduleJobDTO.setJobGroup("DEFAULT");
-        createScheduleJobDTO.setIsDurable("0");
-        createScheduleJobDTO.setIsNonconcurrent("0");
-        createScheduleJobDTO.setIsUpdateData("0");
-        createScheduleJobDTO.setRequestsRecovery("0");
+        if (createScheduleJobDTO.getJobName() != null
+                && createScheduleJobDTO.getJobClass() != null
+                && createScheduleJobDTO.getCronExpression() != null
+                && createScheduleJobDTO.getDataMap() != null
+                && createScheduleJobDTO.getDescription() != null
+                ) {
 
-        scheduleJobService.createScheduleJob(createScheduleJobDTO);
+            //
+            createScheduleJobDTO.setSchedName("QuartzScheduler");
+            createScheduleJobDTO.setJobGroup("DEFAULT");
+            createScheduleJobDTO.setIsDurable("0");
+            createScheduleJobDTO.setIsNonconcurrent("0");
+            createScheduleJobDTO.setIsUpdateData("0");
+            createScheduleJobDTO.setRequestsRecovery("0");
+
+            Boolean isCreated = scheduleJobService.createScheduleJob(createScheduleJobDTO);
+            if (!isCreated) {
+                // create failure
+            }
+        }
+
+
 
 
         return "/eServices2/ScheduleJob/schedule-job-create-success";

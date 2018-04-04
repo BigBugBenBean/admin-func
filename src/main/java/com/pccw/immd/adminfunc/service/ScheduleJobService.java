@@ -19,6 +19,6 @@ public interface ScheduleJobService {
 
     List<ScheduleJobView> searchScheduleJobViewList(ScheduleJobViewDTO scheduleJobViewDTO);
 
-    void createScheduleJob(CreateScheduleJobDTO createScheduleJobDTO);
+    Boolean createScheduleJob(CreateScheduleJobDTO createScheduleJobDTO);
     List<ScheduleJob> searchScheduleJobList(CreateScheduleJobDTO createScheduleJobDTO);
 }

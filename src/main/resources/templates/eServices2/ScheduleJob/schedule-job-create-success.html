@@ -6,8 +6,47 @@
 
     <link rel="stylesheet" href="/adminfunc/css/schedule-job.css"/>
 
-    <script type="text/javascript">
+    <script th:inline="javascript" th:if="${createScheduleJobDTO}">
+        /*<![CDATA[*/
 
+        $(function () {
+            var createScheduleJobDTO = [[${createScheduleJobDTO}]];
+            console.log('createScheduleJobDTO');
+            console.log(createScheduleJobDTO);
+
+            if (isNotEmptyNullUndfined(createScheduleJobDTO)) {
+                var jobName = createScheduleJobDTO['jobName'];
+                var jobClass = createScheduleJobDTO['jobClass'];
+                var cronExp = createScheduleJobDTO['cronExpression'];
+                var dataMap = createScheduleJobDTO['dataMap'];
+                var description = createScheduleJobDTO['description'];
+
+                if (isNotEmptyNullUndfined(jobName)) {
+                    var jobNameDom = $('#jobName');
+                    jobNameDom.html(jobName);
+                }
+                if (isNotEmptyNullUndfined(jobClass)) {
+                    var jobClassDom = $('#jobClass');
+                    jobClassDom.html(jobClass);
+                }
+                if (isNotEmptyNullUndfined(cronExp)) {
+                    var cronExpDom = $('#cronExp');
+                    cronExpDom.html(cronExp);
+                }
+                if (isNotEmptyNullUndfined(dataMap)) {
+                    var dataMapDom = $('#dataMap');
+                    dataMapDom.html(dataMap);
+                }
+                if (isNotEmptyNullUndfined(description)) {
+                    var descriptionDom = $('#description');
+                    descriptionDom.html(description);
+                }
+
+            }
+
+        });
+
+        /*]]>*/
     </script>
 
 </head>
@@ -24,7 +63,7 @@
                         <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobname')}"></span>
                     </div>
                     <div class="success-item-right">
-                        <span ></span>
+                        <span id="jobName"></span>
                     </div>
                 </div>
                 <div class="flex-container success-item-container">
@@ -32,7 +71,7 @@
                         <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobClass')}"></span>
                     </div>
                     <div class="success-item-right">
-                        <span ></span>
+                        <span id="jobClass"></span>
                     </div>
                 </div>
                 <div class="flex-container success-item-container">
@@ -40,7 +79,7 @@
                         <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.cronexpression')}"></span>
                     </div>
                     <div class="success-item-right">
-                        <span></span>
+                        <span id="cronExp"></span>
                     </div>
                 </div>
                 <div class="flex-container success-item-container">
@@ -48,7 +87,15 @@
                         <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.datamap')}"></span>
                     </div>
                     <div class="success-item-right">
-                        <span ></span>
+                        <span id="dataMap"></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.description')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span id="description"></span>
                     </div>
                 </div>
             </div>

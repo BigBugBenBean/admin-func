@@ -8,10 +8,13 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--classpath*:properties/quartz.properties,-->
+
     <context:property-placeholder location="
             classpath:properties/upms.properties,
             classpath:properties/spring-security.properties,
             classpath*:properties/web.properties,
+            classpath*:properties/quartz.properties,
             classpath*:properties/database.properties"
     />
     
