@@ -10,7 +10,7 @@
   ALTER TABLE "UM_FUNC" ADD PRIMARY KEY ("FUNC_ID");
   
   
-  Insert into UM_FUNC (FUNC_ID,FUNC_DESC,DISPLAY_POS,FUNC_TYPE,ENABLE) values ('EC01','Access Control',null,1,'Y');
+Insert into UM_FUNC (FUNC_ID,FUNC_DESC,DISPLAY_POS,FUNC_TYPE,ENABLE) values ('EC01','Access Control',null,1,'Y');
 Insert into UM_FUNC (FUNC_ID,FUNC_DESC,DISPLAY_POS,FUNC_TYPE,ENABLE) values ('EC02','Application Fee Enquiry',null,4,'Y');
 Insert into UM_FUNC (FUNC_ID,FUNC_DESC,DISPLAY_POS,FUNC_TYPE,ENABLE) values ('EC03','Audit Log',null,4,'Y');
 Insert into UM_FUNC (FUNC_ID,FUNC_DESC,DISPLAY_POS,FUNC_TYPE,ENABLE) values ('EC04','Change Password',null,4,'Y');
