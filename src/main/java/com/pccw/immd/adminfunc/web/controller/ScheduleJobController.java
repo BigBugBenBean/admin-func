@@ -9,6 +9,7 @@ import com.pccw.immd.adminfunc.dto.ScheduleJobDetailDTO;
 import com.pccw.immd.adminfunc.dto.ScheduleJobViewDTO;
 import com.pccw.immd.adminfunc.dto.ScheduleJobViewHistoryDTO;
 import com.pccw.immd.adminfunc.service.ScheduleJobService;
+import com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor.FUNC_ID_KEY;
 
 @Controller
 public class ScheduleJobController {
@@ -38,7 +42,8 @@ public class ScheduleJobController {
      */
 
     @GetMapping(value = "/e-Services-2/enquiry/scheduleJobView.do")
-    public String scheduleJobViewSearchPage(@ModelAttribute ScheduleJobViewDTO scheduleJobViewDTO) {
+    public String scheduleJobViewSearchPage(HttpServletRequest request, @ModelAttribute ScheduleJobViewDTO scheduleJobViewDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_View_Job);
 
         List<JobStatus> statusList = scheduleJobViewDTO.getStatusList();
         LOG.debug("scheduleJobViewHistSearchPage statusList size: " + statusList.size());
@@ -61,7 +66,8 @@ public class ScheduleJobController {
 //    }
 
     @PostMapping(value = "/e-Services-2/enquiry/scheduleJobView_Search.do")
-    public String scheduleJobViewResultPage(@ModelAttribute ScheduleJobViewDTO scheduleJobViewDTO) {
+    public String scheduleJobViewResultPage(HttpServletRequest request, @ModelAttribute ScheduleJobViewDTO scheduleJobViewDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_View_Job);
 
         if (scheduleJobViewDTO.getStatus() != null && !scheduleJobViewDTO.equals("")) {
             scheduleJobViewDTO.setStatus(scheduleJobViewDTO.getStatus().toUpperCase());
@@ -192,7 +198,8 @@ public class ScheduleJobController {
      */
 
     @GetMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory.do")
-    public String scheduleJobViewHistSearchPage(@ModelAttribute ScheduleJobDetailDTO scheduleJobDetailDTO) {
+    public String scheduleJobViewHistSearchPage(HttpServletRequest request, @ModelAttribute ScheduleJobDetailDTO scheduleJobDetailDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_View_Job_History);
 
         List<String> scheduleJobViewHistoryList = scheduleJobService.listAllJobNameByJobHistory();
         LOG.debug("scheduleJobViewHistSearchPage scheduleJobViewHistoryList size: " + scheduleJobViewHistoryList.size());
@@ -208,7 +215,8 @@ public class ScheduleJobController {
     }
 
     @PostMapping(value = "/e-Services-2/enquiry/scheduleJobViewHistory_Search.do")
-    public String searchScheduleJobViewHistory(@ModelAttribute ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO) {
+    public String searchScheduleJobViewHistory(HttpServletRequest request, @ModelAttribute ScheduleJobViewHistoryDTO scheduleJobViewHistoryDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_View_Job_History);
 
         if (scheduleJobViewHistoryDTO.getStatus() != null && !scheduleJobViewHistoryDTO.equals("")) {
             scheduleJobViewHistoryDTO.setStatus(scheduleJobViewHistoryDTO.getStatus().toUpperCase());
@@ -308,12 +316,14 @@ public class ScheduleJobController {
      */
 
     @GetMapping(value = "/e-Services-2/maintenance/scheduleJob.do")
-    public String scheduleJobSearchPage() {
+    public String scheduleJobSearchPage(HttpServletRequest request) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_View_Job);
         return "/eServices2/ScheduleJob/schedule-job-search";
     }
 
     @PostMapping(value = "/e-Services-2/maintenance/scheduleJob_Result.do")
-    public String scheduleJobResultPage(@ModelAttribute CreateScheduleJobDTO createScheduleJobDTO) {
+    public String scheduleJobResultPage(HttpServletRequest request, @ModelAttribute CreateScheduleJobDTO createScheduleJobDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_View_Job);
 
 //        String jobName = "job";
 //        String cron = "0 0/1 * * * ?";
@@ -344,12 +354,15 @@ public class ScheduleJobController {
 //    }
 
     @GetMapping(value = "/e-Services-2/maintenance/scheduleJob_Create.do")
-    public String scheduleJobCreatePage() {
+    public String scheduleJobCreatePage(HttpServletRequest request) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_View_Job);
+
         return "/eServices2/ScheduleJob/schedule-job-create";
     }
 
     @PostMapping(value = "/e-Services-2/maintenance/scheduleJob_Success.do")
-    public String scheduleJobCreateSuccessPage(@ModelAttribute CreateScheduleJobDTO createScheduleJobDTO) {
+    public String scheduleJobCreateSuccessPage(HttpServletRequest request, @ModelAttribute CreateScheduleJobDTO createScheduleJobDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Schedule_Job_Create_Job);
 
         String jobName = "NewJob01";
         String jobClass = "com.immd.eservice2.job.report.EC_ROP_201_02_01";
