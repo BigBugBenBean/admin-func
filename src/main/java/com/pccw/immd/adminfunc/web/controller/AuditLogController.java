@@ -5,6 +5,7 @@ import com.pccw.immd.adminfunc.domain.Func;
 import com.pccw.immd.adminfunc.dto.AuditLogDTO;
 import com.pccw.immd.adminfunc.dto.FuncDTO;
 import com.pccw.immd.adminfunc.service.AuditLogService;
+import com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import static com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor.FUNC_ID_KEY;
 
 @Controller
 @RequestMapping(value = "/e-Services-2/maintenance")
@@ -31,7 +35,8 @@ public class AuditLogController {
     private AuditLogService auditLogService;
 
     @GetMapping(value = "/auditLog.do")
-    public String auditLogSearchForm(@ModelAttribute FuncDTO funcDTO) {
+    public String auditLogSearchForm(HttpServletRequest request, @ModelAttribute FuncDTO funcDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Audit_Log);
 
         List<Func> list = auditLogService.listFunctionList();
 
@@ -44,7 +49,8 @@ public class AuditLogController {
     }
 
     @PostMapping(value = "/auditLog_Result.do")
-    public String auditLogSearch(@ModelAttribute AuditLogDTO auditLogDTO) {
+    public String auditLogSearch(HttpServletRequest request, @ModelAttribute AuditLogDTO auditLogDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Audit_Log);
 
         // dummy data
 //        String funcId = "AFE001";

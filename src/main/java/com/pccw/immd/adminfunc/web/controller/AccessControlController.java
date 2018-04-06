@@ -6,6 +6,7 @@ import com.pccw.immd.adminfunc.dto.AccessControlCreateDTO;
 import com.pccw.immd.adminfunc.dto.AccessControlDTO;
 import com.pccw.immd.adminfunc.dto.AccessControlGlobalParamsDTO;
 import com.pccw.immd.adminfunc.service.AccessControlService;
+import com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import static com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor.FUNC_ID_KEY;
 
 @Controller
 @RequestMapping(value = "/e-Services-2/maintenance")
@@ -34,7 +38,9 @@ public class AccessControlController {
     private AccessControlService accessControlService;
 
     @GetMapping(value = "/accessControl.do")
-    public String accessControlPage(@ModelAttribute AccessControlDTO accessControlDTO) {
+    public String accessControlPage(HttpServletRequest request, @ModelAttribute AccessControlDTO accessControlDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Access_Control);
+
         List<AccessControl> list = accessControlService.listAll();
         
         if (list.size() > 0) {
@@ -45,7 +51,9 @@ public class AccessControlController {
     }
 
     @GetMapping(value = "/accessControl_Global.do")
-    public String accessControlGlobalPage(@ModelAttribute AccessControlDTO accessControlDTO) {
+    public String accessControlGlobalPage(HttpServletRequest request, @ModelAttribute AccessControlDTO accessControlDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Access_Control);
+
         List<AccessControlGlobalParam> params = accessControlService.getGlobalParam();
 
         if (params.size() > 0) {
@@ -56,7 +64,8 @@ public class AccessControlController {
     }
 
     @PostMapping(value = "/accessControl_GlobalParamsSave.do")
-    public String saveAccessControlGlobalParams(@ModelAttribute AccessControlGlobalParamsDTO accessControlGlobalParamsDTO) {
+    public String saveAccessControlGlobalParams(HttpServletRequest request, @ModelAttribute AccessControlGlobalParamsDTO accessControlGlobalParamsDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Access_Control);
 
         accessControlService.updateGlobalParam(accessControlGlobalParamsDTO);
 
@@ -64,7 +73,8 @@ public class AccessControlController {
     }
 
     @PostMapping(value = "/accessControl_CreateSave.do")
-    public String accessControlCreateSave(@ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
+    public String accessControlCreateSave(HttpServletRequest request, @ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Access_Control);
 
         String fromYear = accessControlCreateDTO.getEffectiveFromYear();
         String fromMonth = accessControlCreateDTO.getEffectiveFromMonth();
@@ -99,17 +109,21 @@ public class AccessControlController {
     }
 
     @GetMapping(value = "/accessControl_Create.do")
-    public String accessControlCreatePage() {
+    public String accessControlCreatePage(HttpServletRequest request) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Access_Control);
         return "/eServices2/AccessControl/access-control-create";
     }
 
     @PostMapping(value = "/accessControl_CreateSuccess.do")
-    public String accessControlCreateSuccessPage(@ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
+    public String accessControlCreateSuccessPage(HttpServletRequest request, @ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Access_Control);
+
         return "/eServices2/AccessControl/access-control-create-success";
     }
 
     @GetMapping(value = "/accessControl_View.do")
-    public String accessControlViewPage(@ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
+    public String accessControlViewPage(HttpServletRequest request, @ModelAttribute AccessControlCreateDTO accessControlCreateDTO) {
+        request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Access_Control);
         return "/eServices2/AccessControl/access-control-view";
     }
 

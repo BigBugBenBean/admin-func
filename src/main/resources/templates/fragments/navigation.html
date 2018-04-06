@@ -8,7 +8,7 @@
 <body>
 
 
-<div th:fragment="nav(navObj)" >
+<div th:fragment="nav(navObj, funcId)" >
     <div class="flex-container grid-nav-container">
         <div class="flex-item-2 nav-title-left">
             <span style=" width: '100%'">
@@ -29,7 +29,8 @@
             </span>
         </div>
         <div class="nav-title-right">
-            <span style="width: 100%;">AFE0001</span>
+            <span style="width: 100%;" th:text="${funcId}"></span>
+            <!--<span style="width: 100%;">AFE0001</span>-->
         </div>
     </div>
 </div>

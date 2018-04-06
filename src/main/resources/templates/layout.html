@@ -24,6 +24,18 @@
 
         <link rel="stylesheet" href="/adminfunc/css/style.css"/>
 
+        <script th:inline="javascript" th:if="${FUNC_ID}">
+            /*<![CDATA[*/
+
+            $(function () {
+                var FUNC_ID = [[${FUNC_ID}]];
+                console.log('FUNC_ID');
+                console.log(FUNC_ID);
+            });
+
+            /*]]>*/
+        </script>
+
         <script type="text/javascript" th:inline="javascript" th:if="${NAVBAR}">
             /*<![CDATA[*/
 
@@ -87,7 +99,7 @@
                     </div>
                 </div>
 
-                <div th:replace="fragments/navigation::nav(${NAVBAR})"></div>
+                <div th:replace="fragments/navigation::nav(${NAVBAR}, ${FUNC_ID})"></div>
 
             </div>
 

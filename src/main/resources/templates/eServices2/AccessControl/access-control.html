@@ -10,6 +10,10 @@
         $(document).ready(function () {
             var list = [];
 
+            var accessControlDTO = [[${accessControlDTO}]];
+            console.log("accessControlDTO");
+            console.log(accessControlDTO);
+
             var accessControlList = [[${accessControlDTO.accessControlList}]];
 
             if (isNotEmptyNullUndfined(accessControlList) && accessControlList.length > 0) {
