@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://txgroup.cds.icons.immd/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://immd.cds.ws/v1" name="EnquireTransactionGroupServiceWSImplService" targetNamespace="http://txgroup.cds.icons.immd/">
+  <wsdl:import location="enquireTranGpSvc.xsd" namespace="http://immd.cds.ws/v1">
+    </wsdl:import>
+  <wsdl:binding name="EnquireTransactionGroupServiceWSImplServiceSoapBinding" type="ns1:EnquireTransactionGroupServiceWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="enquireTxIDsByRoleCd">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="enquireTxIDsByRoleCd">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="enquireTxIDsByRoleCdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="enquireAllData">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="enquireAllData">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="enquireAllDataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="VLDException_Exception">
+        <soap:fault name="VLDException_Exception" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="CoreAppException_Exception">
+        <soap:fault name="CoreAppException_Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="enquireTransactionGroup">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="enquireTransactionGroup">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="enquireTransactionGroupResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="VLDException_Exception">
+        <soap:fault name="VLDException_Exception" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="CoreAppException_Exception">
+        <soap:fault name="CoreAppException_Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EnquireTransactionGroupServiceWSImplService">
+    <wsdl:port binding="tns:EnquireTransactionGroupServiceWSImplServiceSoapBinding" name="EnquireTransactionGroupServiceWSImplPort">
+      <soap:address location="http://localhost:8080/adminfunc/EnqTrx/services/EnquireTransactionGroupServiceWSImplPortImpl"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
