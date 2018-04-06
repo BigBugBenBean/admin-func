@@ -17,6 +17,7 @@ import org.springframework.context.annotation.*;
         DataSourceAutoConfiguration.class
 })
 @ImportResource ("classpath:/config/application-context.xml")
+//@ComponentScan({"com.pccw.immd.adminfunc.config"})
 public class AdminFuncApplication extends SpringBootServletInitializer {
 
     @Override
