@@ -126,7 +126,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/AUTH/logout-result.do",
                 "/changePassword.do",
                 "/submitChangePassword.do",
-                "/changePassword"
+                "/changePassword",
+                "/webservices/*"
         );
     }
 /*
