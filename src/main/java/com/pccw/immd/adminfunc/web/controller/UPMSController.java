@@ -3,17 +3,14 @@ package com.pccw.immd.adminfunc.web.controller;
 import com.pccw.immd.adminfunc.domain.Func;
 import com.pccw.immd.adminfunc.domain.Group;
 import com.pccw.immd.adminfunc.domain.GroupFunc;
-import com.pccw.immd.adminfunc.domain.RoleGroup;
 import com.pccw.immd.adminfunc.repository.FuncRepository;
 import com.pccw.immd.adminfunc.repository.GroupFuncRepository;
 import com.pccw.immd.adminfunc.repository.GroupRepository;
 import com.pccw.immd.adminfunc.repository.RoleGroupRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ws.cds.immd.v1.*;
@@ -38,7 +35,7 @@ public class UPMSController {
     @Autowired
     FuncRepository funcRepository;
 
-    private static final Logger LOG = LoggerFactory.getLogger(UPMSController.class);
+    private static final Logger LOG = Logger.getLogger(UPMSController.class);
 
     @GetMapping(value = "/ivrs_enquireAllData.do")
     public String enquireAllData() {
@@ -46,9 +43,7 @@ public class UPMSController {
         LOG.info("Executing operation enquireAllData");
         try {
             RoleTxgpTxidDTO roleTxgpTxidDTO = new RoleTxgpTxidDTO();
-
             List<String> roleIdList = roleGroupRepository.findAllRoleId();
-            LOG.info("roleTxgpTxidDTO: " + roleIdList);
             for (String roleId: roleIdList) {
                 RoleTxgp roleTxgp = new RoleTxgp();
                 roleTxgp.setRoleCD(roleId);
@@ -72,33 +67,33 @@ public class UPMSController {
             for (String funcId: funcIdList) {
                 TxgpTxid txgpTxid = new TxgpTxid();
                 txgpTxid.setTxGp(funcId);
-                List<GroupFunc> funcList = groupFuncRepository.findAllByFuncId(funcId);
-                for (GroupFunc groupFunc : funcList) {
-                    txgpTxid.getTxids().add(groupFunc.getFuncId());
+                List<String> funcList = groupFuncRepository.findAllByFuncId(funcId);
+                for (String groupFunc : funcList) {
+                    txgpTxid.getTxids().add(groupFunc);
                 }
                 roleTxgpTxidDTO.getTxgpTxids().add(txgpTxid);
             }
 
-//            LOG.info("--------enquireAllData --> Role : Transaction Group--------");
-//            for (RoleTxgp roleTxgp : roleTxgpTxidDTO.getRoleTxgps()) {
-//                LOG.info("RoleCode: " + roleTxgp.getRoleCD());
-//                for (String txgp : roleTxgp.getTxGps()) {
-//                    LOG.info("Transaction Group: " + txgp);
-//                }
-//            }
-//            LOG.info("--------enquireAllData --> Transaction Group ID : Transaction Group Desc--------");
-//            for (Txgp txgp : roleTxgpTxidDTO.getTxgps()) {
-//                LOG.info("Transaction Group ID: " + txgp.getTxGp());
-//                LOG.info("Transaction Group Description: " + txgp.getTxGpDesc());
-//            }
-//            LOG.info("--------enquireAllData --> Group ID : Function ID--------");
-//            for (TxgpTxid txgptxid : roleTxgpTxidDTO.getTxgpTxids()) {
-//                LOG.info("Group ID: " + txgptxid.getTxGp());
-//                for (String groupId : txgptxid.getTxids()) {
-//                    LOG.info("Function ID: " + groupId);
-//                }
-//            }
-//            LOG.info("roleTxgpTxidDTO: " + roleTxgpTxidDTO);
+            LOG.debug("--------enquireAllData --> Role : Transaction Group--------");
+            for (RoleTxgp roleTxgp : roleTxgpTxidDTO.getRoleTxgps()) {
+                LOG.debug("RoleCode: " + roleTxgp.getRoleCD());
+                for (String txgp : roleTxgp.getTxGps()) {
+                    LOG.debug("Transaction Group: " + txgp);
+                }
+            }
+            LOG.debug("--------enquireAllData --> Transaction Group ID : Transaction Group Desc--------");
+            for (Txgp txgp : roleTxgpTxidDTO.getTxgps()) {
+                LOG.debug("Transaction Group ID: " + txgp.getTxGp());
+                LOG.debug("Transaction Group Description: " + txgp.getTxGpDesc());
+            }
+            LOG.debug("--------enquireAllData --> Group ID : Function ID--------");
+            for (TxgpTxid txgptxid : roleTxgpTxidDTO.getTxgpTxids()) {
+                LOG.debug("Group ID: " + txgptxid.getTxGp());
+                for (String groupId : txgptxid.getTxids()) {
+                    LOG.debug("Function ID: " + groupId);
+                }
+            }
+            LOG.debug("roleTxgpTxidDTO: " + roleTxgpTxidDTO);
 
 
         } catch (Exception ex) {
@@ -112,8 +107,7 @@ public class UPMSController {
 
     @PostMapping(value = "/enquireTransactionGroup.do")
     public String enquireTransactionGroup(List<String> roleCdList) {
-        LOG.info("Executing operation enquireTransactionGroup");
-        System.out.println(roleCdList);
+        LOG.debug("Executing operation enquireTransactionGroup");
         try {
             List<TransGrpRoleDTO> transGrpRoleDTO = new ArrayList<TransGrpRoleDTO>();
             for (String roleCd : roleCdList) {
@@ -127,11 +121,11 @@ public class UPMSController {
                     transGrpRoleDTO.add(roleGroupDescList);
                 }
             }
-            LOG.info("--------enquireTransactionGroup --> Role ID : Function ID : Function Description--------");
+            LOG.debug("--------enquireTransactionGroup --> Role ID : Function ID : Function Description--------");
             for (TransGrpRoleDTO transGrpRoleDTO1 : transGrpRoleDTO) {
-                LOG.info("RoleCode: " + transGrpRoleDTO1.getRoleCd());
-                LOG.info("Function ID: " + transGrpRoleDTO1.getTxGrpId());
-                LOG.info("Function Description: " + transGrpRoleDTO1.getTxGrpDesc());
+                LOG.debug("RoleCode: " + transGrpRoleDTO1.getRoleCd());
+                LOG.debug("Function ID: " + transGrpRoleDTO1.getTxGrpId());
+                LOG.debug("Function Description: " + transGrpRoleDTO1.getTxGrpDesc());
             }
 //            return transGrpRoleDTO;
 
@@ -146,7 +140,7 @@ public class UPMSController {
 
     @PostMapping(value = "/enquireTxIDsByRoleCd.do")
     public String enquireTxIDsByRoleCd(String roleCd){
-        LOG.info("Executing operation enquireTxIDsByRoleCd");
+        LOG.debug("Executing operation enquireTxIDsByRoleCd");
         try {
             List<Txid> txidList = new ArrayList<Txid>();
             List<String> groupIdList = roleGroupRepository.findAllByRoleId(roleCd);
@@ -160,10 +154,10 @@ public class UPMSController {
                     txidList.add(txid);
                 }
             }
-            LOG.info("--------enquireTxIDsByRoleCd--------");
+            LOG.debug("--------enquireTxIDsByRoleCd--------");
             for (Txid txid : txidList) {
-                LOG.info("TXID: " + txid.getTxid());
-                LOG.info("TXIDDescription: " + txid.getTxidDesc());
+                LOG.debug("TXID: " + txid.getTxid());
+                LOG.debug("TXIDDescription: " + txid.getTxidDesc());
             }
 //            return txidList;
         } catch (Exception ex) {
