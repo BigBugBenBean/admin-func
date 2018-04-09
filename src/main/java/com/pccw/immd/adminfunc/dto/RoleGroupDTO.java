@@ -2,36 +2,35 @@ package com.pccw.immd.adminfunc.dto;
 
 import com.pccw.immd.commons.dto.BaseDTO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RoleGroupDTO extends BaseDTO {
 
-    List<RoleDTO> roleIdList = new ArrayList<>();
-    List<GroupDTO> groupIdList = new ArrayList<>();
-    List<String> groupDesc = new ArrayList<>();
+    RoleDTO roleId;
+    GroupDTO groupId;
+    String groupDesc;
 
-    public List<RoleDTO> getRoleIdList() {
-        return roleIdList;
+    public RoleDTO getRoleId() {
+        return roleId;
     }
 
-    public void setRoleIdList(List<RoleDTO> roleIdList) {
-        this.roleIdList = roleIdList;
+    public void setRoleId(RoleDTO roleId) {
+        this.roleId = roleId;
     }
 
-    public List<GroupDTO> getGroupIdList() {
-        return groupIdList;
+    public GroupDTO getGroupId() {
+        return groupId;
     }
 
-    public void setGroupIdList(List<GroupDTO> groupIdList) {
-        this.groupIdList = groupIdList;
+    public void setGroupId(GroupDTO groupId) {
+        this.groupId = groupId;
     }
 
-    public List<String> getGroupDesc() {
+    public String getGroupDesc() {
         return groupDesc;
     }
 
-    public void setGroupDesc(List<String> groupDesc) {
+    public void setGroupDesc(String groupDesc) {
         this.groupDesc = groupDesc;
     }
 }
