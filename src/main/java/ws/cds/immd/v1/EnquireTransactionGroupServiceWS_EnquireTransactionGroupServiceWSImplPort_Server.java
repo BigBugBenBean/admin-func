@@ -10,13 +10,14 @@ import javax.xml.ws.Endpoint;
  *
  */
 
-public class EnquireTransactionGroupServiceWS_EnquireTransactionGroupServiceWSImplPort_Server{
+
+public class EnquireTransactionGroupServiceWS_EnquireTransactionGroupServiceWSImplPort_Server {
 
     protected EnquireTransactionGroupServiceWS_EnquireTransactionGroupServiceWSImplPort_Server() throws Exception {
         System.out.println("Starting Server");
         Object implementor = new EnquireTransactionGroupServiceWSImplPortImpl();
 //        String address = "http://172.16.223.6:29080/icons/upms/enquireTranGpSvc";
-        String address = "http://localhost:8080/adminfunc/EnqTrx/services/EnquireTransactionGroupServiceWSImplPortImpl";
+        String address = "http://localhost:8080/admin-func/services/EnquireTransactionGroupServiceWSImplPortImpl";
         Endpoint.publish(address, implementor);
     }
 
