@@ -127,7 +127,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/changePassword.do",
                 "/submitChangePassword.do",
                 "/changePassword",
-                "/webservices/*"
+                // For CXF Endpoint
+                "/webservices/**"
         );
     }
 /*

@@ -2,22 +2,19 @@ package com.pccw.immd.adminfunc;
 
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.SpringBootWebSecurityConfiguration;
-import org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication(exclude = MessageSourceAutoConfiguration.class)
 @EnableAutoConfiguration(exclude={
         DataSourceAutoConfiguration.class
 })
 @ImportResource ("classpath:/config/application-context.xml")
-@ComponentScan({"com.pccw.immd.adminfunc.config", "com.pccw.immd.adminfunc"})
 public class AdminFuncApplication extends SpringBootServletInitializer {
 
     @Override
@@ -28,7 +25,4 @@ public class AdminFuncApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(AdminFuncApplication.class, args);
     }
-
-
-
 }

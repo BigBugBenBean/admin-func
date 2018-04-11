@@ -15,6 +15,7 @@ import com.pccw.immd.adminfunc.repository.GroupRepository;
 import com.pccw.immd.adminfunc.repository.RoleGroupRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,24 +31,30 @@ import java.util.List;
         serviceName = "EnquireTransactionGroupServiceWSImplService",
         portName = "EnquireTransactionGroupServiceWSImplPort",
         targetNamespace = "http://txgroup.cds.icons.immd/",
-        wsdlLocation = "file:enquireTranGpSvc.wsdl",
+        wsdlLocation = "classpath:wsdl/enquireTranGpSvc.wsdl",
         endpointInterface = "ws.cds.immd.v1.EnquireTransactionGroupServiceWS")
 
 public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTransactionGroupServiceWS {
 
     @Autowired
+    @Qualifier("roleGroupRepository.eservice2")
     RoleGroupRepository roleGroupRepository;
 
     @Autowired
+    @Qualifier("groupRepository.eservice2")
     GroupRepository groupRepository;
 
     @Autowired
+    @Qualifier("groupFuncRepository.eservice2")
     GroupFuncRepository groupFuncRepository;
 
     @Autowired
+    @Qualifier("funcRepository.eservice2")
     FuncRepository funcRepository;
 
     private static final Logger LOG = Logger.getLogger(EnquireTransactionGroupServiceWSImplPortImpl.class.getName());
+
+    public EnquireTransactionGroupServiceWSImplPortImpl(){}
 
     /* (non-Javadoc)
      * @see ws.cds.immd.v1.EnquireTransactionGroupServiceWS#enquireAllData()*

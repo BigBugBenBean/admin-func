@@ -18,36 +18,48 @@
   </xs:complexType>
 </xs:schema>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://immd.cds.ws/v1" targetNamespace="http://immd.cds.ws/v1" version="1.0">
+
   <xs:element name="enquireAllData" type="tns:enquireAllData"/>
+
   <xs:element name="enquireAllDataResponse" type="tns:enquireAllDataResponse"/>
+
   <xs:element name="enquireTransactionGroup" type="tns:enquireTransactionGroup"/>
+
   <xs:element name="enquireTransactionGroupResponse" type="tns:enquireTransactionGroupResponse"/>
+
   <xs:element name="enquireTxIDsByRoleCd" type="tns:enquireTxIDsByRoleCd"/>
+
   <xs:element name="enquireTxIDsByRoleCdResponse" type="tns:enquireTxIDsByRoleCdResponse"/>
+
   <xs:complexType name="enquireTxIDsByRoleCd">
     <xs:sequence>
       <xs:element minOccurs="0" name="roleCd" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="enquireTxIDsByRoleCdResponse">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:txid"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="txid">
     <xs:sequence>
       <xs:element minOccurs="0" name="txid" type="xs:string"/>
       <xs:element minOccurs="0" name="txidDesc" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="enquireAllData">
     <xs:sequence/>
   </xs:complexType>
+
   <xs:complexType name="enquireAllDataResponse">
     <xs:sequence>
       <xs:element minOccurs="0" name="return" type="tns:roleTxgpTxidDTO"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="roleTxgpTxidDTO">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="roleTxgps" nillable="true" type="tns:roleTxgp"/>
@@ -57,29 +69,34 @@
       <xs:element maxOccurs="unbounded" minOccurs="0" name="txids" nillable="true" type="tns:txid"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="roleTxgp">
     <xs:sequence>
       <xs:element minOccurs="0" name="roleCD" type="xs:string"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="txGps" nillable="true" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="txgpTxid">
     <xs:sequence>
       <xs:element minOccurs="0" name="txGp" type="xs:string"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="txids" nillable="true" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="txgp">
     <xs:sequence>
       <xs:element minOccurs="0" name="txGp" type="xs:string"/>
       <xs:element minOccurs="0" name="txGpDesc" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="errorInfoHolder">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="errorInfos" nillable="true" type="tns:errorInfo"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="errorInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="clientId" type="xs:string"/>
@@ -87,16 +104,19 @@
       <xs:element minOccurs="0" name="errorMsg" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="enquireTransactionGroup">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="roleCdList" nillable="true" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="enquireTransactionGroupResponse">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:transGrpRoleDTO"/>
     </xs:sequence>
   </xs:complexType>
+
   <xs:complexType name="transGrpRoleDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="roleCd" type="xs:string"/>
@@ -104,6 +124,7 @@
       <xs:element minOccurs="0" name="txGrpId" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
+
 </xs:schema>
   </wsdl:types>
   <wsdl:message name="enquireAllData">

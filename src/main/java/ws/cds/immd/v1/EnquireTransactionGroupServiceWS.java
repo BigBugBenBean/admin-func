@@ -1,9 +1,12 @@
 package ws.cds.immd.v1;
 
+import io.swagger.annotations.Api;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.ws.rs.core.MediaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
@@ -14,6 +17,11 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 3.2.3
  *
  */
+@Api(value = "Administrative Function POST -> FuncId(TxId)",
+        consumes = MediaType.APPLICATION_XML,
+        produces = MediaType.APPLICATION_XML)
+
+
 @WebService(targetNamespace = "http://immd.cds.ws/v1", name = "EnquireTransactionGroupServiceWS")
 @XmlSeeAlso({ObjectFactory.class, util.itifwk.immd.v1.ObjectFactory.class})
 public interface EnquireTransactionGroupServiceWS {

@@ -21,6 +21,10 @@
     <!-- For RESful controller -->
     <context:component-scan base-package="com.pccw.immd.adminfunc.ws.interceptor"/>
 
+
+    <!-- For UPMS -->
+    <context:component-scan base-package="com.pccw.immd.adminfunc.web.security"/>
+
     <http-conf:conduit name="*.http-conduit">
         <!--<http-conf:client ProxyServer="${proxy.server}" ProxyServerPort="${proxy.port}" />-->
         <http-conf:tlsClientParameters>
@@ -47,4 +51,4 @@
 
         </http-conf:tlsClientParameters>
     </http-conf:conduit>
-</beans>  
+</beans>
