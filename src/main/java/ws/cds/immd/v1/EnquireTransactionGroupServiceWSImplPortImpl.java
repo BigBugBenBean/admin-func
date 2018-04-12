@@ -31,7 +31,7 @@ import java.util.List;
         serviceName = "EnquireTransactionGroupServiceWSImplService",
         portName = "EnquireTransactionGroupServiceWSImplPort",
         targetNamespace = "http://txgroup.cds.icons.immd/",
-        wsdlLocation = "classpath:wsdl/enquireTranGpSvc.wsdl",
+        wsdlLocation = "wsdl/enquireTranGpSvc.wsdl",
         endpointInterface = "ws.cds.immd.v1.EnquireTransactionGroupServiceWS")
 
 public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTransactionGroupServiceWS {
