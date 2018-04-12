@@ -21,11 +21,11 @@ public class Group {
     @Id
     @Column(name = "GROUP_ID", 
             length = 16)
-    private String funcId;
+    private String groupId;
 
     @Column(name = "GROUP_DESC", 
             length = 2000)
-    private String funcDesc;
+    private String groupDesc;
     
     @Column(name = "DISPLAY_POS", 
             length = 3)
@@ -38,20 +38,20 @@ public class Group {
     @Column(name = "LST_UPD_DT")
     private Date lstUpdTd;
 
-    public String getFuncId() {
-        return funcId;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setFuncId(String funcId) {
-        this.funcId = funcId;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
-    public String getFuncDesc() {
-        return funcDesc;
+    public String getGroupDesc() {
+        return groupDesc;
     }
 
-    public void setFuncDesc(String funcDesc) {
-        this.funcDesc = funcDesc;
+    public void setGroupDesc(String groupDesc) {
+        this.groupDesc = groupDesc;
     }
 
     public String getDisplayPos() {

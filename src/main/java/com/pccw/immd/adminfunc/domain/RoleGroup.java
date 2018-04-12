@@ -10,10 +10,11 @@ import javax.persistence.Table;
 @Table(name = "UM_ROLE_GROUP")
 public class RoleGroup {
 
-    @Id
+
     @Column(name ="ROLE_ID", length = 4)
     private String roleId;
 
+    @Id
     @Column(name = "GROUP_ID", length = 16)
     private String groupId;
 

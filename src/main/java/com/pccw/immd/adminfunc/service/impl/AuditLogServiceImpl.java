@@ -63,11 +63,11 @@ public class AuditLogServiceImpl implements AuditLogService {
 
 //    private String getWhereClause(AuditLogDTO auditLogDTO, Map<String, Object> params) {
 //        String whereClause = "";
-//        if (auditLogDTO.getFuncId() != null || auditLogDTO.getUserId() != null
+//        if (auditLogDTO.getGroupId() != null || auditLogDTO.getUserId() != null
 //                || auditLogDTO.getStartDate() != null || auditLogDTO.getEndDate() != null){
-//            if (auditLogDTO.getFuncId() != null && auditLogDTO.getFuncId().trim().length() > 0 ){
+//            if (auditLogDTO.getGroupId() != null && auditLogDTO.getGroupId().trim().length() > 0 ){
 //                whereClause += "and als.funcId = :funcId ";
-//                params.put("funcId", auditLogDTO.getFuncId());
+//                params.put("funcId", auditLogDTO.getGroupId());
 //            }
 //            if (auditLogDTO.getUserId() != null && auditLogDTO.getUserId().trim().length() > 0 ){
 //                whereClause += "and als.userId = :userId ";

@@ -25,6 +25,10 @@
     <!-- For Audit service -->
     <context:component-scan base-package="com.pccw.immd.adminfunc.audit.impl"/>
 
+    <context:component-scan base-package="com.pccw.immd.adminfunc.repository"/>
+    <!--For UPMS Web Service generated classes-->
+    <context:component-scan base-package="ws.cds.immd.v1"/>
+
     <!-- Config for static load first -->
     <!--<mvc:resources mapping="*.html" location="/" />-->
     <!--<mvc:resources order="0" mapping="index.html" location="index.html"/>-->
