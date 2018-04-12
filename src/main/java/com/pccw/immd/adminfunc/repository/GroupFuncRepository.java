@@ -9,17 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
-@Repository("groupFuncRepository.eservice2")
+@Repository("groupFuncRepository")
 public interface GroupFuncRepository extends JpaRepository<GroupFunc, Integer> {
 
     List<GroupFunc> findAll();
 
-    @Query(value = "select distinct(funcId) from GroupFunc")
-    List<String> findAllFuncId();
-
-    @Query(value = "Select gf.grpId from GroupFunc gf where gf.funcId =:funcId")
-    List<String> findAllByFuncId(@Param("funcId") String funcId);
-
     @Query(value = "Select gf from GroupFunc gf where gf.grpId =:groupId")
-    List<GroupFunc> findAllByGroupId(String groupId);
+    List<GroupFunc> findAllByGroupId(@Param("groupId") String groupId);
 }

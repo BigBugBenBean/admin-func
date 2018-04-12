@@ -17,10 +17,11 @@ import javax.persistence.Table;
 @Table(name = "UM_GROUP_FUNC")
 public class GroupFunc {
 
-    @Id
+
     @Column(name = "GROUP_ID", length = 16)
     private String grpId;
 
+    @Id
     @Column(name = "FUNC_ID", length = 8)
     private String funcId;
 

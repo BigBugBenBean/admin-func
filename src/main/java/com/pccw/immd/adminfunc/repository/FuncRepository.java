@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("funcRepository.eservice2")
+@Repository("funcRepository")
 public interface FuncRepository extends JpaRepository<Func, Integer>{
 
     List<Func> findAll();

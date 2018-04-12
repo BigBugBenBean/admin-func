@@ -17,15 +17,13 @@
             classpath*:properties/quartz.properties,
             classpath*:properties/database.properties"
     />
-    
-    <!--
-    -->
 
     <import resource="classpath:config/upms-context.xml"/>
     <import resource="classpath:config/rest-context.xml"/>
     <import resource="classpath:config/cxf-context.xml"/>
     <import resource="classpath:config/web-context.xml"/>
     <import resource="classpath:config/database-context.xml"/>
+    <import resource="classpath:config/cxf-context.xml"/>
 
     <!-- Don't remove, it is for import another Admin Function -->
     <import resource="classpath*:config/*-application-context.xml"/>

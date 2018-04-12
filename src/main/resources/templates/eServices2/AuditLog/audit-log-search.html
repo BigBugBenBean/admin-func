@@ -25,12 +25,12 @@
 
                     var list = [];
                     jQuery.each(tmpFuncList, function (index, object) {
-                        var funcName = object['funcDesc'];
-                        var funcId = object['funcId'];
+                        var funcName = object['groupDesc'];
+                        var groupId = object['groupId'];
 
                         var newObj = {
                             'funcName': funcName,
-                            'funcId': funcId
+                            'groupId': groupId
                         };
 
                         list.push(newObj);
@@ -43,7 +43,7 @@
                         var tmpSelectStr = '';
                         var obj = list[i];
 
-                        var tmpVal = obj['funcId'];
+                        var tmpVal = obj['groupId'];
                         var tmpName = obj['funcName'];
 
                         if (i === 0 ) {
@@ -126,7 +126,7 @@
                             <div class="flex-container search-padding">
                                 <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.funcName')}"></span></b></div>
                                 <div class="flex-item-7">
-                                    <select id="funcList" name="funcId" ></select>
+                                    <select id="funcList" name="groupId" ></select>
                                 </div>
                             </div>
                             <div class="flex-container search-padding">

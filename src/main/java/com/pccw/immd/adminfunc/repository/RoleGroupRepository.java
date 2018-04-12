@@ -10,14 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("roleGroupRepository.eservice2")
+@Repository("roleGroupRepository")
 public interface RoleGroupRepository extends JpaRepository<RoleGroup, Integer> {
 
     List<RoleGroup> findAll();
 
-    @Query(value = "select distinct(roleId) from RoleGroup")
-    List<String> findAllRoleId();
-
-    @Query(value = "select rg.groupId from RoleGroup rg where rg.roleId = :roleId")
-    List<String> findAllByRoleId(@Param("roleId") String roleId);
+    @Query(value = "select rg from RoleGroup rg where rg.roleId = :roleId")
+    List<RoleGroup> findAllByRoleId(@Param("roleId") String roleId);
 }

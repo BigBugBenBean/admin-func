@@ -6,16 +6,12 @@
 
 package ws.cds.immd.v1;
 
-import com.pccw.immd.adminfunc.domain.Func;
-import com.pccw.immd.adminfunc.domain.Group;
-import com.pccw.immd.adminfunc.domain.GroupFunc;
-import com.pccw.immd.adminfunc.repository.FuncRepository;
-import com.pccw.immd.adminfunc.repository.GroupFuncRepository;
-import com.pccw.immd.adminfunc.repository.GroupRepository;
-import com.pccw.immd.adminfunc.repository.RoleGroupRepository;
+import com.pccw.immd.adminfunc.domain.*;
+import com.pccw.immd.adminfunc.repository.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,24 +29,28 @@ import java.util.List;
         targetNamespace = "http://txgroup.cds.icons.immd/",
         wsdlLocation = "wsdl/enquireTranGpSvc.wsdl",
         endpointInterface = "ws.cds.immd.v1.EnquireTransactionGroupServiceWS")
-
+@Service("enquireTransactionGroupServiceWSImplPortImpl")
 public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTransactionGroupServiceWS {
 
     @Autowired
-    @Qualifier("roleGroupRepository.eservice2")
-    RoleGroupRepository roleGroupRepository;
+    @Qualifier("roleGroupRepository")
+    private RoleGroupRepository roleGroupRepository;
 
     @Autowired
-    @Qualifier("groupRepository.eservice2")
-    GroupRepository groupRepository;
+    @Qualifier("groupRepository")
+    private GroupRepository groupRepository;
 
     @Autowired
-    @Qualifier("groupFuncRepository.eservice2")
-    GroupFuncRepository groupFuncRepository;
+    @Qualifier("groupFuncRepository")
+    private GroupFuncRepository groupFuncRepository;
 
     @Autowired
-    @Qualifier("funcRepository.eservice2")
-    FuncRepository funcRepository;
+    @Qualifier("funcRepository")
+    private FuncRepository funcRepository;
+
+    @Autowired
+    @Qualifier("roleRepository")
+    RoleRepository roleRepository;
 
     private static final Logger LOG = Logger.getLogger(EnquireTransactionGroupServiceWSImplPortImpl.class.getName());
 
@@ -63,14 +63,14 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
         LOG.info("Executing operation enquireAllData");
         try {
             RoleTxgpTxidDTO roleTxgpTxidDTO = new RoleTxgpTxidDTO();
-
-            List<String> roleIdList = roleGroupRepository.findAllRoleId();
-            for (String roleId: roleIdList) {
+            List<Role> roleIdList = roleRepository.findAll();
+            for (Role roleId: roleIdList) {
                 RoleTxgp roleTxgp = new RoleTxgp();
-                roleTxgp.setRoleCD(roleId);
-                List<String> roleGroupList = roleGroupRepository.findAllByRoleId(roleId);
-                for (String groupID: roleGroupList) {
-                    roleTxgp.getTxGps().add(groupID);
+                roleTxgp.setRoleCD(roleId.getRoleId());
+                List<RoleGroup> roleGroupList = roleGroupRepository.findAllByRoleId(roleId.getRoleId());
+
+                for (RoleGroup groupID: roleGroupList) {
+                    roleTxgp.getTxGps().add(groupID.getGroupId());
                 }
                 roleTxgpTxidDTO.getRoleTxgps().add(roleTxgp);
             }
@@ -78,29 +78,16 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
             List<Group> groupIdDescList = groupRepository.findAll();
             for (Group group : groupIdDescList) {
                 Txgp txgp = new Txgp();
-                txgp.setTxGp(group.getFuncId());
-                txgp.setTxGpDesc(group.getFuncDesc());
+                txgp.setTxGp(group.getGroupId());
+                txgp.setTxGpDesc(group.getGroupDesc());
                 roleTxgpTxidDTO.getTxgps().add(txgp);
             }
-
-            List<String> funcIdList = groupFuncRepository.findAllFuncId();
-            for (String funcId: funcIdList) {
-                TxgpTxid txgpTxid = new TxgpTxid();
-                txgpTxid.setTxGp(funcId);
-                List<String> funcList = groupFuncRepository.findAllByFuncId(funcId);
-                for (String groupFunc : funcList) {
-                    txgpTxid.getTxids().add(groupFunc);
-                }
-                roleTxgpTxidDTO.getTxgpTxids().add(txgpTxid);
-            }
-            LOG.debug("roleTxgpTxidDTO: " + roleTxgpTxidDTO);
+            LOG.debug("enquireAllDataResponse: " + roleTxgpTxidDTO);
             return roleTxgpTxidDTO;
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex);
         }
-        //throw new VLDExceptionException("VLDException_Exception...");
-        //throw new CoreAppExceptionException("CoreAppException_Exception...");
     }
 
     /* (non-Javadoc)
@@ -112,25 +99,23 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
         try {
             List<TransGrpRoleDTO> transGrpRoleDTO = new ArrayList<TransGrpRoleDTO>();
             for (String roleCd : roleCdList) {
-                List<String> roleGroupList = roleGroupRepository.findAllByRoleId(roleCd);
-                for (String roleGroup : roleGroupList) {
+                List<RoleGroup> roleGroupList = roleGroupRepository.findAllByRoleId(roleCd);
+                for (RoleGroup roleGroup : roleGroupList) {
                     TransGrpRoleDTO roleGroupDescList = new TransGrpRoleDTO();
                     roleGroupDescList.setRoleCd(roleCd);
-                    Group groupID = groupRepository.findByGroupId(roleGroup);
-                    roleGroupDescList.setTxGrpId(groupID.getFuncId());
-                    roleGroupDescList.setTxGrpDesc(groupID.getFuncDesc());
+                    Group groupID = groupRepository.findByGroupId(roleGroup.getGroupId());
+                    roleGroupDescList.setTxGrpId(groupID.getGroupId());
+                    roleGroupDescList.setTxGrpDesc(groupID.getGroupDesc());
                     transGrpRoleDTO.add(roleGroupDescList);
                 }
             }
-            LOG.debug("List<TransGrpRoleDTO>: " + transGrpRoleDTO);
+            LOG.debug("EnquireTransactionGroupResponse: " + transGrpRoleDTO);
             return transGrpRoleDTO;
 
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new RuntimeException(ex);
         }
-        //throw new VLDExceptionException("VLDException_Exception...");
-        //throw new CoreAppExceptionException("CoreAppException_Exception...");
     }
 
     /* (non-Javadoc)
@@ -139,10 +124,10 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
     public List<Txid> enquireTxIDsByRoleCd(String roleCd) {
         LOG.info("Executing operation enquireTxIDsByRoleCd");
         try {
-            List<Txid> txidList = new ArrayList<Txid>();
-            List<String> groupIdList = roleGroupRepository.findAllByRoleId(roleCd);
-            for (String groupID : groupIdList) {
-                List<GroupFunc> groupFunc = groupFuncRepository.findAllByGroupId(groupID);
+            List<Txid> txidList = new ArrayList<>();
+            List<RoleGroup> groupIdList = roleGroupRepository.findAllByRoleId(roleCd);
+            for (RoleGroup groupID : groupIdList) {
+                List<GroupFunc> groupFunc = groupFuncRepository.findAllByGroupId(groupID.getGroupId());
                 for (GroupFunc funcIdDesc : groupFunc ) {
                     Txid txid = new Txid();
                     Func txIdDesc = funcRepository.findByFuncId(funcIdDesc.getFuncId());
@@ -151,7 +136,7 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
                     txidList.add(txid);
                 }
             }
-            LOG.debug("List<Txid>: " + txidList);
+            LOG.debug("EnquireTxIDsByRoleCdResponse: " + txidList);
             return txidList;
         } catch (Exception ex) {
             ex.printStackTrace();

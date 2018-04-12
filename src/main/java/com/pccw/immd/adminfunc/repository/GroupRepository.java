@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("groupRepository.eservice2")
+@Repository("groupRepository")
 public interface GroupRepository extends JpaRepository<Group, Integer>{
 
     List<Group> findAll();
 
-    @Query(value = "select rg from RoleGroup rg where rg.groupId = :groupId")
+    @Query(value = "select rg from Group rg where rg.groupId = :groupId")
     Group findByGroupId(@Param("groupId") String groupId);
 }

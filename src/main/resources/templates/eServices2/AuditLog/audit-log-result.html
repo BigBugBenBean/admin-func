@@ -19,7 +19,7 @@
             
 
             if (isNotEmptyNullUndfined(auditLogDTO)) {
-                var funcId = auditLogDTO['funcId'];
+                var groupId = auditLogDTO['groupId'];
                 var userId = auditLogDTO['userId'];
 
                 var startDate = auditLogDTO['startDate'];
@@ -30,7 +30,7 @@
                 if (isNotEmptyNullUndfined(historyList) && historyList.length > 0) {
                     jQuery.each(historyList, function (index, object) {
                         var tmpUserId = object['auditAccess']['userId'];
-                        var tmpFuncId = object['auditAccess']['funcId'];
+                        var tmpFuncId = object['auditAccess']['groupId'];
                         var fieldName = object['auditAccessSearch']['searchFieldName'];
                         var fieldValue = object['auditAccessSearch']['searchFieldValue'];
                         var fieldResult = ( object['auditAccessSearch']['searchResult'] === 'Y' ) ? 'Hit' : '';
@@ -42,7 +42,7 @@
 
                         var newObj = {
                             'userId': tmpUserId,
-                            'funcId': tmpFuncId,
+                            'groupId': tmpFuncId,
                             'fieldName': fieldName,
                             'fieldValue': fieldValue,
                             'fieldResult': fieldResult,
@@ -57,7 +57,7 @@
 
                 if (isNotEmptyNullUndfined(funcName)) {
                     var funcNameDom = $('#funcName');
-                    funcNameDom.html(funcId);
+                    funcNameDom.html(groupId);
                 }
                 if (isNotEmptyNullUndfined(userId)) {
                     var userIdDom = $('#userId');
@@ -139,7 +139,7 @@
 
                 fields: [
                     { name: 'userId', title: 'User ID', type: 'text', width: 10, headerTemplate: commonHeader },
-                    { name: 'funcId', title: 'UserName/Function Name', type: 'text', width: 30, headerTemplate: commonHeader },
+                    { name: 'groupId', title: 'UserName/Function Name', type: 'text', width: 30, headerTemplate: commonHeader },
                     { name: 'fieldName', title: 'Field Name', type: 'text', width: 20, headerTemplate: commonHeader },
                     { name: 'fieldValue', title: 'Input', type: 'text', width: 10, headerTemplate: commonHeader },
                     { name: 'fieldResult', title: 'Result', type: 'text', width: 10, headerTemplate: commonHeader },

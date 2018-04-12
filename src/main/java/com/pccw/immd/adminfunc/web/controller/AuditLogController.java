@@ -63,7 +63,7 @@ public class AuditLogController {
 //        Integer endHour = 15;
 //        Integer endMinute = 45;
 
-//        auditLogDTO.setFuncId(funcId);
+//        auditLogDTO.setGroupId(funcId);
 //        auditLogDTO.setUserId(userId);
 //        auditLogDTO.setStartTime(startTime);
 //        auditLogDTO.setStartHour(startHour);
