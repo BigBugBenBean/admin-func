@@ -25,9 +25,9 @@
     <!-- For UPMS -->
     <context:component-scan base-package="com.pccw.immd.adminfunc.web.security"/>
 
-    <http-conf:conduit name="*.http-conduit">
+    <!--<http-conf:conduit name="*.http-conduit">-->
         <!--<http-conf:client ProxyServer="${proxy.server}" ProxyServerPort="${proxy.port}" />-->
-        <http-conf:tlsClientParameters>
+        <!--<http-conf:tlsClientParameters>-->
             <!--<sec:keyManagers keyPassword="cspass">-->
                 <!--<sec:keyStore file="src/main/config/client-keystore.jks" password="pass" type="JKS"/>-->
             <!--</sec:keyManagers>-->
@@ -49,6 +49,6 @@
                 <!--<sec:keyStore file="E:/SMARTICS-2/GIT/eservices_admin_func/src/main/resources/ca/upms_dev_root.jks" password="password" type="JKS"/>-->
             <!--</sec:trustManagers>-->
 
-        </http-conf:tlsClientParameters>
-    </http-conf:conduit>
+        <!--</http-conf:tlsClientParameters>-->
+    <!--</http-conf:conduit>-->
 </beans>
