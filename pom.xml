@@ -117,6 +117,35 @@
             <version>${cxf.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <!-- Spring-boot -->
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-spring-boot-starter-jaxrs</artifactId>
+            <version>${cxf.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-spring-boot-autoconfigure</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description-swagger</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-service-description</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
         <!-- CXF END -->
 
         <!-- BEGIN - For compile, which are provided by running env. machine -->
@@ -449,22 +478,22 @@
 
 <!--
 -->
-        <repository>
-            <id>central</id>
-            <name>the nexus repository of pccw framework team</name>
-            <url>http://10.89.105.44/nexus/repository/maven-public</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>nexus-pccw-snapshot</id>
-            <name>the nexus repository of pccw framework team</name>
-            <url>http://10.89.105.44/nexus/repository/mvn-pccw-snapshot</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
+        <!--<repository>-->
+            <!--<id>central</id>-->
+            <!--<name>the nexus repository of pccw framework team</name>-->
+            <!--<url>http://10.89.105.44/nexus/repository/maven-public</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>true</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+        <!--<repository>-->
+            <!--<id>nexus-pccw-snapshot</id>-->
+            <!--<name>the nexus repository of pccw framework team</name>-->
+            <!--<url>http://10.89.105.44/nexus/repository/mvn-pccw-snapshot</url>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
         
         <repository>
             <id>Maven 2</id>

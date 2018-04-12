@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+
+        http://cxf.apache.org/jaxrs
+        http://cxf.apache.org/schemas/jaxrs.xsd
+        http://cxf.apache.org/core
+        http://cxf.apache.org/schemas/core.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <!-- For CXF Endpoint Server -->
+    <!--<context:component-scan base-package="ws.cds.immd.v1"/>-->
+    <!--<beans>-->
+        <!--<jaxrs:server id="customerService" address="/service1">-->
+            <!--<jaxrs:serviceBeans>-->
+                <!--<bean class="ws.cds.immd.v1.EnquireTransactionGroupServiceWSImplPortImpl" />-->
+            <!--</jaxrs:serviceBeans>-->
+        <!--</jaxrs:server>-->
+        <!--
+          The scope attribute, if any, will be ignored. For example, adding the scope attribute with the value
+          "request", "prototype", etc, won't have any effect, the customerBean will still be treated as
+          a JAX-RS singleton by the runtime.
+        -->
+    <!--</beans>-->
+
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+
+    <!--<bean id="cxfServletRegistration" class="org.springframework.boot.web.servlet.ServletRegistrationBean">-->
+        <!--<property name="servlet"><bean class="org.apache.cxf.transport.servlet.CXFServlet" /></property>-->
+        <!--<property name="urlMappings">-->
+            <!---->
+            <!--<list>-->
+                <!--<value>${cxf.jaxrs.server.path}</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+</beans>  

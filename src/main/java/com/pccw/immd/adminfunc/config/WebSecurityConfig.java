@@ -59,6 +59,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${web.auth.invalidSessionUrl}")
     private String invalidSessionUrl;
 
+    @Value("${web.auth.webservice}")
+    private String webServiceUrl;
+
     @Autowired
     @Qualifier("authenticationFailureHandler")
     private AuthenticationFailureHandler authenticationFailureHandler;
@@ -78,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(loginUrl).permitAll();
+        http.authorizeRequests().antMatchers(webServiceUrl).permitAll();
         LOG.info("in security configure (HttpSecurity) ...");
 
         http
@@ -122,7 +126,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/AUTH/logout-result.do",
                 "/changePassword.do",
                 "/submitChangePassword.do",
-                "/changePassword"
+                "/changePassword",
+                // For CXF Endpoint
+                "/webservices/**"
         );
     }
 /*
