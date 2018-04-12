@@ -39,20 +39,6 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         // TODO: dummy data only, need to get the list from DB depends on UM_GROUP's function list
         if (funcMenu == null) {
             funcMenu = menuService.buildMenuTree();
-            if (funcMenu.getChild().size() > 2) {
-                funcMenu.getChild().get(0).getChild().get(0).getChild().remove(0);
-                funcMenu.getChild().get(0).getChild().get(0).getChild().remove(0);
-
-                funcMenu.getChild().get(0).getChild().get(1).getChild().remove(0);
-                funcMenu.getChild().get(0).getChild().get(1).getChild().remove(0);
-                funcMenu.getChild().get(0).getChild().get(1).getChild().remove(0);
-
-                funcMenu.getChild().get(0).getChild().get(2).getChild().remove(0);
-                funcMenu.getChild().get(0).getChild().get(2).getChild().remove(0);
-
-                funcMenu.getChild().get(0).getChild().get(1).getChild().clear();
-
-            }
         }
 
 
