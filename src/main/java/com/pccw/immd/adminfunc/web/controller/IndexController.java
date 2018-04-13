@@ -1,5 +1,6 @@
 package com.pccw.immd.adminfunc.web.controller;
 
+import com.pccw.immd.adminfunc.dto.UpmsUser;
 import com.pccw.immd.adminfunc.dto.UserDTO;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import org.slf4j.Logger;
@@ -54,8 +55,6 @@ public class IndexController {
 
         String loginId = principal.getName();
         LOG.info("loginId: " + loginId  );
-
-
         return "menu";
     }
 

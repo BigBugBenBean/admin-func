@@ -37,6 +37,9 @@ public class Func {
             columnDefinition= "Function Status, 1 = Eanble, 0 = Disable")
     private String enable;
 
+    @Column(name="DEST_URL", length = 256)
+    private String destUrl;
+
     public String getFuncId() {
         return funcId;
     }
@@ -75,5 +78,13 @@ public class Func {
 
     public void setEnable(String enable) {
         this.enable = enable;
+    }
+
+    public String getDestUrl() {
+        return destUrl;
+    }
+
+    public void setDestUrl(String destUrl) {
+        this.destUrl = destUrl;
     }
 }

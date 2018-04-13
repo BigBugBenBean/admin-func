@@ -3,12 +3,16 @@ package com.pccw.immd.adminfunc.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface MenuService {
 
     public MenuItem buildMenuTree() throws IOException;
 
+    public MenuItem buildMenuTree(Map<String, String> propertiesMap);
+
     public class MenuItem{
+        private String labelKey;
         private String label;
         private String url;
 
@@ -19,8 +23,9 @@ public interface MenuService {
         public MenuItem parent;
         private List<MenuItem> child = new ArrayList<>();
 
-        public MenuItem(MenuItem parent, String label, String url) {
+        public MenuItem(MenuItem parent, String key, String label, String url) {
             this.parent = parent;
+            this.labelKey = key;
             this.label = label;
             this.url = url;
         }
@@ -39,6 +44,10 @@ public interface MenuService {
 
         public void addChild(MenuItem menuItem) {
             this.child.add(menuItem);
+        }
+
+        public String getLabelKey() {
+            return labelKey;
         }
 
         @Override

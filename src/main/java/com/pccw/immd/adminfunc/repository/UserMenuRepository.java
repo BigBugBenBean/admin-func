@@ -18,6 +18,6 @@ public interface UserMenuRepository extends JpaRepository<Post, Long>{
             "inner join UM_GROUP_FUNC GF on GF.GROUP_ID = RG.GROUP_ID " +
             "inner join UM_FUNC F on F.FUNC_ID = GF.FUNC_ID " +
             "WHERE P.ROLE_ID = :roleCd", nativeQuery = true)
-    List<String[]> findFunctionsForUserRole(@Param("roleCd")String roleCd);
+    List<Object[]> findFunctionsForUserRole(@Param("roleCd")String roleCd);
 
 }

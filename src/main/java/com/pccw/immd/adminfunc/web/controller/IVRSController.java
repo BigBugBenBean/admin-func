@@ -1,9 +1,11 @@
 package com.pccw.immd.adminfunc.web.controller;
 
+import com.pccw.immd.adminfunc.domain.Func;
 import com.pccw.immd.adminfunc.domain.SystemParam;
 import com.pccw.immd.adminfunc.dto.IvrsDTO;
+import com.pccw.immd.adminfunc.repository.FuncRepository;
+import com.pccw.immd.adminfunc.repository.UserMenuRepository;
 import com.pccw.immd.adminfunc.service.IVRSService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/e-Services-2/maintenance")
@@ -85,5 +91,23 @@ public class IVRSController {
 
         return "/eServices2/IVRS/ivrs-success";
     }
+
+    @Autowired
+    @Qualifier("funcRepository")
+    FuncRepository funcRepository;
+
+    @GetMapping(value = "/ivrs_menuservice.do")
+    public void ivrsPage() {
+        Map<String, String> functionsFromDb = new HashMap<>();
+        List<Func> functionsForUserRole = funcRepository.findFunctionsByUserRoles("R01");
+        for (Func functions : functionsForUserRole) {
+            functionsFromDb.put(functions.getFuncDesc(), functions.getDestUrl());
+        }
+        LOG.debug("map: " + functionsFromDb );
+
+
+    }
+
+
 
 }

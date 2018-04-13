@@ -3,6 +3,7 @@ package com.pccw.immd.adminfunc.dto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
@@ -41,6 +42,9 @@ public class LoginUser extends User {
     public LoginUser(String username, String displayName, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         this(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.displayName = displayName;
+
+        this.roleCDs = new ArrayList<>();
+        roleCDs.add("R01");
     }
 
     public LoginUser(String username, String displayName, String password, Collection<? extends GrantedAuthority> authorities) {

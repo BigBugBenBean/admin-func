@@ -20,7 +20,6 @@ public class MenuServiceImpl implements MenuService {
 
     private static final Logger LOG = LoggerFactory.getLogger(MenuServiceImpl.class);
 
-
     private static final String MENU_DELIMITER = ".";
 
     private static final String MENU_DELIMITER_REG = "\\.";
@@ -33,7 +32,7 @@ public class MenuServiceImpl implements MenuService {
 
     public MenuItem buildMenuTree() throws IOException {
         Map<String, String> mapping = getFromFile(propertiesFilePath);
-        MenuItem root = new MenuItem(null, "ROOT", landingUrl);
+        MenuItem root = new MenuItem(null,"ROOT","ROOT", landingUrl);
         formMenuTree(root, mapping);
 
         LOG.info("Menu Generation Completed.");
@@ -64,6 +63,14 @@ public class MenuServiceImpl implements MenuService {
         return mapping;
     }
 
+    public MenuItem buildMenuTree(Map<String, String> propertiesMap) {
+        MenuItem root = new MenuItem(null,"ROOT","ROOT", landingUrl);
+        formMenuTree(root, propertiesMap);
+
+        LOG.info("Menu Generation Completed.");
+        return root;
+    }
+
     private void formMenuTree(MenuItem root, Map<String, String> menuProperties ){
         Map<String, MenuItem> allMenu = new HashMap<>();
         allMenu.put(root.getLabel(), root);
@@ -89,7 +96,7 @@ public class MenuServiceImpl implements MenuService {
             String[] labels = label.split(MENU_DELIMITER_REG);
             label = labels[labels.length - 1];
         }
-        MenuItem menu = new MenuItem(parent, label, menuProperties.get(key));
+        MenuItem menu = new MenuItem(parent, key, label, menuProperties.get(key));
         allMenu.put(key, menu);
         return menu;
     }

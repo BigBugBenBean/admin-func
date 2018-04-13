@@ -1,8 +1,15 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
+import com.pccw.immd.adminfunc.domain.Func;
+import com.pccw.immd.adminfunc.domain.Role;
 import com.pccw.immd.adminfunc.dto.LoginUser;
+import com.pccw.immd.adminfunc.repository.FuncRepository;
+import com.pccw.immd.adminfunc.service.MenuService;
 import com.pccw.immd.adminfunc.service.MenuService.MenuItem;
 import com.pccw.immd.adminfunc.service.UpmsEndPointServiceWithHeader;
+import com.pccw.immd.adminfunc.service.UserMenuService;
+import com.pccw.immd.adminfunc.service.impl.MenuServiceImpl;
+import com.pccw.immd.adminfunc.service.impl.UserMenuServiceImpl;
 import com.pccw.immd.adminfunc.web.security.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +24,10 @@ import ws.upms.immd.v1.ITISysException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.MENU_ROOT_KEY;
 import static com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationFailureHandler.SPRING_SECURITY_LAST_EXCEPTION;
@@ -93,6 +104,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
             userId = SecurityContextHolder.getContext().getAuthentication().getName();
             String immdToken = ((LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getImmdToken();
 
+
             /*
             // for development
             boolean isDemo = isDemoAccount(userId);
@@ -112,8 +124,10 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
      * TODO: Here should check the menu access right with database / UPMS return values
      */
     private void resolveMenuAccessRight(HttpServletRequest request) {
-        MenuItem applicationMenu = (MenuItem)request.getAttribute( MENU_ROOT_KEY );
-
+        List<String> funcs = (List<String>)request.getSession().getAttribute( MENU_ROOT_KEY );
+        if ( funcs != null && !funcs.contains(request.getRequestURI())){
+            // redirect:/AUTH/login_form.do
+        }
     }
 
 
