@@ -1,41 +1,26 @@
+
+ CREATE TABLE     "UM_FUNC"
+   (	"FUNC_ID" VARCHAR2(4 BYTE),
+	"FUNC_DESC" VARCHAR2(2000 BYTE),
+	"DEST_URL" VARCHAR2(256 BYTE),
+	"DISPLAY_POS" VARCHAR2(3 BYTE),
+	"FUNC_TYPE" NUMBER DEFAULT 0,
+	"ENABLE" VARCHAR2(1 BYTE),
+	PRIMARY KEY (FUNC_ID)
+   );
+
+
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EC01','Access Control','/e-Services-2/maintenance/accessControl.do','','1','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('ADM0001','User Maintenance','','','2','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('ADM0002','Create User','/e-Services-2/management/createFunctionGroup.do','','2','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('ADM0003','Delete User','/e-Services-2/management/deleteFunctionGroup.do','','2','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('ADM0004','Update User','/e-Services-2/management/updateFunctionGroup.do','','2','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EC05','Create Function Group','../admin/UserMaintenanceCreateGroup01.do','','2','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EC06','Delete Function Group','../admin/UserMaintenanceDeleteGroup01.do','','2','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EC09','Update Function Group','../admin/UserMaintenanceUpdateGroup01.do','','2','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('SM02','Delete Appointment','/SMARTICS-2/maintenance/deleteAppointment.do','','1','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('SM03','Enquiry Code Information','/SMARTICS-2/enquiry/enquiryCodeInformation.do','','4','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0001','Office Quota Maintenance ','../admin/QuotaMaintenance01.do','','1','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('SM01','Appointment Booking Enquiry','/SMARTICS-2/enquiry/appointmentBookingEnquiry.do','','4','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0003','e-Passport Quota Update for Fo Tan (FTO)','','','3','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0004','e-Passport Quota Update for Cash Payment App. Sub-Section (SA)','','','3','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0005','e-Passport Quota Update for Yuen Long (YLO)','','','3','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0006','e-Passport Quota Update for East Kowloon Office (EKO)','','','3','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0007','e-Passport Quota Update for West Kowloon Office (WKO)','','','3','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0008','e-Passport Quota Update for HK Island Issuing Office (HKO)','','','3','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0009','e-Passport Quota Update for Shatin Office (STO)','','','3','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EC10','System Holiday and Non-working Date View','/e-Services-2/enquiry/systemHoliday.do','','4','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0011','Appointment Reminder','../admin/EnquiryApplicationCode01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0012','Appointment Bookable Period Enquiry','../admin/AppointmentBookablePeriod01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0013','Office Maintenance','../admin/OfficeMaintenance01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0014','Hospital-Office Maintenance','../admin/HospitalMaintenance01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0015','Application-Office Maintenance','../admin/ApplicationOffice01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0016','Appointment-Office Maintenance','../admin/AppointmentOffice01.do','','1','N');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EC02','Application Fee Enquiry','/e-Services-2/enquiry/applicationFeeEnquiry.do','','4','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0018','Application Due Day','../admin/ApplicationInformation01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EFN0019','Virtual Appointment Enquiry','../admin/EnquiryVirtualAppointmentBooking00.do','','4','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('RM01','Online Submission Enquiry','../admin/EnquiryApplicationStatus01.do','','4','Y');
 INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('EC07','Important Announcement','/e-Services-2/maintenance/importantAnnouncement.do','','1','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('MQM0001','Marriage Quota Transfer','../admin/MarriageQuotaTransfer01.do','','1','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('MQT0001','Marriage Quota Transfer','../admin/MarriageQuotaTransfer01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('PFN0001','Payment Enquiry','../admin/PaymentEnquiry01.do','','4','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('PFN0002','Payment Manual Reconciliation','../admin/ManualReconciliation01.do','','1','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('QAM0001','Email Address for Quota Full Alert','../admin/QuotaAlertEmail01.do','','1','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('QRM0001','Quota Release Rule','../admin/QuotaReleaseRule01.do','','1','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('RIS0001','Identity Proof Selection','../admin/IdentityProofSelection01.do','','1','N');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('ROA0001','ROA No Show Case','../admin/EnquiryRoaOverdue01.do','','4','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('SDS0001','Supplementary Document Submission','../admin/SupplementaryDocumentSubmission01.do','','4','Y');
-INSERT INTO UM_FUNC (FUNC_ID,FUNC_DESC,DEST_URL,DISPLAY_POS,FUNC_TYPE,ENABLE) VALUES ('VQM0001','Virtual Quota Multiplier Maintenance','../admin/VirtualQuotaMultiplier01.do','','1','Y');
+
+
+

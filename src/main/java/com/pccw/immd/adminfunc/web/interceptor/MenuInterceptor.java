@@ -21,8 +21,10 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
     
     private static final Logger LOG = LoggerFactory.getLogger(MenuInterceptor.class);
     public static final String MENU_ROOT_KEY = "ROOT";
+    public static final String FUNC_MENU_KEY = "MENU";
 
     private MenuService.MenuItem applicationMenu;
+    private MenuService.MenuItem funcMenu;
 
     @Autowired
     @Qualifier("menuService.eservices2")
@@ -34,6 +36,13 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
             applicationMenu = menuService.buildMenuTree();
         }
 
+        // TODO: dummy data only, need to get the list from DB depends on UM_GROUP's function list
+        if (funcMenu == null) {
+            funcMenu = menuService.buildMenuTree();
+        }
+
+
+        request.setAttribute( FUNC_MENU_KEY, funcMenu );
         request.setAttribute( MENU_ROOT_KEY, applicationMenu );
         return true;
     }

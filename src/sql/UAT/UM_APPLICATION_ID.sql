@@ -23,7 +23,7 @@ INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('524','Payment Statu
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('525','Appointment Booking for Collecting HKSAR Travel Document');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('526','Repayment (Application via Self-service kiosk)');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('509','Appointment Booking for Collection of HKSAR Passport or Document of Identity for Visa Purposes');
-INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('510','Appointment booking ??Collection of HKSAR Document of Identity for Visa Purposes');
+INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('510','Appointment booking Collection of HKSAR Document of Identity for Visa Purposes');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('502','Application for Search of Record of Death in Hong Kong');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('503','Application for a Certified Copy of an Entry in the Deaths Register');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('500','Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong)');
@@ -42,9 +42,9 @@ INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('520','Application f
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('570','Application for Search of Marriage Records in Hong Kong and/or Issue of Certified True Copy of Marriage Certificate');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('579','Appointment Booking for Hong Kong Smart Identity Card');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('578','Appointment Booking for Applying Extension of Stay (at Immigration Branch Offices only)');
-INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S02','Appointment booking ??Application for HKSAR Document of Identity for Visa Purposes');
-INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S03','Appointment booking ??Application for HKSAR Re-entry Permit');
-INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S04','Appointment booking ??Application for Seaman's Identity Book');
+INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S02','Appointment booking Application for HKSAR Document of Identity for Visa Purposes');
+INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S03','Appointment booking Application for HKSAR Re-entry Permit');
+INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S04','Appointment booking Application for Seamans Identity Book');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('900','Appointment Booking for Giving of Notice of Intended Marriage (with date of intended marriage)Internal use');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('563','Appointment Booking for Giving of Notice of Intended Marriage (for Marriage Ceremony at a Marriage Registry)');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('564','Appointment Booking for Giving of Notice of Intended Marriage only');
@@ -79,7 +79,7 @@ INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('505','Book an Appoi
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('619','Submission of Information Required for Registration of Birth');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('622','Pre-arrival Registration for Taiwan Residents');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('623','Enquiry of Pre-arrival Registration for Taiwan Residents');
-INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S01','Appointment Booking ??Application for HKSAR Passport');
+INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('S01','Appointment Booking Application for HKSAR Passport');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('630','Pre-enrolment for the e-Channel Service');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('634','Application for Entry under the Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents');
 INSERT INTO UM_APPLICATION_ID (APP_ID,ENG_APP_NAME) VALUES ('P16','ASSG (Admission Scheme for the Second Generation of Chinese Hong Kong Permanent Residents)');
