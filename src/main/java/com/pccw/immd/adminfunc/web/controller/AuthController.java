@@ -56,10 +56,10 @@ public class AuthController {
                 LOG.info("Password expired, loginId: " + loginId);
                 passwordDTO.setLoginId(loginId);
 //                returnResult = "redirect:/changePassword.do";
-                returnResult = "auth/change-pwd";
+                returnResult = "Auth/change-pwd";
             } else {
                 // General Error will goto error page.
-                returnResult = "auth/login-fail";
+                returnResult = "Auth/login-fail";
             }
             request.setAttribute("hasError", true);
             session.removeAttribute(SPRING_SECURITY_LAST_EXCEPTION);

@@ -56,7 +56,9 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         }
 
         // TODO: dummy data only, need to get the list from DB depends on UM_GROUP's function list
-        if (funcMenu == null && SecurityContextHolder.getContext().getAuthentication() != null) {
+        if (funcMenu == null
+                && SecurityContextHolder.getContext() != null
+                && SecurityContextHolder.getContext().getAuthentication() != null) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if ( !(principal instanceof  String && ((String )principal).equals("anonymousUser"))) {
                 LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
