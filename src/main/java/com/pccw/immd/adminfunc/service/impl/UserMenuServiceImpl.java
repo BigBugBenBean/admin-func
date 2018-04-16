@@ -1,26 +1,21 @@
 package com.pccw.immd.adminfunc.service.impl;
 
-import com.pccw.immd.adminfunc.service.MenuService.MenuItem;
-import com.pccw.immd.adminfunc.domain.Func;
-import com.pccw.immd.adminfunc.repository.FuncRepository;
-import com.pccw.immd.adminfunc.repository.GroupFuncRepository;
-import com.pccw.immd.adminfunc.repository.RoleGroupRepository;
+import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.FUNC_LIST;
+import static com.pccw.immd.adminfunc.service.impl.MenuServiceImpl.MENU_DELIMITER;
+import static com.pccw.immd.adminfunc.service.impl.MenuServiceImpl.MENU_DELIMITER_REG;
+
 import com.pccw.immd.adminfunc.repository.UserMenuRepository;
 import com.pccw.immd.adminfunc.service.MenuService;
+import com.pccw.immd.adminfunc.service.MenuService.MenuItem;
 import com.pccw.immd.adminfunc.service.UserMenuService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("userMenuService")
 public class UserMenuServiceImpl implements UserMenuService {
@@ -37,37 +32,80 @@ public class UserMenuServiceImpl implements UserMenuService {
     MenuService menuService;
 
     @Override
-    public MenuService.MenuItem getFunctionForUserRole(MenuItem applicationMenu, HttpServletRequest request, List<String> roleCDs) {
-        List<Object[]> functionsForUserRole = userMenuRepository.findFunctionsForUserRole("R01");
-        Map<String, String> menuProperties = new HashMap<>();
+    public MenuItem getFunctionForUserRole(MenuItem applicationMenu, HttpServletRequest request, List<String> roleCDs) {
+        Map<String, String> menuProperties = new LinkedHashMap<>();
         List<String> grantedFuncs = new ArrayList<>();
+        List<String> functionsForUserRole = new ArrayList<>();
 
-        for ( Object[] o : functionsForUserRole ) {
-            String url = (String)o[6];
-            String labelKey = isContains(url, applicationMenu);
-            if (labelKey != null) {
+        for (String roleCd : roleCDs ){
+            functionsForUserRole = userMenuRepository.findFunctionsForUserRole(roleCd);
+        }
+        logger.info("functionsforrole: " + functionsForUserRole.toString());
+
+        for ( String url: functionsForUserRole) {
+            MenuItem tempMenu = getMenuItemByUrl(applicationMenu, url);
+            if (tempMenu != null) {
+                String labelKey = tempMenu.getLabelKey();
+                addParent(applicationMenu, labelKey, menuProperties);
                 menuProperties.put(labelKey, url);
                 grantedFuncs.add(url);
             }
         }
 
-        request.getSession().setAttribute("test menu", grantedFuncs);
+        request.getSession().setAttribute(FUNC_LIST, grantedFuncs);
         return menuService.buildMenuTree(menuProperties);
     }
 
-    private String isContains(String url, MenuItem menu) {
-        if (url.equals(menu.getUrl())){
-            return menu.getLabelKey();
-        }else{
-            if (menu.getChild().size() > 0 ){
-                String tmp = null;
-                for ( MenuItem m : menu.getChild())
-                    tmp = isContains(url, m);
-                return tmp;
-            }else {
-                return null;
+    /**
+     * Hardcode 3 level logic
+     */
+    private void addParent(MenuItem applicationMenu, String labelKey, Map<String, String> menuProperties) {
+
+        int count = StringUtils.countOccurrencesOf(labelKey, MENU_DELIMITER);
+        String[] menuKeyAry = labelKey.split(MENU_DELIMITER_REG);
+        if ( count > 0 ){
+            String lookupKey = menuKeyAry[0];
+            if (!menuProperties.containsKey(lookupKey)) {
+                MenuItem menu = getMenuItemByKey(applicationMenu, lookupKey);
+                menuProperties.put(menu.getLabelKey(), menu.getUrl());
+            }
+        }
+        if ( count > 1 ){
+            String lookupKey = menuKeyAry[0] + MENU_DELIMITER + menuKeyAry[1];
+            if (!menuProperties.containsKey(lookupKey)) {
+                MenuItem menu = getMenuItemByKey(applicationMenu, lookupKey);
+                menuProperties.put(menu.getLabelKey(), menu.getUrl());
             }
         }
     }
 
+    private MenuItem getMenuItemByUrl(MenuItem menu, String url) {
+        if (url.equals(menu.getUrl())){
+            return menu;
+        }else {
+            if ( menu.getChild() != null && menu.getChild().size() > 0) {
+                for (MenuItem m : menu.getChild()) {
+                    MenuItem tempMenu = getMenuItemByUrl(m, url);
+                    if (tempMenu != null)
+                        return tempMenu;
+                }
+            }
+            return null;
+        }
+    }
+
+    private MenuItem getMenuItemByKey(MenuItem menu, String labelKey) {
+        if (labelKey.equals(menu.getLabelKey())){
+            return menu;
+        }else {
+            if ( menu.getChild() != null && menu.getChild().size() > 0) {
+                for (MenuItem m : menu.getChild()) {
+                    MenuItem tempMenu = getMenuItemByKey(m, labelKey);
+                    if (tempMenu != null)
+                        return tempMenu;
+                }
+            }
+            return null;
+        }
+    }
 }

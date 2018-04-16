@@ -1,5 +1,7 @@
 package com.pccw.immd.adminfunc.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import java.util.Date;
  * Created by Dell on 29/1/2018.
  */
 @Entity
-@Table(name = "UM_APPLICATION_CODE")
+@Table(name = "UM_APPLICATION_ID")
 public class ApplicationCode {
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,9 +34,11 @@ public class ApplicationCode {
     private String engAppName;
 
     @Column(name = "CHT_APP_NAME")
+    @Type(type="org.hibernate.type.StringNVarcharType")
     private String chtAppName;
 
     @Column(name = "CHS_APP_NAME")
+    @Type(type="org.hibernate.type.StringNVarcharType")
     private String chsAppName;
 
     @Column(name = "REQUIRE_REMINDER")

@@ -21,7 +21,7 @@ public class FunctionIdResolverInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger LOG = LoggerFactory.getLogger(FunctionIdResolverInterceptor.class);
 
-    public static String FUNCTION_ID_KEY = "FUNCTION_ID_KEY";
+    public static final String FUNCTION_ID_KEY = "FUNCTION_ID_KEY";
 
     @Autowired
     @Qualifier ("functionService.eservice2")
@@ -36,7 +36,7 @@ public class FunctionIdResolverInterceptor extends HandlerInterceptorAdapter {
 
         request.setAttribute("startTime", startTime);
 
-        String funcId = functionService.resoloveFunctionId(request.getRequestURI());
+        String funcId = functionService.resolveFunctionId(request.getRequestURI());
         request.setAttribute(FUNCTION_ID_KEY, funcId);
 
         request.setAttribute("startTime", startTime);

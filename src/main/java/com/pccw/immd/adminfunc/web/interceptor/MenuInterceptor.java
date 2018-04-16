@@ -32,6 +32,8 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(MenuInterceptor.class);
     public static final String MENU_ROOT_KEY = "ROOT";
     public static final String FUNC_MENU_KEY = "MENU";
+    public final static String FUNC_LIST = "FUNC_LIST";
+
 
     private MenuService.MenuItem applicationMenu;
     private MenuService.MenuItem funcMenu;

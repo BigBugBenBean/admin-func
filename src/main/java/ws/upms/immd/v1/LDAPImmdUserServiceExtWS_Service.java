@@ -17,7 +17,7 @@ import java.net.URL;
  *
  */
 @WebServiceClient(name = "LDAPImmdUserServiceExtWS",
-        wsdlLocation = "file:ldapImmdUserServiceExtWS_1.wsdl",
+        wsdlLocation = "file:wsdl/ldapImmdUserServiceExtWS_1.wsdl",
         targetNamespace = "http://immd.upms.ws/v1")
 public class LDAPImmdUserServiceExtWS_Service extends Service {
 

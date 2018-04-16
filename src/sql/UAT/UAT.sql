@@ -45,6 +45,7 @@ Insert into UM_ROLE_APP (ROLE_ID,APP_ID) values ('SIO(ROP)HK/O','527');
 
 
 --------------------------------------------------------
+/*
   CREATE TABLE "UM_ROLE_OFFICE"
    (	"ROLD_CD" VARCHAR2(30 BYTE),
 	"OFFICE_CODE" VARCHAR2(10 BYTE)
@@ -54,6 +55,8 @@ Insert into UM_ROLE_APP (ROLE_ID,APP_ID) values ('SIO(ROP)HK/O','527');
   ALTER TABLE "UM_ROLE_OFFICE" ADD CONSTRAINT "UM_ROLE_OFFICE_PK" PRIMARY KEY ("ROLD_CD", "OFFICE_CODE");
 
 Insert into UM_ROLE_OFFICE (ROLD_CD,OFFICE_CODE) values ('CO(ROP)','CHR');
+
+   */
 
 --------------------------------------------------------
 CREATE TABLE "UM_GROUP"
@@ -3884,8 +3887,7 @@ Insert into UM_OFFICE (OFFICE_CODE,DISPLAY_CODE,DISPLAY_NAME) values ('TMBR','TM
 Insert into UM_OFFICE (OFFICE_CODE,DISPLAY_CODE,DISPLAY_NAME) values ('TMR','TMMR','Tuen Mun Marriage Registry');
 Insert into UM_OFFICE (OFFICE_CODE,DISPLAY_CODE,DISPLAY_NAME) values ('TSTR','TSTR','Tsim Sha Tsui Marriage Registry');
 Insert into UM_OFFICE (OFFICE_CODE,DISPLAY_CODE,DISPLAY_NAME) values ('COE','COE','Certificate of Entitlement Section');
-Insert into UM_OFFICE (OFFICE_CODE,DISPLAY_CODE,DISPLAY_NAME) values ('TDNA','TDNA','Travel Documents and Nationality (Application) Section, Immigration Headquarters
-(Wan Chai)');
+Insert into UM_OFFICE (OFFICE_CODE,DISPLAY_CODE,DISPLAY_NAME) values ('TDNA','TDNA','Travel Documents and Nationality (Application) Section, Immigration Headquarters (Wan Chai)');
 Insert into UM_OFFICE (OFFICE_CODE,DISPLAY_CODE,DISPLAY_NAME) values ('TDS','TDI','Travel Documents (Issue) Section');
 
 

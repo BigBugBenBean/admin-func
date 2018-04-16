@@ -19,12 +19,11 @@ public class LoginUser extends User {
     private String officeCode;
     private String displayName;
 
-    private List<String> posts;
-    private List<String> roleCDs;
-    private List<String> systemIDs;
-    private String locID;
-    private Calendar passwordExpiryDateTime;
-
+    protected List<String> posts;
+    protected List<String> roleCDs;
+    protected List<String> systemIDs;
+    protected String locID;
+    protected Calendar passwordExpiryDateTime;
 
     public LoginUser(String username, UpmsUser upmsUser, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         this(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);

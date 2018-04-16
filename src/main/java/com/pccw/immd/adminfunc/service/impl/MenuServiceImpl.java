@@ -20,9 +20,9 @@ public class MenuServiceImpl implements MenuService {
 
     private static final Logger LOG = LoggerFactory.getLogger(MenuServiceImpl.class);
 
-    private static final String MENU_DELIMITER = ".";
+    public static final String MENU_DELIMITER = ".";
 
-    private static final String MENU_DELIMITER_REG = "\\.";
+    public static final String MENU_DELIMITER_REG = "\\.";
 
     @Value("${web.menu.config.path}")
     private String propertiesFilePath;

@@ -18,4 +18,7 @@ public interface FuncRepository extends JpaRepository<Func, Integer>{
 
     @Query(value = "select f from Func f where f.funcId = :funcId")
     List<Func> findFunctionsByUserRoles(@Param("funcId")String funcId);
+
+    @Query(value = "select f from Func f where f.destUrl = :destUrl")
+    Func getByDestUrl(@Param("destUrl")String destUrl);
 }

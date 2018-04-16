@@ -2,6 +2,7 @@ package com.pccw.immd.adminfunc.web.security;
 
 import com.pccw.immd.adminfunc.dto.LoginUser;
 import com.pccw.immd.adminfunc.dto.UpmsUser;
+import com.pccw.immd.adminfunc.mock.MockLoginUser;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import com.pccw.immd.adminfunc.utils.MessageSourceAdapter;
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -46,6 +48,13 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
     @Qualifier("upmsService")
     private UpmsService upmsService;
 
+    @Value("${web.loginmode.byrole:false}")
+    private boolean roleLoginMode;
+
+    @Value("${web.loginmode.demouser:false}")
+    private boolean demoUserMode;
+
+
     public final void afterPropertiesSet() throws Exception {
         Assert.notNull(this.messages, "A message source must be set");
     }
@@ -68,8 +77,7 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
             throw new BadCredentialsException(messageSourceAdapter.getMessage("umps.useridandpassword.notempty"));
 
         String demoPrefix = "demo";
-
-        if (userName.startsWith(demoPrefix)) {
+        if (demoUserMode && userName.startsWith(demoPrefix)) {
             LOG.info("Using demo account in testing env. ONLY.");
 
             loginUser = new LoginUser(
@@ -86,10 +94,22 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
             return new UsernamePasswordAuthenticationToken(loginUser, authentication.getCredentials(), authList);
         }
 
+        if (roleLoginMode) {
+            LOG.info("Using roleCD to login in testing env. ONLY.");
+
+            List<String> roleCDs = new ArrayList<>();
+            roleCDs.add(userName);
+            MockLoginUser mockLoginUser = new MockLoginUser(
+                    userName,
+                    password,
+                    roleCDs,
+                    authList);
+            LOG.info("Using Mock loginUser (Uesrname as RoleCD)");
+            return new UsernamePasswordAuthenticationToken(mockLoginUser, authentication.getCredentials(), authList);
+        }
 
         try {
-//            String newPassword = "password1";
-            UpmsUser user = upmsService.login(authentication.getName(), password, termialId);
+            UpmsUser upmsUser = upmsService.login(authentication.getName(), password, termialId);
 
             LOG.debug("Login Success.");
 
@@ -106,16 +126,13 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
 
             loginUser = new LoginUser(
                     userName,
-                    user.getIss3UserSignOnDTO().getUserEngName(),
+                    upmsUser,
                     password,
                     enabled,
                     accountNonExpired,
                     credentialsNonExpired,
                     accountNonLocked,
                     authList);
-
-            LoginUser lu = (LoginUser)loginUser;
-            lu.setImmdToken(user.getIss3UserSignOnDTO().getImmdToken());
 
         } catch (ITIAppException | ITISysException e) {
             if (e instanceof ITIAppException) {
