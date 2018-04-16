@@ -114,7 +114,17 @@
                                 <!--<input type="radio" name="time" />-->
                                 <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.startTime')}"></span></b>
                             </div>
-                            <div class="flex-item-7">
+                            <div class="flex-item-3">
+                                <!--<input type="hidden" id="startDate" name="startDate" />-->
+                                <input class="search-input-time" id="startTime" name="startTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="startHour" name="startHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="startMin" name="startMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                            <div class="flex-item-4">
+                                <span class="search-time-padding">To</span>
                                 <!--<input type="hidden" id="startDate" name="startDate" />-->
                                 <input class="search-input-time" id="startTime" name="startTime" type="text" maxlength="10" size="10" />
                                 <span class="search-time-padding">(dd/mm/yyyy)</span>
@@ -129,7 +139,17 @@
                                 <!--<input type="radio" name="time" />-->
                                 <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.endTime')}"></span></b>
                             </div>
-                            <div class="flex-item-7">
+                            <div class="flex-item-3">
+                                <!--<input type="hidden" id="endDate" name="endDate" />-->
+                                <input class="search-input-time" id="endTime" name="endTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="endHour" name="endHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="endMin" name="endMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                            <div class="flex-item-4">
+                                <span class="search-time-padding">To</span>
                                 <!--<input type="hidden" id="endDate" name="endDate" />-->
                                 <input class="search-input-time" id="endTime" name="endTime" type="text" maxlength="10" size="10" />
                                 <span class="search-time-padding">(dd/mm/yyyy)</span>
