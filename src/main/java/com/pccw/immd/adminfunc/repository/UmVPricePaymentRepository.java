@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository("umVPricePaymentRepository.eservice2")
 public interface UmVPricePaymentRepository extends JpaRepository<VPricePayment,Integer> {
-    List<VPricePayment> findAll();
 }

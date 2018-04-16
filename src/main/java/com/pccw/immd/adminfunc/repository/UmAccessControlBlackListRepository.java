@@ -13,8 +13,5 @@ import java.util.List;
  */
 @Repository ("umAccessControlBlackListRepository.eservice2")
 public interface UmAccessControlBlackListRepository extends JpaRepository<AccessControlBlackList,Integer>{
-    List<AccessControlBlackList> findAll();
-
-
 
 }

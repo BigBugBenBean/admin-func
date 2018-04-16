@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository("umApplicationCodeRepository.eservice2")
 public interface UmApplicationCodeRepository extends JpaRepository<ApplicationCode,Integer> {
-    List<ApplicationCode> findAll();
 }

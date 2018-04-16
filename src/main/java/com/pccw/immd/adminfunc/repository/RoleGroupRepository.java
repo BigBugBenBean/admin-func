@@ -13,8 +13,6 @@ import java.util.List;
 @Repository("roleGroupRepository")
 public interface RoleGroupRepository extends JpaRepository<RoleGroup, Integer> {
 
-    List<RoleGroup> findAll();
-
     @Query(value = "select rg from RoleGroup rg where rg.roleId = :roleId")
     List<RoleGroup> findAllByRoleId(@Param("roleId") String roleId);
 }

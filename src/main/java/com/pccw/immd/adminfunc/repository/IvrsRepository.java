@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository("ivrsRepository.eservice2")
 public interface IvrsRepository extends JpaRepository<SystemParam,String> {
-    List<SystemParam> findAll();
 }
