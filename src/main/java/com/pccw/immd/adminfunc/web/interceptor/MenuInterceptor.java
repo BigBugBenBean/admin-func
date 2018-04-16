@@ -56,7 +56,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         }
 
         // TODO: dummy data only, need to get the list from DB depends on UM_GROUP's function list
-        if (funcMenu == null) {
+        if (funcMenu == null && SecurityContextHolder.getContext().getAuthentication() != null) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             if ( !(principal instanceof  String && ((String )principal).equals("anonymousUser"))) {
                 LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -65,7 +65,9 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
             }
         }
 
-        request.setAttribute( FUNC_MENU_KEY, funcMenu );
+//        request.setAttribute( FUNC_MENU_KEY, funcMenu );
+        // TODO: Full menu is equals to NO Permission Check
+        request.setAttribute( FUNC_MENU_KEY, applicationMenu );
         request.setAttribute( MENU_ROOT_KEY, applicationMenu );
         return true;
     }

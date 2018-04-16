@@ -34,11 +34,9 @@ public class ApplicationCode {
     private String engAppName;
 
     @Column(name = "CHT_APP_NAME")
-    @Type(type="org.hibernate.type.StringNVarcharType")
     private String chtAppName;
 
     @Column(name = "CHS_APP_NAME")
-    @Type(type="org.hibernate.type.StringNVarcharType")
     private String chsAppName;
 
     @Column(name = "REQUIRE_REMINDER")

@@ -1,8 +1,9 @@
 <jboss-deployment-structure>
     <deployment>
-        <!--<dependencies>-->
+        <dependencies>
             <!--<module name="org.apache.cxf" />-->
-        <!--</dependencies>-->
+            <module name="com.oracle" />
+        </dependencies>
 
         <exclude-subsystems>
 

@@ -1,6 +1,6 @@
 package com.pccw.immd.adminfunc.repository;
 
-import com.pccw.immd.adminfunc.domain.Post;
+import com.pccw.immd.adminfunc.domain.RoleGroup;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository("userMenuRepository")
-public interface UserMenuRepository extends JpaRepository<Post, Long>{
+public interface UserMenuRepository extends JpaRepository<RoleGroup, Long>{
 
     @Query(value = "select F.DEST_URL from UM_ROLE_GROUP UM " +
             "INNER JOIN UM_GROUP G ON UM.GROUP_ID = G.GROUP_ID " +

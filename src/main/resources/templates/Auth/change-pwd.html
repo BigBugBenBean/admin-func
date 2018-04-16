@@ -91,7 +91,7 @@
                 <span>Create your new password in the fields below.</span>
             </div>
             <form method="post" th:action="@{/submitChangePassword.do}">
-                <input type="hidden" name="loginId" th:value="${LOGIN_USER.username}" />
+                <input type="hidden" name="loginId" th:value="${passwordDTO.loginId}" />
                 <div class="flex-container">
                     <div style="flex: 6;">
                         <div class="flex-container box-container">
