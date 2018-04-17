@@ -368,6 +368,9 @@ main menu
     height: 28px;
 }
 
+.main-menu > label:first-child{
+    margin-left: 30px;
+}
 .main-menu > input,
 .main-menu > span > input {
     display: none;
@@ -422,6 +425,7 @@ main menu
     height: 150px;
     background-color: #C7DBB8;
 }
+
 #main-tab-1:checked ~ #main-content-1,
 #main-tab-2:checked ~ #main-content-2,
 #main-tab-3:checked ~ #main-content-3 {
