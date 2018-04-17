@@ -18,6 +18,9 @@ public class RoleGroup {
     @Column(name = "GROUP_ID", length = 16)
     private String groupId;
 
+    @Column(name ="ROLE_CD", length = 30)
+    private String roleCd;
+
     public String getRoleId() {
         return roleId;
     }
@@ -32,5 +35,13 @@ public class RoleGroup {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public String getRoleCd() {
+        return roleCd;
+    }
+
+    public void setRoleCd(String roleCd) {
+        this.roleCd = roleCd;
     }
 }

@@ -63,25 +63,44 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
         LOG.info("Executing operation enquireAllData");
         try {
             RoleTxgpTxidDTO roleTxgpTxidDTO = new RoleTxgpTxidDTO();
-            List<Role> roleIdList = roleRepository.findAll();
-            for (Role roleId: roleIdList) {
-                RoleTxgp roleTxgp = new RoleTxgp();
-                roleTxgp.setRoleCD(roleId.getRoleId());
-                List<RoleGroup> roleGroupList = roleGroupRepository.findAllByRoleId(roleId.getRoleId());
-
-                for (RoleGroup groupID: roleGroupList) {
-                    roleTxgp.getTxGps().add(groupID.getGroupId());
+            List<String> roleCdList = roleGroupRepository.findAllRoleCodes();
+            if (!roleCdList.isEmpty()) {
+                for (String roleCd : roleCdList) {
+                    RoleTxgp roleTxgp = new RoleTxgp();
+                    roleTxgp.setRoleCD(roleCd);
+                    List<RoleGroup> roleGroupList = roleGroupRepository.findAllbyRoleCd(roleCd);
+                    if (!roleGroupList.isEmpty()) {
+                        for (RoleGroup groupID : roleGroupList) {
+                            roleTxgp.getTxGps().add(groupID.getGroupId());
+                        }
+                    }
+                    roleTxgpTxidDTO.getRoleTxgps().add(roleTxgp);
                 }
-                roleTxgpTxidDTO.getRoleTxgps().add(roleTxgp);
             }
 
             List<Group> groupIdDescList = groupRepository.findAll();
-            for (Group group : groupIdDescList) {
-                Txgp txgp = new Txgp();
-                txgp.setTxGp(group.getGroupId());
-                txgp.setTxGpDesc(group.getGroupDesc());
-                roleTxgpTxidDTO.getTxgps().add(txgp);
+            if (!groupIdDescList.isEmpty()) {
+                for (Group group : groupIdDescList) {
+                    Txgp txgp = new Txgp();
+                    txgp.setTxGp(group.getGroupId());
+                    txgp.setTxGpDesc(group.getGroupDesc());
+                    roleTxgpTxidDTO.getTxgps().add(txgp);
+                }
+
+                for (Group grpId : groupIdDescList) {
+                    TxgpTxid txgpTxid = new TxgpTxid();
+                    txgpTxid.setTxGp(grpId.getGroupId());
+                    List<GroupFunc> groupFuncList = groupFuncRepository.findAllByGroupId(grpId.getGroupId());
+                    if (!groupFuncList.isEmpty()) {
+                        for (GroupFunc funcList : groupFuncList) {
+                            txgpTxid.getTxids().add(funcList.getFuncId());
+                        }
+                    }
+                    roleTxgpTxidDTO.getTxgpTxids().add(txgpTxid);
+                }
             }
+
+
             LOG.debug("enquireAllDataResponse: " + roleTxgpTxidDTO);
             return roleTxgpTxidDTO;
         } catch (Exception ex) {
@@ -99,14 +118,18 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
         try {
             List<TransGrpRoleDTO> transGrpRoleDTO = new ArrayList<TransGrpRoleDTO>();
             for (String roleCd : roleCdList) {
-                List<RoleGroup> roleGroupList = roleGroupRepository.findAllByRoleId(roleCd);
-                for (RoleGroup roleGroup : roleGroupList) {
-                    TransGrpRoleDTO roleGroupDescList = new TransGrpRoleDTO();
-                    roleGroupDescList.setRoleCd(roleCd);
-                    Group groupID = groupRepository.findByGroupId(roleGroup.getGroupId());
-                    roleGroupDescList.setTxGrpId(groupID.getGroupId());
-                    roleGroupDescList.setTxGrpDesc(groupID.getGroupDesc());
-                    transGrpRoleDTO.add(roleGroupDescList);
+                List<RoleGroup> roleGroupList = roleGroupRepository.findAllbyRoleCd(roleCd);
+                if (!roleGroupList.isEmpty()) {
+                    for (RoleGroup roleGroup : roleGroupList) {
+                        TransGrpRoleDTO roleGroupDescList = new TransGrpRoleDTO();
+                        roleGroupDescList.setRoleCd(roleCd);
+                        Group groupID = groupRepository.findByGroupId(roleGroup.getGroupId());
+                        if (groupID != null) {
+                            roleGroupDescList.setTxGrpId(groupID.getGroupId());
+                            roleGroupDescList.setTxGrpDesc(groupID.getGroupDesc());
+                            transGrpRoleDTO.add(roleGroupDescList);
+                        }
+                    }
                 }
             }
             LOG.debug("EnquireTransactionGroupResponse: " + transGrpRoleDTO);
@@ -125,15 +148,21 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
         LOG.info("Executing operation enquireTxIDsByRoleCd");
         try {
             List<Txid> txidList = new ArrayList<>();
-            List<RoleGroup> groupIdList = roleGroupRepository.findAllByRoleId(roleCd);
-            for (RoleGroup groupID : groupIdList) {
-                List<GroupFunc> groupFunc = groupFuncRepository.findAllByGroupId(groupID.getGroupId());
-                for (GroupFunc funcIdDesc : groupFunc ) {
-                    Txid txid = new Txid();
-                    Func txIdDesc = funcRepository.findByFuncId(funcIdDesc.getFuncId());
-                    txid.setTxid(txIdDesc.getFuncId());
-                    txid.setTxidDesc(txIdDesc.getFuncDesc());
-                    txidList.add(txid);
+            List<RoleGroup> groupIdList = roleGroupRepository.findAllbyRoleCd(roleCd);
+            if(!groupIdList.isEmpty()) {
+                for (RoleGroup groupID : groupIdList) {
+                    List<GroupFunc> groupFunc = groupFuncRepository.findAllByGroupId(groupID.getGroupId());
+                    if (!groupFunc.isEmpty()) {
+                        for (GroupFunc funcIdDesc : groupFunc) {
+                            Func txIdDesc = funcRepository.findByFuncId(funcIdDesc.getFuncId());
+                            if (txIdDesc != null) {
+                                Txid txid = new Txid();
+                                txid.setTxid(txIdDesc.getFuncId());
+                                txid.setTxidDesc(txIdDesc.getFuncDesc());
+                                txidList.add(txid);
+                            }
+                        }
+                    }
                 }
             }
             LOG.debug("EnquireTxIDsByRoleCdResponse: " + txidList);
