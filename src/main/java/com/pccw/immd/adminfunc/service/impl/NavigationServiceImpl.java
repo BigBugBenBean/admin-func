@@ -1,5 +1,7 @@
 package com.pccw.immd.adminfunc.service.impl;
 
+import static com.pccw.immd.adminfunc.service.MenuService.MenuItem;
+
 import com.pccw.immd.adminfunc.service.MenuService;
 import com.pccw.immd.adminfunc.service.NavigationService;
 import com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service("navigationService.eservice2")
@@ -16,41 +19,21 @@ public class NavigationServiceImpl implements NavigationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BreadcrumbInterceptor.class);
 
-    public List<MenuService.MenuItem> generateNavigationBar(String url, MenuService.MenuItem root) throws IOException {
-        List<MenuService.MenuItem> list = new ArrayList<>();
+    public List<MenuItem> generateNavigationBar(String url, MenuService.MenuItem root) throws IOException {
+        List<MenuService.MenuItem> list = null;
 
         LOG.debug("generateNavigationBar url: " + url);
+        MenuService.MenuItem foundItem = findMenuItemByURL(root, url);
+        LOG.debug("foundItem: " + foundItem);
 
-        String targetURL = getURL(url);
-
-        if (!targetURL.equals("")) {
-            MenuService.MenuItem foundItem = findMenuItemByURL(root, targetURL);
-            list = getMenuTreeFromItem(foundItem);
-        }
-
-        LOG.debug("generateNavigationBar.navigationList: " + list);
+        list = convertToList(foundItem);
+        Collections.reverse(list);
 
         return list;
     }
 
-    private String getURL(String srcUrl) {
-        String destUrl = "";
-        if (srcUrl.contains("_")) {
-            String[] urls = srcUrl.split("_");
-            destUrl = urls[0];
-        } else {
-            String[] urls = srcUrl.split(".do");
-            if (urls.length > 0) {
-                destUrl = urls[0];
-            }
-        }
-        return destUrl;
-    }
-
-    private MenuService.MenuItem findMenuItemByURL(MenuService.MenuItem root, String targetURL) {
-        MenuService.MenuItem traversingItem = root;
-
-        String url = getURL(traversingItem.getUrl());
+    private MenuService.MenuItem findMenuItemByURL(MenuService.MenuItem traversingItem, String targetURL) {
+        String url = traversingItem.getUrl();
 
         if (url.equals(targetURL)) {
             LOG.debug("findMenuItemByURL Found url: " + url);
@@ -68,13 +51,13 @@ public class NavigationServiceImpl implements NavigationService {
         return null;
     }
 
-    private List<MenuService.MenuItem> getMenuTreeFromItem(MenuService.MenuItem item) {
-        List<MenuService.MenuItem> list = new ArrayList<>();
+    private List<MenuItem> convertToList(MenuItem item) {
+        List<MenuItem> list = new ArrayList<>();
 
         if (item != null) {
             MenuService.MenuItem tmpMenuItem = item;
             while (tmpMenuItem.parent != null) {
-                list.add(0, tmpMenuItem);
+                list.add(tmpMenuItem);
                 tmpMenuItem = tmpMenuItem.parent;
             }
         }
