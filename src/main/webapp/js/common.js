@@ -213,3 +213,8 @@ function updateNavTitle() {
 function isNotEmptyNullUndfined(obj) {
     return ( (obj != null) && (obj !== '') && (obj !== 'undefined') );
 }
+
+
+$(function () {
+    $('#todayDate').html(today);
+});

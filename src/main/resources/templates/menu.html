@@ -5,13 +5,16 @@
     <meta charset="UTF-8"></meta>
     <title>e-Services Admin Function</title>
 
-    <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
-    <script src="/adminfunc/js/lib/lodash.min.js"></script>
-    <script src="/adminfunc/js/lib/moment.min.js"></script>
+    <script th:src="@{js/lib/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{js/lib/lodash.min.js}"></script>
+    <script th:src="@{js/lib/moment.min.js}"></script>
 
-    <script src="/adminfunc/js/common.js"></script>
+    <script th:src="@{js/common.js}"></script>
 
+    <link rel="stylesheet" th:href="@{/js/lib/bootstrap/bootstrap-custom.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}"></link>
+
+
 
     <script type="text/javascript"   >
 
@@ -19,7 +22,6 @@
         $(function () {
             console.log('ready');
 
-            $('#todayDate').html(today);
             updateNavTitle();
 
             bindTabChange(".sub-menu", onSubCatSelected);
@@ -51,7 +53,8 @@
                 </div>
                 <div></div>
                 <div class="flex-item-1 header-item-right">
-                    <span>| userID: <b th:text="${userDTO.loginId}"></b> |</span>
+                    <span>| userID:
+                            <b th:text="${LOGIN_USER.displayName}"></b> |</span>
                     <span>Date:
                     <b id="todayDate"></b>
                 </span>
@@ -72,10 +75,25 @@
                         </a >
                     </div>
 
-                    <div th:each="firstLvMenu,firstLvMenuRow : ${MENU.child}" th:attr="id=${'main-content-' + (firstLvMenuRow.index+1)}">
+
+                    <div class="main-content" th:each="firstLvMenu,firstLvMenuRow : ${MENU.child}" th:attr="id=${'main-content-' + (firstLvMenuRow.index+1)}">
                         <div class="flex-container grid-nav-container">
                             <div class="flex-item-1 nav-title-left">
-                                <span th:text="${firstLvMenu.label}" style=" width: 100%">e-Services-2 </span><span> > </span> <span th:attr="class=${#strings.replace(firstLvMenu.label,'-','') + 'SubCat'} "></span>
+                            <span>
+                                <span>
+                                    <span class="nav-title-left">
+                                        <span th:text="${firstLvMenu.label}" style=" width: 100%">e-Services-2 </span>
+                                    </span>
+                                </span>
+                            </span>
+                           <span> > </span>
+                            <span>
+                                <span>
+                                    <span class="nav-title-left">
+                                        <span th:attr="class=${#strings.replace(firstLvMenu.label,'-','') + 'SubCat'} "></span>
+                                    </span>
+                                </span>
+                            </span>
                             </div>
                         </div>
                         <div class="content-container ">
