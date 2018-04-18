@@ -1,20 +1,21 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
+import static com.pccw.immd.adminfunc.service.MenuService.MenuItem;
+
 import com.pccw.immd.adminfunc.service.MenuService;
 import com.pccw.immd.adminfunc.service.NavigationService;
+import com.pccw.immd.adminfunc.web.security.WebAuthorizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.MENU_ROOT_KEY;
-
+import static com.pccw.immd.adminfunc.service.MenuService.MENU_ROOT_KEY;
 
 /**
  ** 
@@ -26,9 +27,7 @@ import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.MENU_ROOT_
 public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     
     private static final Logger LOG = LoggerFactory.getLogger(BreadcrumbInterceptor.class);
-    private static final String BREADCRUMB_MENU_KEY = "BREADCRUMB_MENU_KEY";
     private static final String BREADCRUMB_NAV_KEY = "NAVBAR";
-    private static final String CONTEXT_PATH_KEY = "CONTEXT_PATH";
     public static final String FUNC_ID_KEY = "FUNC_ID";
 
     public enum FUNC_ID {
@@ -69,43 +68,27 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
     @Qualifier("navigationService.eservice2")
     NavigationService navigationService;
 
-//    @Autowired
-//    @Qualifier("menuService.eservice2")
-//    MenuService.MenuItem menuItem;
+    @Autowired
+    @Qualifier("webAuthorizationService.eservice2")
+    private WebAuthorizationService webAuthorizationService;
 
     //before the actual handler will be executed
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
         throws Exception {
 
-        MenuService.MenuItem root = (MenuService.MenuItem)request.getAttribute(MENU_ROOT_KEY);
+        if (!webAuthorizationService.hasAuthorized())
+            return true;
 
+        String context = request.getContextPath();
+        String uri = request.getRequestURI().replace(context, "");
 
-        String contextPath = request.getContextPath();
-        String requestLink = convertLink(request.getRequestURI().toString(), contextPath);
+        MenuItem root = (MenuService.MenuItem)request.getAttribute(MENU_ROOT_KEY);
+        List<MenuItem> navItems = navigationService.generateNavigationBar(uri, root);
 
-        List<MenuService.MenuItem> navList = navigationService.generateNavigationBar(requestLink, root);
-
-        request.setAttribute( CONTEXT_PATH_KEY, contextPath );
-        request.setAttribute( BREADCRUMB_NAV_KEY, navigationService );
-//        request.setAttribute( FUNC_ID_KEY, "" );
+        request.setAttribute( BREADCRUMB_NAV_KEY, navItems );
+        LOG.info("navItems:" + navItems);
 
         return true;
-    }
-
-    private String convertLink(String uri, String contextPath) {
-//        LOG.info("uri: " + uri + " , contextPath: " + contextPath);
-
-        String link = uri.replace(contextPath, "");
-
-
-        return link;
-    }
-
-    //after the handler is executed
-    public void postHandle(
-        HttpServletRequest request, HttpServletResponse response, 
-        Object handler, ModelAndView modelAndView)
-        throws Exception {
     }
 
 

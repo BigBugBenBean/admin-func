@@ -78,17 +78,14 @@
                     </span>
                     </div>
                 </div>
-
-
-
                 <div class="grid-container" style="border-radius: 20px 20px 0 0; ">
                     <div class="main-menu" >
                         <span style="margin-left: 30px;"></span>
 
-                        <span th:each="item, idx : ${ROOT.child}" >
-                            <input type="radio" id="main-tab-" th:attrappend="id=${idx.index + 1}" name="main-tabs" th:checked="( ${NAVBAR.navigationList[0].label} == ${item.label} )"  />
+                        <span th:each="item, idx : ${MENU.child}" >
+                            <input type="radio" id="main-tab-" th:attrappend="id=${idx.index + 1}" name="main-tabs" th:checked="( ${NAVBAR[0].label} == ${item.label} )"  />
                             <label for="main-tab-" th:attrappend="for=${idx.index + 1}" class="nav-title nav-border-left" url="${item.url}"
-                                   th:text="${item.label}" th:onclick="'navigatePage('+${idx.index}+', true);'"  ></label>
+                                   th:text="${item.label}" th:onclick="'navigatePage('+${(idx.index + 1)}+', true);'"  ></label>
                         </span>
 
                         <span class="TopLabel nav-title nav-border-right" style=" ">
@@ -99,7 +96,7 @@
                     </div>
                 </div>
 
-                <div th:replace="fragments/navigation::nav(${NAVBAR}, ${FUNC_ID})"></div>
+                <div th:replace="fragments/navigation::nav(${NAVBAR})"></div>
 
             </div>
 

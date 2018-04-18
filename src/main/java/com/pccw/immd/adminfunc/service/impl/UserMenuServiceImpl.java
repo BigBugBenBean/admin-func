@@ -1,6 +1,6 @@
 package com.pccw.immd.adminfunc.service.impl;
 
-import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.FUNC_LIST;
+import static com.pccw.immd.adminfunc.service.MenuService.FUNC_LIST;
 import static com.pccw.immd.adminfunc.service.impl.MenuServiceImpl.MENU_DELIMITER;
 import static com.pccw.immd.adminfunc.service.impl.MenuServiceImpl.MENU_DELIMITER_REG;
 

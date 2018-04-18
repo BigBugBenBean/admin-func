@@ -359,6 +359,7 @@
     color: #1B6742;
 }
 
+
 /***
 main menu
 */
@@ -368,7 +369,7 @@ main menu
     height: 28px;
 }
 
-.main-menu > label:first-child{
+.main-menu > span:first-child{
     margin-left: 30px;
 }
 .main-menu > input,
@@ -435,6 +436,7 @@ main menu
 #exit-tab {
 
 }
+
 
 
 /***

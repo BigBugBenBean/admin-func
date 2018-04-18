@@ -16,9 +16,6 @@ public class NavigationServiceImpl implements NavigationService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BreadcrumbInterceptor.class);
 
-
-    private List<MenuService.MenuItem> navigationList = new ArrayList<>();
-
     public List<MenuService.MenuItem> generateNavigationBar(String url, MenuService.MenuItem root) throws IOException {
         List<MenuService.MenuItem> list = new ArrayList<>();
 
@@ -28,13 +25,10 @@ public class NavigationServiceImpl implements NavigationService {
 
         if (!targetURL.equals("")) {
             MenuService.MenuItem foundItem = findMenuItemByURL(root, targetURL);
-
             list = getMenuTreeFromItem(foundItem);
         }
 
-        this.setNavigationList(list);
-
-        LOG.debug("generateNavigationBar.navigationList: " + this.navigationList.size());
+        LOG.debug("generateNavigationBar.navigationList: " + list);
 
         return list;
     }
@@ -64,7 +58,7 @@ public class NavigationServiceImpl implements NavigationService {
         } else {
             for (MenuService.MenuItem tmpItem : traversingItem.getChild() ) {
                  MenuService.MenuItem result = findMenuItemByURL(tmpItem, targetURL);
-//                LOG.debug("result: " + result + " , url: " + url);
+                LOG.debug("result: " + result + " , url: " + url);
                  if (result != null) {
                      return result;
                  }
@@ -86,14 +80,6 @@ public class NavigationServiceImpl implements NavigationService {
         }
 
         return list;
-    }
-
-    public List<MenuService.MenuItem> getNavigationList() {
-        return navigationList;
-    }
-
-    public void setNavigationList(List<MenuService.MenuItem> navigationList) {
-        this.navigationList = navigationList;
     }
 
 }
