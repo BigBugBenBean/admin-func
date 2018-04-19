@@ -103,12 +103,14 @@
                                 <input class="search-input" type="text" maxlength="10" size="10" name="cronExpression" value="0 0/1 * * * ?" />
                             </div>
                         </div>
+                        <!--
                         <div class="flex-container search-padding">
                             <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.datamap')}"></span></b></div>
                             <div class="flex-item-7">
                                 <input class="search-input" type="text" maxlength="10" size="10" name="dataMap"  />
                             </div>
                         </div>
+                        -->
                         <div class="flex-container search-padding">
                             <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.laststatus')}"></span></b></div>
                             <div class="flex-item-7">
@@ -123,7 +125,16 @@
 
                         <div class="flex-container search-padding">
                             <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.lastExecutionTime')}"></span></b></div>
-                            <div class="flex-item-7">
+                            <div class="flex-item-3">
+                                <input class="search-input-time" id="startTime" name="startTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="startHour" name="startHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="startMin" name="startMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                            <div class="flex-item-4">
+                                <span class="search-time-padding">To</span>
                                 <input class="search-input-time" id="startTime" name="startTime" type="text" maxlength="10" size="10" />
                                 <span class="search-time-padding">(dd/mm/yyyy)</span>
                                 <input class="search-input-minute" id="startHour" name="startHour" type="text" maxlength="2" size="2" />
@@ -134,7 +145,16 @@
                         </div>
                         <div class="flex-container search-padding">
                             <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.nextExecutionTime')}"></span></b></div>
-                            <div class="flex-item-7">
+                            <div class="flex-item-3">
+                                <input class="search-input-time" id="endTime" name="endTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="endHour" name="endHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="endMin" name="endMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                            <div class="flex-item-4">
+                                <span class="search-time-padding">To</span>
                                 <input class="search-input-time" id="endTime" name="endTime" type="text" maxlength="10" size="10" />
                                 <span class="search-time-padding">(dd/mm/yyyy)</span>
                                 <input class="search-input-minute" id="endHour" name="endHour" type="text" maxlength="2" size="2" />

@@ -1,11 +1,10 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
-import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.FUNC_LIST;
-
 import com.pccw.immd.adminfunc.dto.LoginUser;
 import com.pccw.immd.adminfunc.service.UpmsEndPointServiceWithHeader;
 import com.pccw.immd.adminfunc.service.UserMenuService;
 import com.pccw.immd.adminfunc.web.security.ExceptionUtils;
+import com.pccw.immd.adminfunc.web.security.WebAuthorizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,9 @@ import javax.xml.ws.WebServiceException;
 import java.io.IOException;
 import java.util.List;
 
-import static com.pccw.immd.adminfunc.web.interceptor.MenuInterceptor.MENU_ROOT_KEY;
+import static com.pccw.immd.adminfunc.service.MenuService.FUNC_LIST;
+import static com.pccw.immd.adminfunc.service.MenuService.MENU_ROOT_KEY;
+
 import static com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationFailureHandler.SPRING_SECURITY_LAST_EXCEPTION;
 
 /** 
@@ -42,8 +43,9 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
     private UpmsEndPointServiceWithHeader upmsService;
 
     @Autowired
-    @Qualifier("userMenuService")
-    private UserMenuService userMenuService;
+    @Qualifier("webAuthorizationService.eservice2")
+    private WebAuthorizationService webAuthorizationService;
+
 
     @Value("${web.loginmode.byrole:false}")
     private boolean roleLoginMode;
@@ -54,6 +56,8 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
     //before the actual handler will be executed
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
         throws Exception {
+        if (!webAuthorizationService.hasAuthorized())
+            return true;
 
         try {
             // Validate ImmdToken with every request.

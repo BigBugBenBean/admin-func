@@ -28,12 +28,6 @@ public class IndexController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
 
-//    @GetMapping(value = "/error")
-////    @PostMapping(value = "/error")
-//    public String error(){
-//        return "error";
-//    }
-
     @GetMapping(value = "/index.html")
     public String indexPage(){
         return "index";
@@ -58,8 +52,6 @@ public class IndexController {
         return "menu";
     }
 
-
-
     private String demoPage(String loginId, UserDTO userDTO) {
         LOGIN_STATUS status = validateAccount(loginId);
         LOG.info("validateAccount status: " + status);
@@ -72,7 +64,7 @@ public class IndexController {
                 return "menu";
             }
             case FIRST_LOGIN: {
-                return "/auth/change-pwd";
+                return "/Auth/change-pwd";
             }
             case EXPIRED: {
                 errTitle = "Login Rejected";
@@ -92,7 +84,7 @@ public class IndexController {
         userDTO.setErrorTitle(errTitle);
         userDTO.setErrorMessage(errMsg);
 
-        return "/auth/login-fail";
+        return "/Auth/login-fail";
     }
 
     private LOGIN_STATUS validateAccount(String loginId) {

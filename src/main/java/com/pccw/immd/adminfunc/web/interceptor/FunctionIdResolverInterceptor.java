@@ -1,6 +1,7 @@
 package com.pccw.immd.adminfunc.web.interceptor;
 
 import com.pccw.immd.adminfunc.service.FunctionService;
+import com.pccw.immd.adminfunc.web.security.WebAuthorizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,19 @@ public class FunctionIdResolverInterceptor extends HandlerInterceptorAdapter {
     @Qualifier ("functionService.eservice2")
     private FunctionService functionService;
 
+    @Autowired
+    @Qualifier("webAuthorizationService.eservice2")
+    private WebAuthorizationService webAuthorizationService;
+
     //before the actual handler will be executed
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
         throws Exception {
+        if (!webAuthorizationService.hasAuthorized())
+            return true;
 
         long startTime = System.currentTimeMillis();
-        request.setAttribute("PermissionInterceptor ... startTime", startTime);
+        request.setAttribute("startTime", startTime);
+
 
         request.setAttribute("startTime", startTime);
 

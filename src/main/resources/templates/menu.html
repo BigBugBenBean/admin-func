@@ -5,24 +5,28 @@
     <meta charset="UTF-8"></meta>
     <title>e-Services Admin Function</title>
 
-    <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
-    <script src="/adminfunc/js/lib/lodash.min.js"></script>
-    <script src="/adminfunc/js/lib/moment.min.js"></script>
+    <script th:src="@{js/lib/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{js/lib/lodash.min.js}"></script>
+    <script th:src="@{js/lib/moment.min.js}"></script>
 
-    <script src="/adminfunc/js/common.js"></script>
+    <script th:src="@{js/common.js}"></script>
 
-    <link rel="stylesheet" href="/adminfunc/css/style.css"></link>
-    <link rel="stylesheet" href="/adminfunc/css/menu.css"></link>
+    <link rel="stylesheet" th:href="@{/js/lib/bootstrap/bootstrap-custom.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"></link>
 
-    <script type="text/javascript"  >
 
-        var selectedCat = 0;
 
+    <script type="text/javascript"   >
+
+        var selectedCat = 1;
         $(function () {
             console.log('ready');
 
-            $('#todayDate').html(today);
             updateNavTitle();
+
+            bindTabChange(".sub-menu", onSubCatSelected);
+            bindTabChange(".main-menu > ", onMainCatSelected);
+
 
             var hash = window.location.hash;
             if (hash !== '' ) {
@@ -31,71 +35,10 @@
 
                 selectedCat = parseInt(hash);
             }
-
-            switch (selectedCat) {
-                case 0: {
-                    $('#main-tab-1').attr('checked', 'checked');
-                    break;
-                }
-                case 1: {
-                    $('#main-tab-2').attr('checked', 'checked');
-                    break;
-                }
-                case 2: {
-                    $('#main-tab-3').attr('checked', 'checked');
-                    break;
-                }
-                default: {
-                    $('#main-tab-1').attr('checked', 'checked');
-                    break;
-                }
-            }
-
-
+            $('#main-tab-' + selectedCat).prop('checked', 'checked');
+            $("#sub-tab-" + selectedCat +"-1 ").change().prop( "checked" , 'checked');
         });
 
-    </script>
-
-    <script type="text/javascript" th:inline="javascript" th:if="${MENU}">
-        /*<![CDATA[*/
-
-        $(function () {
-            var MENU = "[[${MENU}]]";
-
-            console.log('MENU');
-            console.log(MENU);
-
-            var rootList = "[[${MENU.child}]]";
-            console.log('rootList');
-            // console.log(rootList);
-
-
-            var eServices2List = "[[${MENU.child[0].child}]]";
-            var smartics2List = "[[${MENU.child[1].child}]]";
-            var rmList = "[[${MENU.child[2].child}]]";
-
-            if (!isNotEmptyNullUndfined(eServices2List)) {
-                eServices2List = [];
-            }
-            if (!isNotEmptyNullUndfined(smartics2List)) {
-                smartics2List = [];
-            }
-            if (!isNotEmptyNullUndfined(rmList)) {
-                rmList = [];
-            }
-
-            console.log(eServices2List);
-            console.log(smartics2List);
-            console.log(rmList);
-
-            if (isNotEmptyNullUndfined(rootList) && rootList.length > 0) {
-
-            }
-
-
-        });
-
-        /*]]>*/
     </script>
 
 </head>
@@ -110,141 +53,21 @@
                 </div>
                 <div></div>
                 <div class="flex-item-1 header-item-right">
-                    <span>| userID: <b th:text="${userDTO.loginId}"></b> |</span>
+                    <span>| userID:
+                            <b th:text="${LOGIN_USER.displayName}"></b> |</span>
                     <span>Date:
                     <b id="todayDate"></b>
                 </span>
-                    <a th:href="@{/noPermission.do}">No Permission</a>
+                    <!-- <a th:href="@{/noPerlmission.do}">No Permission</a> -->
                 </div>
             </div>
             <div class="grid-container " style="border-radius: 20px 20px 0 0; height: 400px;">
                 <div class="main-menu">
-                    <input type="radio" id="main-tab-1" name="main-tabs"  />
-                    <label for="main-tab-1" class="nav-title nav-border-left" style="margin-left: 30px; " th:text="${#messages.msg('umps.adminfunc.nav.eservices2')}"></label>
-                    <input type="radio" id="main-tab-2" name="main-tabs"  />
-                    <label for="main-tab-2" class="nav-title nav-border-left" th:text="${#messages.msg('umps.adminfunc.nav.smartics2')}"></label>
-                    <input type="radio" id="main-tab-3" name="main-tabs"  />
-                    <label for="main-tab-3" class="nav-title nav-border-left" th:text="${#messages.msg('umps.adminfunc.nav.rm')}"></label>
-                    <div style="float: right; " >
-                        <a th:href="@{/AUTH/logout.do}" class="">
-                            <input type="submit" id="exit-tab" name="" />
-                            <label for="exit-tab" class="TopLabel nav-title nav-border-right" ><b th:text="${#messages.msg('umps.adminfunc.nav.exit')}"></b></label>
-                        </a >
-                    </div>
-                    
-                    <div id="main-content-1">
-                        <div class="flex-container grid-nav-container">
-                            <div class="flex-item-1 nav-title-left">
-                                <span style=" width: '100%'">e-Services-2 > <span id="eServices2SubCat"></span></span>
-                            </div>
-                        </div>
-                        <div class="content-container ">
-                            <div class="menu-container flex-container ">
-                                <div class="flex-item-1">&nbsp;</div>
-                                <div class="sub-menu">
-                                    <input type="radio" id="sub-tab-1-1" name="sub-tabs-1" checked="checked" onchange="onEServices2SubCatSelected(SUB_CAT_MENU.ENQUIRY)" />
-                                    <label for="sub-tab-1-1">Enquiry</label>
-                                    <input type="radio" id="sub-tab-1-2" name="sub-tabs-1" onchange="onEServices2SubCatSelected(SUB_CAT_MENU.MAINTENANCE)" />
-                                    <label for="sub-tab-1-2">Maintenance</label>
-                                    <input type="radio" id="sub-tab-1-3" name="sub-tabs-1" onchange="onEServices2SubCatSelected(SUB_CAT_MENU.MANAGEMENT)" />
-                                    <label for="sub-tab-1-3">Management</label>
-
-
-                                    <div id="sub-content-1-1">
-                                        <ul class="func-parent">
-                                            <li class="func-child" th:each="item : ${MENU.child[0].child[0].child}" >
-                                                <a class="func-bullet" th:href="${#httpServletRequest.getContextPath()} + ${item.url}" th:text="${item.label}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="sub-content-1-2">
-                                        <ul class="func-parent">
-                                            <li class="func-child" th:each="item : ${MENU.child[0].child[1].child}" >
-                                                <a class="func-bullet" th:href="${#httpServletRequest.getContextPath()} + ${item.url}" th:text="${item.label}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="sub-content-1-3">
-                                        <ul class="func-parent">
-                                            <li class="func-child" th:each="item : ${MENU.child[0].child[2].child}" >
-                                                <a class="func-bullet" th:href="${#httpServletRequest.getContextPath()} + ${item.url}" th:text="${item.label}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="flex-item-1">&nbsp;</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="main-content-2">
-                        <div class="flex-container grid-nav-container">
-                            <div class="flex-item-1 nav-title-left">
-                                <span style=" width: '100%'">SMARTICS-2 > <span id="smartics2SubCat"></span></span>
-                            </div>
-                        </div>
-                        <div class="content-container ">
-                            <div class="menu-container flex-container">
-                                <div class="flex-item-1">&nbsp;</div>
-                                <div class="sub-menu">
-                                    <input type="radio" id="sub-tab-2-1" name="sub-tabs-2" checked="checked" onchange="onSmartics2SubCatSelected(SUB_CAT_MENU.ENQUIRY)" />
-                                    <label for="sub-tab-2-1">Enquiry</label>
-                                    <input type="radio" id="sub-tab-2-2" name="sub-tabs-2" onchange="onSmartics2SubCatSelected(SUB_CAT_MENU.MAINTENANCE)" />
-                                    <label for="sub-tab-2-2">Manatenance</label>
-
-                                    <div id="sub-content-2-1">
-                                        <ul class="func-parent">
-                                            <li class="func-child" th:each="item : ${MENU.child[1].child[0].child}" >
-                                                <a class="func-bullet" th:href="${#httpServletRequest.getContextPath()} + ${item.url}" th:text="${item.label}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="sub-content-2-2">
-                                        <ul class="func-parent">
-                                            <li class="func-child" th:each="item : ${MENU.child[1].child[1].child}" >
-                                                <a class="func-bullet" th:href="${#httpServletRequest.getContextPath()} + ${item.url}" th:text="${item.label}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="flex-item-1">&nbsp;</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="main-content-3">
-                        <div class="flex-container grid-nav-container">
-                            <div class="flex-item-1 nav-title-left">
-                                <span style=" width: '100%'">RM > <span id="rmSubCat"></span></span>
-                            </div>
-                        </div>
-                        <div class="content-container ">
-                            <div class="menu-container flex-container">
-                                <div class="flex-item-1">&nbsp;</div>
-                                <div class="sub-menu">
-                                    <input type="radio" id="sub-tab-3-1" name="sub-tabs-3" checked="checked" onchange="onRmSubCatSelected(SUB_CAT_MENU.ENQUIRY)" />
-                                    <label for="sub-tab-3-1">Enquiry</label>
-                                    <div id="sub-content-3-1">
-                                        <ul class="func-parent">
-                                            <li class="func-child" th:each="item : ${MENU.child[2].child[0].child}" >
-                                                <a class="func-bullet" th:href="${#httpServletRequest.getContextPath()} + ${item.url}" th:text="${item.label}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                                <div class="flex-item-1">&nbsp;</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!--
-
-                    <input type="radio" id="main-tab-1" name="main-tabs"  />
-                    <label for="main-tab-1" class="nav-title nav-border-left" style="margin-left: 30px; " th:text="${#messages.msg('umps.adminfunc.nav.eservices2')}"></label>
-                    <input type="radio" id="main-tab-2" name="main-tabs"  />
-                    <label for="main-tab-2" class="nav-title nav-border-left" th:text="${#messages.msg('umps.adminfunc.nav.smartics2')}"></label>
-                    <input type="radio" id="main-tab-3" name="main-tabs"  />
-                    <label for="main-tab-3" class="nav-title nav-border-left" th:text="${#messages.msg('umps.adminfunc.nav.rm')}"></label>
+                    <span></span>
+                    <th:block th:each="firstLvMenu,firstLvMenuRow : ${MENU.child}">
+                        <input th:attr="id=${'main-tab-' + (firstLvMenuRow.index+1)}" th:value="${(firstLvMenuRow.index+1)}" type="radio" name="main-tabs"  />
+                        <label th:attr="for=${'main-tab-' + (firstLvMenuRow.index+1)}" class="nav-title nav-border-left" th:text="${firstLvMenu.label}"></label>
+                    </th:block>
                     <div style="float: right; " >
                         <a th:href="@{/AUTH/logout.do}" class="">
                             <input type="submit" id="exit-tab" name="" />
@@ -252,146 +75,50 @@
                         </a >
                     </div>
 
-                    <div id="main-content-1">
+
+                    <div class="main-content" th:each="firstLvMenu,firstLvMenuRow : ${MENU.child}" th:attr="id=${'main-content-' + (firstLvMenuRow.index+1)}">
                         <div class="flex-container grid-nav-container">
                             <div class="flex-item-1 nav-title-left">
-                                <span style=" width: '100%'">e-Services-2 > <span id="eServices2SubCat"></span></span>
+                            <span>
+                                <span>
+                                    <span class="nav-title-left">
+                                        <span th:text="${firstLvMenu.label}" style=" width: 100%">e-Services-2 </span>
+                                    </span>
+                                </span>
+                            </span>
+                           <span> > </span>
+                            <span>
+                                <span>
+                                    <span class="nav-title-left">
+                                        <span th:attr="class=${#strings.replace(firstLvMenu.label,'-','') + 'SubCat'} "></span>
+                                    </span>
+                                </span>
+                            </span>
                             </div>
                         </div>
                         <div class="content-container ">
                             <div class="menu-container flex-container ">
                                 <div class="flex-item-1">&nbsp;</div>
                                 <div class="sub-menu">
-                                    <input type="radio" id="sub-tab-1-1" name="sub-tabs-1" checked="checked" onchange="onEServices2SubCatSelected(SUB_CAT_MENU.ENQUIRY)" />
-                                    <label for="sub-tab-1-1">Enquiry</label>
-                                    <input type="radio" id="sub-tab-1-2" name="sub-tabs-1" onchange="onEServices2SubCatSelected(SUB_CAT_MENU.MAINTENANCE)" />
-                                    <label for="sub-tab-1-2">Maintenance</label>
-                                    <input type="radio" id="sub-tab-1-3" name="sub-tabs-1" onchange="onEServices2SubCatSelected(SUB_CAT_MENU.MANAGEMENT)" />
-                                    <label for="sub-tab-1-3">Management</label>
-                                    <div id="sub-content-1-1">
-                                        <ul class="func-parent">
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/enquiry/applicationFeeEnquiry.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.enquiry.applicationfeeenquiry')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/enquiry/systemHoliday.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.enquiry.systemholidayview')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/enquiry/scheduleJobView.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.enquiry.schedulejobview')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/enquiry/scheduleJobViewHistory.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.enquiry.schedulejobviewhistory')}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="sub-content-1-2">
-                                        <ul class="func-parent">
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/maintenance/importantAnnouncement.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.importantannouncement')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/maintenance/surgeControl.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.surgecontrol')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/maintenance/accessControl.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.accesscontrol')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/maintenance/auditLog.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.auditlog')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/maintenance/scheduleJob.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.schedulejob')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/maintenance/ivrs.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.maintenance.ivrs')}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="sub-content-1-3">
-                                        <ul class="func-parent">
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/management/createFunctionGroup.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.createfuncgroup')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/management/updateFunctionGroup.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.updatefuncgroup')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/e-Services-2/management/deleteFunctionGroup.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.deletefuncgroup')}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <th:block th:each="secondLvMenu,secondLvMenuRow : ${firstLvMenu.child}">
+                                        <input id="sub-tab-" name="sub-tabs-1" th:attrappend="id=${(firstLvMenuRow.index+1)+'-' + (secondLvMenuRow.index+1)}"
+                                               th:attr="data=${#strings.replace(firstLvMenu.label,'-','') + '_' + #strings.replace(secondLvMenu.label,'-','')}" type="radio" />
+                                        <label th:attr="for=${'sub-tab-' +(firstLvMenuRow.index+1) + '-' + (secondLvMenuRow.index+1)}" th:text="${secondLvMenu.label}">Enquiry</label>
+                                    </th:block>
+                                    <th:block th:each="secondLvMenu,secondLvMenuRow : ${firstLvMenu.child}">
+                                        <div id="sub-content-" th:attrappend="id=${(firstLvMenuRow.index+1) + '-' + (secondLvMenuRow.index+1)}">
+                                            <ul class="func-parent">
+                                                <li class="func-child" th:each="thridLvMenu,thridLvMenuRow : ${secondLvMenu.child}" >
+                                                    <a class="func-bullet" th:href="@{${thridLvMenu.url}}" th:text="${thridLvMenu.label}"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </th:block>
                                 </div>
                                 <div class="flex-item-1">&nbsp;</div>
                             </div>
                         </div>
                     </div>
-                    <div id="main-content-2">
-                        <div class="flex-container grid-nav-container">
-                            <div class="flex-item-1 nav-title-left">
-                                <span style=" width: '100%'">SMARTICS-2 > <span id="smartics2SubCat"></span></span>
-                            </div>
-                        </div>
-                        <div class="content-container ">
-                            <div class="menu-container flex-container">
-                                <div class="flex-item-1">&nbsp;</div>
-                                <div class="sub-menu">
-                                    <input type="radio" id="sub-tab-2-1" name="sub-tabs-2" checked="checked" onchange="onSmartics2SubCatSelected(SUB_CAT_MENU.ENQUIRY)" />
-                                    <label for="sub-tab-2-1">Enquiry</label>
-                                    <input type="radio" id="sub-tab-2-2" name="sub-tabs-2" onchange="onSmartics2SubCatSelected(SUB_CAT_MENU.MAINTENANCE)" />
-                                    <label for="sub-tab-2-2">Manatenance</label>
-
-                                    <div id="sub-content-2-1">
-                                        <ul class="func-parent">
-                                            <li class="func-child">
-                                                <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.appointmentbookingenquiry')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/SMARTICS-2/enquiry/onlineSubmissionEnquiry.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.onlinesubmissionenquiry')}"></a>
-                                            </li>
-                                            <li class="func-child">
-                                                <a th:href="@{/SMARTICS-2/enquiry/enquiryCodeInformation.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.enquiry.enquirycode')}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div id="sub-content-2-2">
-                                        <ul class="func-parent">
-                                            <li class="func-child">
-                                                <a th:href="@{/SMARTICS-2/maintenance/deleteAppointment.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.smartics2.maintenance.deleteappointment')}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="flex-item-1">&nbsp;</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="main-content-3">
-                        <div class="flex-container grid-nav-container">
-                            <div class="flex-item-1 nav-title-left">
-                                <span style=" width: '100%'">RM > <span id="rmSubCat"></span></span>
-                            </div>
-                        </div>
-                        <div class="content-container ">
-                            <div class="menu-container flex-container">
-                                <div class="flex-item-1">&nbsp;</div>
-                                <div class="sub-menu">
-                                    <input type="radio" id="sub-tab-3-1" name="sub-tabs-3" checked="checked" onchange="onRmSubCatSelected(SUB_CAT_MENU.ENQUIRY)" />
-                                    <label for="sub-tab-3-1">Enquiry</label>
-                                    <div id="sub-content-3-1">
-                                        <ul class="func-parent">
-                                            <li class="func-child">
-                                                <a th:href="@{/RM/enquiry/onlineSubmissionEnquiry.do}" class="func-bullet" th:text="${#messages.msg('umps.adminfunc.func.rm.enquiry.onlinesubmissionenquiry')}"></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                                <div class="flex-item-1">&nbsp;</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    -->
-
                 </div>
             </div>
         </div>

@@ -1,4 +1,7 @@
-
+body {
+    display: block;
+    margin: 8px;
+}
 
 .flex-container {
     display: flex;
@@ -300,6 +303,7 @@
     border-left-color: #964350;
     border-left-style: solid;
     border-left-width: 2px;
+    margin-bottom: 0px;
 }
 
 .nav-title-left, .nav-title-right {
@@ -359,6 +363,7 @@
     color: #1B6742;
 }
 
+
 /***
 main menu
 */
@@ -368,6 +373,9 @@ main menu
     height: 28px;
 }
 
+.main-menu > span:first-child{
+    margin-left: 30px;
+}
 .main-menu > input,
 .main-menu > span > input {
     display: none;
@@ -384,22 +392,27 @@ main menu
 .main-menu > div > form > label {
     box-sizing: border-box;
     display: inline-block;
-    padding: 5px 25px;
+    padding: 5px 25px 0px 25px;
     color: white;
     background-color: #BF5564;
     margin-left: -1px;
     border-radius: 0px 10px 0px 0px;
     margin-right: -3px;
+    margin-bottom: 0px;
 }
 .main-menu label:before {
     content:'';
     display:block;
     width:100%;
     background-color:#fff;
-    position:absolute;
+    /*position:absolute;*/
     bottom:-11px;
     left:0;
     z-index:10;
+}
+
+.main-menu input + label:before {
+    margin-bottom: -1px;
 }
 .main-menu > label:hover {
     color: #93de83;
@@ -413,8 +426,11 @@ main menu
 .main-menu input:checked + label:after {
     display: block;
     content: '';
-    position: absolute;
+    /*position: absolute;*/
     top: 0; right: 0; bottom: 0; left: 0;
+}
+.main-content {
+
 }
 #main-content-1, #main-content-2, #main-content-3 {
     display: none;
@@ -422,6 +438,7 @@ main menu
     height: 150px;
     background-color: #C7DBB8;
 }
+
 #main-tab-1:checked ~ #main-content-1,
 #main-tab-2:checked ~ #main-content-2,
 #main-tab-3:checked ~ #main-content-3 {
@@ -431,6 +448,7 @@ main menu
 #exit-tab {
 
 }
+
 
 
 /***

@@ -25,9 +25,8 @@ public class Func {
             length = 2000)
     private String funcDesc;
 
-    @Column(name = "DISPLAY_POS", 
-            length = 3)
-    private String displayPos;
+    @Column(name = "DISPLAY_POS")
+    private Integer displayPos;
 
     @Column(name = "FUNC_TYPE")
     private Integer funcType;
@@ -56,11 +55,11 @@ public class Func {
         this.funcDesc = funcDesc;
     }
 
-    public String getDisplayPos() {
+    public Integer getDisplayPos() {
         return displayPos;
     }
 
-    public void setDisplayPos(String displayPos) {
+    public void setDisplayPos(Integer displayPos) {
         this.displayPos = displayPos;
     }
 
