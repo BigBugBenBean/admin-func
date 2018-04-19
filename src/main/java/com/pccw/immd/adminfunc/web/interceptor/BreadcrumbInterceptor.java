@@ -85,11 +85,15 @@ public class BreadcrumbInterceptor extends HandlerInterceptorAdapter {
         MenuItem root = (MenuService.MenuItem)request.getAttribute(MENU_ROOT_KEY);
         List<MenuItem> navItems = navigationService.generateNavigationBar(uri, root);
 
+        if (navItems != null && navItems.size()> 0) {
+            request.getSession().setAttribute(BREADCRUMB_NAV_KEY, navItems);
+        } else {
+            navItems = (List<MenuItem>) request.getSession().getAttribute(BREADCRUMB_NAV_KEY);
+        }
+
         request.setAttribute( BREADCRUMB_NAV_KEY, navItems );
         LOG.info("navItems:" + navItems);
 
         return true;
     }
-
-
 }
