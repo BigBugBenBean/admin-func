@@ -60,14 +60,15 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         // Only execute once
         if (funcMenu == null){
             LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            funcMenu = userMenuService.getFunctionForUserRole(applicationMenu, request, loginUser.getRoleCDs());
+            funcMenu = userMenuService.getFunctionForUserRole(menuMapping, request, loginUser.getRoleCDs());
         }
 
         // Store for rendering
-        request.setAttribute( FUNC_MENU_KEY, applicationMenu );
+        request.setAttribute( FUNC_MENU_KEY, funcMenu );
         // applicationMenu store for other process use
         request.setAttribute( MENU_ROOT_KEY, applicationMenu );
 
+        LOG.info("applicationMenu:" + funcMenu.toString());
         LOG.info("applicationMenu:" + applicationMenu.toString());
         return true;
     }
