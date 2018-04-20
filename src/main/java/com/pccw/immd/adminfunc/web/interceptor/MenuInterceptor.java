@@ -17,6 +17,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /** 
  **
@@ -42,6 +43,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
     @Qualifier("webAuthorizationService.eservice2")
     private WebAuthorizationService webAuthorizationService;
 
+    private Map<String,String> menuMapping;
 
     //before the actual handler will be executed
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -50,6 +52,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
 
         if (applicationMenu == null){
             applicationMenu = menuService.buildMenuTree();
+            menuMapping = menuService.getMenuMapping();
         }
 
         MenuItem funcMenu =  (MenuItem)request.getAttribute( FUNC_MENU_KEY );
@@ -57,7 +60,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         // Only execute once
         if (funcMenu == null){
             LoginUser loginUser = (LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            funcMenu = userMenuService.getFunctionForUserRole(applicationMenu, request, loginUser.getRoleCDs());
+            funcMenu = userMenuService.getFunctionForUserRole(menuMapping, request, loginUser.getRoleCDs());
         }
 
         // Store for rendering
@@ -65,6 +68,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         // applicationMenu store for other process use
         request.setAttribute( MENU_ROOT_KEY, applicationMenu );
 
+        LOG.info("applicationMenu:" + funcMenu.toString());
         LOG.info("applicationMenu:" + applicationMenu.toString());
         return true;
     }

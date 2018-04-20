@@ -27,6 +27,8 @@ public class MenuServiceImpl implements MenuService {
     @Value("${web.menu.config.path}")
     private String propertiesFilePath;
 
+    private Map<String,String> menuMapping;
+
     @Value("${web.menu.config.landing.path}")
     private String landingUrl;
 
@@ -40,7 +42,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     private Map<String,String> getFromFile(String propertiesFilePath) {
-        Map<String, String> mapping = new LinkedHashMap<>();
+        menuMapping = new LinkedHashMap<>();
         try (
                 FileReader fr = new FileReader(new ClassPathResource(propertiesFilePath).getFile());
                 BufferedReader br = new BufferedReader(fr);
@@ -54,13 +56,13 @@ public class MenuServiceImpl implements MenuService {
                     continue;
                 String[] keyValue = sCurrentLine.split("=");
                 if ( keyValue.length > 0 )
-                    mapping.put(keyValue[0], keyValue.length > 1 ? keyValue[1] : "");
+                    menuMapping.put(keyValue[0], keyValue.length > 1 ? keyValue[1] : "");
             }
 
         } catch (IOException e) {
             LOG.info("Generate Menu Error.");
         }
-        return mapping;
+        return menuMapping;
     }
 
     public MenuItem buildMenuTree(Map<String, String> propertiesMap) {
@@ -122,5 +124,9 @@ public class MenuServiceImpl implements MenuService {
         MenuItem parent = allMenu.get(parentKey);
         MenuItem menu = getMenuItem(allMenu, parent, key, menuProperties);
         return menu;
+    }
+
+    public Map<String,String>  getMenuMapping() {
+        return menuMapping;
     }
 }
