@@ -13,6 +13,9 @@ import java.util.List;
 @Repository("roleGroupRepository")
 public interface RoleGroupRepository extends JpaRepository<RoleGroup, Integer> {
 
-    @Query(value = "select rg from RoleGroup rg where rg.roleId = :roleId")
-    List<RoleGroup> findAllByRoleId(@Param("roleId") String roleId);
+    @Query(value = "select rg from RoleGroup rg where rg.roleCd = :roleCd")
+    List<RoleGroup> findAllbyRoleCd(@Param("roleCd") String roleCd);
+
+    @Query(value = "select distinct(roleCd) from RoleGroup")
+    List<String> findAllRoleCodes();
 }

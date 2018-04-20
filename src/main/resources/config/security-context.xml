@@ -11,6 +11,7 @@
     <!--<bean id="securityContextFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter" >-->
         <!--<constructor-arg ref="securityContextRepository"/>-->
     <!--</bean>-->
+    <bean id="webAuthorizationService.eservice2" class="com.pccw.immd.adminfunc.web.security.WebAuthorizationServiceImpl" />
 
     <bean id="authenticationSuccessHandler" class="com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationSuccessHandler">
         <constructor-arg>

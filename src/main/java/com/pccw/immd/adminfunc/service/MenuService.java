@@ -7,6 +7,10 @@ import java.util.Map;
 
 public interface MenuService {
 
+    public static final String MENU_ROOT_KEY = "ROOT";
+    public static final String FUNC_MENU_KEY = "MENU";
+    public static final String FUNC_LIST = "FUNC_LIST";
+
     public MenuItem buildMenuTree() throws IOException;
 
     public MenuItem buildMenuTree(Map<String, String> propertiesMap);
@@ -52,11 +56,11 @@ public interface MenuService {
 
         @Override
         public String toString() {
-            return "MenuItem{" +
-                    "label='" + label + '\'' +
-                    ", url='" + url + '\'' +
-                    ", parent='" + (parent != null?parent.getLabel():"null") + "'" +
-                    ", child=[" + child + "]" +
+            return "MenuItem:{" +
+                    "label:\"" + label + "\"" +
+                    ", url:\"" + url + "\"" +
+                    ", paren:" + (parent != null? "\"" + parent.getLabel()+ "\"" :"null") +
+                    ", child:" + child +
                     '}';
         }
 
