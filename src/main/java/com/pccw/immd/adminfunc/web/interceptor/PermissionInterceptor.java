@@ -115,7 +115,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
             String immdToken = ((LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getImmdToken();
 
             // for development
-            if( ! (roleLoginMode && demoUserMode) ) {
+            if( ! (roleLoginMode || demoUserMode) ) {
                 upmsService.validateImmdToken(userId, immdToken);
             }
         } else {
