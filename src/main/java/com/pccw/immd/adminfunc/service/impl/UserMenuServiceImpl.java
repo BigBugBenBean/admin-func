@@ -32,7 +32,8 @@ public class UserMenuServiceImpl implements UserMenuService {
     MenuService menuService;
 
     @Override
-    public MenuItem getFunctionForUserRole(MenuItem applicationMenu, HttpServletRequest request, List<String> roleCDs) {
+    public MenuItem getFunctionForUserRole(Map<String,String> menuPropertiesMapping, HttpServletRequest request, List<String> roleCDs) throws Exception {
+        MenuItem applicationMenu = menuService.buildMenuTree(menuPropertiesMapping);
         Map<String, String> menuProperties = new LinkedHashMap<>();
         List<String> grantedFuncs = new ArrayList<>();
         List<String> functionsForUserRole = new ArrayList<>();
@@ -41,16 +42,29 @@ public class UserMenuServiceImpl implements UserMenuService {
             functionsForUserRole = userMenuRepository.findFunctionsForUserRole(roleCd);
         }
         logger.info("functionsforrole: " + functionsForUserRole.toString());
-
-        for ( String url: functionsForUserRole) {
-            MenuItem tempMenu = getMenuItemByUrl(applicationMenu, url);
-            if (tempMenu != null) {
-                String labelKey = tempMenu.getLabelKey();
-                addParent(applicationMenu, labelKey, menuProperties);
-                menuProperties.put(labelKey, url);
-                grantedFuncs.add(url);
+//        for ( String url: functionsForUserRole) {
+//            MenuItem tempMenu = getMenuItemByUrl(applicationMenu, url);
+//            if (tempMenu != null) {
+//                String labelKey = tempMenu.getLabelKey();
+//                addParent(applicationMenu, labelKey, menuProperties);
+//                menuProperties.put(labelKey, url);
+//                grantedFuncs.add(url);
+//            }
+//        }
+        for (Object keyList : menuPropertiesMapping.keySet()) {
+            String mplabel = (String)keyList;
+            String mpurl = menuPropertiesMapping.get(mplabel);
+            if (functionsForUserRole != null && functionsForUserRole.size() > 0) {
+                for (String dbFunctionUrl : functionsForUserRole) {
+                    if (mpurl.equals(dbFunctionUrl)) {
+                        addParent(applicationMenu, mplabel, menuProperties);
+                        menuProperties.put(mplabel, dbFunctionUrl);
+                        grantedFuncs.add(dbFunctionUrl);
+                    }
+                }
             }
         }
+        logger.info("menuProperties: " + menuProperties);
 
         request.getSession().setAttribute(FUNC_LIST, grantedFuncs);
         return menuService.buildMenuTree(menuProperties);

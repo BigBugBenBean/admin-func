@@ -15,7 +15,9 @@ public interface MenuService {
 
     public MenuItem buildMenuTree(Map<String, String> propertiesMap);
 
-    public class MenuItem{
+    public Map<String,String>  getMenuMapping();
+
+        public class MenuItem{
         private String labelKey;
         private String label;
         private String url;
