@@ -37,8 +37,8 @@
         <local.java.lib>${local.config}/lib</local.java.lib>
         <dest_dir>src/main/java</dest_dir>
 
-        <domain.package.name>com.pccw.immd.adminfunc</domain.package.name>
-        <dao.dir>{package-name}/../dao</dao.dir>
+        <domain.package.name>com.pccw.immd.adminfunc.domain</domain.package.name>
+        <dao.dir>{package-name}/../repository</dao.dir>
         <dao.class.pattern>{class-name}Repository.java</dao.class.pattern>
         <dao.filePattern>${dao.dir}/${dao.class.pattern}</dao.filePattern>
     </properties>
