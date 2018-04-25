@@ -11,6 +11,5 @@ import java.util.List;
 @Repository("groupRepository")
 public interface GroupRepository extends JpaRepository<Group, Integer>{
 
-    @Query(value = "select rg from Group rg where rg.groupId = :groupId")
-    Group findByGroupId(@Param("groupId") String groupId);
+    List<Group> findByGroupIdIn(List<String> groupId);
 }

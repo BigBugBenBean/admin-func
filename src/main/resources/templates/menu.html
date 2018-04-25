@@ -68,12 +68,11 @@
                         <input th:attr="id=${'main-tab-' + (firstLvMenuRow.index+1)}" th:value="${(firstLvMenuRow.index+1)}" type="radio" name="main-tabs"  />
                         <label th:attr="for=${'main-tab-' + (firstLvMenuRow.index+1)}" class="nav-title nav-border-left" th:text="${firstLvMenu.label}"></label>
                     </th:block>
-                    <div style="float: right; " >
-                        <a th:href="@{/AUTH/logout.do}" class="">
-                            <input type="submit" id="exit-tab" name="" />
-                            <label for="exit-tab" class="TopLabel nav-title nav-border-right" ><b th:text="${#messages.msg('umps.adminfunc.nav.exit')}"></b></label>
-                        </a >
-                    </div>
+                    <span class="TopLabel nav-title nav-border-right" style=" ">
+                        <a th:href="@{/AUTH/logout.do}" class="exit-btn">
+                            <b>Exit</b>
+                        </a>
+                    </span>
 
 
                     <div class="main-content" th:each="firstLvMenu,firstLvMenuRow : ${MENU.child}" th:attr="id=${'main-content-' + (firstLvMenuRow.index+1)}">

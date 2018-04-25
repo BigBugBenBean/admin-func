@@ -38,16 +38,12 @@ public class FunctionIdResolverInterceptor extends HandlerInterceptorAdapter {
         if (!webAuthorizationService.hasAuthorized())
             return true;
 
-        long startTime = System.currentTimeMillis();
-        request.setAttribute("startTime", startTime);
-
-
-        request.setAttribute("startTime", startTime);
-
-        String funcId = functionService.resolveFunctionId(request.getRequestURI());
+        String uri = request.getRequestURI();
+        if (uri.startsWith(request.getContextPath())){
+            uri = uri.substring(request.getContextPath().length());
+        }
+        String funcId = functionService.resolveFunctionId(uri);
         request.setAttribute(FUNCTION_ID_KEY, funcId);
-
-        request.setAttribute("startTime", startTime);
         return true;
     }
 

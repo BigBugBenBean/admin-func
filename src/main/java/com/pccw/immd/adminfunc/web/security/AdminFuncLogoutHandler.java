@@ -3,6 +3,7 @@ package com.pccw.immd.adminfunc.web.security;
 import com.pccw.immd.adminfunc.annotation.AccessAudit;
 import com.pccw.immd.adminfunc.audit.AuditTrailSearchService;
 import com.pccw.immd.adminfunc.dto.LoginUser;
+import com.pccw.immd.adminfunc.mock.MockLoginUser;
 import com.pccw.immd.adminfunc.service.UpmsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,8 +34,10 @@ public class AdminFuncLogoutHandler  implements LogoutHandler {
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         logoutAccessAudit(request, response, authentication);
         try {
-            // Call enforce logout via SOAP endpoint
-            logoutUpms(authentication);
+            if ( !(authentication.getPrincipal() instanceof MockLoginUser) ) {
+                // Call enforce logout via SOAP endpoint
+                logoutUpms(authentication);
+            }
         } catch (ITIAppException | ITISysException ex) {
             if (logger.isDebugEnabled())
                 logger.debug("UPMS logout occur exception:" + ex.getMessage());
