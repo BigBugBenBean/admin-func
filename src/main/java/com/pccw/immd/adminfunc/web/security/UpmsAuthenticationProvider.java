@@ -80,18 +80,15 @@ public class UpmsAuthenticationProvider implements AuthenticationProvider, Initi
         if (demoUserMode && userName.startsWith(demoPrefix)) {
             LOG.info("Using demo account in testing env. ONLY.");
 
-            loginUser = new LoginUser(
+            List<String> roleCDs = new ArrayList<>();
+            roleCDs.add(password);
+            MockLoginUser mockLoginUser = new MockLoginUser(
                     userName,
-                    // user.getIss3UserSignOnDTO().getUserEngName(),
-                    "FULL NAME",
                     password,
-                    true,
-                    true,
-                    true,
-                    true,
+                    roleCDs,
                     authList);
 
-            return new UsernamePasswordAuthenticationToken(loginUser, authentication.getCredentials(), authList);
+            return new UsernamePasswordAuthenticationToken(mockLoginUser, authentication.getCredentials(), authList);
         }
 
         if (roleLoginMode) {

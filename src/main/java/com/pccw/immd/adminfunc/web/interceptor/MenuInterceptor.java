@@ -68,8 +68,8 @@ public class MenuInterceptor extends HandlerInterceptorAdapter {
         // applicationMenu store for other process use
         request.setAttribute( MENU_ROOT_KEY, applicationMenu );
 
-        LOG.info("applicationMenu:" + funcMenu.toString());
-        LOG.info("applicationMenu:" + applicationMenu.toString());
+        LOG.debug("funcMenu:" + funcMenu.toString());
+        LOG.debug("applicationMenu:" + applicationMenu.toString());
         return true;
     }
 }

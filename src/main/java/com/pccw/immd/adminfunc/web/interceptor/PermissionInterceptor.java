@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.pccw.immd.adminfunc.service.MenuService.FUNC_LIST;
+import static com.pccw.immd.adminfunc.service.MenuService.FUNC_MENU_KEY;
 import static com.pccw.immd.adminfunc.service.MenuService.MENU_ROOT_KEY;
 
 import static com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationFailureHandler.SPRING_SECURITY_LAST_EXCEPTION;
@@ -115,7 +116,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
             String immdToken = ((LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getImmdToken();
 
             // for development
-            if( ! (roleLoginMode && demoUserMode) ) {
+            if( ! (roleLoginMode || demoUserMode) ) {
                 upmsService.validateImmdToken(userId, immdToken);
             }
         } else {
@@ -129,14 +130,17 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
      */
     private boolean resolveMenuAccessRight(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<String> funcs = (List<String>)request.getSession().getAttribute( MENU_ROOT_KEY );
+
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (demoUserMode && isDemoAccount(userId)) {
+            LOG.info("SKIP Resolve functions.");
+            // Store for rendering all menu for testing
+            request.setAttribute(FUNC_MENU_KEY, request.getAttribute( MENU_ROOT_KEY));
+            return true;
+        }
+
         if ( funcs != null && !funcs.contains(request.getRequestURI())) {
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-
-            if (demoUserMode && isDemoAccount(userId)) {
-                LOG.info("SKIP Resolve functions.");
-                return true;
-            }
 
             if (principal instanceof LoginUser) {
                 List<String> funcList = (List<String>) request.getSession().getAttribute(FUNC_LIST);
