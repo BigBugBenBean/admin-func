@@ -10,6 +10,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.pccw.immd.adminfunc.domain.SctlSvcCfg;
 
+import java.util.List;
+
 @Repository ("sctlSvcCfgRepository.eservice2")
 public interface SctlSvcCfgRepository extends JpaRepository<SctlSvcCfg,String>{
+
+    List<SctlSvcCfg> findAll();
 }
