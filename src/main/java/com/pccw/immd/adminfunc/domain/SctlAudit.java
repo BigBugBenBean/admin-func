@@ -3,7 +3,7 @@ package com.pccw.immd.adminfunc.domain;
 
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,22 +20,22 @@ public class SctlAudit  implements java.io.Serializable {
 
     private BigDecimal auditId;
     private String ticketId;
-    private LocalDateTime allotedDate;
-    private LocalDateTime releaseDate;
-    private LocalDateTime lastUpdateDate;
+    private Date allotedDate;
+    private Date releaseDate;
+    private Date lastUpdateDate;
     private String svcId;
 
     public SctlAudit() {
     }
 
 
-    public SctlAudit(BigDecimal auditId, String ticketId, LocalDateTime allotedDate, String svcId) {
+    public SctlAudit(BigDecimal auditId, String ticketId, Date allotedDate, String svcId) {
         this.auditId = auditId;
         this.ticketId = ticketId;
         this.allotedDate = allotedDate;
         this.svcId = svcId;
     }
-    public SctlAudit(BigDecimal auditId, String ticketId, LocalDateTime allotedDate, LocalDateTime releaseDate, LocalDateTime lastUpdateDate, String svcId) {
+    public SctlAudit(BigDecimal auditId, String ticketId, Date allotedDate, Date releaseDate, Date lastUpdateDate, String svcId) {
         this.auditId = auditId;
         this.ticketId = ticketId;
         this.allotedDate = allotedDate;
@@ -69,31 +69,31 @@ public class SctlAudit  implements java.io.Serializable {
 
     @Column(name="ALLOTED_DATE", columnDefinition = "TIMESTAMP")
     @NotNull
-    public LocalDateTime getAllotedDate() {
+    public Date getAllotedDate() {
         return this.allotedDate;
     }
 
-    public void setAllotedDate(LocalDateTime allotedDate) {
+    public void setAllotedDate(Date allotedDate) {
         this.allotedDate = allotedDate;
     }
 
 
     @Column(name="RELEASE_DATE", columnDefinition = "TIMESTAMP")
-    public LocalDateTime getReleaseDate() {
+    public Date getReleaseDate() {
         return this.releaseDate;
     }
 
-    public void setReleaseDate(LocalDateTime releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
 
     @Column(name="LAST_UPDATE_DATE", columnDefinition = "TIMESTAMP")
-    public LocalDateTime getLastUpdateDate() {
+    public Date getLastUpdateDate() {
         return this.lastUpdateDate;
     }
 
-    public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
+    public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
 

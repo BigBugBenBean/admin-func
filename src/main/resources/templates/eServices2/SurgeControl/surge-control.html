@@ -26,7 +26,20 @@
 
     <script th:inline="javascript" type="text/javascript" >
         /*<![CDATA[*/
-        function onHistoricalBlockChanged() {
+    <!--<script type="text/javascript" >-->
+
+    $(document).ready(function () {
+
+       var submitBtnDom = jQuery('#submitBtn');
+       var svcId = jQuery('#svcId');
+        submitBtnDom.on('click', function () {
+            console.log('submitBtnDom');
+            var form =jQuery('#submitForm');
+            console.log(form);
+            form.submit();
+        });
+    });
+         function onHistoricalBlockChanged() {
             var showHistDataContainer = $('#showHistDataContainer');
             if (showHistDataContainer.css('display') == 'none') {
                 showHistDataContainer.show();
@@ -213,6 +226,7 @@
         <div class="content-padding">
 
             <div>
+                <form id="submitForm" th:action="@{/e-Services-2/maintenance/surgeControlSearchResult.do}" method="post" >
                 <h3 th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.search.title')}"></h3>
                 <div class="RowSeparator"></div>
 
@@ -220,37 +234,37 @@
                     <div class="flex-container search-row-padding">
                         <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.appid')}"></span></div>
                         <div class="flex-item-1">
-                            <input type="text" maxlength="10" size="10" />
+                            <input type="text" maxlength="10" size="10" id ="svcId" name ="svcId" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
                         <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.gst')}"></span></div>
                         <div class="flex-item-1">
-                            <input type="text" maxlength="10" size="10" />
+                            <input type="text" maxlength="10" size="10" id ="gst" name ="gst" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
                         <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.desc')}"></span></div>
                         <div class="flex-item-1">
-                            <input type="text" maxlength="10" size="10" />
+                            <input type="text" maxlength="10" size="10" id ="svcDesc" name ="svcDesc" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
                         <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.mst')}"></span></div>
                         <div class="flex-item-1">
-                            <input type="text" maxlength="10" size="10" />
+                            <input type="text" maxlength="10" size="10" id ="mst" name ="mst" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
                         <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.priority')}"></span></div>
                         <div class="flex-item-1">
-                            <input type="text" maxlength="10" size="10" />
+                            <input type="text" maxlength="10" size="10" id ="priority" name ="priority" />
                         </div>
                     </div>
                     <div class="flex-container search-row-padding">
                         <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.clawback')}"></span></div>
                         <div class="flex-item-1">
-                            <input type="checkbox" />
+                            <input type="checkbox" id ="clawback" name ="clawback" />
                         </div>
                     </div>
                 </div>
@@ -258,17 +272,14 @@
                 <div class="flex-container">
                     <div style="flex: 10"></div>
                     <div style="flex: 1;  ">
-                        <input type="button" class="ButtonStyle search-btn pointer" th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.search.btn')}" />
+                        <input type="button" class="ButtonStyle search-btn pointer" id="submitBtn"
+                               th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.search.btn')}" />
                     </div>
                 </div>
 
                 <div class="RowSeparator"></div>
+                </form>
             </div>
-
-            <div style=" margin-top: 1.5em; width: 100%; height: 200px;">
-                <div id="surgeControlGrid"></div>
-            </div>
-            <div class="data-grid-footer">&nbsp;</div>
 
             <div class="flex-container" style="padding-top: 10px;">
                 <div class="flex-item-1" >

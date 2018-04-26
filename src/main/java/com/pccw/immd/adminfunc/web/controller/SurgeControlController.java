@@ -1,8 +1,7 @@
 package com.pccw.immd.adminfunc.web.controller;
 
-import com.pccw.immd.adminfunc.domain.SctlSvcCfg;
-import com.pccw.immd.adminfunc.dto.ApplicationFeeEnquiryDTO;
 import com.pccw.immd.adminfunc.dto.SurgeControlDto;
+import com.pccw.immd.adminfunc.dto.SurgeControlView;
 import com.pccw.immd.adminfunc.dto.SurgeControlViewDTO;
 import com.pccw.immd.adminfunc.service.SurgeControlService;
 import org.slf4j.Logger;
@@ -13,14 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 
 import java.util.List;
-
-import static com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor.FUNC_ID_KEY;
 
 @Controller
 public class SurgeControlController {
@@ -42,12 +37,12 @@ public class SurgeControlController {
     @PostMapping(value = "/e-Services-2/maintenance/surgeControlSearchResult.do")
     public String surgeControlSearchResult(HttpServletRequest request, @ModelAttribute SurgeControlViewDTO surgeControlViewDTO) {
 
-        LOG.info("SurgeControlView: " + surgeControlViewDTO);
-        List<SctlSvcCfg> serviceList = surgeControlService.searchSearchControl(surgeControlViewDTO);
+        LOG.info("executing surgeControlSearchResult..");
+
+        List<SurgeControlView> serviceList = surgeControlService.searchSurgeControl(surgeControlViewDTO);
         if (serviceList.size() > 0) {
             surgeControlViewDTO.setSurgeControlViewList(serviceList);
         }
-
         return "/eServices2/SurgeControl/surge-control-search-result";
     }
 
@@ -60,5 +55,4 @@ public class SurgeControlController {
     public String updateSurgeControlPage(HttpServletRequest request) {
         return "/eServices2/SurgeControl/surge-control-updated";
     }
-
 }

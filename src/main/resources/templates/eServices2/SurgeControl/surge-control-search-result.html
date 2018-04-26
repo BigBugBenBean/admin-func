@@ -19,24 +19,24 @@
 
             if (isNotEmptyNullUndfined(surgeControlViewDTO)) {
                 var surgeControlViewList    = surgeControlViewDTO['surgeControlViewList'];
-                var appId                   = surgeControlViewDTO['appId'];
+                var svcId                   = surgeControlViewDTO['svcId'];
                 var gst                     = surgeControlViewDTO['gst'];
-                var description             = surgeControlViewDTO['description'];
+                var svcDesc                 = surgeControlViewDTO['svcDesc'];
                 var mst                     = surgeControlViewDTO['mst'];
                 var priority                = surgeControlViewDTO['priority'];
                 var clawback                = surgeControlViewDTO['clawback'];
 
-                if (isNotEmptyNullUndfined(appId)) {
-                    var appIdDom = $('#appId');
-                    appIdDom.html(appId);
+                if (isNotEmptyNullUndfined(svcId)) {
+                    var svcIdDom = $('#svcId');
+                    svcIdDom.html(svcId);
                 }
                 if (isNotEmptyNullUndfined(gst)) {
-                    var gstExpDom = $('#gst');
+                    var gstDom = $('#gst');
                     gstDom.html(gst);
                 }
-                if (isNotEmptyNullUndfined(description)) {
-                    var descriptionDom = $('#description');
-                    descriptionDom.html(description);
+                if (isNotEmptyNullUndfined(svcDesc)) {
+                    var descriptionDom = $('#svcDesc');
+                    descriptionDom.html(svcDesc);
                 }
                 if (isNotEmptyNullUndfined(mst)) {
                     var mstDom = $('#mst');
@@ -50,20 +50,35 @@
                     var clawbackDom = $('#clawback');
                     clawbackDom.html(clawback);
                 }
-            }
 
-            /*
-            list = [
-                {
-                    'appId': '01',
-                    'gst': '1',
-                    'description': 'Sample Description',
-                    'mst': '1',
-                    'priority': '1',
-                    'clawback': ''
+                if (isNotEmptyNullUndfined(surgeControlViewList) && surgeControlViewList.length > 0) {
+                     jQuery.each(surgeControlViewList, function (index, object) {
+                        var tmpSvcId    = object['sctlSvcCfg']['svcId'];
+                        var tmpGst      = object['sctlSvcCfg']['gst'];
+                        var tmpGstUsage = object['sctlTrend']['gstUsage'];
+                        var tmpSvcDesc  = object['sctlSvcCfg']['svcDesc'];
+                        var tmpMst      = object['sctlSvcCfg']['mst'];
+                        var tmpMstUsage = object['sctlTrend']['mstUsage'];
+                        var tmpPriority = object['sctlSvcCfg']['priority'];
+                        var tmpClawback = object['sctlSvcCfg']['clawback'];
+
+                        var newObj = {
+                            'svcId': tmpSvcId,
+                            'gst': tmpGst + '/' + tmpGstUsage,
+                            'svcDesc': tmpSvcDesc,
+                            'mst': tmpMst + '/' + tmpMstUsage,
+                             'priority': tmpPriority,
+                            'clawback':tmpClawback
+                        };
+
+                        list.push(newObj);
+
+
+                     });
+
                 }
-            ];
-            */
+
+            }
 
             // table grid data
             var totalPageList = GRID_RECORD_PER_PAGE_ARRAY_DEFAULT;
@@ -120,19 +135,20 @@
                         };
                     }
                 },
+
                 fields: [
-                    { name: 'appId', title: 'App ID', type: 'text', width: 40, headerTemplate: commonHeader },
-                    { name: 'gst', title: 'GST', type: 'text', width: 40, headerTemplate: commonHeader },
-                    { name: 'description', title: 'Description', type: 'text', width: 30, headerTemplate: commonHeader },
-                    { name: 'mst', title: 'MST', type: 'text', width: 30, headerTemplate: commonHeader },
+                    { name: 'svcId', title: 'App ID', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'gst', title: 'GST/GST USAGE', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'svcDesc', title: 'Description', type: 'text', width: 30, headerTemplate: commonHeader },
+                    { name: 'mst', title: 'MST/MST USAGE', type: 'text', width: 30, headerTemplate: commonHeader },
                     { name: 'priority', title: 'Priority', type: 'text', width: 40, headerTemplate: commonHeader },
                     { name: 'clawback', title: 'Clawback', type: 'text', width: 40, headerTemplate: commonHeader }
                 ]
 
             };
             grid.jsGrid(gridConfig);
-        });
 
+        });
 
          /*]]>*/
     </script>
@@ -154,7 +170,7 @@
                 <div class="flex-container">
                     <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.appid')}"></span></b></div>
                     <div class="flex-item-7 search-result-right">
-                        <span id="appid"></span>
+                        <span id="svcId"></span>
                     </div>
                 </div>
                 <div class="RowSeparatorThin"></div>
@@ -168,7 +184,7 @@
                 <div class="flex-container">
                     <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.desc')}"></span></b></div>
                     <div class="flex-item-7 search-result-right">
-                        <span id="desc"></span>
+                        <span id="svcDesc"></span>
                     </div>
                 </div>
                 <div class="RowSeparatorThin"></div>
@@ -210,7 +226,7 @@
                     </div>
                 </div>
                 <div>
-                    <div id="scheduleJobGrid"></div>
+                    <div id= "surgeControlGrid"></div>
                 </div>
             </div>
 
@@ -223,6 +239,9 @@
                 </div>
 
             </div>
+            <div class="data-grid-footer">&nbsp;</div>
+
+
         </div>
     </div>
 

@@ -3,56 +3,58 @@ package com.pccw.immd.adminfunc.dto;
 import com.pccw.immd.adminfunc.domain.SctlSvcCfg;
 import com.pccw.immd.commons.dto.BaseDTO;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SurgeControlViewDTO extends BaseDTO {
 
-    private String appId;
-    private Integer gst;
-    private String description;
-    private Integer mst;
-    private Integer priority;
+    private String svcId;
+    private BigDecimal gst;
+    private String svcDesc;
+    private BigDecimal mst;
+    private BigDecimal priority;
     private String clawback;
-    private List<SctlSvcCfg> surgeControlViewList = new ArrayList<>();
 
-    public String getAppId() {
-        return appId;
+    private List<SurgeControlView> surgeControlViewList = new ArrayList<>();
+
+    public String getSvcId() {
+        return svcId;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setSvcId(String svcId) {
+        this.svcId = svcId;
     }
 
-    public Integer getGst() {
+    public BigDecimal getGst() {
         return gst;
     }
 
-    public void setGst(Integer gst) {
+    public void setGst(BigDecimal gst) {
         this.gst = gst;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSvcDesc() {
+        return svcDesc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSvcDesc(String svcDesc) {
+        this.svcDesc = svcDesc;
     }
 
-    public Integer getMst() {
+    public BigDecimal getMst() {
         return mst;
     }
 
-    public void setMst(Integer mst) {
+    public void setMst(BigDecimal mst) {
         this.mst = mst;
     }
 
-    public Integer getPriority() {
+    public BigDecimal getPriority() {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(BigDecimal priority) {
         this.priority = priority;
     }
 
@@ -64,11 +66,12 @@ public class SurgeControlViewDTO extends BaseDTO {
         this.clawback = clawback;
     }
 
-    public List<SctlSvcCfg> getSurgeControlViewList() {
+    public List<SurgeControlView> getSurgeControlViewList() {
         return surgeControlViewList;
     }
 
-    public void setSurgeControlViewList(List<SctlSvcCfg> surgeControlViewList) {
+    public void setSurgeControlViewList(List<SurgeControlView> surgeControlViewList) {
         this.surgeControlViewList = surgeControlViewList;
     }
+
 }
