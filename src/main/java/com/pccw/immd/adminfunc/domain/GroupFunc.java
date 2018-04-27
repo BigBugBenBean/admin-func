@@ -1,9 +1,8 @@
 package com.pccw.immd.adminfunc.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.pccw.immd.adminfunc.domain.id.GroupFuncId;
+
+import javax.persistence.*;
 
 /**
  * *
@@ -17,29 +16,14 @@ import javax.persistence.Table;
 @Table(name = "UM_GROUP_FUNC")
 public class GroupFunc {
 
+    @EmbeddedId
+    GroupFuncId id;
 
-    @Column(name = "GROUP_ID", length = 16)
-    private String grpId;
-
-    @Id
-    @Column(name = "FUNC_ID", length = 8)
-    private String funcId;
-
-    public String getFuncId() {
-        return funcId;
+    public GroupFuncId getId() {
+        return id;
     }
 
-    public void setFuncId(String funcId) {
-        this.funcId = funcId;
+    public void setId(GroupFuncId id) {
+        this.id = id;
     }
-
-    public String getGrpId() {
-        return grpId;
-    }
-
-    public void setGrpId(String grpId) {
-        this.grpId = grpId;
-    }
-
-
 }

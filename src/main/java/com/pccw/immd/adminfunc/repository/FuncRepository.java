@@ -13,12 +13,15 @@ public interface FuncRepository extends JpaRepository<Func, Integer>{
 
     List<Func> findAll();
 
+
+    List<Func> findByFuncIdIn(List<String> funcId);
+
     @Query(value = "select distinct f "+
                     "FROM RoleGroup AS rg, " +
                     "GroupFunc AS gf, " +
                     "Func AS f "+
             "WHERE " +
-            "  rg.id.groupId = gf.grpId AND gf.funcId = f.funcId AND " +
+            "  rg.id.groupId = gf.id.grpId AND gf.id.funcId = f.funcId AND " +
             "  rg.id.roleCd = :roleCd")
     List<Func> findByFuncId(@Param("roleCd")String roleCd);
 

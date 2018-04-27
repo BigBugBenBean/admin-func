@@ -6,21 +6,12 @@
 
     <link rel="stylesheet" href="/adminfunc/css/func-group.css"/>
 
-    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
-    <!--/*<![CDATA[*/-->
+    <script th:inline="javascript" th:if="${functionGroupCreateDTO}">
+    /*<![CDATA[*/
 
-    <!--$(document).ready(function () {-->
-    <!--// var jobList = [];-->
-    <!--// var statusList = [];-->
 
-    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
-    <!--console.log('scheduleJobDetailDTO');-->
-    <!--console.log(scheduleJobDetailDTO);-->
-    <!---->
-    <!--});-->
-
-    <!--/*]]>*/-->
-    <!--</script>-->
+    /*]]>*/
+    </script>
 
 </head>
 <body>
@@ -46,7 +37,7 @@
                                 <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
                             </div>
                             <div class="flex-item-7">
-                                <span>ABC</span>
+                                <span th:text="${functionGroupCreateDTO.grpId}"></span>
                             </div>
                         </div>
                         <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
@@ -55,7 +46,7 @@
                                 <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
                             </div>
                             <div class="flex-item-7">
-                                <span>Testing Group ID</span>
+                                <span th:text="${functionGroupCreateDTO.groupDesc}"></span>
                             </div>
                         </div>
                     </div>
@@ -74,10 +65,11 @@
                                 <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
                             </div>
                             <div class="flex-item-7">
-                                <div style="padding-top: 20px;"><span>User Maintenance (ADM0001) </span></div>
-                                <div style="padding-top: 20px;"></div>
-                                <div><span>Enquiry Code Information (ECE0001) </span></div>
-                                <div><span>Marriage Quota Transfer (MQM0001) </span></div>
+                                <div th:each="func  : ${functionGroupCreateDTO.funcDetails}">
+                                    <!--th:text="${bean.field + '!' + bean.field}">-->
+                                    <div th:text="${func.funcId + '(' + func.funcDesc + ')'}"></div>
+                                    <!--<div th:text="${func.funcDesc}"></div>-->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,6 +81,16 @@
 
                 <div style="padding-top: 20px;">
                     <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.print')}" />
+                </div>
+
+                <div class="flex-container">
+                    <div style="flex: auto;"></div>
+                    <div style="padding: 15px;">
+                        <a class="DisableLinkUnderline" th:href="@{/e-Services-2/management/createFunctionGroup.do}">
+                            <input class="ButtonStyle back-button pointer" type="button" th:value="${#messages.msg('umps.adminfunc.func.eservices2.management.createnewfuncgroup')}" />
+                        </a>
+                    </div>
+
                 </div>
 
             </div>

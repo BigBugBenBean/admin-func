@@ -119,16 +119,16 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
                 } else {
                     boolean addNewTxGp = true;
                     for (TxgpTxid txgpTxid : txgpTxids) {
-                        if (txgpTxid.getTxGp().equals(groupFunc.getGrpId())) {
+                        if (txgpTxid.getTxGp().equals(groupFunc.getId().getGrpId())) {
                             addNewTxGp = false;
                             boolean addNewTxid = true;
                             for (String txId : txgpTxid.getTxids())
-                                if (txId.equals(groupFunc.getFuncId())) {
+                                if (txId.equals(groupFunc.getId().getFuncId())) {
                                     addNewTxid = false;
                                     break;
                                 }
                             if (addNewTxid) {
-                                txgpTxid.getTxids().add(groupFunc.getFuncId());
+                                txgpTxid.getTxids().add(groupFunc.getId().getFuncId());
                             }
                             break;
                         }
@@ -149,8 +149,8 @@ public class EnquireTransactionGroupServiceWSImplPortImpl implements EnquireTran
 
     private TxgpTxid createNewTxgpTxid(GroupFunc groupFunc) {
         TxgpTxid txgpTxid = new TxgpTxid();
-        txgpTxid.setTxGp(groupFunc.getGrpId());
-        txgpTxid.getTxids().add(groupFunc.getFuncId());
+        txgpTxid.setTxGp(groupFunc.getId().getGrpId());
+        txgpTxid.getTxids().add(groupFunc.getId().getFuncId());
         return txgpTxid;
     }
 
