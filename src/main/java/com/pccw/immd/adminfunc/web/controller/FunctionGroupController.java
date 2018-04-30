@@ -15,6 +15,7 @@ import com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,7 +81,7 @@ public class FunctionGroupController {
                                       @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Update_Function_Group);
 
-        model.addAttribute("groupIds", groupRepository.findAll());
+        model.addAttribute("groupIds", groupRepository.findAll(new Sort(Sort.Direction.ASC, "groupId")));
         return "/eServices2/FuncGroup/update-func-group-search";
     }
 
@@ -127,7 +128,7 @@ public class FunctionGroupController {
     public String deleteFuncGroupPage(HttpServletRequest request, Model model,
                                       @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Delete_Function_Group);
-        model.addAttribute("groupIds", groupRepository.findAll());
+        model.addAttribute("groupIds", groupRepository.findAll(new Sort(Sort.Direction.ASC, "groupId")));
         return "/eServices2/FuncGroup/delete-func-group-search";
     }
 
