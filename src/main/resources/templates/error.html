@@ -64,10 +64,11 @@
                     <span id="loginFailTitle" class="login-fail-title">
                         <b>Warning</b>
                     </span>
-
+                <!--
                 <p th:if="${status}">
                     <b>Response Status:</b> <span th:text="${status}">status-code</span>
                 </p>
+                -->
 
                 <p id="loginFailContent" class="login-fail-content">
                     <b>Error Message:</b>
@@ -76,18 +77,15 @@
                     <span th:if="${message} and ${message.length() != 0} and ${#strings.contains(message,'Exception:')}"
                           th:text="${#strings.substringAfter(message, 'Exception:')}">message ...</span>
                 </p>
+                <span sec:authorize="isAuthenticated()">
+                    <a th:href="@{/landing.do}">
+                        <input type="button" value="Landing Page" />
+                    </a>
+                </span>
 
-                <a th:href="@{/landing.do}">
-                    <input type="button" value="Landing Page" />
-                </a>
                 <a th:href="@{/AUTH/login-form.do}"  >
                     <input type="button" value="Login Page" />
                 </a>
-                <span  sec:authorize="isAuthenticated()">
-                    <a th:href="@{/AUTH/login-form.do}" >
-                        <input type="button" value="Login Page" />
-                    </a>
-                </span>
             </div>
         </div>
     </div>
