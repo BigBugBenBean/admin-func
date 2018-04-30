@@ -11,5 +11,6 @@
         <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
+        <property name="default_schema">SE2ADMINFUNC</property>
     </session-factory>
 </hibernate-configuration>
