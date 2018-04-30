@@ -53,8 +53,9 @@ public class FunctionGroupServiceImpl implements FunctionGroupService {
         } else {
             /*
              * TODO: Display error for duplicate ID, it should handling by Hibernate.
+             * ERR0013: Function Group ID exists. Please create a new one.
             * */
-            throw new DuplicateKeyException("Duplicate Key of Group ID.");
+            throw new DuplicateKeyException("Function Group ID exists. Please create a new one.");
         }
     }
 
