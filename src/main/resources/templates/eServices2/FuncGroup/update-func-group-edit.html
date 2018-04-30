@@ -22,21 +22,9 @@
                 return option.value;
             });
             $('#currentFunc').val(currentFuncList);
-            if (validateGroupID()) {
-                form.submit();
-            }
+            form.submit();
         });
     });
-
-    function validateGroupID() {
-
-        if  ( $('#grpId').val() == "") {
-            alert('Group ID is required.' )
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     function copyToList(from,to) {
         fromList = eval('document.forms[0].' + from);
@@ -146,9 +134,19 @@
                         </div>
                     </div>
 
-                    <div style="padding-top: 30px;">
-                        <input class="SmallButtonStyle pointer" id = "submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
+                    <div style="padding-top: 20px;">
+                        <a th:href="@{/e-Services-2/management/updateFunctionGroup.do}">
+                        <input class="ButtonStyle back-button pointer" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.back')}" />
+                        </a>
+                        <input class="ButtonStyle back-button pointer" id = "submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
                     </div>
+
+                    <!--<div class="flex-container">-->
+                        <!--<div style="flex: auto;"></div>-->
+                        <!--<div style="padding: 20px;">-->
+                            <!--<input class="ButtonStyle back-button pointer" id = "submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </form>
             </div>
         </div>

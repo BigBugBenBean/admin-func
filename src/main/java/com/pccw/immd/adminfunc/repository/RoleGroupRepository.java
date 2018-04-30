@@ -16,5 +16,10 @@ public interface RoleGroupRepository extends JpaRepository<RoleGroup, RoleGroupI
 
     List<RoleGroup> findByIdRoleCdIn(List<String> roleCd);
 
+    List<RoleGroup> findByIdGroupId(String groupId);
+
     List<RoleGroup> findByIdRoleCd(String roleCd);
+
+    @Query("select rg from RoleGroup rg, GroupFunc gf where rg.id.groupId = gf.id.grpId and gf.id.grpId =:grpId")
+    List<RoleGroup> findRoleIdByGroupId(@Param("grpId")String grpId);
 }

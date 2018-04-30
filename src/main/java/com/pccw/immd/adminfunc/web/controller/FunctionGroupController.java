@@ -3,11 +3,13 @@ package com.pccw.immd.adminfunc.web.controller;
 import com.pccw.immd.adminfunc.domain.Func;
 import com.pccw.immd.adminfunc.domain.Group;
 import com.pccw.immd.adminfunc.domain.GroupFunc;
+import com.pccw.immd.adminfunc.domain.RoleGroup;
 import com.pccw.immd.adminfunc.domain.id.GroupFuncId;
 import com.pccw.immd.adminfunc.dto.FunctionGroupCreateDTO;
 import com.pccw.immd.adminfunc.repository.FuncRepository;
 import com.pccw.immd.adminfunc.repository.GroupFuncRepository;
 import com.pccw.immd.adminfunc.repository.GroupRepository;
+import com.pccw.immd.adminfunc.repository.RoleGroupRepository;
 import com.pccw.immd.adminfunc.service.FunctionGroupService;
 import com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor;
 import org.apache.log4j.Logger;
@@ -44,6 +46,9 @@ public class FunctionGroupController {
     @Autowired
     GroupRepository groupRepository;
 
+    @Autowired
+    RoleGroupRepository roleGroupRepository;
+
     /**
      * Create Function Group
      */
@@ -60,14 +65,8 @@ public class FunctionGroupController {
             @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Create_Function_Group);
 
-        List<String> functionList = functionGroupCreateDTO.getCurrentFunc();
-        String groupId = functionGroupCreateDTO.getGrpId();
-        String groupDesc = functionGroupCreateDTO.getGroupDesc();
-        String userId = request.getRequestedSessionId();
-        List<Func> functionsDetails = funcRepository.findByFuncIdIn(functionList);
-
-        functionGroupService.createNewGroup(groupId, groupDesc, userId);
-        functionGroupService.createGroupFunc(groupId, functionList);
+        List<Func> functionsDetails = funcRepository.findByFuncIdIn(functionGroupCreateDTO.getCurrentFunc());
+        functionGroupService.createNewGroupFuncGroup(functionGroupCreateDTO);
 
         functionGroupCreateDTO.setFuncDetails(functionsDetails);
         return "/eServices2/FuncGroup/create-func-group-success";
@@ -142,10 +141,11 @@ public class FunctionGroupController {
     }
 
     @PostMapping(value = "/deleteFunctionGroup_Success.do")
-    public String deleteResultSccessFuncGroupPage(HttpServletRequest request,
-                                                  @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
+    public String deleteResultSuccessFuncGroupPage(HttpServletRequest request,
+                                                   @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Delete_Function_Group);
-        functionGroupService.deleteFunctionGroup(functionGroupCreateDTO.getGrpId(), funcRepository.findFuncByGroupId(functionGroupCreateDTO.getGrpId()));
+        List<RoleGroup> rolegroupList = roleGroupRepository.findRoleIdByGroupId(functionGroupCreateDTO.getGrpId());
+        functionGroupService.deleteRoleGroupFunction(functionGroupCreateDTO.getGrpId());
         return "/eServices2/FuncGroup/delete-func-group-result-success";
     }
 

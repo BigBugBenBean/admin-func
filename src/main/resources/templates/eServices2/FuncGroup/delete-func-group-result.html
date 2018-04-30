@@ -83,7 +83,10 @@
                 </div>
 
                 <div style="padding-top: 20px;">
-                        <input class="SmallButtonStyle pointer" style="min-width: 80px;" id = "submitBtn" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
+                    <a th:href="@{/e-Services-2/management/deleteFunctionGroup.do}">
+                        <input class="ButtonStyle back-button pointer" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.back')}" />
+                    </a>
+                    <input class="ButtonStyle back-button pointer" id = "submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
                 </div>
                 </form>
 
