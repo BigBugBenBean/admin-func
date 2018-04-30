@@ -16,6 +16,7 @@
             var currentFuncList = $.map(currentFuncOptions ,function(option) {
                 return option.value;
             });
+            $('#grpId').val(document.getElementById('groupId').innerText);
             var form = e.target.form;
             var currentFuncOptions = $('#currentFunc option');
             var currentFuncList = $.map(currentFuncOptions ,function(option) {
@@ -71,7 +72,8 @@
                                     <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
-                                    <input type="text" name ="grpId" id ="grpId" readOnly ="true" th:value="${functionGroupCreateDTO.grpId}"/>
+                                    <span id ="groupId" name="groupId" th:text="${functionGroupCreateDTO.grpId}"></span>
+                                    <input type="hidden" name ="grpId" id ="grpId"/>
                                 </div>
                             </div>
                             <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
@@ -96,27 +98,6 @@
                         <div class="func-border-frame">
                             <div class="flex-container">
                                 <div class="flex-item-3 func-tab-padding-left">
-                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
-                                </div>
-                                <div class="flex-item-7">
-                                    <select class="func-select" multiple="" th:id ="availableFunctions" size="5" th:field ="*{availableFunctions}">
-                                        <option th:each ="function : ${availableFunctions}"
-                                                th:value="${function.funcId}"
-                                                th:text="${function.funcDesc}"></option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="flex-container">
-                                <div class="flex-item-3 func-tab-padding-left"></div>
-                                <div class="flex-item-7">
-                                    <div class="func-select-middle">
-                                        <img class="func-arrow" th:onclick="'copyToList(currentFunc.id, availableFunctions.id)'" th:src="@{/images/b_addImage.gif}" />
-                                        <img class="func-arrow" th:onclick="'copyToList(availableFunctions.id, currentFunc.id)'" th:src="@{/images/b_removeImage.gif}" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-container">
-                                <div class="flex-item-3 func-tab-padding-left">
                                     <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
@@ -129,6 +110,28 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="flex-container">
+                                <div class="flex-item-3 func-tab-padding-left"></div>
+                                <div class="flex-item-7">
+                                    <div class="func-select-middle">
+                                        <img class="func-arrow" th:onclick="'copyToList(availableFunctions.id, currentFunc.id)'" th:src="@{/images/b_addImage.gif}" />
+                                        <img class="func-arrow" th:onclick="'copyToList(currentFunc.id, availableFunctions.id)'" th:src="@{/images/b_removeImage.gif}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-container">
+                                <div class="flex-item-3 func-tab-padding-left">
+                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
+                                </div>
+                                <div class="flex-item-7">
+                                    <select class="func-select" multiple="" th:id ="availableFunctions" size="5" th:field ="*{availableFunctions}">
+                                        <option th:each ="function : ${availableFunctions}"
+                                                th:value="${function.funcId}"
+                                                th:text="${function.funcDesc}"></option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

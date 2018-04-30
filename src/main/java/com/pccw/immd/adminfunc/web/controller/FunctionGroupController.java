@@ -93,9 +93,9 @@ public class FunctionGroupController {
         if (functionGroupCreateDTO.getGrpId() != null) {
             HashMap list = functionGroupService.loadGroupFunction(functionGroupCreateDTO.getGrpId());
 
-                String groupId = (String) list.get("groupid");
-                String groupDesc = (String) list.get("groupDesc");
-                List<String> functionList = (List<String>) list.get("functionList");
+            String groupId = (String) list.get("groupid");
+            String groupDesc = (String) list.get("groupDesc");
+            List<String> functionList = (List<String>) list.get("functionList");
 
             functionGroupCreateDTO.setGroupDesc(groupDesc);
             if (functionList != null && functionList.size() != 0) {
@@ -133,19 +133,22 @@ public class FunctionGroupController {
     }
 
     @PostMapping(value = "/deleteFunctionGroup_Result.do")
-    public String deleteResultFuncGroupPage(HttpServletRequest request,Model model,
+    public String deleteResultFuncGroupPage(HttpServletRequest request, Model model,
                                             @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Delete_Function_Group);
+        functionGroupCreateDTO.setGroupDesc(groupRepository.findByGroupId(functionGroupCreateDTO.getGrpId()).getGroupDesc());
         functionGroupCreateDTO.setCurrentFunc(funcRepository.findFuncByGroupId(functionGroupCreateDTO.getGrpId()));
         model.addAttribute("currentFunc", funcRepository.findByFuncIdIn(functionGroupCreateDTO.getCurrentFunc()));
         return "/eServices2/FuncGroup/delete-func-group-result";
     }
 
     @PostMapping(value = "/deleteFunctionGroup_Success.do")
-    public String deleteResultSuccessFuncGroupPage(HttpServletRequest request,
+    public String deleteResultSuccessFuncGroupPage(HttpServletRequest request,  Model model,
                                                    @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Delete_Function_Group);
-        List<RoleGroup> rolegroupList = roleGroupRepository.findRoleIdByGroupId(functionGroupCreateDTO.getGrpId());
+        functionGroupCreateDTO.setCurrentFunc(funcRepository.findFuncByGroupId(functionGroupCreateDTO.getGrpId()));
+        functionGroupCreateDTO.setGroupDesc(groupRepository.findByGroupId(functionGroupCreateDTO.getGrpId()).getGroupDesc());
+        model.addAttribute("currentFunc", funcRepository.findByFuncIdIn(functionGroupCreateDTO.getCurrentFunc()));
         functionGroupService.deleteRoleGroupFunction(functionGroupCreateDTO.getGrpId());
         return "/eServices2/FuncGroup/delete-func-group-result-success";
     }

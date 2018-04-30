@@ -66,9 +66,7 @@
                             </div>
                             <div class="flex-item-7">
                                 <div th:each="func  : ${functionGroupCreateDTO.funcDetails}">
-                                    <!--th:text="${bean.field + '!' + bean.field}">-->
                                     <div th:text="${func.funcId + '(' + func.funcDesc + ')'}"></div>
-                                    <!--<div th:text="${func.funcDesc}"></div>-->
                                 </div>
                             </div>
                         </div>
@@ -80,7 +78,8 @@
                 </div>
 
                 <div style="padding-top: 20px;">
-                    <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.print')}" />
+                    <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" th:onclick="'print()'"
+                           th:value="${#messages.msg('umps.adminfunc.common.print')}" />
                     <a class="DisableLinkUnderline" th:href="@{/e-Services-2/management/createFunctionGroup.do}">
                         <input class="SmallButtonStyle pointer" type="button" th:value="${#messages.msg('umps.adminfunc.func.eservices2.management.createnewfuncgroup')}" />
                     </a>

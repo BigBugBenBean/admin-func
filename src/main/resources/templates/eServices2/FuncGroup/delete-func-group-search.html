@@ -41,7 +41,7 @@
                             <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.searchFuncGrp')}"></span></b>
                         </div>
                         <div class="flex-item-7">
-                            <select style="width: 150px;" th:id ="groupId" name ="groupId" th:field ="*{groupIds}" >
+                            <select style="min-width: 150px;max-width: 550px;" th:id ="groupId" name ="groupId" th:field ="*{groupIds}" >
                                 <option th:each ="allGroups : ${groupIds}"
                                         th:value="${{allGroups.groupId}}"
                                         th:text="${allGroups.groupId + '-' + allGroups.groupDesc} "></option>

@@ -13,4 +13,6 @@ public interface GroupRepository extends JpaRepository<Group, Integer>{
 
     List<Group> findByGroupIdIn(List<String> groupId);
     Group findByGroupId(String groupId);
+
+    List<Group> findAllByGroupId(String groupId);
 }

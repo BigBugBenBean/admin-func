@@ -14,6 +14,8 @@ import com.pccw.immd.adminfunc.repository.RoleGroupRepository;
 import com.pccw.immd.adminfunc.service.FunctionGroupService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.NestedRuntimeException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,13 +38,24 @@ public class FunctionGroupServiceImpl implements FunctionGroupService {
     @Autowired
     RoleGroupRepository roleGroupRepository;
 
+    @Transactional
     public void createNewGroupFuncGroup(FunctionGroupCreateDTO functionGroupCreateDTO) {
 
         List<String> functionList = functionGroupCreateDTO.getCurrentFunc();
         String groupId = functionGroupCreateDTO.getGrpId();
         String groupDesc = functionGroupCreateDTO.getGroupDesc();
-        createNewGroup(groupId, groupDesc, "");
-        createGroupFunc(groupId, functionList);
+
+        List<Group> existingGrp = groupRepository.findAllByGroupId(groupId);
+
+        if ( existingGrp.size() == 0 ) {
+            createNewGroup(groupId, groupDesc, "");
+            createGroupFunc(groupId, functionList);
+        } else {
+            /*
+             * TODO: Display error for duplicate ID, it should handling by Hibernate.
+            * */
+            throw new DuplicateKeyException("Duplicate Key of Group ID.");
+        }
     }
 
     @Override
