@@ -9,15 +9,6 @@
     <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
     <!--/*<![CDATA[*/-->
 
-    <!--$(document).ready(function () {-->
-    <!--// var jobList = [];-->
-    <!--// var statusList = [];-->
-
-    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
-    <!--console.log('scheduleJobDetailDTO');-->
-    <!--console.log(scheduleJobDetailDTO);-->
-    <!---->
-    <!--});-->
 
     <!--/*]]>*/-->
     <!--</script>-->
@@ -33,57 +24,7 @@
             <div>
                 <!--<h1>createFuncGroup</h1>-->
 
-                <div>
-                    <div class="flex-container ">
-                        <div class="flex-item-auto func-tab" >
-                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.detail')}"></span>
-                        </div>
-                        <div class="flex-item-1"></div>
-                    </div>
-                    <div class="func-border-frame">
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <span>ABC</span>
-                            </div>
-                        </div>
-                        <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <span>Testing Group ID</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="padding-top: 30px;">
-                    <div class="flex-container ">
-                        <div class="flex-item-auto func-tab" >
-                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.title')}"></span>
-                        </div>
-                        <div class="flex-item-1"></div>
-                    </div>
-                    <div class="func-border-frame">
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left" style="padding-top: 20px;">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <div style="padding-top: 20px;"><span>Enquiry Code Information (ABC) </span></div>
-                                <div style="padding-top: 20px;"></div>
-                                <div><span>Enquiry Code Information (ECE0001)</span></div>
-                                <div><span>Marriage Quota Transfer (MQM0001)</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="padding-top: 20px;">
+                <div class = "deleteSuccess" style="padding-top: 20px;">
                     <span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.deleteSuccess')}"></span>
                 </div>
 

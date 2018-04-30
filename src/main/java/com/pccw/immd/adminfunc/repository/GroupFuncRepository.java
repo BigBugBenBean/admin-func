@@ -15,6 +15,7 @@ public interface GroupFuncRepository extends JpaRepository<GroupFunc, GroupFuncI
 
     List<GroupFunc> findAll();
 
-    @Query(value = "Select gf from GroupFunc gf where gf.id.grpId =:groupId")
+    @Query(value = "Select gf from GroupFunc gf " +
+            "where gf.id.grpId =:groupId")
     List<GroupFunc> findAllByGroupId(@Param("groupId") String groupId);
 }

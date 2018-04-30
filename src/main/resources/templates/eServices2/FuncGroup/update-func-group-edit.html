@@ -5,22 +5,59 @@
     <title>e-Services Admin Function</title>
 
     <link rel="stylesheet" href="/adminfunc/css/func-group.css"/>
+    <script th:inline="javascript" type="text/javascript"  >
+    /*<![CDATA[*/
 
-    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
-    <!--/*<![CDATA[*/-->
+    $(document).ready(function () {
 
-    <!--$(document).ready(function () {-->
-    <!--// var jobList = [];-->
-    <!--// var statusList = [];-->
+        var submitBtnDom = jQuery('#submitBtn');
+        submitBtnDom.on('click', function (e) {
+            var currentFuncOptions = $('#currentFunc option');
+            var currentFuncList = $.map(currentFuncOptions ,function(option) {
+                return option.value;
+            });
+            var form = e.target.form;
+            var currentFuncOptions = $('#currentFunc option');
+            var currentFuncList = $.map(currentFuncOptions ,function(option) {
+                return option.value;
+            });
+            $('#currentFunc').val(currentFuncList);
+            if (validateGroupID()) {
+                form.submit();
+            }
+        });
+    });
 
-    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
-    <!--console.log('scheduleJobDetailDTO');-->
-    <!--console.log(scheduleJobDetailDTO);-->
-    <!---->
-    <!--});-->
+    function validateGroupID() {
 
-    <!--/*]]>*/-->
-    <!--</script>-->
+        if  ( $('#grpId').val() == "") {
+            alert('Group ID is required.' )
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function copyToList(from,to) {
+        fromList = eval('document.forms[0].' + from);
+        toList = eval('document.forms[0].' + to);
+        var sel = false;
+        for (i=0;i<fromList.options.length;i++) {
+            var current = fromList.options[i];
+            if (current.selected) {
+                sel = true;
+                txt = current.text;
+                val = current.value;
+                toList.options[toList.length] = new Option(txt,val);
+                fromList.options[i] = null;
+                i--;
+            }
+        }
+    }
+
+
+    /*]]>*/
+    </script>
 
 </head>
 <body>
@@ -31,138 +68,88 @@
     <div layout:fragment="content">
         <div class="content-padding">
             <div>
-                <!--<h1>createFuncGroup</h1>-->
+                <form id="submitForm" th:action="@{/e-Services-2/management/updateFunctionGroup_Success.do}" method="post" >
+                    <h3 th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.updatefuncgroup')}"></h3>
+                    <div>
+                        <div class="flex-container ">
+                            <div class="flex-item-auto func-tab" >
+                                <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.detail')}"></span>
+                            </div>
+                            <div class="flex-item-1"></div>
+                        </div>
+                        <div class="func-border-frame">
+                            <div class="flex-container">
+                                <div class="flex-item-3 func-tab-padding-left">
+                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
+                                </div>
+                                <div class="flex-item-7">
+                                    <input type="text" name ="grpId" id ="grpId" readOnly ="true" th:value="${functionGroupCreateDTO.grpId}"/>
+                                </div>
+                            </div>
+                            <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
+                            <div class="flex-container">
+                                <div class="flex-item-3 func-tab-padding-left">
+                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
+                                </div>
+                                <div class="flex-item-7">
+                                    <input type="text" name ="groupDesc" id ="groupDesc" th:value="${functionGroupCreateDTO.groupDesc}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div>
-                    <div class="flex-container ">
-                        <div class="flex-item-auto func-tab" >
-                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.detail')}"></span>
+                    <div style="padding-top: 30px;">
+                        <div class="flex-container ">
+                            <div class="flex-item-auto func-tab" >
+                                <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.title')}"></span>
+                            </div>
+                            <div class="flex-item-1"></div>
                         </div>
-                        <div class="flex-item-1"></div>
-                    </div>
-                    <div class="func-border-frame">
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <input type="text" />
-                            </div>
-                        </div>
-                        <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <input type="text" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="padding-top: 30px;">
-                    <div class="flex-container ">
-                        <div class="flex-item-auto func-tab" >
-                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.title')}"></span>
-                        </div>
-                        <div class="flex-item-1"></div>
-                    </div>
-                    <div class="func-border-frame">
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <div>
-                                    <select class="func-select" multiple="" size="5" >
-                                        <option value="MQM0001">Marriage Quota Transfer</option>
-                                        <option value="ECE0001">Enquiry Code Information</option>
-                                        <option value="ADM0001">User Maintenance</option>
+                        <div class="func-border-frame">
+                            <div class="flex-container">
+                                <div class="flex-item-3 func-tab-padding-left">
+                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
+                                </div>
+                                <div class="flex-item-7">
+                                    <select class="func-select" multiple="" th:id ="availableFunctions" size="5" th:field ="*{availableFunctions}">
+                                        <option th:each ="function : ${availableFunctions}"
+                                                th:value="${function.funcId}"
+                                                th:text="${function.funcDesc}"></option>
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left"></div>
-                            <div class="flex-item-7">
-                                <div class="func-select-middle">
-                                    <img class="func-arrow" th:src="@{/images/b_addImage.gif}" />
-                                    <img class="func-arrow" th:src="@{/images/b_removeImage.gif}" />
+                            <div class="flex-container">
+                                <div class="flex-item-3 func-tab-padding-left"></div>
+                                <div class="flex-item-7">
+                                    <div class="func-select-middle">
+                                        <img class="func-arrow" th:onclick="'copyToList(currentFunc.id, availableFunctions.id)'" th:src="@{/images/b_addImage.gif}" />
+                                        <img class="func-arrow" th:onclick="'copyToList(availableFunctions.id, currentFunc.id)'" th:src="@{/images/b_removeImage.gif}" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <div>
-                                    <select class="func-select" multiple="" size="5">
-                                        <option value="EFN0001">Office Quota Maintenance</option>
-                                        <option value="PFN0002">Payment Manual Reconciliation</option>
-                                        <option value="PFN0001">Payment Enquiry</option>
-                                        <option value="GFN0001">Online Submission Enquiry</option>
-                                        <option value="IAM0001">Important Announcement</option>
-                                    </select>
+                            <div class="flex-container">
+                                <div class="flex-item-3 func-tab-padding-left">
+                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="padding-top: 30px;">
-                    <div class="flex-container ">
-                        <div class="flex-item-auto func-tab" >
-                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.user')}"></span>
-                        </div>
-                        <div class="flex-item-1"></div>
-                    </div>
-                    <div class="func-border-frame">
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.userAssigned')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <div>
-                                    <select class="func-select" multiple="" size="5" >
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left"></div>
-                            <div class="flex-item-7">
-                                <div class="func-select-middle">
-                                    <img class="func-arrow" th:src="@{/images/b_addImage.gif}" />
-                                    <img class="func-arrow" th:src="@{/images/b_removeImage.gif}" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
-                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableUser')}"></span></b>
-                            </div>
-                            <div class="flex-item-7">
-                                <div>
-                                    <select class="func-select" multiple="" size="5">
-                                        <option value="EFN0001">A0001</option>
-                                        <option value="PFN0002">A0002</option>
-                                        <option value="PFN0001">A0003</option>
-                                        <option value="GFN0001">A0004</option>
-                                    </select>
+                                <div class="flex-item-7">
+                                    <div>
+                                        <div>
+                                            <select class="func-select" th:id ="currentFunc" multiple="" name ="currentFunc" >
+                                                <option th:each ="function : ${currentFunc}"
+                                                        th:value="${function.funcId}"
+                                                        th:text="${function.funcDesc}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div style="padding-top: 30px;">
-                    <a th:href="@{/e-Services-2/management/updateFunctionGroup_Success.do}">
-                        <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
-                    </a>
-                </div>
-
+                    <div style="padding-top: 30px;">
+                        <input class="SmallButtonStyle pointer" id = "submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>

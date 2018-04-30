@@ -12,21 +12,37 @@
 
         var submitBtnDom = jQuery('#submitBtn');
         submitBtnDom.on('click', function (e) {
-        if  ($('#grpId').val() == "" || $('#groupDesc').val() == "") {
-            alert('Group ID and Group Desc can not be null!');
-        }
-        var currentFuncOptions = $('#currentFunc option');
-        var currentFuncList = $.map(currentFuncOptions ,function(option) {
-            return option.value;
-        });
-        $('#currentFunc').val(currentFuncList);
-        if (currentFuncList.length == 0) {
-            alert("Function must be assigned to the Group!");
-        }
-        var form = e.target.form;
-        form.submit();
+            var form = e.target.form;
+            var currentFuncOptions = $('#currentFunc option');
+            var currentFuncList = $.map(currentFuncOptions ,function(option) {
+                return option.value;
+            });
+            $('#currentFunc').val(currentFuncList);
+            if (validateGroupID()) {
+                form.submit();
+            }
         });
     });
+
+    function validateGroupID() {
+
+        if  ( $('#grpId').val() == "") {
+            alert('Group ID is required.' )
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function validateCurrentFuncList() {
+        if (currentFuncList.length == 0) {
+            alert('Function must be assigned to the Group!' )
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     function copyToList(from,to) {
         fromList = eval('document.forms[0].' + from);
@@ -98,10 +114,10 @@
                         <div class="func-border-frame">
                             <div class="flex-container">
                                 <div class="flex-item-3 func-tab-padding-left">
-                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
+                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
-                                    <select class="func-select" multiple="" th:id ="availFunc" size="5" th:field ="*{availableFunctions}">
+                                    <select class="func-select" multiple="" th:id ="availableFunctions" size="5" th:field ="*{availableFunctions}">
                                         <option th:each ="function : ${availableFunctions}"
                                                 th:value="${function.funcId}"
                                                 th:text="${function.funcDesc}"></option>
@@ -112,14 +128,14 @@
                                 <div class="flex-item-3 func-tab-padding-left"></div>
                                 <div class="flex-item-7">
                                     <div class="func-select-middle">
-                                        <img class="func-arrow" th:onclick="'copyToList(currentFunc.id, availFunc.id)'" th:src="@{/images/b_addImage.gif}" />
-                                        <img class="func-arrow" th:onclick="'copyToList(availFunc.id, currentFunc.id)'" th:src="@{/images/b_removeImage.gif}" />
+                                        <img class="func-arrow" th:onclick="'copyToList(currentFunc.id, availableFunctions.id)'" th:src="@{/images/b_addImage.gif}" />
+                                        <img class="func-arrow" th:onclick="'copyToList(availableFunctions.id, currentFunc.id)'" th:src="@{/images/b_removeImage.gif}" />
                                     </div>
                                 </div>
                             </div>
                             <div class="flex-container">
                                 <div class="flex-item-3 func-tab-padding-left">
-                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
+                                    <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
                                     <div>

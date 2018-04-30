@@ -8,9 +8,11 @@ import com.pccw.immd.adminfunc.dto.FunctionGroupCreateDTO;
 import com.pccw.immd.adminfunc.repository.FuncRepository;
 import com.pccw.immd.adminfunc.repository.GroupFuncRepository;
 import com.pccw.immd.adminfunc.repository.GroupRepository;
+import com.pccw.immd.adminfunc.service.FunctionGroupService;
 import com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.pccw.immd.adminfunc.web.interceptor.BreadcrumbInterceptor.FUNC_ID_KEY;
@@ -32,24 +35,22 @@ public class FunctionGroupController {
     private static final Logger LOG = Logger.getLogger(FunctionGroupController.class);
 
     @Autowired
+    @Qualifier("functionGroupService.eservices2")
+    FunctionGroupService functionGroupService;
+
+    @Autowired
     FuncRepository funcRepository;
 
     @Autowired
-    GroupFuncRepository groupFuncRepository;
-
-    @Autowired
     GroupRepository groupRepository;
-
 
     /**
      * Create Function Group
      */
 
     @GetMapping(value = "/createFunctionGroup.do")
-    public String createFuncGroupPage(HttpServletRequest request, Model model) {
+    public String createFuncGroupPage(HttpServletRequest request, Model model, @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Create_Function_Group);
-
-        model.addAttribute("currentFunctions", funcRepository.findAll());
         model.addAttribute("availableFunctions", funcRepository.findAll());
         return "/eServices2/FuncGroup/create-func-group";
     }
@@ -65,8 +66,8 @@ public class FunctionGroupController {
         String userId = request.getRequestedSessionId();
         List<Func> functionsDetails = funcRepository.findByFuncIdIn(functionList);
 
-        createNewGroup(groupId, groupDesc, userId);
-        createGroupFunc(groupId, functionList);
+        functionGroupService.createNewGroup(groupId, groupDesc, userId);
+        functionGroupService.createGroupFunc(groupId, functionList);
 
         functionGroupCreateDTO.setFuncDetails(functionsDetails);
         return "/eServices2/FuncGroup/create-func-group-success";
@@ -76,66 +77,76 @@ public class FunctionGroupController {
      * Update Function Group
      */
     @GetMapping(value = "/updateFunctionGroup.do")
-    public String updateFuncGroupPage(HttpServletRequest request) {
+    public String updateFuncGroupPage(HttpServletRequest request, Model model,
+                                      @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Update_Function_Group);
+
+        model.addAttribute("groupIds", groupRepository.findAll());
         return "/eServices2/FuncGroup/update-func-group-search";
     }
 
-    @GetMapping(value = "/updateFunctionGroup_Edit.do")
-    public String editFuncGroupPage(HttpServletRequest request) {
+    @PostMapping(value = "/updateFunctionGroup_Edit.do")
+    public String editFuncGroupPage(HttpServletRequest request, Model model,
+                                    @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Update_Function_Group);
+
+        if (functionGroupCreateDTO.getGrpId() != null) {
+            HashMap list = functionGroupService.loadGroupFunction(functionGroupCreateDTO.getGrpId());
+
+                String groupId = (String) list.get("groupid");
+                String groupDesc = (String) list.get("groupDesc");
+                List<String> functionList = (List<String>) list.get("functionList");
+
+            functionGroupCreateDTO.setGroupDesc(groupDesc);
+            if (functionList != null && functionList.size() != 0) {
+                model.addAttribute("currentFunc", funcRepository.findByFuncIdIn(functionList));
+                model.addAttribute("availableFunctions", funcRepository.findByFuncIdNotIn(functionList));
+            } else {
+                model.addAttribute("currentFunc", null);
+                model.addAttribute("availableFunctions", funcRepository.findAll());
+            }
+
+        }
         return "/eServices2/FuncGroup/update-func-group-edit";
     }
 
-    @GetMapping(value = "/updateFunctionGroup_Success.do")
-    public String editSuccessFuncGroupPage(HttpServletRequest request) {
+    @PostMapping(value = "/updateFunctionGroup_Success.do")
+    public String editSuccessFuncGroupPage(HttpServletRequest request, Model model,
+        @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Update_Function_Group);
+
+        functionGroupService.updateGroupFunction(functionGroupCreateDTO);
+        model.addAttribute("currentFunc", funcRepository.findByFuncIdIn(functionGroupCreateDTO.getCurrentFunc()));
+
         return "/eServices2/FuncGroup/update-func-group-edit-success";
     }
-
 
     /**
      * Delete Function Group
      */
     @GetMapping(value = "/deleteFunctionGroup.do")
-    public String deleteFuncGroupPage(HttpServletRequest request) {
+    public String deleteFuncGroupPage(HttpServletRequest request, Model model,
+                                      @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Delete_Function_Group);
+        model.addAttribute("groupIds", groupRepository.findAll());
         return "/eServices2/FuncGroup/delete-func-group-search";
     }
 
-    @GetMapping(value = "/deleteFunctionGroup_Result.do")
-    public String deleteResultFuncGroupPage(HttpServletRequest request) {
+    @PostMapping(value = "/deleteFunctionGroup_Result.do")
+    public String deleteResultFuncGroupPage(HttpServletRequest request,Model model,
+                                            @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Delete_Function_Group);
+        functionGroupCreateDTO.setCurrentFunc(funcRepository.findFuncByGroupId(functionGroupCreateDTO.getGrpId()));
+        model.addAttribute("currentFunc", funcRepository.findByFuncIdIn(functionGroupCreateDTO.getCurrentFunc()));
         return "/eServices2/FuncGroup/delete-func-group-result";
     }
 
-    @GetMapping(value = "/deleteFunctionGroup_Success.do")
-    public String deleteResultSccessFuncGroupPage(HttpServletRequest request) {
+    @PostMapping(value = "/deleteFunctionGroup_Success.do")
+    public String deleteResultSccessFuncGroupPage(HttpServletRequest request,
+                                                  @ModelAttribute FunctionGroupCreateDTO functionGroupCreateDTO) {
         request.setAttribute(FUNC_ID_KEY, BreadcrumbInterceptor.FUNC_ID.Delete_Function_Group);
+        functionGroupService.deleteFunctionGroup(functionGroupCreateDTO.getGrpId(), funcRepository.findFuncByGroupId(functionGroupCreateDTO.getGrpId()));
         return "/eServices2/FuncGroup/delete-func-group-result-success";
-    }
-
-    private void createNewGroup(String groupId, String groupDesc, String userId) {
-        LOG.debug("Creating new group " + groupId);
-
-        Group createdGroup = new Group();
-        createdGroup.setGroupId(groupId);
-        createdGroup.setGroupDesc(groupDesc);
-        createdGroup.setDisplayPos("");
-        createdGroup.setLstUpdTd(new Date());
-        groupRepository.save(createdGroup);
-    }
-
-    private void createGroupFunc(String id, List<String> functionIds){
-
-        for (String funcId : functionIds) {
-            GroupFunc groupFunc = new GroupFunc();
-            GroupFuncId groupFuncId = new GroupFuncId();
-            groupFuncId.setGrpId(id);
-            groupFuncId.setFuncId(funcId);
-            groupFunc.setId(groupFuncId);
-            groupFuncRepository.save(groupFunc);
-        }
     }
 
 }

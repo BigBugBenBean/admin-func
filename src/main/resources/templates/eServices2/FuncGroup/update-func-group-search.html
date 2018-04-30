@@ -5,22 +5,27 @@
     <title>e-Services Admin Function</title>
 
     <link rel="stylesheet" href="/adminfunc/css/func-group.css"/>
+    <script th:inline="javascript" type="text/javascript"  >
+    /*<![CDATA[*/
 
-    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
-    <!--/*<![CDATA[*/-->
+    $(document).ready(function () {
 
-    <!--$(document).ready(function () {-->
-    <!--// var jobList = [];-->
-    <!--// var statusList = [];-->
+        var submitBtnDom = jQuery('#submitBtn');
+        submitBtnDom.on('click', function (e) {
 
-    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
-    <!--console.log('scheduleJobDetailDTO');-->
-    <!--console.log(scheduleJobDetailDTO);-->
-    <!---->
-    <!--});-->
+            var selectedGrpId = $('#groupId option:selected').val();
 
-    <!--/*]]>*/-->
-    <!--</script>-->
+            var form = e.target.form;
+            $('#grpId').val(selectedGrpId);
+
+            form.submit();
+        });
+    });
+
+
+    /*]]>*/
+    </script>
+
 
 </head>
 <body>
@@ -31,24 +36,26 @@
     <div layout:fragment="content">
         <div class="content-padding">
             <div>
+                <form id="submitForm" th:action="@{/e-Services-2/management/updateFunctionGroup_Edit.do}" method ="post">
                 <div class="flex-container">
                     <div class="flex-item-4">
                         <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.searchFuncGrp')}"></span></b>
                     </div>
                     <div class="flex-item-7">
-                        <select style="width: 150px;">
-                            <option value="">ABC</option>
-                            <option value="">ABC</option>
-                            <option value="">ABC</option>
+                        <select style="width: 150px;" th:id ="groupId" name ="groupId" th:field ="*{groupIds}" >
+                            <option th:each ="allGroups : ${groupIds}"
+                            th:value="${{allGroups.groupId}}"
+                            th:text="${allGroups.groupId + '-' + allGroups.groupDesc} "></option>
                         </select>
+                        <input type="hidden" name ="grpId" id ="grpId"/>
                     </div>
                 </div>
 
                 <div style="padding-top: 30px;">
-                    <a th:href="@{/e-Services-2/management/updateFunctionGroup_Edit.do}">
-                        <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
-                    </a>
+                        <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" id ="submitBtn"
+                               th:value="${#messages.msg('umps.adminfunc.common.search')}" />
                 </div>
+                </form>
             </div>
         </div>
     </div>
