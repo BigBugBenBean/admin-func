@@ -80,7 +80,7 @@
                                     <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
-                                    <input type="text" name ="groupDesc" id ="groupDesc" th:value="${functionGroupCreateDTO.groupDesc}"/>
+                                    <input type="text" name ="groupDesc" id ="groupDesc" th:value="${functionGroupCreateDTO.groupDesc}" maxlength="256"/>
                                 </div>
                             </div>
                         </div>
@@ -140,13 +140,6 @@
                         </a>
                         <input class="ButtonStyle back-button pointer" id = "submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />
                     </div>
-
-                    <!--<div class="flex-container">-->
-                        <!--<div style="flex: auto;"></div>-->
-                        <!--<div style="padding: 20px;">-->
-                            <!--<input class="ButtonStyle back-button pointer" id = "submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.confirm')}" />-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </form>
             </div>
         </div>
