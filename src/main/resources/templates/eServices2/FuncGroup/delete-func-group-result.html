@@ -33,14 +33,14 @@
 
                 <div>
                     <div class="flex-container ">
-                        <div class="flex-item-auto func-tab" >
+                        <div class="flex-item-1 func-tab" >
                             <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.detail')}"></span>
                         </div>
-                        <div class="flex-item-1"></div>
+                        <div class="flex-item-7"></div>
                     </div>
                     <div class="func-border-frame">
                         <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
+                            <div class="flex-item-1 func-tab-padding-left">
                                 <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
                             </div>
                             <div class="flex-item-7">
@@ -50,11 +50,11 @@
                         </div>
                         <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
                         <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left">
+                            <div class="flex-item-1 func-tab-padding-left">
                                 <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
                             </div>
                             <div class="flex-item-7">
-                                <span th:text="${functionGroupCreateDTO.groupDesc}"></span>
+                                <span class="func-text-description" th:text="${functionGroupCreateDTO.groupDesc}"></span>
                             </div>
                         </div>
                     </div>
@@ -62,14 +62,14 @@
 
                 <div style="padding-top: 30px;">
                     <div class="flex-container ">
-                        <div class="flex-item-auto func-tab" >
+                        <div class="flex-item-1 func-tab" >
                             <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.title')}"></span>
                         </div>
-                        <div class="flex-item-1"></div>
+                        <div class="flex-item-7"></div>
                     </div>
                     <div class="func-border-frame">
                         <div class="flex-container">
-                            <div class="flex-item-3 func-tab-padding-left" style="padding-top: 20px;">
+                            <div class="flex-item-1 func-tab-padding-left" style="padding-top: 20px;">
                                 <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
                                 <input type ="hidden" name ="currentFunc" id ="currentFunc" />
                             </div>

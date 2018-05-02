@@ -61,14 +61,14 @@
                     <h3 th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.updatefuncgroup')}"></h3>
                     <div>
                         <div class="flex-container ">
-                            <div class="flex-item-auto func-tab" >
+                            <div class="flex-item-1 func-tab" >
                                 <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.detail')}"></span>
                             </div>
-                            <div class="flex-item-1"></div>
+                            <div class="flex-item-7"></div>
                         </div>
                         <div class="func-border-frame">
                             <div class="flex-container">
-                                <div class="flex-item-3 func-tab-padding-left">
+                                <div class="flex-item-1 func-tab-padding-left">
                                     <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
@@ -78,11 +78,11 @@
                             </div>
                             <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
                             <div class="flex-container">
-                                <div class="flex-item-3 func-tab-padding-left">
+                                <div class="flex-item-1 func-tab-padding-left">
                                     <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
-                                    <input type="text" name ="groupDesc" id ="groupDesc" th:value="${functionGroupCreateDTO.groupDesc}" maxlength="256"/>
+                                    <input class="func-text-description" type="text" name ="groupDesc" id ="groupDesc" th:value="${functionGroupCreateDTO.groupDesc}" maxlength="256"/>
                                 </div>
                             </div>
                         </div>
@@ -90,14 +90,14 @@
 
                     <div style="padding-top: 30px;">
                         <div class="flex-container ">
-                            <div class="flex-item-auto func-tab" >
+                            <div class="flex-item-1 func-tab" >
                                 <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.title')}"></span>
                             </div>
-                            <div class="flex-item-1"></div>
+                            <div class="flex-item-7"></div>
                         </div>
                         <div class="func-border-frame">
                             <div class="flex-container">
-                                <div class="flex-item-3 func-tab-padding-left">
+                                <div class="flex-item-1 func-tab-padding-left">
                                     <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">
@@ -114,7 +114,7 @@
                             </div>
 
                             <div class="flex-container">
-                                <div class="flex-item-3 func-tab-padding-left"></div>
+                                <div class="flex-item-1 func-tab-padding-left"></div>
                                 <div class="flex-item-7">
                                     <div class="func-select-middle">
                                         <img class="func-arrow" th:onclick="'copyToList(availableFunctions.id, currentFunc.id)'" th:src="@{/images/b_addImage.gif}" />
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                             <div class="flex-container">
-                                <div class="flex-item-3 func-tab-padding-left">
+                                <div class="flex-item-1 func-tab-padding-left">
                                     <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.availableFunc')}"></span></b>
                                 </div>
                                 <div class="flex-item-7">

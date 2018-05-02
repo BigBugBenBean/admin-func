@@ -42,13 +42,12 @@ public class FunctionGroupController {
     FunctionGroupService functionGroupService;
 
     @Autowired
+    @Qualifier("funcRepository")
     FuncRepository funcRepository;
 
     @Autowired
+    @Qualifier("groupRepository")
     GroupRepository groupRepository;
-
-    @Autowired
-    RoleGroupRepository roleGroupRepository;
 
     /**
      * Create Function Group
