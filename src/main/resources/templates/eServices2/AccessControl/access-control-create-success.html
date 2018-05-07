@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
+
+    <script type="application/javascript" th:inline="javascript" th:if="${accessControlCreateDTO}">
+        $(document).ready(function () {
+
+            var effectiveFrom = [[${accessControlCreateDTO.effectiveFrom}]];
+            var effectiveTo = [[${accessControlCreateDTO.effectiveTo}]];
+
+            if (isNotEmptyNullUndfined(effectiveFrom)) {
+                var fromDateFormatted =  moment(effectiveFrom).format(TABLE_DATE_FORMAT);
+            }
+
+            if (isNotEmptyNullUndfined(effectiveTo)) {
+                var toDateFormatted = moment(effectiveTo).format(TABLE_DATE_FORMAT);
+            }
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div class="border-frame global-success-frame " style="padding: 1em;">
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Type</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlCreateDTO.type}"></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Channel</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:switch="${accessControlCreateDTO.channel}">
+                            <span th:case="I" th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.channel.ivrs')}"></span>
+                            <span th:case="W" th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.channel.web')}"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>IP Address/Telephone Number</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlCreateDTO.desc}"></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Effective From</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlCreateDTO.effectiveFromDay}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveFromMonth}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveFromYear}"></span>&nbsp;
+                        <span th:text="${accessControlCreateDTO.effectiveFromHour}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveFromMinute}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveFromSecond}"></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span>Effective To</span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlCreateDTO.effectiveToDay}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveToMonth}"></span>/
+                        <span th:text="${accessControlCreateDTO.effectiveToYear}"></span>&nbsp;
+                        <span th:text="${accessControlCreateDTO.effectiveToHour}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveToMinute}"></span>:
+                        <span th:text="${accessControlCreateDTO.effectiveToSecond}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-label" th:text="${#messages.msg('umps.adminfunc.common.itemSaved')}"></div>
+
+            <div style=" float: right; padding-top: 1em;">
+                <a th:href="@{/e-Services-2/maintenance/accessControl.do}">
+                    <input type="button" th:value="${#messages.msg('umps.adminfunc.accesscontrol.backToAccessControl')}" class="ButtonStyle back-button pointer" style="margin-right: 20px;" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

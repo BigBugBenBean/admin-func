@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8"></meta>
@@ -14,6 +14,12 @@
 
     <script src="/adminfunc/js/common.js"></script>
 
+    <script type="text/javascript" th:if="${hasError == null}">
+        /*<![CDATA[*/
+        window.location="/adminfunc/AUTH/login-form.html";
+        /*]]>*/
+    </script>
+
     <script type="text/javascript"  >
 
         jQuery(document).ready(function () {
@@ -26,7 +32,7 @@
 </head>
 
 <body>
-    <div th:if="${userDTO}">
+    <div th:if="${hasError}">
 
         <!--<h3 th:if="${userDTO}">-->
         <!--loginId: <span th:text="${userDTO.loginId}"></span><br/>-->
@@ -49,11 +55,11 @@
                 </span>
             </div>
         </div>
-        <div class="grid-container">
+        <div class="grid-container round-border">
             <div class="grid-header">&nbsp;</div>
             <div class="flex-container grid-nav-container">
                 <div class="flex-item-1 nav-title-left">
-                    <span style=" width: '100%'" th:text="${userDTO.errorTitle}"></span>
+                    <span></span>
                 </div>
                 <div></div>
                 <div class="flex-item-1 nav-title-right">
@@ -67,11 +73,13 @@
                     </span>
 
                     <p id="loginFailContent" class="login-fail-content">
-                        <b th:text="${userDTO.errorMessage}"></b>
+                        <span style=" width: '100%'" th:text="${SPRING_SECURITY_LAST_EXCEPTION?.message}"></span>
                     </p>
-                    <a th:href="@{/AUTH/login_form.html}">
+
+                    <a th:href="@{/AUTH/login-form.do}">
                         <input type="submit" value="Confirm" />
                     </a >
+                    <!-- <span th:text="${#messages.msg('umps.useridandpassword.notempty')}"></span> -->
                 </div>
             </div>
         </div>

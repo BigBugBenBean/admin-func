@@ -4,13 +4,16 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/data/jpa
         http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
         http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <jpa:repositories
         base-package="com.pccw.immd.adminfunc.repository"
@@ -32,7 +35,7 @@
     </bean>
     -->
 
-    <bean id="datasource.adminfunc" class="oracle.jdbc.pool.OracleDataSource"
+    <bean primary="true" id="datasource.adminfunc" class="oracle.jdbc.pool.OracleDataSource"
           p:user="${eservice2.web.datasource.username}"
           p:password="${eservice2.web.datasource.password}"
           p:driverType="${eservice2.web.datasource.className}"
@@ -40,7 +43,7 @@
     />
 
     <!-- Create default configuration for Hibernate -->
-    <bean id="hibernateJpaVendorAdapter.adminfunc"
+    <bean primary="true" id="hibernateJpaVendorAdapter.adminfunc"
           class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
 
     <util:map id="jpaProperties.adminfunc">
@@ -58,7 +61,7 @@
             Configures the naming strategy that is used when Hibernate creates
             new database objects and schema elements
         -->
-        <entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}"/>
+        <!--<entry key="hibernate.ejb.naming_strategy" value="${hibernate.ejb.naming_strategy}"/>-->
         <!--
             If the value of this property is true, Hibernate writes all SQL
             statements to the console.
@@ -69,14 +72,22 @@
             when it writes SQL to the console.
         -->
         <entry key="hibernate.format_sql" value="${hibernate.format_sql}"/>
+        <!--<entry key="hibernate.current_session_context_class" value="org.hibernate.context.internal.ThreadLocalSessionContext" />-->
+
     </util:map>
     <!-- Creates the bean that creates the JPA entity manager factory. -->
-    <bean id="entityManagerFactory.adminfunc" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+    <bean primary="true" id="entityManagerFactory.adminfunc" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:persistenceUnitName="adminfunc"
           p:dataSource-ref="datasource.adminfunc"
           p:jpaVendorAdapter-ref="hibernateJpaVendorAdapter.adminfunc"
           p:packagesToScan="com.pccw.immd.adminfunc.domain"
           p:jpaPropertyMap-ref="jpaProperties.adminfunc">
     </bean>
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory.adminfunc"
+    />
+
+    <tx:annotation-driven />
 
     <!--
     <bean id="auditingProvider" class="net.petrikainulainen.springdata.jpa.common.UsernameAuditorAware"/>
@@ -86,7 +97,7 @@
     </bean>
 
     <jpa:auditing auditor-aware-ref="auditingProvider" set-dates="true"/>
-    <jpa:repositories base-package="net.petrikainulainen.springdata.jpa.todo"/>
+    <jpa:repositories base-package="net.petrikainulainen.springdata.jpa"/>
 
 
    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -98,4 +109,13 @@
    <bean id="persistenceExceptionTranslationPostProcessor"
       class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
     -->
+
+    <!--<tx:annotation-driven />-->
+    <!--<tx:jta-transaction-manager></tx:jta-transaction-manager>-->
+    <!--<bean id="transactionManager"-->
+          <!--class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+        <!--<property name="hibernateManagedSession" value="true" />-->
+    <!--</bean>-->
+
+    <bean class="com.pccw.immd.adminfunc.repository.HibernateHelper" />
 </beans>

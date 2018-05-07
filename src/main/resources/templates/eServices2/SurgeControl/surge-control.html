@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <script th:src="@{/js/lib/jquery-ui.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/js/lib/jquery-ui.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/surge-control.css}"/>
+
+    <style>
+        #showHistDataContainer {
+            margin-top: 10px;
+            height: 400px;
+            display: none;
+        }
+        #curve_chart {
+            height: 400px;
+        }
+        .well {
+            /*max-height: 200px; */
+            overflow-y: auto;
+        }
+    </style>
+
+    <script th:inline="javascript" type="text/javascript" >
+        /*<![CDATA[*/
+    <!--<script type="text/javascript" >-->
+
+    $(document).ready(function () {
+
+        var submitBtnDom = jQuery('#submitBtn');
+        submitBtnDom.on('click', function (e) {
+            var form = e.target.form;
+            form.submit();
+        });
+    });
+    function onHistoricalBlockChanged() {
+       var showHistDataContainer = $('#showHistDataContainer');
+       if (showHistDataContainer.css('display') == 'none') {
+           showHistDataContainer.show();
+       } else {
+           showHistDataContainer.hide();
+       }
+    }
+
+    function drawChart() {
+        var sourceData = [
+            ['AppID', '500', '502'],
+            [0, 0, 0],    [1, 10, 5],   [2, 23, 15],  [3, 17, 9],   [4, 18, 10],  [5, 9, 5],
+            [6, 11, 3],   [7, 27, 19],  [8, 33, 25],  [9, 40, 32],  [10, 32, 24], [11, 35, 27],
+            [12, 30, 22], [13, 40, 32], [14, 42, 34], [15, 47, 39], [16, 44, 36], [17, 48, 40],
+            [18, 52, 44], [19, 54, 46], [20, 42, 34], [21, 55, 47], [22, 56, 48], [23, 57, 49],
+            [24, 60, 52], [25, 50, 42], [26, 52, 44], [27, 51, 43], [28, 49, 41], [29, 53, 45],
+            [30, 55, 47], [31, 60, 52], [32, 61, 53], [33, 59, 51], [34, 62, 54], [35, 65, 57],
+            [36, 62, 54], [37, 58, 50], [38, 55, 47], [39, 61, 53], [40, 64, 56], [41, 65, 57],
+            [42, 63, 55], [43, 66, 58], [44, 67, 59], [45, 69, 61], [46, 69, 61], [47, 70, 62],
+            [48, 72, 64], [49, 68, 60], [50, 66, 58], [51, 65, 57], [52, 67, 59], [53, 70, 62],
+            [54, 71, 63], [55, 72, 64], [56, 73, 65], [57, 75, 67], [58, 70, 62], [59, 68, 60],
+            [60, 64, 56], [61, 60, 52], [62, 65, 57], [63, 67, 59], [64, 68, 60], [65, 69, 61],
+            [66, 70, 62], [67, 72, 64], [68, 75, 67], [69, 80, 72]
+        ];
+        var data = new google.visualization.arrayToDataTable(sourceData);
+
+        var options = {
+            hAxis: {
+                title: 'Time'
+            },
+            vAxis: {
+                title: 'Ticket usage'
+            },
+            width: 550,
+            height: 400
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        chart.draw(data, options);
+
+    }
+
+    $(function () {
+        $( "#startDatepicker" ).datepicker();
+        $( "#endDatepicker" ).datepicker();
+
+        //
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+
+
+        //
+        $('.list-group.checked-list-box .list-group-item').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                $checkbox = $('<input type="checkbox" class="hidden" />'),
+                color = ($widget.data('color') ? $widget.data('color') : "primary"),
+                style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+                settings = {
+                    on: {
+                        icon: 'glyphicon glyphicon-check'
+                    },
+                    off: {
+                        icon: 'glyphicon glyphicon-unchecked'
+                    }
+                };
+
+            $widget.css('cursor', 'pointer')
+            $widget.append($checkbox);
+
+            // Event Handlers
+            $widget.on('click', function () {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+            });
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $widget.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $widget.find('.state-icon')
+                    .removeClass()
+                    .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $widget.addClass(style + color + ' active');
+                } else {
+                    $widget.removeClass(style + color + ' active');
+                }
+            }
+
+            // Initialization
+            function init() {
+
+                if ($widget.data('checked') == true) {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                }
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($widget.find('.state-icon').length == 0) {
+                    $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                }
+            }
+            init();
+        });
+
+        var names = [
+            {
+                'appID': '500',
+                'GST': '20/20',
+                'Desc': '',
+                'MST': '22/30',
+                'Priority': '1',
+                'Clawback': '123'
+            }
+        ];
+
+        var grid = $("#surgeControlGrid");
+        // console.log(grid);
+
+
+
+        grid.jsGrid(
+            {
+                width: '100%',
+                height: '100%',
+
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
+
+                data: names,
+
+                paging: true,
+                pageSize: 5,
+                pageButtonCount: 5,
+                pagerContainer: '#externalPager',
+                pagerFormat: 'current page: {pageIndex}  &nbsp;&nbsp; {first} {prev} <select> <option> {pages} </option> </select>  {next} {last} &nbsp;&nbsp; total pages: {pageCount}',
+                pagePrevText: 'prev',
+                pageNextText: 'next',
+                pageFirstText: 'first',
+                pageLastText: 'last',
+                pageNavigatorNextText: '&#8230;',
+                pageNavigatorPrevText: '&#8230;',
+
+                fields: [
+                    { name: 'appID', title: 'App ID', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'GST', title: 'GST (Usage/Assigned)', type: 'text', width: 80, headerTemplate: commonHeader },
+                    { name: 'desc', title: 'Description', type: 'text', width: 50, headerTemplate: commonHeader },
+                    { name: 'MST', title: 'MST (Usage/Assigned)', type: 'text', width: 80, headerTemplate: commonHeader },
+                    { name: 'Priority', title: 'Priority', type: 'text', width: 40, headerTemplate: commonHeader },
+                    // { name: 'Clawback', title: 'Clawback', type: 'text', width: 80, headerTemplate: commonHeader }
+                    { name: 'Clawback', title: 'Clawback', type: "checkbox", width: 80, headerTemplate: commonHeader }
+                ]
+
+            }
+        )
+    });
+    /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content" style="">
+        <div class="content-padding">
+
+            <div>
+                <form id="submitForm" th:action="@{/e-Services-2/maintenance/surgeControlSearchResult.do}" method="post" >
+                <h3 th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.search.title')}"></h3>
+                <div class="RowSeparator"></div>
+
+                <div style="width: 30%;">
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.appid')}"></span></div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" id ="svcId" name ="svcId" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.gst')}"></span></div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" id ="gst" name ="gst" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.desc')}"></span></div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" id ="svcDesc" name ="svcDesc" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.mst')}"></span></div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" id ="mst" name ="mst" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.priority')}"></span></div>
+                        <div class="flex-item-1">
+                            <input type="text" maxlength="10" size="10" id ="priority" name ="priority" />
+                        </div>
+                    </div>
+                    <div class="flex-container search-row-padding">
+                        <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.main.clawback')}"></span></div>
+                        <div class="flex-item-1">
+                            <input type="checkbox" id ="clawback" name ="clawback" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <div style="flex: 10"></div>
+                    <div style="flex: 1;  ">
+                        <input type="button" class="ButtonStyle search-btn pointer" id="submitBtn"
+                               th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.search.btn')}" />
+                    </div>
+                </div>
+
+                <div class="RowSeparator"></div>
+                </form>
+            </div>
+
+            <div class="flex-container" style="padding-top: 10px;">
+                <div class="flex-item-1" >
+                    <span>Share Ticket Pool(Usage/Assigned): 3067/6000</span>
+                </div>
+                <div class="flex-item-1" style="min-width: 320px; ">
+                    <input type="button" class="ButtonStyle edit-btn pointer"
+                           th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.showHistData')}"
+                           id="showHistData" onclick="onHistoricalBlockChanged()" />
+                    <a th:href="@{/e-Services-2/maintenance/surgeControl_Edit.do}">
+                        <input type="button" class="ButtonStyle edit-btn pointer"
+                               th:value="${#messages.msg('umps.adminfunc.surgecontrol.main.editConfig')}" />
+                    </a>
+                </div>
+            </div>
+
+            <div id="showHistDataContainer">
+                <div class="flex-container">
+                    <div class="flex-item-2">
+                        <div id="curve_chart"></div>
+                    </div>
+                    <div class="flex-item-1">
+                        <div>
+                            <div style="text-align: center;"><span>SelectStartDate</span></div>
+                            <input type="text" id="startDatepicker" />
+                            <div style="text-align: center;"><span>SelectEndDate</span></div>
+                            <input type="text" id="endDatepicker" />
+                        </div>
+                    </div>
+                    <div class="flex-item-1 well" >
+                        <ul class="list-group checked-list-box">
+                            <li class="list-group-item pointer">Application for Search of Record of Death in Hong Kong (502)</li>
+                            <li class="list-group-item pointer">Application for HKSAR Passport (For persons 16 years of age or above applying in Hong Kong) (500)</li>
+                            <li class="list-group-item pointer">Supplementary Document Submission (592)</li>
+                            <li class="list-group-item pointer">Application Status Enquiry (504)</li>
+                            <li class="list-group-item pointer">Pre-arrival Registration for Taiwan Residents (622)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding-top: 10px;">
+                <div th:replace="fragments/surge-control-footer::surgeControlFooter" ></div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

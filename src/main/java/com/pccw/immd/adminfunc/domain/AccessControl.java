@@ -1,32 +1,26 @@
 package com.pccw.immd.adminfunc.domain;
 
 
-import java.util.Date;
-
 import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
+import java.util.Date;
 
 /**
  * Created by Dell on 29/1/2018.
  */
-@Entity
-@Table(name = "UM_ACCESS_CONTROL")
+@MappedSuperclass
 public class AccessControl {
 
     @Id
-    @Column(name = "AC_ID", length = 4)
-    private String acId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "AC_ID", length = 4, updatable = false, nullable = false)
+    private Integer acId;
 
     @Column(name = "AC_NAME", length = 50)
     private String acName;
-
-    @Column(name = "EFFECT_DATE_FROM")
-    private Date effectDateFrom;
-
-    @Column(name = "EFFECT_DATE_TO")
-    private Date effectDateTo;
 
     @Column(name = "AC_LIST", length = 20)
     private String acList;
@@ -34,13 +28,14 @@ public class AccessControl {
     @Column(name = "CHANNEL", length = 10)
     private String channel;
 
-    public String getAcId() {
-        return acId;
-    }
+    @Column(name = "AC_IP", length = 15)
+    private String acIp;
 
-    public void setAcId(String acId) {
-        this.acId = acId;
-    }
+    @Column(name = "EFFECT_DATE_FROM")
+    private Date effectDateFrom;
+
+    @Column(name = "EFFECT_DATE_TO")
+    private Date effectDateTo;
 
     public String getAcName() {
         return acName;
@@ -90,8 +85,11 @@ public class AccessControl {
         this.acIp = acIp;
     }
 
-    @Column(name = "AC_IP", length = 15)
-    private String acIp;
+    public Integer getAcId() {
+        return acId;
+    }
 
-
+    public void setAcId(Integer acId) {
+        this.acId = acId;
+    }
 }

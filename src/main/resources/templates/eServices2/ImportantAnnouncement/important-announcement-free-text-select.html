@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/important-announcement.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div class="announcement-content">
+                <div>
+                    <h5>
+                        <b><span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.freeTextTemplate')}"></span></b>
+                    </h5>
+                </div>
+
+                <div style="padding-top: 40px;">
+                    <select id="" name="" >
+                        <option value="">-- Please select a template --</option>
+                        <option value="">[1] ABC</option>
+                        <option value="">[2] ABCD</option>
+                    </select>
+                </div>
+
+                <div style="padding-top: 10px;">
+                    <a th:href="@{/e-Services-2/maintenance/importantAnnouncement_FreeTextEdit.do}">
+                        <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.update')}" />
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

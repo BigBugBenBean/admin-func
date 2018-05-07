@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
+
+    <script type="text/javascript" th:inline="javascript" th:if="${accessControlGlobalParamsDTO}">
+        /*<![CDATA[*/
+
+        $(document).ready(function () {
+
+        });
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <h3>Global Parameters</h3>
+
+            <div class="border-frame global-success-frame " style="padding: 1em;">
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.whitelist')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <div th:switch="${accessControlGlobalParamsDTO.WHITE_LIST_ACTIVATE}">
+                            <span th:case="true" th:text="${#messages.msg('umps.adminfunc.common.enabled')}"></span>
+                            <span th:case="false" th:text="${#messages.msg('umps.adminfunc.common.disabled')}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.blacklist')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <div th:switch="${accessControlGlobalParamsDTO.BLACK_LIST_ACTIVATE}">
+                            <span th:case="true" th:text="${#messages.msg('umps.adminfunc.common.enabled')}"></span>
+                            <span th:case="false" th:text="${#messages.msg('umps.adminfunc.common.disabled')}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.counterblocking')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <div th:switch="${accessControlGlobalParamsDTO.COUNTER_BLOCKING_ACTIVATE}">
+                            <span th:case="true" th:text="${#messages.msg('umps.adminfunc.common.enabled')}"></span>
+                            <span th:case="false" th:text="${#messages.msg('umps.adminfunc.common.disabled')}"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.success.maxNumOfTran')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlGlobalParamsDTO.MAX_TRANS}"></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.success.tranNumOfDay')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlGlobalParamsDTO.MAX_TRANS_PERIOD}"></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.success.maxNumOfAppoint')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlGlobalParamsDTO.MAX_APM}"></span>
+                    </div>
+                </div>
+                <div class="flex-container success-item-container">
+                    <div class="success-item-left">
+                        <span th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.success.appointNumOfDay')}"></span>
+                    </div>
+                    <div class="success-item-right">
+                        <span th:text="${accessControlGlobalParamsDTO.MAX_APM_PERIOD}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-label" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.success.message')}"></div>
+
+            <div style=" float: right; padding-top: 1em;">
+                <a th:href="@{/e-Services-2/maintenance/accessControl.do}">
+                    <input type="text" th:value="${#messages.msg('umps.adminfunc.accesscontrol.backToAccessControl')}" class="ButtonStyle back-button" style="margin-right: 20px;" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

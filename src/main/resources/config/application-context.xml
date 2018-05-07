@@ -8,21 +8,21 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--classpath*:properties/quartz.properties,-->
+
     <context:property-placeholder location="
-            classpath:properties/application.properties,
             classpath:properties/upms.properties,
-            classpath:properties/rest.properties,
-            classpath:properties/web.properties,
-            classpath:properties/database.properties"
+            classpath:properties/spring-security.properties,
+            classpath*:properties/web.properties,
+            classpath*:properties/quartz.properties,
+            classpath*:properties/database.properties"
     />
-    <!--
-
-
-    -->
 
     <import resource="classpath:config/upms-context.xml"/>
     <import resource="classpath:config/rest-context.xml"/>
     <import resource="classpath:config/web-context.xml"/>
-<!--    <import resource="classpath:config/security-context.bak.xml"/> -->
     <import resource="classpath:config/database-context.xml"/>
+
+    <!-- Don't remove, it is for import another Admin Function -->
+    <import resource="classpath*:config/*-application-context.xml"/>
 </beans>

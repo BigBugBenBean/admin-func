@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/schedule-job.css"/>
+
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <form th:action="@{/e-Services-2/maintenance/scheduleJob_Success.do}" method="post">
+                    <div>
+                        <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.newScheduleJob')}"></span></b>
+                    </div>
+                    <div >
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobname')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <input class="search-input" name="jobName" type="text" />
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.jobClass')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <input class="search-input" name="jobClass" type="text" />
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.cronexpression')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <input class="search-input" name="cronExpression" type="text" />
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.datamap')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <input class="search-input" name="dataMap" type="text" />
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.description')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <input class="search-input" name="description" type="text" />
+                            </div>
+                        </div>
+
+                        <div class="RowSeparatorThin"></div>
+                    </div>
+                    <div class="flex-container" style="padding-top: 30px;">
+                        <div style="flex: auto;"></div>
+                        <div style="padding: 15px;">
+                            <!--<a class="DisableLinkUnderline" th:href="@{/e-Services-2/maintenance/scheduleJob_Success.do}">-->
+                                <input class="ButtonStyle button pointer" type="submit" th:value="${#messages.msg('umps.adminfunc.common.create')}" />
+                            <!--</a>-->
+                            &nbsp;
+                            <a class="DisableLinkUnderline" th:href="@{/e-Services-2/maintenance/scheduleJob.do}">
+                                <input class="ButtonStyle button pointer" type="button" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" />
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

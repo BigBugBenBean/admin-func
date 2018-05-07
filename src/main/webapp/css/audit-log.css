@@ -1,0 +1,50 @@
+
+.back-button {
+
+}
+
+.button {
+    width: 80px;
+}
+
+.back-button, .button {
+    text-align: center;
+    text-decoration-line: none;
+}
+
+.search-padding {
+    padding: 5px;
+}
+
+.search-field-left {
+    padding-left: 50px;
+}
+
+.search-field-left, .search-field-right {
+    line-height: 30px;
+}
+
+.search-input {
+    width: 200px;
+}
+
+.search-result-left {
+
+}
+
+.search-result-left, .search-result-right {
+    height: 15px;
+    line-height: 15px;
+}
+
+.search-input-time {
+    width: 100px;
+}
+
+.search-input-minute {
+    width: 30px;
+}
+
+.search-time-padding {
+    padding-right: 20px;
+}

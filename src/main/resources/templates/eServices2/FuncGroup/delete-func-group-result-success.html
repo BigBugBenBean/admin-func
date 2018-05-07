@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/func-group.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <!--<h1>createFuncGroup</h1>-->
+
+                <div>
+                    <div class="flex-container ">
+                        <div class="flex-item-1 func-tab" >
+                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.detail')}"></span>
+                        </div>
+                        <div class="flex-item-7"></div>
+                    </div>
+                    <div class="func-border-frame">
+                        <div class="flex-container">
+                            <div class="flex-item-1 func-tab-padding-left">
+                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.funcGroupId')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <span th:text="${functionGroupCreateDTO.grpId}"></span>
+                            </div>
+                        </div>
+                        <div class="func-tab-padding-left func-tab-padding-right"><div class="RowSeparatorThin"></div></div>
+                        <div class="flex-container">
+                            <div class="flex-item-1 func-tab-padding-left">
+                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.description')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <span class="func-text-description" th:text="${functionGroupCreateDTO.groupDesc}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding-top: 30px;">
+                    <div class="flex-container ">
+                        <div class="flex-item-1 func-tab" >
+                            <span class="func-tab-title" th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.title')}"></span>
+                        </div>
+                        <div class="flex-item-7"></div>
+                    </div>
+                    <div class="func-border-frame">
+                        <div class="flex-container">
+                            <div class="flex-item-1 func-tab-padding-left" style="padding-top: 20px;">
+                                <b><span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.currFunc')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <div th:each="func  : ${currentFunc}">
+                                    <div th:text="${func.funcId + '(' + func.funcDesc + ')'}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class = "deleteSuccess" style="padding-top: 20px;">
+                    <span th:text="${#messages.msg('umps.adminfunc.func.eservices2.management.func.deleteSuccess')}"></span>
+                </div>
+
+                <div style="padding-top: 20px;">
+                    <input class="SmallButtonStyle pointer" style="min-width: 80px;" type="button" th:onclick="'print()'" th:value="${#messages.msg('umps.adminfunc.common.print')}" />
+                    <a class="DisableLinkUnderline" th:href="@{/e-Services-2/management/deleteFunctionGroup.do}">
+                        <input class="SmallButtonStyle pointer" type="button" th:value="${#messages.msg('umps.adminfunc.func.eservices2.management.deletefuncgroup')}" />
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

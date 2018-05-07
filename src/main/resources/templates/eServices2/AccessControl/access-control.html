@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <script th:inline="javascript" th:if="${accessControlDTO}">
+        /*<![CDATA[*/
+
+        $(document).ready(function () {
+            var list = [];
+
+            var accessControlDTO = [[${accessControlDTO}]];
+            console.log("accessControlDTO");
+            console.log(accessControlDTO);
+
+            var accessControlList = [[${accessControlDTO.accessControlList}]];
+
+            if (isNotEmptyNullUndfined(accessControlList) && accessControlList.length > 0) {
+                jQuery.each(accessControlList, function (index, object) {
+                   var fromDate = new Date(object['effectDateFrom']);
+                   var toDate = new Date(object['effectDateTo']);
+                   var fromDateFormatted =  moment(fromDate).format(TABLE_DATE_FORMAT);
+                   var toDateFormatted = moment(toDate).format(TABLE_DATE_FORMAT);
+
+                    var newObj = {
+                        'Effective Date': fromDateFormatted,
+                        'To': toDateFormatted,
+                        'Name': object['acName'],
+                        'White/Black': '',
+                        'Channel': object['channel'],
+                        'IP/Telephone Number': object['acIp']
+                    };
+
+                    list.push(newObj);
+                });
+            }
+
+            console.log('AC_list');
+            console.log(list);
+
+            var grid = $("#accessControlGrid");
+            // console.log(grid);
+
+            var gridConfig = {
+                width: '100%',
+                height: '500px',
+
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
+
+                // data: list,
+                autoload: true,
+
+                // rowClick: function (args) {
+                //     console.log(args);
+                //
+                //     var getData = args.item;
+                //     var keys = Object.keys(getData);
+                //     var outputs = [];
+                //
+                //     jQuery.each(keys, function (idx, key) {
+                //        outputs.push(key + ' : ' + getData[key] + '');
+                //     });
+                //
+                //     // console.log(outputs);
+                //
+                //     var target = jQuery(args.event.target);
+                //     console.log(target);
+                //     console.log(target.closest('.RedLink pointer'));
+                //     if (target.closest('.RedLink pointer').length) {
+                //         console.log('hhhhhh');
+                //     }
+                //
+                // },
+
+                controller: {
+                    loadData: function (filter) {
+                        // console.log(filter);
+                        // var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                        // return {
+                        //     data: list.slice(startIndex, startIndex + filter.pageSize),
+                        //     itemCount: list.length
+                        // };
+                        return list;
+                    }
+                },
+
+                fields: [
+                    { name: 'Effective Date', type: 'text', width: 60, headerTemplate: commonHeader },
+                    { name: 'To', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'Name', type: 'text', width: 50, headerTemplate: commonHeader },
+                    { name: 'White/Black', type: 'text', width: 80, headerTemplate: commonHeader },
+                    { name: 'Channel', type: 'text', width: 40, headerTemplate: commonHeader },
+                    { name: 'IP/Telephone Number', type: 'text', width: 80, headerTemplate: commonHeader },
+                        {
+                            type: 'control',
+                            headerTemplate: function () {
+                                var title = '<span>Detail</span>';
+                                return title;
+                            },
+                            itemTemplate: function (value, item) {
+                                var result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+
+                                var str = '';
+
+                                str += '<span>';
+                                // str += '<form method="get" th:action="@{/e-Services-2/maintenance/accessControl_View.do}">';
+
+                                // str += '<a class="RedLink pointer">';
+                                str += '<a th:href="@{/e-Services-2/maintenance/accessControl_View.do}" class="RedLink pointer">';
+                                str += 'View';
+                                str += '</a>';
+
+
+                                // str += '<button id="abc">';
+                                // str += 'View';
+                                // str += '</button>';
+                                //
+                                // jQuery('#abc').click(function () {
+                                //     console.log('asdafsadf');
+                                // });
+
+                                // str += '<input type="submit" value="View" class="RedLink pointer" style="" />';
+                                // str += '</form>';
+
+                                str += '</span>';
+
+                                // result = result.add(str);
+                                result = str;
+
+                                return result;
+                            }
+                        }
+                ]
+
+            };
+            grid.jsGrid(gridConfig);
+
+
+        });
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div class="flex-container">
+                <div class="flex-item-1 ">
+                    <span class="field-name" style="font-size: large; line-height: 30px;">Access Control</span>
+                </div>
+                <div style="flex: auto;"></div>
+                <div class="flex-item-1 SmallButtonStyle" style="margin: 0px 10px;">
+                    <a th:href="@{/e-Services-2/maintenance/accessControl_Global.do}">
+                        <span>Edit Global Parameters</span>
+                    </a>
+                </div>
+                <div class="flex-item-1 SmallButtonStyle">
+                    <a th:href="@{/e-Services-2/maintenance/accessControl_Create.do}">
+                        <span>Create New White/Black List</span>
+                    </a>
+                </div>
+            </div>
+            <div style=" margin-top: 1.5em; width: 100%; height: 200px; ">
+                <div id="accessControlGrid"></div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

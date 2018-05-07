@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/schedule-job.css"/>
+
+    <script th:inline="javascript" th:if="${scheduleJobDetailDTO}">
+        /*<![CDATA[*/
+
+        $(document).ready(function () {
+            // var jobList = [];
+            // var statusList = [];
+
+            var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];
+            console.log('scheduleJobDetailDTO');
+            console.log(scheduleJobDetailDTO);
+
+            if (isNotEmptyNullUndfined(scheduleJobDetailDTO)) {
+                var tmpJobList = scheduleJobDetailDTO['jobNameList'];
+                var jobStatusList = scheduleJobDetailDTO['statusList'];
+
+                if (isNotEmptyNullUndfined(tmpJobList) && tmpJobList.length > 0) {
+                    var jobListDom =jQuery('#jobList');
+
+                    var list = [];
+                    jQuery.each(tmpJobList, function (index, object) {
+                        var jobName = object;
+                        list.push(jobName);
+                    });
+                    generateSelectOptionByValue(jobListDom, list, false);
+
+                }
+
+                if (isNotEmptyNullUndfined(jobStatusList) && jobStatusList.length > 0) {
+                    var statusListDom =jQuery('#statusList');
+
+                    var list = [];
+                    jQuery.each(jobStatusList, function (index, object) {
+                        var name = object['name'];
+
+                        list.push(name);
+                    });
+                    generateSelectOptionByValue(statusListDom, list, true);
+                }
+            }
+
+            var shouldIncludeSearchDateField = false;
+
+            // var startDateDom = jQuery('#startDate');
+            // var endDateDom = jQuery('#endDate');
+
+            var startTimeDom = jQuery('#startTime');
+            var startHourDom = jQuery('#startHour');
+            var startMinDom = jQuery('#startMin');
+
+            var endTimeDom = jQuery('#endTime');
+            var endHourDom = jQuery('#endHour');
+            var endMinDom = jQuery('#endMin');
+
+            var submitBtnDom = jQuery('#submitBtn');
+            submitBtnDom.on('click', function () {
+                var form =jQuery('#submitForm');
+
+                form.submit();
+            });
+
+        });
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <form id="submitForm" th:action="@{/e-Services-2/enquiry/scheduleJobViewHistory_Search.do}" method="post" >
+                    <div>
+                        <b><span th:text="${#messages.msg('umps.adminfunc.common.searchCriteria')}"></span></b>
+                    </div>
+                    <div >
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.jobname')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select id="jobList" name="jobName">
+                                    <!--<option value=""><span>JobNameA</span></option>-->
+                                    <!--<option value=""><span>JobNameB</span></option>-->
+                                    <!--<option value=""><span>JobNameC</span></option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.status')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select id="statusList" name="status">
+                                    <option value=""></option>
+                                    <!--<option value=""><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.select.success')}"></span></option>-->
+                                    <!--<option value=""><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.select.failed')}"></span></option>-->
+                                    <!--<option value=""><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.select.running')}"></span></option>-->
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left">
+                                <!--<input type="radio" name="time" />-->
+                                <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.startTime')}"></span></b>
+                            </div>
+                            <div class="flex-item-3">
+                                <!--<input type="hidden" id="startDate" name="startDate" />-->
+                                <input class="search-input-time" id="startTime" name="startTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="startHour" name="startHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="startMin" name="startMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                            <div class="flex-item-4">
+                                <span class="search-time-padding">To</span>
+                                <!--<input type="hidden" id="startDate" name="startDate" />-->
+                                <input class="search-input-time" id="startTime" name="startTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="startHour" name="startHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="startMin" name="startMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left">
+                                <!--<input type="radio" name="time" />-->
+                                <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.endTime')}"></span></b>
+                            </div>
+                            <div class="flex-item-3">
+                                <!--<input type="hidden" id="endDate" name="endDate" />-->
+                                <input class="search-input-time" id="endTime" name="endTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="endHour" name="endHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="endMin" name="endMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                            <div class="flex-item-4">
+                                <span class="search-time-padding">To</span>
+                                <!--<input type="hidden" id="endDate" name="endDate" />-->
+                                <input class="search-input-time" id="endTime" name="endTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="endHour" name="endHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="endMin" name="endMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                        </div>
+
+                        <div class="RowSeparatorThin"></div>
+                    </div>
+                    <div class="flex-container" style="padding-top: 30px;">
+                        <div style="flex: auto;"></div>
+                        <div style="padding: 15px;">
+                            <!--<a th:href="@{/e-Services-2/enquiry/scheduleJobViewHistory_Result.do}">-->
+                                <!--<input class="SmallButtonStyle pointer" style="min-width: 80px;" type="submit" th:value="${#messages.msg('umps.adminfunc.common.search')}" />-->
+                            <input class="SmallButtonStyle pointer" id="submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                            <!--</a>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

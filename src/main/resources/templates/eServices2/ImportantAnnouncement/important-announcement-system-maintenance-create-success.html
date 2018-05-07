@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/important-announcement.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+
+                <div class="border-frame free-text-frame " >
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.effectiveFrom')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <span>25/11/2017  00:00</span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.effectiveTo')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <span>25/11/2017  00:01</span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.anntType')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <span>System </span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.application')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <p>[527] Application for Access to General Information</p>
+                            <p>[584] Application for Access to Information with Personal Data</p>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.engContent')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <p>To facilitate the system update, this service will be temporarily suspended during the following period(s):</p>
+                            <p>25-11-2017 (Saturday) 12 midnight to 25-11-2017 (Saturday) 12:01 am</p>
+                            <p>If you need assistance, you can call the Immigration e-Services Hotline at (852) 3128 8668 between 7 am and 11 pm (HK Time) daily.</p>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.tradChinContent')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <p>為方便進行系統更新，本服務將於下列時間暫停使用：</p>
+                            <p>2017年11月25日 (星期六) 午夜 12時 至 2017年11月25日 (星期六) 上午 12時01分</p>
+                            <p>如你需要協助，請於香港時間每日上午7時至下午11時致電入境事務處電子服務熱線 (852) 3128 8668。</p>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.simpChinContent')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <p>为方便进行系统更新，本服务将于下列时间暂停使用：</p>
+                            <p>2017年11月25日 (星期六) 午夜 12时 至 2017年11月25日 (星期六) 上午 12时01分</p>
+                            <p>如你需要协助，请於香港时间每日上午7时至下午11时致电入境事务处电子服务热线 (852) 3128 8668。</p>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                </div>
+
+                <div class="success-label" th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.anntSaved')}"></div>
+
+                <div style=" float: right; padding-top: 1em; padding-bottom: 1em;">
+                    <a th:href="@{/e-Services-2/maintenance/importantAnnouncement.do}">
+                        <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.importantAnnouncement.backToImportantAnnt')}" />
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

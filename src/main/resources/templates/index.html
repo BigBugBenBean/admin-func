@@ -11,6 +11,7 @@
 <div sec:authentication="name">User Name </div>
 
 <div th:text ="${#authentication.principal.displayName}"></div>
-<a href="index.html" th:href="@{/AUTH/logout.html}">Logout NOW</a>
+
+<a href="index.html" th:href="@{/AUTH/login-form.html}">Login Page</a>
 </body>
 </html>

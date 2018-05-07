@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#deleteBtn').click(function () {
+                var answer = confirm("Confirm to delete")
+                if (answer) {
+                    // document.forms[0].action.value = 'DELETE';
+                    // document.forms[0].submit();
+                }
+            });
+        });
+
+
+
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <h3>Access Control Detail</h3>
+
+            <div>
+                <div class="RowSeparator"></div>
+                <div class="param-container">
+                    <div class="" style="padding-left: 15px;">
+                        <input type="radio" name="accesslist" value="" checked="checked">
+                        <span class="item-margin-right">WHITELIST</span>
+                        </input>
+                        <input type="radio" name="accesslist" value="">
+                        <span>BLACKLIST</span>
+                        </input>
+                    </div>
+                    <div class="param-item-right"></div>
+                </div>
+                <div class="RowSeparator"></div>
+                <div class="flex-container param-container">
+                    <div class="param-item-left">Name</div>
+                    <div class="param-item-right">
+                        <input class="access-name-field" type="text" maxlength="10" value="100"></input>
+                    </div>
+                </div>
+                <div class="RowSeparator"></div>
+                <div class="flex-container param-container">
+                    <div class="param-item-left">Channel</div>
+                    <div class="param-item-right">
+                        <select>
+                            <option value="">IVRS</option>
+                            <option value="">Web application and Mobile App</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="RowSeparator"></div>
+                <div class="flex-container param-container">
+                    <div class="param-item-left">IP Address/Telephone Number</div>
+                    <div class="param-item-right">
+                        <input class="access-name-field" type="text" maxlength="10" value="100"></input>
+                    </div>
+                </div>
+                <div class="RowSeparator"></div>
+
+                <div class="flex-container param-container">
+                    <div class="param-item-left">Effective From</div>
+                    <div class="param-item-right flex-container effective-code">
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-long effective-lock" type="text" maxlength="4" readonly="readonly" value="2010"></input>
+                            <br />
+                            <span>YYYY</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="02"></input>
+                            <br />
+                            <span>MM</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="13"></input>
+                            <br />
+                            <span>DD</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="00"></input>
+                            <br />
+                            <span>hh</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="00"></input>
+                            <br />
+                            <span>mm</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium effective-lock" type="text" maxlength="2" readonly="readonly" value="00"></input>
+                            <br />
+                            <span>ss</span>
+                        </div>
+                        <div style="flex: 100;"></div>
+                    </div>
+                </div>
+                <div class="RowSeparator"></div>
+                <div class="flex-container param-container">
+                    <div class="param-item-left">Effective To</div>
+                    <div class="param-item-right flex-container effective-code">
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-long" type="text" maxlength="4" value="2022"></input>
+                            <br />
+                            <span>YYYY</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium" type="text" maxlength="2" value="09"></input>
+                            <br />
+                            <span>MM</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium" type="text" maxlength="2" value="21"></input>
+                            <br />
+                            <span>DD</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium" type="text" maxlength="2" value="00"></input>
+                            <br />
+                            <span>hh</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium" type="text" maxlength="2" value="00"></input>
+                            <br />
+                            <span>mm</span>
+                        </div>
+                        <div class="flex-item-1 effective-code-padding">
+                            <input class="effective-medium" type="text" maxlength="2" value="00"></input>
+                            <br />
+                            <span>ss</span>
+                        </div>
+                        <div style="flex: 100;"></div>
+                    </div>
+                </div>
+                <div class="RowSeparator"></div>
+            </div>
+
+            <div style=" float: right; padding-top: 1em;">
+                <a th:href="@{/e-Services-2/maintenance/accessControl_CreateSuccess.do}">
+                    <input type="text" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                </a>
+                <a >
+                    <input id="deleteBtn" type="text" value="Delete" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                </a>
+                <a th:href="@{/e-Services-2/maintenance/accessControl.do}">
+                    <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

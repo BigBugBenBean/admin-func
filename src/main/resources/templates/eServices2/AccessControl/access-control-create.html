@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
+
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <h3>Access Control Detail</h3>
+            <form method="post" th:action="@{/e-Services-2/maintenance/accessControl_CreateSave.do}">
+                <div>
+                    <div class="RowSeparator"></div>
+                    <div class="param-container">
+                        <div class="" style="padding-left: 15px;">
+                            <input type="radio" name="type" value="White" >
+                            <span class="item-margin-right">WHITELIST</span>
+                            </input>
+                            <input type="radio" name="type" value="Black" checked="checked">
+                            <span>BLACKLIST</span>
+                            </input>
+                        </div>
+                        <div class="param-item-right"></div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left"><span th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.name')}"></span></div>
+                        <div class="param-item-right">
+                            <input class="access-name-field" type="text" name="name" maxlength="10" value="myname" />
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left"><span th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.channel')}"></span></div>
+                        <div class="param-item-right">
+                            <select name="channel" >
+                                <option value="I"><span th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.channel.ivrs')}"></span></option>
+                                <option value="W"><span th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.channel.web')}"></span></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left"><span th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.ipaddress')}"></span></div>
+                        <div class="param-item-right">
+                            <input class="access-name-field" type="text" name="desc" maxlength="10" value="10.0.1.1"></input>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <!--<input type="hidden" id="effectiveFromDate" name="effectiveFrom" />-->
+                        <div class="param-item-left"><span th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.effectivefrom')}"></span></div>
+                        <div class="param-item-right flex-container effective-code">
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-long" type="text" maxlength="4" name="effectiveFromYear" value="2017" />
+                                <br />
+                                <span>YYYY</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveFromMonth" value="08" />
+                                <br />
+                                <span>MM</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveFromDay" value="15" />
+                                <br />
+                                <span>DD</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveFromHour" value="00" />
+                                <br />
+                                <span>hh</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveFromMinute" value="00" />
+                                <br />
+                                <span>mm</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveFromSecond" value="00" />
+                                <br />
+                                <span>ss</span>
+                            </div>
+                            <div style="flex: 100;"></div>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container param-container">
+                        <div class="param-item-left"><span th:text="${#messages.msg('umps.adminfunc.accesscontrol.create.effectiveto')}"></span></div>
+                        <div class="param-item-right flex-container effective-code">
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-long" type="text" maxlength="4" name="effectiveToYear" value="2046" />
+                                <br />
+                                <span>YYYY</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveToMonth" value="09" />
+                                <br />
+                                <span>MM</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveToDay" value="11" />
+                                <br />
+                                <span>DD</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveToHour" value="00" />
+                                <br />
+                                <span>hh</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveToMinute" value="00" />
+                                <br />
+                                <span>mm</span>
+                            </div>
+                            <div class="flex-item-1 effective-code-padding">
+                                <input class="effective-medium" type="text" maxlength="2" name="effectiveToSecond" value="00" />
+                                <br />
+                                <span>ss</span>
+                            </div>
+                            <div style="flex: 100;"></div>
+                        </div>
+                    </div>
+                    <div class="RowSeparator"></div>
+                </div>
+
+
+                <div style=" float: right; padding-top: 1em;">
+                    <!--<a th:href="@{/e-Services-2/maintenance/accessControl_CreateSuccess.do}">-->
+                        <input type="submit" value="Save" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                    <!--</a>-->
+                    <a th:href="@{/e-Services-2/maintenance/accessControl.do}">
+                        <input type="text" value="Cancel" class="ButtonStyle submit-button" />
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

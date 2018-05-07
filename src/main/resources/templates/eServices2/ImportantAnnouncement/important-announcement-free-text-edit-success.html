@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/important-announcement.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+
+                <div class="border-frame free-text-frame " >
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.officeRelocation')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <span>new</span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.engContent')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <p>Important Notice: Yuen Long Office will be relocated to the following address on 26 February 2018: 1/F, Yuen Long Government Offices, 2 Kiu Lok Square, Yuen Long, New Territories
+                                The existing office at Manhattan Plaza will be closed and cease providing services on the same day. Services provided will not be affected during the relocation period. </p>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.tradChinContent')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <p>元朗辦事處將於二零一八年二月二十六日遷往以下地址 ﹕ 新界元朗橋樂坊2 號元朗政府合署1樓
+                                現時位於富逹廣場的辦事處將於同日起關閉及停止服務。 在搬遷期間，辦事處所提供的服務將不受影響。</p>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container success-item-container">
+                        <div class="flex-item-4 annt-item-left">
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.simpChinContent')}"></span>
+                        </div>
+                        <div class="success-item-right">
+                            <p>元朗办事处将于二零一八年二月二十六日迁往以下地址： 新界元朗桥乐坊2号元朗政府合署1楼
+                                现时位于富逹广场的办事处将于同日起关闭及停止服务。 在搬迁期间，办事处所提供的服务将不受影响。</p>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                </div>
+
+                <div class="success-label" th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.templateSaved')}"></div>
+
+                <div style=" float: right; padding-top: 1em; padding-bottom: 1em;">
+                    <a th:href="@{/e-Services-2/maintenance/importantAnnouncement.do}">
+                        <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.importantAnnouncement.backToImportantAnnt')}" />
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

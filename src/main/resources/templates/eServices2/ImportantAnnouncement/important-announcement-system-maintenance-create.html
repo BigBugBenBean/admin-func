@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/important-announcement.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+    <script>
+        $(document).ready(function () {
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+
+                <div>
+                    <div>
+                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.importAnntEditor')}"></span>
+                    </div>
+                    <div style="font-size: 12px;">
+                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.editSysMainAnnt')}"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="padding-top: 30px;">
+                        <div class="grid-page-header grid-page-header-text annt-header">
+                            <span>I. </span>
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.defineAppAffect')}"></span>
+                        </div>
+                        <div class="border-frame" style="padding: 1em 5%;">
+
+                            <div>
+                                <div class="flex-container">
+                                    <div class="flex-item-1">
+                                        <b><span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.currApp')}"></span></b>
+                                    </div>
+                                    <div class="flex-item-7">
+                                        <div>
+                                            <select class="annt-appl" multiple="" size="5" >
+                                                <option value="">[527] Application for Access to General Information</option>
+                                                <option value="">[584] Application for Access to Information with Personal Data</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-container">
+                                    <div class="flex-item-auto"></div>
+                                    <div>
+                                        <span><input type="checkbox" /></span>
+                                        <span th:text="${#messages.msg('umps.adminfunc.common.selectAll')}"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex-container">
+                                    <div class="flex-item-1">
+                                        <b><span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.availApp')}"></span></b>
+                                    </div>
+                                    <div class="flex-item-7">
+                                        <div>
+                                            <select class="annt-appl" multiple="" size="5" >
+                                                <option value="">[527] Application for Status Enquiry</option>
+                                                <option value="">[584] Application for Certificate of Absence of Marriage Record</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-container">
+                                    <div class="flex-item-auto"></div>
+                                    <div>
+                                        <span><input type="checkbox" /></span>
+                                        <span th:text="${#messages.msg('umps.adminfunc.common.selectAll')}"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div style="padding-top: 30px;">
+                        <div class="grid-page-header grid-page-header-text annt-header">
+                            <span>II. </span>
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainPeriod')}"></span>
+                        </div>
+                        <div class="border-frame free-text-frame ">
+                            <div>
+                                <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainTitle')}"></span>
+                            </div>
+
+                            <div>
+                                <div class="flex-container" style="padding-top: 10px;">
+                                    <div class="flex-item-1"></div>
+                                    <div class="flex-item-4">
+                                        <div class="annt-date-container">
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-year" />
+                                                <div class="annt-date-value"><span>YYYY</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>MM</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>DD</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>hh</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>mm</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-item-1">
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.to')}"></span>
+                                    </div>
+                                    <div class="flex-item-4">
+                                        <div class="annt-date-container">
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-year" />
+                                                <div class="annt-date-value"><span>YYYY</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>MM</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>DD</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>hh</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>mm</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-item-1"></div>
+                                </div>
+
+                                <div class="flex-container" style="padding-top: 10px;">
+                                    <div class="flex-item-1"></div>
+                                    <div class="flex-item-4">
+                                        <div class="annt-date-container">
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-year" />
+                                                <div class="annt-date-value"><span>YYYY</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>MM</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>DD</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>hh</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>mm</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-item-1">
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.to')}"></span>
+                                    </div>
+                                    <div class="flex-item-4">
+                                        <div class="annt-date-container">
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-year" />
+                                                <div class="annt-date-value"><span>YYYY</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>MM</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>DD</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>hh</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>mm</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-item-1"></div>
+                                </div>
+
+                                <div class="flex-container" style="padding-top: 10px;">
+                                    <div class="flex-item-1"></div>
+                                    <div class="flex-item-4">
+                                        <div class="annt-date-container">
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-year" />
+                                                <div class="annt-date-value"><span>YYYY</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>MM</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>DD</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>hh</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>mm</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-item-1">
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.to')}"></span>
+                                    </div>
+                                    <div class="flex-item-4">
+                                        <div class="annt-date-container">
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-year" />
+                                                <div class="annt-date-value"><span>YYYY</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>MM</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>DD</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>hh</span></div>
+                                            </div>
+                                            <div class="annt-date-content">
+                                                <input type="text" class="annt-date-non-year" />
+                                                <div class="annt-date-value"><span>mm</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-item-1"></div>
+                                </div>
+                            </div>
+
+                            <div>
+
+                                <div class="flex-container" style="padding-top: 10px;">
+                                    <div>
+                                        <input type="radio" name="RADIO_SELECT" />
+                                    </div>
+                                    <div class="flex-item-1">
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainOption1')}"></span>
+                                        <br />
+                                        <span class="annt-note" th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainNote1')}"></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container" style="padding-top: 10px;">
+                                    <div>
+                                        <input type="radio" name="RADIO_SELECT" />
+                                    </div>
+                                    <div class="flex-item-1">
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainOption2')}"></span>
+                                        <br />
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainOption3')}"></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container" style="padding-top: 10px;">
+                                    <div>
+                                        <input type="radio" name="RADIO_SELECT" />
+                                    </div>
+                                    <div class="flex-item-1">
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainOption4')}"></span>
+                                        <br />
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainOption5')}"></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex-container" style="padding-top: 10px;">
+                                    <div>
+                                        <input type="radio" name="RADIO_SELECT" />
+                                    </div>
+                                    <div class="flex-item-1">
+                                        <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainOption6')}"></span>
+                                        <span class="annt-note" th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyMainNote4')}"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div style="padding-top: 30px;">
+                        <div class="grid-page-header grid-page-header-text annt-header">
+                            <span>III. </span>
+                            <span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.specifiyEffectDateRange')}"></span>
+                        </div>
+                        <div class="border-frame free-text-frame ">
+                            <div class="flex-container">
+                                <div class="flex-item-1"></div>
+                                <div class="flex-item-7">
+                                    <div><span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.effectiveFrom')}"></span></div>
+                                    <div class="annt-date-container">
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-year" />
+                                            <div class="annt-date-value"><span>YYYY</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>MM</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>DD</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>hh</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>mm</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-item-1"></div>
+                                <div class="flex-item-7">
+                                    <div><span th:text="${#messages.msg('umps.adminfunc.importantAnnouncement.effectiveTo')}"></span></div>
+                                    <div class="annt-date-container">
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-year" />
+                                            <div class="annt-date-value"><span>YYYY</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>MM</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>DD</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>hh</span></div>
+                                        </div>
+                                        <div class="annt-date-content">
+                                            <input type="text" class="annt-date-non-year" />
+                                            <div class="annt-date-value"><span>mm</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-item-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex-container" style="padding-top: 30px;">
+                    <div style="flex: auto;"></div>
+                    <div>
+                        <a th:href="@{/e-Services-2/maintenance/importantAnnouncement_SystemMaintenanceCreateSuccess.do}">
+                            <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.save')}" />
+                        </a>
+                    </div>
+                    <div style="padding-left: 10px;">
+                        <a th:href="@{/e-Services-2/maintenance/importantAnnouncement_FreeTextSelect.do}">
+                            <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" />
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

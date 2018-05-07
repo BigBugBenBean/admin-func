@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/audit-log.css"/>
+
+    <script th:inline="javascript" th:if="${auditLogDTO}">
+        /*<![CDATA[*/
+
+        $(document).ready(function () {
+            var auditLogDTO = [[${auditLogDTO}]];
+            console.log('auditLogDTO');
+            console.log(auditLogDTO);
+        });
+
+        /*]]>*/
+    </script>
+
+    <!--<script>-->
+
+        <!--jQuery(function(){-->
+            <!--$("#auditLog").on("submit", function(e){-->
+                <!--if ($(".forStartDate").val() == '')-->
+                    <!--$(".startDate").prop('disabled', true);-->
+                <!--else-->
+                    <!--$(".startDate").prop('disabled', false);-->
+<!--//                    $(".startDate").val(moment($(this).val(), UI_DATE_FORMAT).format(UI_DATE_FORMAT));-->
+                <!--$(".startDate").val($(".forStartDate").val());-->
+
+                <!--if ($(".forEndDate").val() == '')-->
+                    <!--$(".endDate").prop('disabled', true);-->
+                <!--else-->
+                    <!--$(".endDate").prop('disabled', false);-->
+
+                <!--$(".endDate").val($(".forEndDate").val());-->
+            <!--})-->
+        <!--})-->
+    <!--</script>-->
+
+</head>
+<body>
+<div>
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+
+        <form id="auditLog" th:action="@{/eservices2/auditLogSearch.do}" method="post" >
+        <div class="content-padding">
+            <!--
+            <div style=" margin-top: 1.5em; width: 100%; height: 200px; ">
+                <div id="auditLogSearch">
+                    <span>Search Criteria</span>
+                </div>
+
+
+                <div class="search-form">
+
+                    <div class="row">
+                        <label>Function Name:</label>
+                        <div  id="functionNameId" >
+                            <select name="funcId" >
+                                <option></option>
+                                <option value="EC01">Application Fee Enquiry</option>
+                                <option value="EC02">System Holiday View</option>
+                                <option value="EC03">Schedule Job View</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label>User ID:</label>
+                        <div  id="userId" >
+                            <input name="userId" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label>Start Date:</label>
+                        <div  id="startDate" >
+                            <input class="forStartDate" />
+                            <input class="startDate" type="hidden" name="startDate" disabled="disabled"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>End Date:</label>
+                        <div  id="endDate" >
+                            <input class="forEndDate" />
+                            <input class="endDate" type="hidden" name="endDate" disabled="disabled" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            -->
+
+            <div>
+                <form id="submitForm" th:action="@{/e-Services-2/maintenance/auditLog_Search.do}" method="post" >
+                    <div>
+                        <b><span th:text="${#messages.msg('umps.adminfunc.common.searchCriteria')}"></span></b>
+                    </div>
+                    <div >
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.funcName')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <select id="jobList" name="jobName">
+                                    <option value=""><span>JobNameA</span></option>
+                                    <option value=""><span>JobNameB</span></option>
+                                    <option value=""><span>JobNameC</span></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.userId')}"></span></b></div>
+                            <div class="flex-item-7">
+                                <!--<select id="statusList" name="status">-->
+                                    <!--<option value=""></option>-->
+                                <!--</select>-->
+                                <input class="search-input-time" id="userId" name="userId" type="text" maxlength="10" size="10" />
+                            </div>
+                        </div>
+
+
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left">
+                                <!--<input type="radio" name="time" />-->
+                                <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.startDate')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <!--<input type="hidden" id="startDate" name="startDate" />-->
+                                <input class="search-input-time" id="startTime" name="startTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="startHour" name="startHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="startMin" name="startMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                        </div>
+                        <div class="flex-container search-padding">
+                            <div class="flex-item-2 search-field-left">
+                                <!--<input type="radio" name="time" />-->
+                                <b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.search.field.endDate')}"></span></b>
+                            </div>
+                            <div class="flex-item-7">
+                                <!--<input type="hidden" id="endDate" name="endDate" />-->
+                                <input class="search-input-time" id="endTime" name="endTime" type="text" maxlength="10" size="10" />
+                                <span class="search-time-padding">(dd/mm/yyyy)</span>
+                                <input class="search-input-minute" id="endHour" name="endHour" type="text" maxlength="2" size="2" />
+                                <span> : </span>
+                                <input class="search-input-minute" id="endMin" name="endMinute" type="text" maxlength="2" size="2" />
+                                <span>(hh:mm)</span>
+                            </div>
+                        </div>
+
+                        <div class="RowSeparatorThin"></div>
+                    </div>
+                    <div class="flex-container" style="padding-top: 30px;">
+                        <div style="flex: auto;"></div>
+                        <div style="padding: 15px;">
+                            <!--<a th:href="@{/e-Services-2/enquiry/scheduleJobViewHistory_Result.do}">-->
+                            <!--<input class="SmallButtonStyle pointer" style="min-width: 80px;" type="submit" th:value="${#messages.msg('umps.adminfunc.common.search')}" />-->
+                            <input class="SmallButtonStyle pointer" id="submitBtn" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.search')}" />
+                            <!--</a>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+        <!--<div class="button-panel"  >-->
+
+            <!--<button type="submit">Search</button>-->
+        <!--</div>-->
+
+
+        </form>
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/ivrs.css"/>
+
+    <script th:inline="javascript" th:if="${ivrsDTO}">
+    /*<![CDATA[*/
+
+    $(document).ready(function () {
+    // var jobList = [];
+    // var statusList = [];
+
+    var ivrsDTO = [[${ivrsDTO}]];
+    console.log('ivrsDTO');
+    console.log(ivrsDTO);
+
+    });
+
+    /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+
+                <div class="border-frame ivrs-frame " >
+                    <div class="RowSeparatorThin"></div>
+
+                    <div th:each="item : ${ivrsDTO.systemParamList}">
+                        <div class="flex-container success-item-container">
+                            <div class="flex-item-4 annt-item-left">
+                                <span th:text="${item.sysParamKey}"></span>
+                            </div>
+                            <div class="success-item-right">
+                                <span th:text="${item.sysParamValue}"></span>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                    </div>
+                </div>
+
+                <div class="success-label" th:text="${#messages.msg('umps.adminfunc.ivrs.updated')}"></div>
+
+                <div style=" float: right; padding-top: 1em; padding-bottom: 1em;">
+                    <a th:href="@{/e-Services-2/maintenance/ivrs.do}">
+                        <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.back')}" />
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

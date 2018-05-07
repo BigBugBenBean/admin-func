@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/func-group.css"/>
+
+    <!--<script th:inline="javascript" th:if="${scheduleJobDetailDTO}">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--$(document).ready(function () {-->
+    <!--// var jobList = [];-->
+    <!--// var statusList = [];-->
+
+    <!--var scheduleJobDetailDTO = [[${scheduleJobDetailDTO}]];-->
+    <!--console.log('scheduleJobDetailDTO');-->
+    <!--console.log(scheduleJobDetailDTO);-->
+    <!---->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+
+    <script>
+        $(document).ready(function () {
+            var detailList = [];
+            var historyList = [];
+
+            detailList = [
+                {
+                    'appDateTime': '01-12-2017',
+                    'appOffice': 'ROP-HKO',
+                    'applicantID': 'A123456',
+                    'dob': '01-12-1999',
+                    'group': '1',
+                    'txDateTime': '21-11-2017 17:12:43',
+                    'trn': '5791711306000005',
+                    'channel': 'W',
+                    'status': 'Valid'
+                }
+            ];
+
+            historyList = [
+                {
+                    'appDateTime': '01-12-2017',
+                    'appOffice': 'ROP-HKO',
+                    'applicantID': 'A123456',
+                    'dob': '01-12-1999',
+                    'group': '1',
+                    'txDateTime': '21-11-2017 17:12:43',
+                    'trn': '5791711306000005',
+                    'channel': 'W',
+                    'action': 'Make'
+                }
+            ];
+
+            //
+            var detailGrid = $("#detailGrid");
+            var detailGridConfig = {
+                width: '100%',
+                height: '260px',
+
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
+
+                autoload: true,
+
+                // paging: true,
+                // pageLoading: true,
+                // pageSize: recordPerPage,
+
+                data: detailList,
+
+                // controller: {
+                //     loadData: function (filter) {
+                //         var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                //         return {
+                //             data: list.slice(startIndex, startIndex + filter.pageSize),
+                //             itemCount: list.length
+                //         };
+                //     }
+                // },
+
+                fields: [
+                    { name: 'appDateTime', title: 'App Date Time', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'appOffice', title: 'App Office', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'applicantID', title: 'Applicant ID/ARN', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'dob', title: 'DOB', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'group', title: 'Group', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'txDateTime', title: 'Tx Date Time', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'trn', title: 'TRN', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'channel', title: 'Channel', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'status', title: 'Status', type: 'text', width: 10, headerTemplate: commonHeader },
+                    {type: 'control', width: 10, headerTemplate: function () {
+                            var title = '<span>History</span>';
+                            return title;
+                        }, itemTemplate: function (value, item) {
+                            var result = jsGrid.fields.control.prototype.itemTemplate.apply(this, arguments);
+
+                            var str = '';
+
+                            // href="http://localhost:8080/adminfunc/SMARTICS-2/enquiry/appointmentBookingEnquiry_ApplicantDetail.do"
+
+                            str += '<span>';
+                            str += '<a class="RedLink pointer" >';
+                            str += 'View';
+                            str += '</a>';
+                            str += '</span>';
+
+                            result = str;
+
+                            return result;
+                        }}
+                ]
+            };
+            detailGrid.jsGrid(detailGridConfig);
+
+
+            //
+            var historyGrid = $("#historyGrid");
+            var historyGridConfig = {
+                width: '100%',
+                height: '260px',
+
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
+
+                autoload: true,
+
+                // paging: true,
+                // pageLoading: true,
+                // pageSize: recordPerPage,
+
+                data: historyList,
+
+                // controller: {
+                //     loadData: function (filter) {
+                //         var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                //         return {
+                //             data: list.slice(startIndex, startIndex + filter.pageSize),
+                //             itemCount: list.length
+                //         };
+                //     }
+                // },
+
+                fields: [
+                    { name: 'appDateTime', title: 'App Date Time', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'appOffice', title: 'App Office', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'applicantID', title: 'Applicant ID/ARN', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'dob', title: 'DOB', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'group', title: 'Group', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'txDateTime', title: 'Tx Date Time', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'trn', title: 'TRN', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'channel', title: 'Channel', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'action', title: 'Action', type: 'text', width: 10, headerTemplate: commonHeader }
+                ]
+            };
+            historyGrid.jsGrid(historyGridConfig);
+
+
+
+        });
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <div>
+                    <div class="flex-container">
+                        <div class="flex-item-1">
+                            <b><span th:text="${#messages.msg('umps.adminfunc.common.searchResult')}"></span></b>
+                        </div>
+                        <div class="flex-item-auto">
+                            <!--<input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.printThisPage')}" />-->
+                        </div>
+                    </div>
+                    <div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container">
+                            <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.applicantID')}"></span></b></div>
+                            <div class="flex-item-7 search-result-right">
+                                <span id=""></span>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container">
+                            <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.trn')}"></span></b></div>
+                            <div class="flex-item-7 search-result-right">
+                                <span id="">5791711306000005</span>
+                            </div>
+                        </div>
+                        <div class="RowSeparatorThin"></div>
+                        <div class="flex-container">
+                            <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.AppointmentType')}"></span></b></div>
+                            <div class="flex-item-7 search-result-right">
+                                <span id="startDate">[ROPbooking] ROP Appointment Booking  Form Pre-fill</span>
+                            </div>
+                        </div>
+                        <!--<div class="RowSeparatorThin"></div>-->
+
+
+                        <div class="RowSeparator"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="margin-top: 1em;  ">
+                        <div class="grid-page-header grid-page-header-text" style="width: 200px; text-align: center;">
+                            <span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.details')}"></span>
+                        </div>
+                        <div>
+                            <div id="detailGrid"></div>
+                        </div>
+                        <div class="grid-page-header" style="height: 30px;">&nbsp;</div>
+                    </div>
+
+                    <div style="margin-top: 1em;  ">
+                        <div class="grid-page-header grid-page-header-text" style="width: 200px; text-align: center;">
+                            <span th:text="${#messages.msg('umps.adminfunc.appointmentEnquiry.history')}"></span>
+                        </div>
+                        <div>
+                            <div id="historyGrid"></div>
+                        </div>
+                        <div class="grid-page-header" style="height: 30px;">&nbsp;</div>
+                    </div>
+                </div>
+
+                <div class="flex-container" style="padding-top: 30px;">
+                    <div style="flex: auto;"></div>
+                    <div>
+                        <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry.do}">
+                            <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.backToSearchCriteria')}" />
+                        </a>
+                    </div>
+                    <div style="padding-left: 10px;">
+                        <a th:href="@{/SMARTICS-2/enquiry/appointmentBookingEnquiry_ApplicantResult.do}">
+                            <input class="SmallButtonStyle pointer" id="" style="min-width: 80px;" type="button" th:value="${#messages.msg('umps.adminfunc.common.backToPreviousPage')}" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

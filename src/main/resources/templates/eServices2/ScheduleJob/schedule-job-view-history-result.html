@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/schedule-job.css"/>
+
+    <script th:inline="javascript" th:if="${scheduleJobViewHistoryDTO}" >
+        /*<![CDATA[*/
+
+        $(function () {
+            var list = [];
+
+
+
+            var scheduleJobViewHistoryDTO = [[${scheduleJobViewHistoryDTO}]];
+
+            if (isNotEmptyNullUndfined(scheduleJobViewHistoryDTO)) {
+                var jobName = scheduleJobViewHistoryDTO['jobName'];
+                var jobStatus = scheduleJobViewHistoryDTO['status'];
+
+                var startDate = scheduleJobViewHistoryDTO['startDate'];
+                var endDate = scheduleJobViewHistoryDTO['endDate'];
+
+                var historyList = scheduleJobViewHistoryDTO['scheduleJobViewHistoryList'];
+
+                if (isNotEmptyNullUndfined(historyList) && historyList.length > 0) {
+                    jQuery.each(historyList, function (index, object) {
+                        var name = object['jobName'];
+                        var status = object['status'];
+                        var fromDate = new Date(object['startTime']);
+                        var toDate = new Date(object['endTime']);
+                        var fromDateFormatted =  moment(fromDate).format(TABLE_DATE_FORMAT);
+                        var toDateFormatted = moment(toDate).format(TABLE_DATE_FORMAT);
+
+                        var newObj = {
+                            'startTime': fromDateFormatted,
+                            'endTime': toDateFormatted,
+                            'jobName': name,
+                            'status': status
+                        };
+
+                        list.push(newObj);
+                    });
+
+                }
+
+                if (isNotEmptyNullUndfined(jobName)) {
+                    var jobNameDom = $('#jobName');
+                    jobNameDom.html(jobName);
+                }
+                if (isNotEmptyNullUndfined(jobStatus)) {
+                    var jobStatusDom = $('#jobStatus');
+                    jobStatusDom.html(jobStatus);
+                }
+                if (isNotEmptyNullUndfined(startDate)) {
+                    var startDateDom = $('#startDate');
+
+                    var tmpStartDate = new Date(startDate);
+                    var startDateFormatted = moment(tmpStartDate).format(TABLE_DATE_FORMAT);
+
+                    startDateDom.html(startDateFormatted);
+                }
+                if (isNotEmptyNullUndfined(endDate)) {
+                    var endDateDom = $('#endDate');
+
+                    var tmpEndDate = new Date(endDate);
+                    var endDateFormatted = moment(tmpEndDate).format(TABLE_DATE_FORMAT);
+
+                    endDateDom.html(endDateFormatted);
+                }
+            }
+
+            // table grid data
+            var totalPageList = GRID_RECORD_PER_PAGE_ARRAY_DEFAULT;
+            var recordPerPage = totalPageList[0];
+
+            // table grid record per page
+            var totalPager = $('#totalPager');
+            totalPager.on('change', function () {
+                recordPerPage = $(this).val();
+
+                var tmpNumSize = getGridPageNumSize(recordPerPage, list.length);
+                generateSelectOptionBySequence(numPager, tmpNumSize, GRID_TABLE_OFFSET);
+
+                grid.jsGrid('option', 'pageSize', recordPerPage);
+            });
+
+            // table grid page number
+            var numPager = $('#numPager');
+            numPager.on('change', function () {
+                var val = $(this).val();
+                var page = parseInt(val, 10);
+
+                grid.jsGrid('openPage', page);
+            });
+
+            //
+            generateSelectOptionByValue(totalPager, totalPageList, false);
+
+            var numSize = getGridPageNumSize(recordPerPage, list.length);
+            generateSelectOptionBySequence(numPager, numSize, GRID_TABLE_OFFSET);
+
+// grid
+            var grid = $("#scheduleJobGrid");
+            var gridConfig = {
+                width: '100%',
+                height: '260px',
+
+                sorting: true,
+                noDataContent: 'NO data',
+                selecting: false,
+
+                autoload: true,
+
+                paging: true,
+                pageLoading: true,
+                pageSize: recordPerPage,
+
+                controller: {
+                    loadData: function (filter) {
+                        var startIndex = (filter.pageIndex - 1) * filter.pageSize;
+                        return {
+                            data: list.slice(startIndex, startIndex + filter.pageSize),
+                            itemCount: list.length
+                        };
+                    }
+                },
+
+                fields: [
+                    { name: 'jobName', title: 'Job Name', type: 'text', width: 20, headerTemplate: commonHeader },
+                    { name: 'status', title: 'Status', type: 'text', width: 10, headerTemplate: commonHeader },
+                    { name: 'startTime', title: 'Start Time', type: 'text', width: 30, headerTemplate: commonHeader },
+                    { name: 'endTime', title: 'End Time', type: 'text', width: 30, headerTemplate: commonHeader }
+                ]
+            };
+            grid.jsGrid(gridConfig);
+
+
+
+        });
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <div>
+                <div>
+                    <b><span th:text="${#messages.msg('umps.adminfunc.common.searchResult')}"></span></b>
+                </div>
+                <div>
+                    <div class="RowSeparator"></div>
+                    <div class="flex-container">
+                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.jobname')}"></span></b></div>
+                        <div class="flex-item-7 search-result-right">
+                            <span id="jobName"></span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container">
+                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.status')}"></span></b></div>
+                        <div class="flex-item-7 search-result-right">
+                            <span id="jobStatus"></span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container">
+                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.startTime')}"></span></b></div>
+                        <div class="flex-item-7 search-result-right">
+                            <span id="startDate"></span>
+                        </div>
+                    </div>
+                    <div class="RowSeparatorThin"></div>
+                    <div class="flex-container">
+                        <div class="flex-item-2 search-result-left"><b><span th:text="${#messages.msg('umps.adminfunc.schedulejob.view.history.search.field.endTime')}"></span></b></div>
+                        <div class="flex-item-7 search-result-right">
+                            <span id="endDate"></span>
+                        </div>
+                    </div>
+                    <!--<div class="RowSeparatorThin"></div>-->
+
+
+                    <div class="RowSeparator"></div>
+                </div>
+
+                <div style="margin-top: 1em;  ">
+                    <div class="flex-container grid-page-header">
+                        <div style="flex: auto;"></div>
+                        <div>
+                            <span class="grid-page-header-text" th:text="${#messages.msg('umps.adminfunc.common.pagination.recordPerPage')}"></span>
+                            <span>
+                                <select id="totalPager"></select>
+                            </span>
+                            <span class="grid-page-header-text" style="padding-left: 10px;" th:text="${#messages.msg('umps.adminfunc.common.pagination.pageNo')}"></span>
+                            <span>
+                                <select id="numPager"></select>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <div id="scheduleJobGrid"></div>
+                    </div>
+                </div>
+
+                <div class="flex-container">
+                    <div style="flex: auto;"></div>
+                    <div style="padding: 15px;">
+                        <a class="DisableLinkUnderline" th:href="@{/e-Services-2/enquiry/scheduleJobViewHistory.do}">
+                            <input class="ButtonStyle back-button pointer" type="button" th:value="${#messages.msg('umps.adminfunc.common.backToSearchCriteria')}" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+.search-row-padding {
+    padding: 5px;
+}
+
+.search-btn {
+    width: 80px;
+    text-align: center;
+}
+
+.edit-btn {
+    width: 150px;
+    text-align: center;
+    float: right;
+    margin: 0 5px;
+}

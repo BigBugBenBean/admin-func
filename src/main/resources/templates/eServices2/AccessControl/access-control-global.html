@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>e-Services Admin Function</title>
+
+    <link rel="stylesheet" href="/adminfunc/css/access-control.css"/>
+
+    <script type="text/javascript" th:inline="javascript" th:if="${accessControlDTO}">
+        /*<![CDATA[*/
+
+        $(document).ready(function () {
+
+        });
+
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+<div>
+
+    <div layout:fragment="header(${ROOT})"></div>
+
+    <div layout:fragment="content">
+        <div class="content-padding">
+            <form method="post" th:action="@{/e-Services-2/maintenance/accessControl_GlobalParamsSave.do}">
+                <h3>Global Parameters</h3>
+
+                <div>
+                    <div class="RowSeparator"></div>
+
+                    <div th:each="item : ${accessControlDTO.accessControlGlobalParamList}">
+                        <div th:switch="${item.key}">
+                            <div th:case="'WHITE_LIST_ACTIVATE'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.whitelist')}"></div>
+                                    <div class="param-item-right">
+                                        <input type="radio" name="WHITE_LIST_ACTIVATE" th:value="${true}" th:checked="${item.value}" >
+                                        <span class="item-margin-right">Enable</span>
+                                        </input>
+                                        <input type="radio" name="WHITE_LIST_ACTIVATE" th:value="${false}" th:checked="${!item.value}" >
+                                        <span>Disable</span>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'BLACK_LIST_ACTIVATE'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.blacklist')}"></div>
+                                    <div class="param-item-right">
+                                        <input type="radio" name="BLACK_LIST_ACTIVATE" th:value="${true}" th:checked="${item.value}" >
+                                        <span class="item-margin-right">Enable</span>
+                                        </input>
+                                        <input type="radio" name="BLACK_LIST_ACTIVATE" th:value="${false}" th:checked="${!item.value}">
+                                        <span>Disable</span>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'COUNTER_BLOCKING_ACTIVATE'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.counterblocking')}"></div>
+                                    <div class="param-item-right">
+                                        <input type="radio" name="COUNTER_BLOCKING_ACTIVATE" th:value="${true}" th:checked="${item.value}" >
+                                        <span class="item-margin-right">Enable</span>
+                                        </input>
+                                        <input type="radio" name="COUNTER_BLOCKING_ACTIVATE" th:value="${false}" th:checked="${!item.value}" >
+                                        <span>Disable</span>
+                                        </input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_TRANS'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.maxNumOfTran')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_TRANS"  th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_TRANS_PERIOD'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.tranNumOfDay')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_TRANS_PERIOD" th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_APM'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.maxNumOfAppoint')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_APM" th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                            <div th:case="'MAX_APM_PERIOD'">
+                                <div class="flex-container param-container">
+                                    <div class="param-item-left" th:text="${#messages.msg('umps.adminfunc.accesscontrol.global.appointNumOfDay')}"></div>
+                                    <div class="param-item-right">
+                                        <input class="input-box" type="text" maxlength="10" name="MAX_APM_PERIOD" th:value="${item.value}"></input>
+                                    </div>
+                                </div>
+                                <div class="RowSeparator"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style=" float: right; padding-top: 1em;">
+                    <!--<a th:href="@{/accessControlGlobalSuccess.do}">-->
+                        <input type="submit" th:value="${#messages.msg('umps.adminfunc.common.save')}" class="ButtonStyle submit-button" style="margin-right: 20px;" />
+                    <!--</a>-->
+                    <a th:href="@{/e-Services-2/maintenance/accessControl.do}">
+                        <input type="text" th:value="${#messages.msg('umps.adminfunc.common.cancel')}" class="ButtonStyle submit-button" />
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

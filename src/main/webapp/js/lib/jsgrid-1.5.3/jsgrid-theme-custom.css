@@ -42,6 +42,7 @@
 
 .jsgrid-grid-header {
     background: #f9f9f9;
+
 }
 
 .jsgrid-header-scrollbar {
@@ -52,7 +53,7 @@
     scrollbar-track-color: #f1f1f1;
     scrollbar-shadow-color: #f1f1f1;
     scrollbar-dark-shadow-color: #f1f1f1;
-    
+
     overflow-y: hidden;
 }
 
@@ -72,26 +73,28 @@
 .jsgrid-header-row .jsgrid-header-sort {
     background: #c4e2ff;
 }
-
-.jsgrid-header-sort:before {
+.jsgrid-header-sort div {
+    display: inline-block;
+}
+.jsgrid-header-sort div:after {
     content: " ";
     display: block;
-    float: left;
+    float: right;
     width: 0;
     height: 0;
     border-style: solid;
 }
 
-.jsgrid-header-sort-asc:before {
+.jsgrid-header-sort-asc div:after {
     border-width: 0 5px 5px 5px;
     /* border-color: transparent transparent #009a67 transparent; */
     border-color: transparent transparent cyan transparent;
 }
 
-.jsgrid-header-sort-desc:before {
+.jsgrid-header-sort-desc div:after {
     /* border-width: 5px 5px 0 5px; */
     /* border-color: #009a67 transparent transparent transparent; */
-    
+
     border-width: 5px 5px 0 5px;
     border-color: cyan transparent transparent transparent;
 
@@ -134,6 +137,7 @@
 .jsgrid-header-row > .jsgrid-header-cell {
     background: #82a579;
     color: white;
+    /*border: 1px solid white;*/
 }
 
 .jsgrid-filter-row > .jsgrid-cell {

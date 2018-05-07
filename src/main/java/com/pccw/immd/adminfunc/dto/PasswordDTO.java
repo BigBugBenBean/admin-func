@@ -17,6 +17,11 @@ import javax.validation.Valid;
 public class PasswordDTO {
 
 
+
+    @Valid
+    @JsonProperty("loginId")
+    private String loginId = null;
+
     @Valid
     @JsonProperty("oldPassword")
     private String oldPassword = null;
@@ -63,6 +68,17 @@ public class PasswordDTO {
         this.errorTitle = errorTitle;
     }
 
+
+    @ApiModelProperty(value = "")
+
+    @Valid
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
 
     @ApiModelProperty(value = "")
 

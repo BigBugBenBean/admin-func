@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Immigration Department of the Hong Kong Special Administrative Region</title>
+
+    <script type="text/javascript" th:inline="javascript" th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']}">
+        /*<![CDATA[*/
+        window.location="/adminfunc/AUTH/login-fail.do";
+        /*]]>*/
+    </script>
+
+    <script src="/adminfunc/js/lib/jquery-3.3.1.min.js"></script>
+    <script src="/adminfunc/js/lib/lodash.min.js"></script>
+    <script src="/adminfunc/js/lib/moment.min.js"></script>
+
+    <script src="/adminfunc/js/common.js"></script>
+    <script src="/adminfunc/js/login.js"></script>
+
+    <!--<link rel="stylesheet" href="${style.css}" />-->
+    <link rel="stylesheet" href="/adminfunc/css/style.css"/>
+    <link rel="stylesheet" href="/adminfunc/css/login.css"/>
+
+    <script type="text/javascript" th:inline="javascript" th:if="${userDTO}">
+        /*<![CDATA[*/
+
+
+        var username = "[[${userDTO.loginId}]]";
+        var password = "[[${userDTO.password}]]";
+        var errorTitle = "[[${userDTO.errorTitle}]]";
+        var errorMessage = "[[${userDTO.errorMessage}]]";
+
+        var str = 'username: ' + username + ' , pwd: ' + password;
+        var err = 'errorTitle: ' + errorTitle + ' , errorMessage: ' + errorMessage;
+        // alert(str);
+        // alert(err);
+
+
+        /*]]>*/
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#todayDate').html(today);
+        });
+
+
+        function onClear() {
+            $('#loginId').val('');
+            $('#password').val('');
+        }
+
+    </script>
+
+</head>
+<body>
+<div>
+
+
+    <div class="flex-container">
+        <div class="flex-item-1 header-item-left">
+            <span>e-Services-2</span>
+        </div>
+        <div></div>
+        <div class="flex-item-1 header-item-right">
+                <span>Date:
+                    <b id="todayDate"></b>
+                </span>
+        </div>
+    </div>
+    <div class="grid-container round-border" >
+        <div class="grid-header">&nbsp;</div>
+        <div class="flex-container grid-nav-container">
+            <div class="flex-item-1 nav-title-left">
+                <span style=" width: '100%'">Login</span>
+            </div>
+            <div></div>
+            <div class="flex-item-1 nav-title-right">
+                <span style=" width: '100%' "></span>
+            </div>
+        </div>
+        <div class="content-container flex-container">
+            <div class="flex-item-1 field-name content-warning-left">
+                <b>WARNING :</b>
+            </div>
+            <div class="flex-item-2 field-name content-warning-right">
+                    <span>
+                        All information contained in or related to the e-Services (the System) is strictly classified. Unauthorized access to the
+                        System is prohibited. Any disclosure of the information to unauthorized person or breach of security
+                        on information being held in computer connected with the System is liable to prosecution under Computer
+                        Crimes Ordinance and Official Secrets Ordinance.
+                    </span>
+            </div>
+        </div>
+        <form id="" method="post" th:action="@{/AUTH/login.do}">
+            <div class="flex-container">
+                <div class="flex-item-1 field-name content-user-id-left">
+                    <b>User ID :</b>
+                </div>
+                <div class="flex-item-2 field-name content-user-id-right">
+                    <!--<input id="loginId" name="user.userId" value=""/>-->
+                    <input id="loginId" name="user.userId"/>
+                    <!--SCUSER08-->
+                    <!--demo001-->
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="flex-item-1 field-name content-password-left">
+                    <b>Password :</b>
+                </div>
+                <div class="flex-item-2 field-name content-password-right">
+                    <!--<input id="password" name="user.password" type="password" value=""/>-->
+                    <input id="password" name="user.password" type="password"/>
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="flex-item-1"></div>
+                <div class="flex-item-2">
+                    <input type="submit" class="ButtonStyle login-confirm" value="Confirm"/>
+
+                    <input type="button" class="ButtonStyle login-clear" value="Clear" onclick="onClear()"/>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

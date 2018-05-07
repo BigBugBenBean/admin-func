@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
@@ -10,8 +11,15 @@
     <!--<bean id="securityContextFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter" >-->
         <!--<constructor-arg ref="securityContextRepository"/>-->
     <!--</bean>-->
+    <bean id="webAuthorizationService.eservice2" class="com.pccw.immd.adminfunc.web.security.WebAuthorizationServiceImpl" />
 
-    <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.ExceptionMappingAuthenticationFailureHandler">
+    <bean id="authenticationSuccessHandler" class="com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationSuccessHandler">
+        <constructor-arg>
+            <value>${web.auth.logInDefaultTargetUrl}</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="authenticationFailureHandler" class="com.pccw.immd.adminfunc.web.security.AdminFuncAuthenticationFailureHandler">
         <property name="exceptionMappings">
             <props>
                 <prop key="org.springframework.security.authentication.BadCredentialsException">${web.auth.exception.badCredentialsException}</prop>
@@ -21,5 +29,7 @@
             </props>
         </property>
     </bean>
+
+    <bean id="logoutHandler" class="com.pccw.immd.adminfunc.web.security.AdminFuncLogoutHandler" />
 </beans>
 

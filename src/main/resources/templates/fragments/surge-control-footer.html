@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link rel="stylesheet" href="/adminfunc/css/style.css"/>
+
+</head>
+<body>
+
+<div th:fragment="surgeControlFooter">
+    <div>-----------------------</div>
+    <div><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.remark')}"></span></div>
+    <div>-----------------------</div>
+    <div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.gst.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.gst.message')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.mst.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.mst.message')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.priority.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.priority.message')}"></span></div>
+        </div>
+        <div class="flex-container">
+            <div class="flex-item-1"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.clawback.title')}"></span></div>
+            <div class="flex-item-7"><span th:text="${#messages.msg('umps.adminfunc.surgecontrol.footer.clawback.message')}"></span></div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

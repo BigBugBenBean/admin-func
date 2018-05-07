@@ -1,39 +1,25 @@
 package com.pccw.immd.adminfunc.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import javax.validation.Valid;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.pccw.immd.adminfunc.service.AppointmentService;
+import com.pccw.immd.adminfunc.dto.PasswordDTO;
+import com.pccw.immd.adminfunc.service.UpmsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import ws.upms.immd.v1.ITIAppException;
+import ws.upms.immd.v1.ITISysException;
 
-import com.pccw.immd.adminfunc.dto.UpmsUser;
-import com.pccw.immd.adminfunc.dto.UserDTO;
-import com.pccw.immd.adminfunc.dto.PasswordDTO;
-import com.pccw.immd.adminfunc.service.UpmsService;
-import com.pccw.immd.adminfunc.web.rest.AuthApi;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITIAppException;
-import com.pccw.immd.adminfunc.ws.upms.cxf.ITISysException;
-
-import io.swagger.annotations.ApiParam;
 
 @Controller
 public class ChangePasswordController {
+
+    final String ALPHABET_REGEX = ".*[A-Za-z].*";
+    final String NUMERIC_REGEX = ".*[0-9].*";
 
     public enum CHANGE_PWD_STATUS {
         CHANGE_PWD_SUCCESS,
@@ -49,44 +35,31 @@ public class ChangePasswordController {
 
     private static final Logger LOG = LoggerFactory.getLogger(ChangePasswordController.class);
 
-    @RequestMapping(value = "/changePassword.html", method = RequestMethod.GET)
+    @Autowired
+    @Qualifier("upmsService")
+    private UpmsService upmsService;
+
+    @RequestMapping(value = "/changePassword.do", method = RequestMethod.GET)
     public String changePwdPage() {
         return "/Auth/change-pwd";
     }
 
-//    @RequestMapping( value = "/{module}/module.html", method = RequestMethod.POST)
-//    public String handleLogin(
-////            @PathVariable("username") String username,
-////            @PathVariable("password") String password
-//            @PathVariable("password") String password
-//    ) {
-//        LOG.debug("username: " + username + " , password: " + password);
-//        if ()
-//        return "";
-//    }
-
-//     @Autowired
-//     @Qualifier ("upmsService")
-//     private UpmsService upmsService;
-
-
-     @PostMapping("/changePassword")
+     @PostMapping("/submitChangePassword.do")
      public String submit(@ModelAttribute PasswordDTO passwordDTO) {
-         LOG.info("Calling changePassword ....... ");
+         LOG.info("Calling submitChangePassword ....... ");
 
+         String loginId = passwordDTO.getLoginId();
          String oldPassword = passwordDTO.getOldPassword();
          String newPassword = passwordDTO.getNewPassword();
          String confirmNewPassword = passwordDTO.getConfirmNewPassword();
 
+         LOG.info("loginId: " + loginId);
          LOG.info("oldPassword: " + oldPassword + " , newPassword: " + newPassword + " , confirmNewPassword: " + confirmNewPassword );
 
          CHANGE_PWD_STATUS status = validateChangePassword(oldPassword, newPassword, confirmNewPassword);
 
          Integer errCode = passwordDTO.getErrorCode();
-         String errTitle = "";
          String errMsg = "";
-
-
 
          switch (status) {
              case CHANGE_PWD_SUCCESS: {
@@ -142,31 +115,30 @@ public class ChangePasswordController {
          passwordDTO.setErrorCode(errCode);
          passwordDTO.setErrorMessage(errMsg);
 
+
+
          if (errCode == -1) {
              // success
-             return "redirect:/AUTH/login_form.html";
+
+             try {
+                 upmsService.changePassword(loginId, oldPassword, newPassword);
+                 return "/auth/login-form";
+             } catch (ITIAppException | ITISysException e) {
+//                 String tmpErrMsg = "Your password cannot be updated due to the following reason:";
+                 String tmpErrTitle = "Change Password Request";
+                 passwordDTO.setErrorTitle(tmpErrTitle);
+                 passwordDTO.setErrorMessage(e.getMessage());
+
+                return "/auth/change-pwd-fail";
+             }
+
+
          } else if (errCode == 1001) {
 
              return "/auth/change-pwd";
          } else if (errCode == 1002) {
-
              return "/auth/change-pwd-fail";
          }
-
-//         String termialId = "";
-
-//         try {
-//             UpmsUser user = upmsService.login(userDTO.getLoginId(), userDTO.getPassword(), termialId);
-//         } catch (ITIAppException|ITISysException e) {
-
-//             userDTO.setErrorTitle("Login Rejected");
-//             userDTO.setErrorMessage(e.getMessage());
-
-//             return "login-fail";
-//         }
-//         return "login-fail";
-// //        return "result";
-
          return "/Auth/change-pwd";
      }
 
@@ -227,17 +199,17 @@ public class ChangePasswordController {
      }
 
      private boolean isAlphabet(String keyword) {
-        String regex = ".*[A-Za-z].*";
+//        String regex = ".*[A-Za-z].*";
 
-        boolean isMatch = keyword.matches(regex);
+        boolean isMatch = keyword.matches(ALPHABET_REGEX);
         LOG.info("isAlpha keyword: " + keyword + " , isMatch: " + isMatch);
         return isMatch;
      }
 
     private boolean isNumeric(String keyword) {
-        String regex = ".*[0-9].*";
+//        String regex = ".*[0-9].*";
 
-        boolean isMatch = keyword.matches(regex);
+        boolean isMatch = keyword.matches(NUMERIC_REGEX);
         LOG.info("isNumeric keyword: " + keyword + " , isMatch: " + isMatch);
         return isMatch;
     }

@@ -8,20 +8,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.context.SecurityContextPersistenceFilter;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 /**
  * Created by jeff on 5/7/17.
  */
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled=true)
 @ImportResource ("classpath:config/security-context.xml")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -36,9 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${web.auth.logInProcessingUrl}")
     private String logInProcessingUrl;
-
-    @Value("${web.auth.logInDefaultTargetUrl}")
-    private String logInDefaultTargetUrl;
 
     @Value("${web.auth.authenticationFailureUrl}")
     private String authenticationFailureUrl;
@@ -61,33 +59,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${web.auth.invalidSessionUrl}")
     private String invalidSessionUrl;
 
+    @Value("${web.auth.webservice}")
+    private String webServiceUrl;
+
     @Autowired
     @Qualifier("authenticationFailureHandler")
     private AuthenticationFailureHandler authenticationFailureHandler;
 
-//    @Autowired
-//    @Qualifier("securityContextFilter")
-//    private SecurityContextPersistenceFilter securityContextFilter;
+    @Autowired
+    @Qualifier("logoutHandler")
+    private LogoutHandler logoutHandler;
+
+    @Autowired
+    @Qualifier("authenticationSuccessHandler")
+    private SimpleUrlAuthenticationSuccessHandler authenticationSuccessHandler;
 
     @Autowired
     @Qualifier("upmsAuthenticationProvider")
     private AuthenticationProvider upmsAuthenticationProvider;
 
-
-
-    protected void configure1(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll();
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(loginUrl).permitAll();
+        http.authorizeRequests().antMatchers(webServiceUrl).permitAll();
         LOG.info("in security configure (HttpSecurity) ...");
 
         http
@@ -98,19 +92,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .hasRole(interceptUrlAccess)
             .anyRequest().authenticated()
         .and()
-            .formLogin()
+            .formLogin().permitAll()
             .usernameParameter("user.userId")
             .passwordParameter("user.password")
-            .loginPage(loginUrl).permitAll()
-            .loginProcessingUrl(logInProcessingUrl)
-            .defaultSuccessUrl(logInDefaultTargetUrl)
+            .loginPage(loginUrl)
+            .loginProcessingUrl(logInProcessingUrl).permitAll()
+            .successHandler(authenticationSuccessHandler)
             .failureForwardUrl(authenticationFailureUrl)
             .failureHandler(authenticationFailureHandler)
         .and()
             .logout().permitAll()
             .logoutUrl(logOutUrl)
             .logoutSuccessUrl(logOutSuccessUrl)
-            .invalidateHttpSession(true)
+            .addLogoutHandler(logoutHandler)
             .clearAuthentication(true)
         .and()
             .sessionManagement().invalidSessionUrl(invalidSessionUrl)
@@ -127,5 +121,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/images/**",
                 "/js/**"
         );
+        web.ignoring().antMatchers(
+                "/AUTH/login-fail.do",
+                "/AUTH/logout-result.do",
+                "/changePassword.do",
+                "/submitChangePassword.do",
+                "/changePassword",
+                // For CXF Endpoint
+                "/webservices/**"
+        );
     }
+/*
+    @Bean
+    public FilterRegistrationBean delegatingFilterProxy(){
+        FilterRegistrationBean registration=new FilterRegistrationBean();
+
+        Filter filter = new DelegatingFilterProxy();
+        registration.setFilter(filter);
+        registration.addUrlPatterns("*//*");
+        registration.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
+        return registration;
+    }
+    */
 }
